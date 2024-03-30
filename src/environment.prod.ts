@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
     development: false,
-    backendURL:"http://ubuntu/"
+    backendURL:"https://studymodules.tobii.uber.space/"
 };
