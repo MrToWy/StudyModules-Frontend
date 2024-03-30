@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Observable} from "rxjs";
+import {environment} from "../../environment";
 
 @Injectable()
 export class LoginService {
-  private loginURL: string = "http://ubuntu:3000/auth/login";
+  private loginURL: string = environment.backendURL + "auth/login";
 
   constructor(private http: HttpClient) { }
 
