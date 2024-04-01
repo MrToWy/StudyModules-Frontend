@@ -6,6 +6,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {ToolbarModule} from "primeng/toolbar";
 import {MenuItem} from "primeng/api";
 import {SidebarComponent} from "../sidebar/sidebar.component";
+import {AuthService} from "../../shared/auth/auth.service";
 
 @Component({
   selector: 'app-topbar',
@@ -22,6 +23,12 @@ import {SidebarComponent} from "../sidebar/sidebar.component";
   styleUrl: './topbar.component.sass'
 })
 export class TopbarComponent {
+  private authService: AuthService;
+
+  constructor(authService: AuthService) {
+    this.authService = authService;
+  }
+
 searchText: any;
 
   items: MenuItem[] | undefined;
@@ -44,4 +51,8 @@ searchText: any;
 
         this.home = { icon: 'pi pi-home', routerLink: '/' };
     }
+
+  logout() {
+    this.authService.logout();
+  }
 }

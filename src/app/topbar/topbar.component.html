@@ -15,6 +15,6 @@
             <i class="pi pi-search"></i>
             <input pInputText placeholder="Search" [ngModel]="searchText"/>
         </span>
-      <p-button label="Logout" [text]="true" [raised]="true" severity="secondary"></p-button>
+      <p-button label="Logout" [text]="true" [raised]="true" severity="secondary" (onClick)="logout()"></p-button>
     </div>
 </p-toolbar>
