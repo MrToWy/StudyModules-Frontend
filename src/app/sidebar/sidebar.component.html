@@ -1,0 +1,7 @@
+<p-sidebar [(visible)]="sidebarVisible">
+    <ng-template pTemplate="header">StudyModules</ng-template>
+    <ng-template pTemplate="content">Body Content</ng-template>
+    <ng-template pTemplate="footer">Version 1.0.2</ng-template>
+</p-sidebar>
+
+<p-button (click)="sidebarVisible = true" icon="pi pi-bars"></p-button>

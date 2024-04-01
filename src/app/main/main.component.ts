@@ -12,6 +12,7 @@ import {SplitButtonModule} from "primeng/splitbutton";
 import {BreadcrumbModule} from "primeng/breadcrumb";
 import {MenuItem} from "primeng/api";
 import {TopbarComponent} from "../topbar/topbar.component";
+import {SidebarComponent} from "../sidebar/sidebar.component";
 
 @Component({
   selector: 'app-main',
@@ -28,7 +29,8 @@ import {TopbarComponent} from "../topbar/topbar.component";
     ToolbarModule,
     SplitButtonModule,
     BreadcrumbModule,
-    TopbarComponent
+    TopbarComponent,
+    SidebarComponent
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.sass'
