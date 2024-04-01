@@ -24,9 +24,9 @@ export class FacultyService {
   mockGetAllObservable() {
     return new Observable<FacultyDto[]>((subscriber) => {
       subscriber.next([
-        { name: "Faculty 1" },
-        { name: "Faculty 2" },
-        { name: "Faculty 3" },
+        { name: "Faculty 1", id: 1},
+        { name: "Faculty 2", id: 2},
+        { name: "Faculty 3", id: 3},
       ]);
     });
   }
@@ -36,4 +36,5 @@ export class FacultyService {
 
 export interface FacultyDto {
   name: string;
+  id: number;
 }

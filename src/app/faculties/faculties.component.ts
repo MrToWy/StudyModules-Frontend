@@ -5,6 +5,7 @@ import {FacultyDto, FacultyService} from "../../shared/faculty/faculty.service";
 import {MessageService} from "primeng/api";
 import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-faculties',
@@ -24,7 +25,9 @@ faculties!: FacultyDto[];
 
     selectedFaculty!: FacultyDto;
 
-    constructor(private facultyService: FacultyService, private messageService: MessageService) {}
+    constructor(private facultyService: FacultyService,
+                private messageService: MessageService,
+                private router: Router) {}
 
     ngOnInit() {
         this.facultyService.mockGetAllObservable().subscribe((data) => {
@@ -34,5 +37,6 @@ faculties!: FacultyDto[];
 
     selectProduct(faculty: FacultyDto) {
         this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: faculty.name });
+        this.router.navigate(['/faculty', faculty.id]).then(r => console.log(r));
     }
 }
