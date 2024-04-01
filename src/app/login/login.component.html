@@ -1,14 +1,25 @@
 <div class="login" id="login">
-  <span class="p-float-label">
-    <input pInputText id="username" [(ngModel)]="username"/>
-    <label for="username">Username</label>
-  </span>
 
-  <span class="p-float-label">
-    <p-password [(ngModel)]="password" [feedback]="false" id="password"></p-password>
-    <label for="password">Password</label>
-  </span>
+  <h1>StudyModules Login</h1>
+
+  <div class="smallPadding">
+    <span class="p-float-label">
+      <input pInputText id="username" [(ngModel)]="username"/>
+      <label for="username">Username</label>
+    </span>
+  </div>
+
+  <div class="smallPadding">
+    <span class="p-float-label">
+      <p-password [(ngModel)]="password" [feedback]="false" id="password"></p-password>
+      <label for="password">Password</label>
+    </span>
+  </div>
 
   <p-button (onClick)="login()">Login</p-button>
 
+
+  <p class="floatingFooter p-text-secondary"> Erhalten Sie Ihre Zugangsdaten bei der Studiengangsverantwortlichen Person der Abteilung Informatik an der Fakultät 4.</p>
+
 </div>
+
