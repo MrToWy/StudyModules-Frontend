@@ -1,0 +1,17 @@
+<p-toast></p-toast>
+<p-table [value]="faculties" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Name</th>
+            <th style="width: 5rem"></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>
+                <button type="button" pButton pRipple icon="pi pi-plus" (click)="selectProduct(product)"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
