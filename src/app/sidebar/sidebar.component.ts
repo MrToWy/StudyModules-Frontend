@@ -20,8 +20,4 @@ import {RippleModule} from "primeng/ripple";
 })
 export class SidebarComponent {
   sidebarVisible: boolean = true;
-
-  closeCallback($event: MouseEvent) {
-    this.sidebarVisible = false;
-  }
 }

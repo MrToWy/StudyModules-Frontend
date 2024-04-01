@@ -10,7 +10,6 @@ import {FormsModule} from "@angular/forms";
 import {ToolbarModule} from "primeng/toolbar";
 import {SplitButtonModule} from "primeng/splitbutton";
 import {BreadcrumbModule} from "primeng/breadcrumb";
-import {MenuItem} from "primeng/api";
 import {TopbarComponent} from "../topbar/topbar.component";
 import {SidebarComponent} from "../sidebar/sidebar.component";
 
