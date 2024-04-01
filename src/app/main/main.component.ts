@@ -11,6 +11,7 @@ import {ToolbarModule} from "primeng/toolbar";
 import {SplitButtonModule} from "primeng/splitbutton";
 import {BreadcrumbModule} from "primeng/breadcrumb";
 import {MenuItem} from "primeng/api";
+import {TopbarComponent} from "../topbar/topbar.component";
 
 @Component({
   selector: 'app-main',
@@ -26,32 +27,12 @@ import {MenuItem} from "primeng/api";
     FormsModule,
     ToolbarModule,
     SplitButtonModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    TopbarComponent
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.sass'
 })
 export class MainComponent {
-  searchText: any;
 
-  items: MenuItem[] | undefined;
-
-    home: MenuItem | undefined;
-
-    ngOnInit() {
-        this.items = [
-          {
-            label: 'Fakultät 4',
-            routerLink: '/fak4',
-          },
-          {
-            label: 'Mediendesigninformatik'
-          },
-          {
-            label: 'Mathe 1'
-          }
-          ];
-
-        this.home = { icon: 'pi pi-home', routerLink: '/' };
-    }
 }
