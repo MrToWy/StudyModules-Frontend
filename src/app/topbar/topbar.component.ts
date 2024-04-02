@@ -8,6 +8,7 @@ import {MenuItem} from "primeng/api";
 import {SidebarComponent} from "../sidebar/sidebar.component";
 import {AuthService} from "../../shared/auth/auth.service";
 import {NavigationEnd, Router} from "@angular/router";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-topbar',
@@ -18,7 +19,8 @@ import {NavigationEnd, Router} from "@angular/router";
     FormsModule,
     InputTextModule,
     ToolbarModule,
-    SidebarComponent
+    SidebarComponent,
+    NgIf
   ],
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.sass'
