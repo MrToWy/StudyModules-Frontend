@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import {FacultyDto} from "../../shared/faculty/faculty.service";
 import { ActivatedRoute } from '@angular/router';
+import {CoursesComponent} from "../courses/courses.component";
 
 @Component({
   selector: 'app-faculty-detail',
   standalone: true,
-  imports: [],
+  imports: [
+    CoursesComponent
+  ],
   templateUrl: './faculty-detail.component.html',
   styleUrl: './faculty-detail.component.sass'
 })

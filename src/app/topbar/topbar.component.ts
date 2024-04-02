@@ -32,16 +32,29 @@ export class TopbarComponent {
     this.authService = authService;
 
     router.events.subscribe((val) => {
-        // see also
-        console.log(val instanceof NavigationEnd)
         if(val instanceof NavigationEnd) {
 
           this.items = [];
 
-          // url is e.g. /faculty/1/mdi/math2
+          // url is e.g. /faculty/1/course/3/module/15
           let facultyId = val.url.split("/")[2];
+          let courseId = val.url.split("/")[4];
+          let moduleId = val.url.split("/")[6];
 
-          if(facultyId !== undefined) {
+          if(courseId !== undefined && facultyId !== undefined) {
+            this.items.push(
+              {
+                label: 'Fakultät ' + facultyId,
+                routerLink: '/faculty/' + facultyId,
+              },
+              {
+                label: 'Studiengang ' + courseId,
+                routerLink: '/faculty/' + facultyId + '/course/' + courseId,
+              }
+            );
+          }
+
+          else if(facultyId !== undefined) {
             this.items.push(
               {
                 label: 'Fakultät ' + facultyId,

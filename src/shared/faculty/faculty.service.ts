@@ -18,6 +18,7 @@ export class FacultyService {
       { name: "Faculty 1" },
       { name: "Faculty 2" },
       { name: "Faculty 3" },
+      { name: "Faculty 4" },
     ];
   }
 
@@ -27,6 +28,7 @@ export class FacultyService {
         { name: "Faculty 1", id: 1},
         { name: "Faculty 2", id: 2},
         { name: "Faculty 3", id: 3},
+        { name: "Faculty 4", id: 4},
       ]);
     });
   }

@@ -24,7 +24,7 @@ export class SidebarComponent {
   constructor(authService: AuthService) {
     this.authService = authService;
   }
-  sidebarVisible: boolean = true;
+  sidebarVisible: boolean = false;
 
   logout() {
     this.authService.logout();
