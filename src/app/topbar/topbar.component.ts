@@ -7,6 +7,7 @@ import {ToolbarModule} from "primeng/toolbar";
 import {MenuItem} from "primeng/api";
 import {SidebarComponent} from "../sidebar/sidebar.component";
 import {AuthService} from "../../shared/auth/auth.service";
+import {NavigationEnd, Router} from "@angular/router";
 
 @Component({
   selector: 'app-topbar',
@@ -25,8 +26,29 @@ import {AuthService} from "../../shared/auth/auth.service";
 export class TopbarComponent {
   private authService: AuthService;
 
-  constructor(authService: AuthService) {
+  constructor(authService: AuthService, private router: Router) {
     this.authService = authService;
+
+    router.events.subscribe((val) => {
+        // see also
+        console.log(val instanceof NavigationEnd)
+        if(val instanceof NavigationEnd) {
+
+          this.items = [];
+
+          // url is e.g. /faculty/1/mdi/math2
+          let facultyId = val.url.split("/")[2];
+
+          if(facultyId !== undefined) {
+            this.items.push(
+              {
+                label: 'Fakultät ' + facultyId,
+                routerLink: '/faculty/' + facultyId,
+              }
+            );
+          }
+        }
+    });
   }
 
 searchText: any;
@@ -36,18 +58,7 @@ searchText: any;
     home: MenuItem | undefined;
 
     ngOnInit() {
-        this.items = [
-          {
-            label: 'Fakultät 4',
-            routerLink: '/fak4',
-          },
-          {
-            label: 'Mediendesigninformatik'
-          },
-          {
-            label: 'Mathe 1'
-          }
-          ];
+        this.items = [];
 
         this.home = { icon: 'pi pi-home', routerLink: '/' };
     }
