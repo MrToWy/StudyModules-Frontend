@@ -28,7 +28,7 @@ import {NgIf} from "@angular/common";
 export class TopbarComponent {
   private authService: AuthService;
 
-  constructor(authService: AuthService, private router: Router) {
+  constructor(authService: AuthService, protected router: Router) {
     this.authService = authService;
 
     router.events.subscribe((val) => {

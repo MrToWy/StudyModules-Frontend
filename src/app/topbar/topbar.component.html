@@ -2,7 +2,7 @@
     <div class="p-toolbar-group-start">
         <app-sidebar></app-sidebar>
 
-        <span>StudyModules</span>
+        <span class="clickable" role="button" (click)="router.navigateByUrl('/')">StudyModules</span>
 
     </div>
     <div *ngIf="items?.length??0 > 0" class="p-toolbar-group-center">
