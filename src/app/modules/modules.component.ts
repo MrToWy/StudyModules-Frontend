@@ -3,7 +3,7 @@ import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
 import {SharedModule} from "primeng/api";
 import {TableModule} from "primeng/table";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ModuleDto, ModuleService} from "../../shared/module/module.service";
 
 @Component({
@@ -26,7 +26,9 @@ export class ModulesComponent {
     courseId!: number;
 
     constructor(private moduleService: ModuleService,
-                private router: Router) {}
+                private router: Router,
+                private route: ActivatedRoute
+                ) {}
 
     ngOnInit() {
 
@@ -38,7 +40,7 @@ export class ModulesComponent {
         });
     }
 
-    selectModule(module: ModuleDto) {
-        this.router.navigate(['/faculty', module.facultyId, 'course', module.courseId, 'module', module.id]).then(r => console.log(r));
+    async selectModule(module: ModuleDto) {
+        await this.router.navigate(['module', module.id], {relativeTo: this.route});
     }
 }
