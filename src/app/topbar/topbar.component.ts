@@ -9,6 +9,7 @@ import {SidebarComponent} from "../sidebar/sidebar.component";
 import {AuthService} from "../../shared/auth/auth.service";
 import {NavigationEnd, Router} from "@angular/router";
 import {NgIf} from "@angular/common";
+import {ModuleSearchComponent} from "../module-search/module-search.component";
 
 @Component({
   selector: 'app-topbar',
@@ -20,7 +21,8 @@ import {NgIf} from "@angular/common";
     InputTextModule,
     ToolbarModule,
     SidebarComponent,
-    NgIf
+    NgIf,
+    ModuleSearchComponent
   ],
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.sass'

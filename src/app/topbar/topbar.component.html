@@ -9,9 +9,6 @@
       <p-breadcrumb class="max-w-full" [model]="items" [home]="home"></p-breadcrumb>
     </div>
     <div class="p-toolbar-group-end">
-        <span class="p-input-icon-left">
-            <i class="pi pi-search"></i>
-            <input pInputText placeholder="Search" [ngModel]="searchText"/>
-        </span>
+      <app-module-search></app-module-search>
     </div>
 </p-toolbar>
