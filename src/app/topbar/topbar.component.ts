@@ -43,7 +43,24 @@ export class TopbarComponent {
           let courseId = val.url.split("/")[4];
           let moduleId = val.url.split("/")[6];
 
-          if(courseId !== undefined && facultyId !== undefined) {
+          if(courseId !== undefined && facultyId !== undefined && moduleId !== undefined) {
+            this.items.push(
+              {
+                label: 'Fakultät ' + facultyId,
+                routerLink: '/faculty/' + facultyId,
+              },
+              {
+                label: 'Studiengang ' + courseId,
+                routerLink: '/faculty/' + facultyId + '/course/' + courseId,
+              },
+              {
+                label: 'Modul ' + moduleId,
+                routerLink: '/faculty/' + facultyId + '/course/' + courseId + '/module/' + moduleId,
+              }
+            );
+          }
+
+          else if(courseId !== undefined && facultyId !== undefined) {
             this.items.push(
               {
                 label: 'Fakultät ' + facultyId,
