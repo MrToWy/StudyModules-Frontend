@@ -25,10 +25,11 @@ export class FacultyService {
   mockGetAllObservable() {
     return new Observable<FacultyDto[]>((subscriber) => {
       subscriber.next([
-        { name: "Faculty 1", id: 1},
-        { name: "Faculty 2", id: 2},
-        { name: "Faculty 3", id: 3},
-        { name: "Faculty 4", id: 4},
+        { name: "Faculty 1", id: 1, subtitle: "Elektro- und Informationstechnik", color: "#1EBEEB" },
+        { name: "Faculty 2", id: 2, subtitle: "Maschinenbau und Bioverfahrenstechnik", color: "#96BE00" },
+        { name: "Faculty 3", id: 3, subtitle: "Medien, Information und Design", color: "#FFA500" },
+        { name: "Faculty 4", id: 4, subtitle: "Wirtschaft und Informatik", color: "#DC3B05" },
+        { name: "Faculty 5", id: 5, subtitle: "Diakonie, Gesundheit und Soziales", color: "#D23C96" },
       ]);
     });
   }
@@ -39,4 +40,6 @@ export class FacultyService {
 export interface FacultyDto {
   name: string;
   id: number;
+  subtitle?: string;
+  color?: string;
 }

@@ -6,6 +6,8 @@ import {MessageService} from "primeng/api";
 import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
 import {Router} from "@angular/router";
+import {CardModule} from "primeng/card";
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-faculties',
@@ -14,7 +16,9 @@ import {Router} from "@angular/router";
     ToastModule,
     TableModule,
     ButtonModule,
-    RippleModule
+    RippleModule,
+    CardModule,
+    NgForOf
   ],
   templateUrl: './faculties.component.html',
   styleUrl: './faculties.component.sass',
@@ -35,7 +39,7 @@ faculties!: FacultyDto[];
         });
     }
 
-    selectProduct(faculty: FacultyDto) {
+    selectFaculty(faculty: FacultyDto) {
         this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: faculty.name });
         this.router.navigate(['/faculty', faculty.id]).then(r => console.log(r));
     }
