@@ -10,6 +10,7 @@ import {AuthService} from "../../shared/auth/auth.service";
 import {NavigationEnd, Router} from "@angular/router";
 import {NgIf} from "@angular/common";
 import {ModuleSearchComponent} from "../module-search/module-search.component";
+import {LanguageDropdownComponent} from "../language-dropdown/language-dropdown.component";
 
 @Component({
   selector: 'app-topbar',
@@ -22,7 +23,8 @@ import {ModuleSearchComponent} from "../module-search/module-search.component";
     ToolbarModule,
     SidebarComponent,
     NgIf,
-    ModuleSearchComponent
+    ModuleSearchComponent,
+    LanguageDropdownComponent
   ],
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.sass'

@@ -1,0 +1,8 @@
+<p-dropdown (onChange)="setLanguage(selectedLanguage)" [options]="languages" [(ngModel)]="selectedLanguage" placeholder="Select a language">
+    <ng-template pTemplate="selectedItem">
+      <div *ngIf="selectedLanguage">{{ selectedLanguage.name }}</div>
+    </ng-template>
+    <ng-template let-language pTemplate="item">
+      <div>{{ language.name }}</div>
+    </ng-template>
+</p-dropdown>
