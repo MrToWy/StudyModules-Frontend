@@ -37,7 +37,7 @@ selectedModule: any;
     ngOnInit() {
         this.groupedCities = [
             {
-                label: 'MDI',
+                label: 'Bachelor Mediendesigninfomatik',
                 items: [
                     { label: 'Animation 1', value: '/faculty/4/course/1' },
                     { label: 'Mediendesign', value: '/faculty/4/course/1' },
@@ -47,7 +47,7 @@ selectedModule: any;
                 ]
             },
             {
-                label: 'BIN',
+                label: 'Bachelor Angewandte Informatik',
                 items: [
                     { label: 'Mathe 1', value: '/faculty/4/course/2' },
                     { label: 'Mathe 2', value: '/faculty/4/course/2' },
