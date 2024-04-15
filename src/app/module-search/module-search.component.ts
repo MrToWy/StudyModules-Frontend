@@ -5,6 +5,7 @@ import {FilterService, SelectItemGroup} from "primeng/api";
 import {InputGroupModule} from "primeng/inputgroup";
 import {InputGroupAddonModule} from "primeng/inputgroupaddon";
 import {Router} from "@angular/router";
+import {TranslocoDirective} from "@jsverse/transloco";
 
 interface AutoCompleteCompleteEvent {
     originalEvent: Event;
@@ -18,7 +19,8 @@ interface AutoCompleteCompleteEvent {
     FormsModule,
     AutoCompleteModule,
     InputGroupModule,
-    InputGroupAddonModule
+    InputGroupAddonModule,
+    TranslocoDirective
   ],
   templateUrl: './module-search.component.html',
   styleUrl: './module-search.component.sass'

@@ -1,12 +1,16 @@
-<span class="p-input-icon-left">
+<ng-container *transloco="let t; prefix:'modulesearch'">
+  <span class="p-input-icon-left">
     <i class="pi pi-search"></i>
 
-    <p-autoComplete (onKeyUp)="onKey($event)" (onSelect)="onSelect($event)" [(ngModel)]="selectedModule" [group]="true" [suggestions]="filteredModules" (completeMethod)="filterModule($event)" placeholder="Modulsuche">
-    <ng-template let-group pTemplate="group">
+    <p-autoComplete (onKeyUp)="onKey($event)" (onSelect)="onSelect($event)" [(ngModel)]="selectedModule" [group]="true"
+                    [suggestions]="filteredModules" (completeMethod)="filterModule($event)"
+                    [placeholder]="t('placeholder')">
+      <ng-template let-group pTemplate="group">
         <div class="flex align-items-center">
             <span>{{ group.label }}</span>
         </div>
-    </ng-template>
-</p-autoComplete>
+      </ng-template>
+    </p-autoComplete>
 
-</span>
+  </span>
+</ng-container>
