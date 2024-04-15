@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {BreadcrumbModule} from "primeng/breadcrumb";
 import {ButtonModule} from "primeng/button";
 import {FormsModule} from "@angular/forms";
@@ -36,68 +36,71 @@ export class TopbarComponent {
     this.authService = authService;
 
     router.events.subscribe((val) => {
-        if(val instanceof NavigationEnd) {
+      if (val instanceof NavigationEnd) {
 
-          this.items = [];
+        this.items = [];
 
-          // url is e.g. /faculty/1/course/3/module/15
-          let facultyId = val.url.split("/")[2];
-          let courseId = val.url.split("/")[4];
-          let moduleId = val.url.split("/")[6];
+        // url is e.g. /faculty/1/course/3/module/15
+        const segments = val.url.split("/");
 
-          if(courseId !== undefined && facultyId !== undefined && moduleId !== undefined) {
-            this.items.push(
-              {
-                label: 'Fakultät ' + facultyId,
-                routerLink: '/faculty/' + facultyId,
-              },
-              {
+        const getIdFromSegment = (segment: string) => {
+          const segmentIndex = segments.indexOf(segment);
+          return segmentIndex !== -1 ? segments[segmentIndex + 1] : undefined;
+        };
+
+        const facultyId = getIdFromSegment("faculty");
+        const departmentId = getIdFromSegment("department");
+        const courseId = getIdFromSegment("course");
+        const moduleId = getIdFromSegment("module");
+
+        if (facultyId !== undefined) {
+          const facultyLink = {
+            label: 'Fakultät ' + facultyId,
+            routerLink: '/faculty/' + facultyId,
+          };
+          this.items.push(facultyLink);
+
+          if (departmentId !== undefined) {
+            const departmentLink = {
+              label: 'Abteilung ' + departmentId,
+              routerLink: '/faculty/' + facultyId + '/department/' + departmentId,
+            };
+            this.items.push(departmentLink);
+
+            if (courseId !== undefined) {
+              const courseLink = {
                 label: 'Studiengang ' + courseId,
-                routerLink: '/faculty/' + facultyId + '/course/' + courseId,
-              },
-              {
-                label: 'Modul ' + moduleId,
-                routerLink: '/faculty/' + facultyId + '/course/' + courseId + '/module/' + moduleId,
-              }
-            );
-          }
+                routerLink: '/faculty/' + facultyId + '/department/' + departmentId + '/course/' + courseId,
+              };
+              this.items.push(courseLink);
 
-          else if(courseId !== undefined && facultyId !== undefined) {
-            this.items.push(
-              {
-                label: 'Fakultät ' + facultyId,
-                routerLink: '/faculty/' + facultyId,
-              },
-              {
-                label: 'Studiengang ' + courseId,
-                routerLink: '/faculty/' + facultyId + '/course/' + courseId,
+              if (moduleId !== undefined) {
+                const moduleLink = {
+                  label: 'Modul ' + moduleId,
+                  routerLink: '/faculty/' + facultyId + '/department/' + departmentId + '/course/' + courseId + '/module/' + moduleId,
+                };
+                this.items.push(moduleLink);
               }
-            );
-          }
-
-          else if(facultyId !== undefined) {
-            this.items.push(
-              {
-                label: 'Fakultät ' + facultyId,
-                routerLink: '/faculty/' + facultyId,
-              }
-            );
+            }
           }
         }
+
+
+      }
     });
   }
 
-searchText: any;
+  searchText: any;
 
   items: MenuItem[] | undefined;
 
-    home: MenuItem | undefined;
+  home: MenuItem | undefined;
 
-    ngOnInit() {
-        this.items = [];
+  ngOnInit() {
+    this.items = [];
 
-        this.home = { icon: 'pi pi-home', routerLink: '/' };
-    }
+    this.home = {icon: 'pi pi-home', routerLink: '/'};
+  }
 
   logout() {
     this.authService.logout();

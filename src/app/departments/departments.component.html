@@ -1,0 +1,10 @@
+<div class="flex justifyContentAround" style="width: 100vw">
+
+  <div (click)="selectDepartment(department)" *ngFor="let department of departments"
+       class="centerText thirdWidth height10rem roundCorners clickable smallPadding smallMargin">
+
+    <h1>{{department.name}}</h1>
+
+  </div>
+
+</div>
