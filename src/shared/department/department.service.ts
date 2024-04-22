@@ -16,9 +16,9 @@ export class DepartmentService {
   mockGetAllObservable() {
     return new Observable<DepartmentDto[]>((subscriber) => {
       subscriber.next([
-        { name: "Abteilung Informatik", id: 1},
-        { name: "Abteilung Betriebswirtschaft", id: 2},
-        { name: "Abteilung Wirtschaftsinformatik", id: 3}
+        { name: "Informatik", id: 1},
+        { name: "Betriebswirtschaft", id: 2},
+        { name: "Wirtschaftsinformatik", id: 3}
       ]);
     });
   }

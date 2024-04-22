@@ -1,7 +1,7 @@
-<div class="flex justifyContentAround" style="width: 100vw">
+<div class="grid-container" style="width: 100vw">
 
   <div (click)="selectDepartment(department)" *ngFor="let department of departments"
-       class="centerText thirdWidth height10rem roundCorners clickable smallPadding smallMargin">
+       class="grid-card clickable">
 
     <h1>{{department.name}}</h1>
 
