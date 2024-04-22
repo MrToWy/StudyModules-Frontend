@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import {ToastModule} from "primeng/toast";
 import {TableModule} from "primeng/table";
 import {FacultyDto, FacultyService} from "../../shared/faculty/faculty.service";
-import {MessageService} from "primeng/api";
 import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
 import {Router} from "@angular/router";
@@ -22,7 +21,7 @@ import {NgForOf} from "@angular/common";
   ],
   templateUrl: './faculties.component.html',
   styleUrl: './faculties.component.sass',
-  providers: [FacultyService, MessageService]
+  providers: [FacultyService]
 })
 export class FacultiesComponent {
 faculties!: FacultyDto[];
@@ -30,7 +29,6 @@ faculties!: FacultyDto[];
     selectedFaculty!: FacultyDto;
 
     constructor(private facultyService: FacultyService,
-                private messageService: MessageService,
                 private router: Router) {}
 
     ngOnInit() {
@@ -40,7 +38,6 @@ faculties!: FacultyDto[];
     }
 
     selectFaculty(faculty: FacultyDto) {
-        this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: faculty.name });
         this.router.navigate(['/faculty', faculty.id]).then(r => console.log(r));
     }
 }
