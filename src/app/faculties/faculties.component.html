@@ -1,9 +1,12 @@
 <div class="grid-container">
 
   <div (click)="selectFaculty(faculty)" *ngFor="let faculty of faculties"
-       class="grid-card clickable" [style]="'background:'+faculty.color">
+       class="grid-card clickable"
+  [style]="'background:' + addAlpha(faculty.color, 0.5)">
 
-    <h1>{{faculty.name}}</h1>
+    <header [style]="'background:' + faculty.color">
+      {{faculty.name}}
+    </header>
     <span>{{faculty.subtitle}}</span>
 
   </div>

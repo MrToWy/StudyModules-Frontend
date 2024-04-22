@@ -40,4 +40,12 @@ faculties!: FacultyDto[];
     selectFaculty(faculty: FacultyDto) {
         this.router.navigate(['/faculty', faculty.id]).then(r => console.log(r));
     }
+
+    addAlpha(color:string|undefined, opacity:number) {
+      if (!color) {
+        return color;
+      }
+      opacity = Math.round(opacity * 255);
+      return color + opacity.toString(16).toUpperCase();
+}
 }
