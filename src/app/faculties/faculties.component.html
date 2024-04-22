@@ -1,7 +1,7 @@
-<div class="flex justifyContentAround" style="width: 100vw">
+<div class="grid-container">
 
   <div (click)="selectFaculty(faculty)" *ngFor="let faculty of faculties"
-       class="centerText thirdWidth height10rem roundCorners clickable smallPadding smallMargin" [style]="'background:'+faculty.color">
+       class="faculty-card" [style]="'background:'+faculty.color">
 
     <h1>{{faculty.name}}</h1>
     <span>{{faculty.subtitle}}</span>
