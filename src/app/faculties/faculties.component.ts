@@ -48,4 +48,8 @@ faculties!: FacultyDto[];
       opacity = Math.round(opacity * 255);
       return color + opacity.toString(16).toUpperCase();
 }
+
+  async openGrid() {
+    await this.router.navigate(['/overview']);
+  }
 }

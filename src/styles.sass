@@ -13,15 +13,15 @@ body
   margin: 0
   padding: 0
 
+.fullheight
+  height: 100%
+  margin: 0
+  padding: 0
+
 
 .smallPadding
   padding: 5px
 
-.smallMargin
-  margin: 2em
-
-.tinyMarginRight
-  margin-right: 1em
 
 .roundCorners
   border-radius: 5px
@@ -40,19 +40,21 @@ body
 
 .flex
   display: flex
+  justify-content: center
+  align-items: center
 
 .justifyContentAround
   justify-content: space-around
 
 .grid-container
   display: grid
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))
-  grid-template-rows: 1fr
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
   align-items: center
   column-gap: 1em
   row-gap: 1em
   width: 100%
-  padding: 1em
+  height: 100%
+  padding: 5%
 
   header
     font-size: 1.5em
