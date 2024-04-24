@@ -4,6 +4,7 @@ import {FacultyDto, FacultyService} from "../../shared/faculty/faculty.service";
 import {MessageService} from "primeng/api";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DepartmentDto, DepartmentService} from "../../shared/department/department.service";
+import {CourseDto} from "../../shared/course/course.service";
 
 @Component({
   selector: 'app-departments',
@@ -31,7 +32,7 @@ export class DepartmentsComponent {
         });
     }
 
-    async selectDepartment(department: DepartmentDto) {
-        await this.router.navigate(['department', department.id], {relativeTo: this.route});
+    async selectCourse(department: DepartmentDto, course: CourseDto) {
+        await this.router.navigate(['department', department.id, 'course', course.id], {relativeTo: this.route});
     }
 }
