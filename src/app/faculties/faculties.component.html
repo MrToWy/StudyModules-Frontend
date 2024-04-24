@@ -1,3 +1,4 @@
+<ng-container *transloco="let t; prefix:'faculties'">
 <div class="grid-container">
 
   <div (click)="selectFaculty(faculty)" *ngFor="let faculty of faculties"
@@ -5,9 +6,9 @@
   [style]="'background:' + addAlpha(faculty.color, 0.5)">
 
     <header [style]="'background:' + faculty.color">
-      {{faculty.name}}
+      {{t('faculty')}} {{faculty.id}}
     </header>
-    <span>{{faculty.subtitle}}</span>
+    <span>{{faculty.name}}</span>
 
   </div>
 
@@ -23,3 +24,4 @@
   </div>
 
 </div>
+</ng-container>

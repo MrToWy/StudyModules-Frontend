@@ -7,6 +7,7 @@ import {RippleModule} from "primeng/ripple";
 import {Router} from "@angular/router";
 import {CardModule} from "primeng/card";
 import {NgForOf} from "@angular/common";
+import {TranslocoDirective} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-faculties',
@@ -17,7 +18,8 @@ import {NgForOf} from "@angular/common";
     ButtonModule,
     RippleModule,
     CardModule,
-    NgForOf
+    NgForOf,
+    TranslocoDirective
   ],
   templateUrl: './faculties.component.html',
   styleUrl: './faculties.component.sass',
@@ -32,7 +34,7 @@ faculties!: FacultyDto[];
                 private router: Router) {}
 
     ngOnInit() {
-        this.facultyService.mockGetAllObservable().subscribe((data) => {
+        this.facultyService.getAll().subscribe((data) => {
             this.faculties = data;
         });
     }

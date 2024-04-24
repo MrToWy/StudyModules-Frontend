@@ -1,5 +1,8 @@
 {
   "modulesearch": {
     "placeholder": "Search modules"
+  },
+  "faculties": {
+    "faculty": "Faculty"
   }
 }

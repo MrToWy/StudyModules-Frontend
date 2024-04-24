@@ -7,6 +7,8 @@ import {NgIf} from "@angular/common";
 import {AuthService} from "../shared/auth/auth.service";
 import {AuthModule} from "../shared/auth/auth.module";
 import {MainComponent} from "./main/main.component";
+import {AuthInterceptor} from "../shared/auth/auth.interceptor";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
 
 
 @Component({
