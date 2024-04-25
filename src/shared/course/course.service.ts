@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
+import {ModuleDto} from "../module/module.service";
 
 @Injectable()
 export class CourseService {
@@ -24,15 +25,18 @@ export class CourseService {
         subscriber.next([
           {
             name: "MDI", id: 1,
-            abbreviation: ''
+            abbreviation: '',
+            modules: []
           },
           {
             name: "BIN", id: 2,
-            abbreviation: ''
+            abbreviation: '',
+            modules: []
           },
           {
             name: "MIN", id: 3,
-            abbreviation: ''
+            abbreviation: '',
+            modules: []
           },
         ]);
       });
@@ -53,4 +57,5 @@ export interface CourseDto {
   name: string;
   abbreviation: string;
   id: number;
+  modules: ModuleDto[];
 }

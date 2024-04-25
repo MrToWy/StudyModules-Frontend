@@ -13,8 +13,12 @@ export class ModuleService {
     return this.http.get<ModuleDto[]>(this.moduleURL);
   }
 
-  get(courseId: number) {
-    return this.http.get<ModuleDto>(this.moduleURL + "/" + courseId);
+  get(moduleId: number) {
+    return this.http.get<ModuleDto>(this.moduleURL + "/" + moduleId);
+  }
+
+  getByCourse(courseId: number) {
+    return this.http.get<ModuleDto[]>(environment.backendURL + "degrees/" + courseId + "/modules");
   }
 
   mockGetAllObservable(courseId: number) {

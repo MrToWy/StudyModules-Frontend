@@ -35,7 +35,7 @@ export class ModulesComponent {
       // get course id from url
       this.courseId = Number(this.router.url.split("/")[6]);
 
-        this.moduleService.mockGetAllObservable(this.courseId).subscribe((data) => {
+        this.moduleService.getByCourse(this.courseId).subscribe((data) => {
             this.modules = data;
         });
     }

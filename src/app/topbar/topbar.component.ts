@@ -73,15 +73,18 @@ export class TopbarComponent {
               this.items?.push(courseLink);
 
               if (moduleId !== undefined) {
-                const moduleNumber = parseInt(moduleId);
-                moduleService.get(moduleNumber).subscribe((module: ModuleDto) => {
-                  const moduleLink = {
-                    label: 'Modul ' + module.name,
-                    routerLink: '/faculty/' + facultyId + '/course/' + courseId + '/module/' + moduleId,
-                  };
-                  this.items?.push(moduleLink);
+
+                // find module with id moduleId
+                course.modules.find((module: ModuleDto) => {
+                  if (module.id === parseInt(moduleId)) {
+                    const moduleLink = {
+                      label: 'Modul ' + module.name,
+                      routerLink: '/faculty/' + facultyId + '/course/' + courseId + '/module/' + moduleId,
+                    };
+                    this.items?.push(moduleLink);
+                  }
                 });
-            }
+              }
             });
 
 
