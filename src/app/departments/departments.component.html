@@ -7,7 +7,7 @@
 
     <div style="margin-bottom: 2rem; background: aqua" class="clickable"
          (click)="selectCourse(department, course)"
-         *ngFor="let course of department.courses">
+         *ngFor="let course of department.degreePrograms">
       {{course.name}}
     </div>
 

@@ -23,7 +23,7 @@ export class CourseDetailComponent {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       let courseId = +params['id']; // (+) converts string 'id' to a number
-      this.currentCourse = { id: courseId, name: "Studiengang " + courseId };
+      this.currentCourse = { id: courseId, name: "Studiengang " + courseId, abbreviation: '' };
     });
   }
 }

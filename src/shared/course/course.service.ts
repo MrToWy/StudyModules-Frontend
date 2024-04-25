@@ -26,9 +26,18 @@ export class CourseService {
     if(facultyId === 4) {
       return new Observable<CourseDto[]>((subscriber) => {
         subscriber.next([
-          {name: "MDI", id: 1},
-          {name: "BIN", id: 2},
-          {name: "MIN", id: 3},
+          {
+            name: "MDI", id: 1,
+            abbreviation: ''
+          },
+          {
+            name: "BIN", id: 2,
+            abbreviation: ''
+          },
+          {
+            name: "MIN", id: 3,
+            abbreviation: ''
+          },
         ]);
       });
     }
@@ -46,5 +55,6 @@ export class CourseService {
 
 export interface CourseDto {
   name: string;
+  abbreviation: string;
   id: number;
 }

@@ -27,7 +27,7 @@ export class DepartmentsComponent {
                 ) {}
 
     ngOnInit() {
-        this.departmentService.mockGetAllObservable().subscribe((data) => {
+        this.departmentService.getAll().subscribe((data) => {
             this.departments = data;
         });
     }
