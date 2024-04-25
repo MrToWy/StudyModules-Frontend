@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
 import {CourseDto} from "../course/course.service";
+import {FacultyDto} from "../faculty/faculty.service";
 
 @Injectable()
 export class DepartmentService {
@@ -19,4 +20,5 @@ export interface DepartmentDto {
   name: string;
   id: number;
   degreePrograms: CourseDto[];
+  faculty: FacultyDto;
 }

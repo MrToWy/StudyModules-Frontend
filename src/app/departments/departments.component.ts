@@ -35,4 +35,12 @@ export class DepartmentsComponent {
     async selectCourse(department: DepartmentDto, course: CourseDto) {
         await this.router.navigate(['department', department.id, 'course', course.id], {relativeTo: this.route});
     }
+
+    // ToDo: Refactor duplicate code
+  addAlpha(color: string | undefined, opacity: number) {
+    if (!color) {
+        return color;
+      }
+      opacity = Math.round(opacity * 255);
+      return color + opacity.toString(16).toUpperCase();  }
 }
