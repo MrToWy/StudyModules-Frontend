@@ -5,7 +5,7 @@ import {Observable} from "rxjs";
 
 @Injectable()
 export class CourseService {
-  private courseURL: string = environment.backendURL + "course";
+  private courseURL: string = environment.backendURL + "degrees";
 
   constructor(private http: HttpClient) { }
 
@@ -13,12 +13,8 @@ export class CourseService {
     return this.http.get<CourseDto[]>(this.courseURL);
   }
 
-  mockGetAll() {
-    return [
-      { name: "Mathe 1", id: 1},
-        { name: "Mathe 2", id: 2},
-        { name: "Mathe 3", id: 3},
-    ];
+  get(id: number) {
+    return this.http.get<CourseDto>(this.courseURL + "/" + id);
   }
 
   mockGetAllObservable(facultyId: number) {

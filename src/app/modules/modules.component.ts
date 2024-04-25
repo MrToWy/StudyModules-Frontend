@@ -33,7 +33,7 @@ export class ModulesComponent {
     ngOnInit() {
 
       // get course id from url
-      this.courseId = Number(this.router.url.split("/")[4]);
+      this.courseId = Number(this.router.url.split("/")[6]);
 
         this.moduleService.mockGetAllObservable(this.courseId).subscribe((data) => {
             this.modules = data;

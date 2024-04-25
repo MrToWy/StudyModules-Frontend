@@ -14,6 +14,10 @@ export class DepartmentService {
   getAll() {
     return this.http.get<DepartmentDto[]>(this.departmentURL);
   }
+
+  get(id: number) {
+    return this.http.get<DepartmentDto>(this.departmentURL + "/" + id);
+  }
 }
 
 export interface DepartmentDto {

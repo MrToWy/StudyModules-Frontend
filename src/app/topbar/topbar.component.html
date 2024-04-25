@@ -6,8 +6,14 @@
 
     </div>
     <div *ngIf="items?.length??0 > 0" class="p-toolbar-group-center">
-      <p-breadcrumb class="max-w-full" [model]="items" [home]="home"></p-breadcrumb>
+      -
+      <span style="padding: 3px" *ngFor="let item of items">
+        {{item.label}} -
+      </span>
     </div>
+
+
+
     <div class="p-toolbar-group-end">
       <app-module-search class="tinyMarginRight"></app-module-search>
       <app-language-dropdown></app-language-dropdown>
