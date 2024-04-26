@@ -20,4 +20,5 @@ export class ModuleGridComponent {
 
   modules: ModuleDto[] = [];
 
+  protected readonly console = console;
 }
