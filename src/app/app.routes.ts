@@ -5,8 +5,10 @@ import {CourseDetailComponent} from "./course-detail/course-detail.component";
 import {ModuleDetailComponent} from "./module-detail/module-detail.component";
 import {ModuleEditComponent} from "./module-edit/module-edit.component";
 import {DepartmentDetailComponent} from "./department-detail/department-detail.component";
+import {ModuleGridComponent} from "./module-grid/module-grid.component";
 
 export const routes: Routes = [
+  { path: 'overview', component: ModuleGridComponent },
   { path: 'faculties', component: FacultiesComponent },
   { path: 'faculty/:id', component: FacultyDetailComponent },
   { path: 'faculty/:id/department/:id', component: DepartmentDetailComponent},

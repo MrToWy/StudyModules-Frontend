@@ -1,0 +1,18 @@
+<p-table [value]="modules" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Semester</th>
+            <th>ECTS</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-module>
+        <tr>
+            <td>{{ module.abbreviation }}</td>
+            <td>{{ module.name }}</td>
+            <td>{{ module.semester }}</td>
+            <td>{{ module.credits }}</td>
+        </tr>
+    </ng-template>
+</p-table>
