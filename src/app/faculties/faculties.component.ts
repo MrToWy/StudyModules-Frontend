@@ -39,8 +39,8 @@ faculties!: FacultyDto[];
         });
     }
 
-    selectFaculty(faculty: FacultyDto) {
-        this.router.navigate(['/faculty', faculty.id]).then(r => console.log(r));
+    async selectFaculty(faculty: FacultyDto) {
+        await this.router.navigate(['/faculty', faculty.id], { state: {faculty: faculty} });
     }
 
     addAlpha(color:string|undefined, opacity:number) {

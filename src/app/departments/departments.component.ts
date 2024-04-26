@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {FacultyDto, FacultyService} from "../../shared/faculty/faculty.service";
 import {MessageService} from "primeng/api";
@@ -19,6 +19,9 @@ import {CourseDto} from "../../shared/course/course.service";
 export class DepartmentsComponent {
     departments!: DepartmentDto[];
 
+    @Input()
+    selectedFaculty: FacultyDto | undefined;
+
     selectedDepartment!: DepartmentDto;
 
     constructor(private departmentService: DepartmentService,
@@ -27,8 +30,9 @@ export class DepartmentsComponent {
                 ) {}
 
     ngOnInit() {
-        this.departmentService.getAll().subscribe((data) => {
-            this.departments = data;
+        this.departmentService.getAll()
+          .subscribe((data) => {
+            this.departments = data.filter(department => department.faculty.id === this.selectedFaculty?.id);
         });
     }
 
