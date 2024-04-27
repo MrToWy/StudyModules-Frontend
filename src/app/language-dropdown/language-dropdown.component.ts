@@ -29,11 +29,18 @@ export class LanguageDropdownComponent {
             { name: 'EN', code: 'en' }
         ];
 
-        this.selectedLanguage = this.languages[0];
+        this.selectedLanguage = this.languages.find(
+            (lang) => lang.code === localStorage.getItem('language')
+        );
+
+        if (!this.selectedLanguage) {
+            this.selectedLanguage = this.languages[0];
+        }
     }
 
     setLanguage(lang: any) {
         this.translocoService.setActiveLang(lang.code.toLowerCase());
         this.selectedLanguage = lang;
+        localStorage.setItem('language', lang.code.toLowerCase());
     }
 }

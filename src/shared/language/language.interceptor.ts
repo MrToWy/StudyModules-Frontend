@@ -5,20 +5,20 @@ import {Observable} from "rxjs";
 @Injectable({
     providedIn: 'root'
 })
-export class AuthInterceptor implements HttpInterceptor {
+export class LanguageInterceptor implements HttpInterceptor {
 
-    private readonly token: string;
+    private readonly language: string;
 
     constructor() {
-        this.token = localStorage.getItem('token')??"";
+        this.language = localStorage.getItem('language')??"de";
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      console.log("auth intercepted");
-        if (this.token) {
+      console.log("language intercepted");
+        if (this.language) {
             const newRequest = req.clone({
                 setHeaders: {
-                    'Authorization': "Bearer " + this.token
+                    'language': this.language
                 }
             });
             return next.handle(newRequest);

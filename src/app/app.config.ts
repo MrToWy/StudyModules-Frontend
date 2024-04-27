@@ -7,6 +7,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient} from "@angular/c
 import { TranslocoHttpLoader } from './transloco-loader';
 import { provideTransloco } from '@jsverse/transloco';
 import {AuthInterceptor} from "../shared/auth/auth.interceptor";
+import {LanguageInterceptor} from "../shared/language/language.interceptor";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,6 +23,7 @@ export const appConfig: ApplicationConfig = {
         },
         loader: TranslocoHttpLoader
       }),
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LanguageInterceptor, multi: true }
   ],
 };
