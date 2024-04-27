@@ -1,16 +1,20 @@
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
+import {LanguageService} from "./language.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class LanguageInterceptor implements HttpInterceptor {
 
-    private readonly language: string;
+    private language: string;
 
-    constructor() {
-        this.language = localStorage.getItem('language')??"de";
+    constructor(private languageService: LanguageService) {
+        this.language = this.languageService.languageCode;
+        this.languageService.languageSubject.subscribe((language) => {
+            this.language = language;
+        });
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

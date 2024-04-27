@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {DropdownModule} from "primeng/dropdown";
 import {FormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
-import {TranslocoService} from "@jsverse/transloco";
+import {LanguageService} from "../../shared/language/language.service";
 
 @Component({
   selector: 'app-language-dropdown',
@@ -16,7 +16,7 @@ import {TranslocoService} from "@jsverse/transloco";
   styleUrl: './language-dropdown.component.sass'
 })
 export class LanguageDropdownComponent {
-  constructor(private translocoService: TranslocoService) {
+  constructor(private languageService: LanguageService) {
   }
 
     languages: any[] | undefined;
@@ -30,7 +30,7 @@ export class LanguageDropdownComponent {
         ];
 
         this.selectedLanguage = this.languages.find(
-            (lang) => lang.code === localStorage.getItem('language')
+            (lang) => lang.code === this.languageService.languageCode
         );
 
         if (!this.selectedLanguage) {
@@ -39,8 +39,7 @@ export class LanguageDropdownComponent {
     }
 
     setLanguage(lang: any) {
-        this.translocoService.setActiveLang(lang.code.toLowerCase());
+        this.languageService.languageCode = lang.code.toLowerCase();
         this.selectedLanguage = lang;
-        localStorage.setItem('language', lang.code.toLowerCase());
     }
 }

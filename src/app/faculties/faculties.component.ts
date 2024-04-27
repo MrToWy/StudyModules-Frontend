@@ -8,6 +8,7 @@ import {Router} from "@angular/router";
 import {CardModule} from "primeng/card";
 import {NgForOf} from "@angular/common";
 import {TranslocoDirective} from "@jsverse/transloco";
+import {LanguageService} from "../../shared/language/language.service";
 
 @Component({
   selector: 'app-faculties',
@@ -31,9 +32,17 @@ faculties!: FacultyDto[];
     selectedFaculty!: FacultyDto;
 
     constructor(private facultyService: FacultyService,
-                private router: Router) {}
+                private router: Router, private languageService: LanguageService) {}
 
     ngOnInit() {
+      this.loadFaculties()
+
+      this.languageService.languageSubject.subscribe(() => {
+        this.loadFaculties()
+      });
+    }
+
+    loadFaculties() {
         this.facultyService.getAll().subscribe((data) => {
             this.faculties = data;
         });
