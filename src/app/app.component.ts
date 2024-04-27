@@ -9,6 +9,7 @@ import {AuthModule} from "../shared/auth/auth.module";
 import {MainComponent} from "./main/main.component";
 import {AuthInterceptor} from "../shared/auth/auth.interceptor";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {TranslocoService} from "@jsverse/transloco";
 
 
 @Component({
@@ -23,6 +24,8 @@ export class AppComponent {
   title = 'study-modules';
   date: any;
 
-  constructor(protected authService: AuthService) {
+  constructor(protected authService: AuthService, private translocoService: TranslocoService) {
+    const activeLang = localStorage.getItem('language');
+    translocoService.setActiveLang(activeLang??"de")
   }
 }
