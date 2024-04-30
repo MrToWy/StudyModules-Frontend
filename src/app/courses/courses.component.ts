@@ -35,9 +35,9 @@ courses!: CourseDto[];
       // get faculty id from url
       this.facultyId = Number(this.router.url.split("/")[2]);
 
-        this.courseService.mockGetAllObservable(this.facultyId).subscribe((data) => {
-            this.courses = data;
-        });
+        //this.courseService.mockGetAllObservable(this.facultyId).subscribe((data) => {
+        //    this.courses = data;
+        //});
     }
 
     async selectCourse(course: CourseDto) {

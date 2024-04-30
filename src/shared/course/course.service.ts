@@ -17,40 +17,6 @@ export class CourseService {
   get(id: number) {
     return this.http.get<CourseDto>(this.courseURL + "/" + id);
   }
-
-  mockGetAllObservable(facultyId: number) {
-
-    if(facultyId === 4) {
-      return new Observable<CourseDto[]>((subscriber) => {
-        subscriber.next([
-          {
-            name: "MDI", id: 1,
-            abbreviation: '',
-            modules: []
-          },
-          {
-            name: "BIN", id: 2,
-            abbreviation: '',
-            modules: []
-          },
-          {
-            name: "MIN", id: 3,
-            abbreviation: '',
-            modules: []
-          },
-        ]);
-      });
-    }
-
-    else {
-      return new Observable<CourseDto[]>((subscriber) => {
-        subscriber.next([
-        ]);
-      });
-    }
-  }
-
-
 }
 
 export interface CourseDto {

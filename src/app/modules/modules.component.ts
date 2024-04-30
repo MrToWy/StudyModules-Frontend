@@ -4,7 +4,8 @@ import {RippleModule} from "primeng/ripple";
 import {SharedModule} from "primeng/api";
 import {TableModule} from "primeng/table";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ModuleDto, ModuleService} from "../../shared/module/module.service";
+import {ModuleDto} from "../../shared/module/module.service";
+import {CourseDto, CourseService} from "../../shared/course/course.service";
 
 @Component({
   selector: 'app-modules',
@@ -15,7 +16,7 @@ import {ModuleDto, ModuleService} from "../../shared/module/module.service";
         SharedModule,
         TableModule
     ],
-  providers: [ModuleService],
+  providers: [CourseService],
   templateUrl: './modules.component.html',
   styleUrl: './modules.component.sass'
 })
@@ -23,9 +24,11 @@ export class ModulesComponent {
     modules!: ModuleDto[];
 
     selectedModule!: ModuleDto;
-    courseId!: number;
 
-    constructor(private moduleService: ModuleService,
+    courseId!: number;
+    course: CourseDto | undefined;
+
+    constructor(private courseService: CourseService,
                 private router: Router,
                 private route: ActivatedRoute
                 ) {}
@@ -34,9 +37,9 @@ export class ModulesComponent {
 
       // get course id from url
       this.courseId = Number(this.router.url.split("/")[6]);
-
-        this.moduleService.getByCourse(this.courseId).subscribe((data) => {
-            this.modules = data;
+        this.courseService.get(this.courseId).subscribe((data) => {
+            this.course = data;
+            this.modules = data.modules;
         });
     }
 
