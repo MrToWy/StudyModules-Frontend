@@ -59,6 +59,18 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
+          sidebarId: 'frontendSidebar',
+          position: 'left',
+          label: 'Frontend',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'backendSidebar',
+          position: 'left',
+          label: 'Backend',
+        },
+        {
+          type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
           label: 'Tutorial',
@@ -76,6 +88,14 @@ const config: Config = {
         {
           title: 'Docs',
           items: [
+            {
+              label: 'Frontend',
+              to: '/docs/frontend',
+            },
+            {
+              label: 'Backend',
+              to: '/docs/backend',
+            },
             {
               label: 'Tutorial',
               to: '/docs/intro',
