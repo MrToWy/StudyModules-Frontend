@@ -70,12 +70,6 @@ const config: Config = {
           label: 'Backend',
         },
         {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          position: 'left',
-          label: 'Tutorial',
-        },
-        {
           href: 'https://github.com/facebook/docusaurus',
           label: 'GitHub',
           position: 'right',
@@ -95,10 +89,6 @@ const config: Config = {
             {
               label: 'Backend',
               to: '/docs/backend',
-            },
-            {
-              label: 'Tutorial',
-              to: '/docs/intro',
             },
           ],
         },
