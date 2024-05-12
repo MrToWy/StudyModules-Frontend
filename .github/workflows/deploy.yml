@@ -39,7 +39,7 @@ jobs:
           server: "${{ secrets.FTP_SERVER }}"
           username: "${{ secrets.FTP_USERNAME_DOC }}"
           password: "${{ secrets.FTP_PASSWORD_DOC }}"
-          local-dir: "build/"
+          local-dir: "documentation/build/"
 
 
   deployFrontend:
