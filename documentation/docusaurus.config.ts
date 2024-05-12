@@ -84,11 +84,11 @@ const config: Config = {
           items: [
             {
               label: 'Frontend',
-              to: '/docs/frontend',
+              to: '/docs/frontend/intro',
             },
             {
               label: 'Backend',
-              to: '/docs/backend',
+              to: '/docs/backend/intro',
             },
           ],
         },
