@@ -10,32 +10,29 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
+    title: 'Frontend',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        The frontend has been written with angular and typescript. It's design follows the latest UI-Patterns.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: 'Backend',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        The backend has been written with nest.js and typescript. It is responsible for serving multiple applications.
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: 'Bachelors thesis',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        The bachelors thesis might contain useful information regarding this project. It is written with typst and can be viewed as a PDF.
       </>
     ),
   },
