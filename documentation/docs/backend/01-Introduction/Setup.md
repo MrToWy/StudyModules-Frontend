@@ -46,6 +46,16 @@ To run the creation, use the following command.
 docker-compose up -d
 ```
 
+Prisma will be used to generate the database schema. Start by installing the prisma cli.
+```shell
+npm i -g prisma
+```
+
+Now you can generate the schema.
+```shell
+prisma migrate dev
+```
+
 ## Run project
 
 In order to publish the backend to the web, the files need to be compiled. The resulting files will be placed inside a folder called `dist` and then can be hosted with a node.js-Server.
