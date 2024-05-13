@@ -85,19 +85,6 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
-          items: [
-            {
-              label: 'Frontend',
-              to: '/docs/frontend/introduction/hello',
-            },
-            {
-              label: 'Backend',
-              to: '/docs/backend/intro',
-            },
-          ],
-        },
-        {
           title: 'Repositories',
           items: [
             {
