@@ -1,3 +1,10 @@
 # Database changes
 
-TODO
+To change the schema of the database, edit the file `schema.prisma` according to your needs.
+
+Generate a migration file and apply it.
+```shell
+prisma migrate dev --name <name>
+```
+
+
