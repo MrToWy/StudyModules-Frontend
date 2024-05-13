@@ -51,6 +51,8 @@ Prisma will be used to generate the database schema. Start by installing the pri
 npm i -g prisma
 ```
 
+If this doesnt work, e.g. due to permission issues, you can use npx (e.g. `npx prisma migrate dev`).
+
 Now you can generate the schema.
 ```shell
 prisma migrate dev
