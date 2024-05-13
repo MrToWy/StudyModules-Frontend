@@ -84,7 +84,7 @@ const config: Config = {
           items: [
             {
               label: 'Frontend',
-              to: '/docs/frontend/intro',
+              to: '/docs/frontend/introduction/hello',
             },
             {
               label: 'Backend',
