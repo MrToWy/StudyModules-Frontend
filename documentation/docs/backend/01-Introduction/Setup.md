@@ -55,7 +55,7 @@ If this doesnt work, e.g. due to permission issues, you can use npx (e.g. `npx p
 
 Now you can generate the schema.
 ```shell
-prisma migrate dev
+prisma migrate deploy
 ```
 
 ## Run project
