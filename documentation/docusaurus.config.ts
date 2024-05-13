@@ -3,8 +3,8 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
+  title: 'StudyModules',
+  tagline: 'Manage modules and their details',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -37,8 +37,8 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          //editUrl:
+          //  'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -51,7 +51,7 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'My Site',
+      title: 'StudyModules',
       logo: {
         alt: 'My Site Logo',
         src: 'img/logo.svg',
@@ -70,8 +70,8 @@ const config: Config = {
           label: 'Backend',
         },
         {
-          href: 'https://github.com/facebook/docusaurus',
-          label: 'GitHub',
+          href: 'https://studymodules.tobi.win/',
+          label: 'Live-System',
           position: 'right',
         },
       ],
@@ -93,33 +93,33 @@ const config: Config = {
           ],
         },
         {
-          title: 'Community',
+          title: 'Repositories',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              label: 'Frontend & Documentation',
+              href: 'https://github.com/MrToWy/StudyModules-Frontend',
             },
             {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
+              label: 'Backend',
+              href: 'https://gitlab.gwdg.de/lernanwendungen/studybase',
             },
             {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
+              label: 'Bachelors Thesis',
+              href: 'https://github.com/MrToWy/Bachelorarbeit',
             },
           ],
         },
         {
-          title: 'More',
+          title: 'Misc',
           items: [
             {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              label: 'Impressum',
+              href: 'http://www.tobias.wylega.de/Impressum.html',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Tobias Wylega. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,
