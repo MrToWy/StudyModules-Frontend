@@ -38,6 +38,9 @@ Fill in a value for the `AUTH_SECRET`.
 In the field `DATABASE_URL` you can define the connection-string of the Postgres-Database.
 In case the connection-string changes, you now know where to go to.
 
+## Setup Database
+TODO
+
 ## Run project
 
 In order to publish the backend to the web, the files need to be compiled. The resulting files will be placed inside a folder called `dist` and then can be hosted with a node.js-Server.
