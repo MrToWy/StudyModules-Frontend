@@ -71,7 +71,12 @@ const config: Config = {
         },
         {
           href: 'https://studymodules.tobi.win/',
-          label: 'Live-System',
+          label: 'Live-Frontend',
+          position: 'right',
+        },
+        {
+          href: 'https://studymodules.tobii.uber.space/api',
+          label: 'Live-Backend',
           position: 'right',
         },
       ],
