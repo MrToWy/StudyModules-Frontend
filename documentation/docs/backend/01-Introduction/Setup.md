@@ -39,7 +39,12 @@ In the field `DATABASE_URL` you can define the connection-string of the Postgres
 In case the connection-string changes, you now know where to go to.
 
 ## Setup Database
-TODO
+
+The database will be hosted inside a docker container. In order to create the container, the file `docker-compose.yaml` will be used.
+To run the creation, use the following command.
+```shell
+docker-compose up -d
+```
 
 ## Run project
 
