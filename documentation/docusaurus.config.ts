@@ -70,6 +70,12 @@ const config: Config = {
           label: 'Backend',
         },
         {
+          type: 'docSidebar',
+          sidebarId: 'apiSidebar',
+          position: 'left',
+          label: 'API',
+        },
+        {
           href: 'https://studymodules.tobi.win/',
           label: 'Live-Frontend',
           position: 'right',
