@@ -18,6 +18,7 @@ export class ModuleGridComponent {
     moduleService.getAll().subscribe(modules => this.modules = modules);
   }
 
+  module: ModuleDto | undefined;
   modules: ModuleDto[] = [];
 
   protected readonly console = console;

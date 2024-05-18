@@ -20,33 +20,11 @@ export class ModuleService {
   getByCourse(courseId: number) {
     return this.http.get<ModuleDto[]>(environment.backendURL + "degrees/" + courseId + "/modules");
   }
-
-  mockGetAllObservable(courseId: number) {
-
-    if(courseId === 1) {
-      return new Observable<ModuleDto[]>((subscriber) => {
-        subscriber.next([
-          {name: "Mathe 1", id: 1, facultyId: 4, courseId: 1},
-          {name: "Mathe 2", id: 2, facultyId: 4, courseId: 1},
-          {name: "Mathe 3", id: 3, facultyId: 4, courseId: 1},
-        ]);
-      });
-    }
-
-    else {
-      return new Observable<ModuleDto[]>((subscriber) => {
-        subscriber.next([
-        ]);
-      });
-    }
-  }
-
-
 }
 
 export interface ModuleDto {
-  name: string;
   id: number;
+  abbreviation: string;
   courseId: number;
   facultyId: number;
 }

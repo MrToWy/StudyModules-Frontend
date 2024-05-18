@@ -6,15 +6,15 @@ selectionMode="single"
             <th>Code</th>
             <th>Name</th>
             <th>Semester</th>
-            <th>ECTS</th>
+            <th>Verantwortlich</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-module>
         <tr class="clickable" (click)="console.log(module.abbreviation)">
             <td>{{ module.abbreviation }}</td>
-            <td>{{ module.name }}</td>
+            <td>{{ module.translations[0].name }}</td>
             <td>{{ module.semester }}</td>
-            <td>{{ module.credits }}</td>
+            <td>{{ module.responsible.firstName }} {{module.responsible.lastName}}</td>
         </tr>
     </ng-template>
 </p-table>

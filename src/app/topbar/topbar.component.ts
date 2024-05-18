@@ -78,7 +78,7 @@ export class TopbarComponent {
                 course.modules.find((module: ModuleDto) => {
                   if (module.id === parseInt(moduleId)) {
                     const moduleLink = {
-                      label: 'Modul ' + module.name,
+                      label: 'Modul ' + module.abbreviation,
                       routerLink: '/faculty/' + facultyId + '/course/' + courseId + '/module/' + moduleId,
                     };
                     this.items?.push(moduleLink);

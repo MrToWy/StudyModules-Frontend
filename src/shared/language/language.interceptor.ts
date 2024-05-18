@@ -22,7 +22,7 @@ export class LanguageInterceptor implements HttpInterceptor {
         if (this.language) {
             const newRequest = req.clone({
                 setHeaders: {
-                    'language': this.language
+                    'language': this.language.toUpperCase()
                 }
             });
             return next.handle(newRequest);
