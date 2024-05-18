@@ -142,7 +142,7 @@ const config: Config = {
       searchParameters: {},
 
       // Optional: path for search page that enabled by default (`false` to disable it)
-      searchPagePath: 'search',
+      searchPagePath: false,
 
       // Optional: whether the insights feature is enabled or not on Docsearch (`false` by default)
       insights: false,
