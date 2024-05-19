@@ -88,7 +88,7 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-module>
-        <tr class="clickable" (click)="console.log(module.abbreviation)">
+        <tr class="clickable" (click)="openDetailView(module)">
             <td>
               <p-tag severity="success" value="{{ module.course }}" [pTooltip]="tooltipContent" />
               <ng-template #tooltipContent>

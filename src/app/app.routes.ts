@@ -14,6 +14,8 @@ export const routes: Routes = [
   { path: 'faculty/:id/department/:id', component: DepartmentDetailComponent},
   { path: 'faculty/:id/department/:id/course/:id', component: CourseDetailComponent },
   { path: 'faculty/:id/department/:id/course/:id/module/:id', component: ModuleDetailComponent},
+  { path: 'module/:id', component: ModuleDetailComponent},
   { path: 'faculty/:id/department/:id/course/:id/module/:id/edit', component: ModuleEditComponent},
+  { path: 'module/:id/edit', component: ModuleEditComponent},
   { path: '', redirectTo: '/faculties', pathMatch: 'full' }
 ];

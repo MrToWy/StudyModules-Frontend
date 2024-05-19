@@ -7,6 +7,7 @@ import {DropdownModule} from "primeng/dropdown";
 import {FormsModule} from "@angular/forms";
 import {MultiSelectModule} from "primeng/multiselect";
 import {AvatarModule} from "primeng/avatar";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-module-grid',
@@ -30,7 +31,7 @@ export class ModuleGridComponent {
   selectedUser: any;
   selectedvalue: any;
 
-  constructor(moduleService: ModuleService) {
+  constructor(moduleService: ModuleService, private router: Router) {
     moduleService.getAll().subscribe(
       modules => {
             this.modules = modules;
@@ -38,6 +39,10 @@ export class ModuleGridComponent {
             this.users = [...new Set(modules.map(module => module.responsible))];
             console.log(this.users)
         });
+  }
+
+  async openDetailView(module: ModuleDto) {
+    await this.router.navigate(['module', module.id]);
   }
 
   module: ModuleDto | undefined;
