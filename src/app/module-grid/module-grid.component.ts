@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {TableModule} from "primeng/table";
 import {ModuleDto, ModuleService} from "../../shared/module/module.service";
 import {TagModule} from "primeng/tag";
@@ -7,7 +7,7 @@ import {DropdownModule} from "primeng/dropdown";
 import {FormsModule} from "@angular/forms";
 import {MultiSelectModule} from "primeng/multiselect";
 import {AvatarModule} from "primeng/avatar";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-module-grid',
@@ -37,7 +37,6 @@ export class ModuleGridComponent {
             this.modules = modules;
             this.statuses = [...new Set(modules.map(module => module.course))];
             this.users = [...new Set(modules.map(module => module.responsible))];
-            console.log(this.users)
         });
   }
 

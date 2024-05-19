@@ -18,7 +18,6 @@ export class LanguageInterceptor implements HttpInterceptor {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      console.log("language intercepted");
         if (this.language) {
             const newRequest = req.clone({
                 setHeaders: {
