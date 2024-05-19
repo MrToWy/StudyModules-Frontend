@@ -1,8 +1,11 @@
 <ng-container *transloco="let t; prefix:'overview'">
+
 <p-table
   [value]="modules"
   [tableStyle]="{ 'min-width': '50rem' }"
   selectionMode="single"
+  rowGroupMode="subheader"
+  groupRowsBy="course"
 >
     <ng-template pTemplate="header">
         <tr>
@@ -88,8 +91,32 @@
             </th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-module>
-        <tr class="clickable" (click)="openDetailView(module)">
+  <ng-template *ngIf="groupByCourse" pTemplate="groupheader" let-module let-expanded="expanded">
+            <tr>
+                <td colspan="5">
+                  <div style="display: flex; align-items: center;">
+                    <p-button
+                        [text]="true"
+                        type="button"
+                        pButton
+                        pRipple
+                        [pRowToggler]="module"
+                        class="p-button-text p-button-rounded "
+                        [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">
+                    </p-button>
+
+                    <span>{{module.course_name}} ({{module.course}})</span>
+                  </div>
+                </td>
+            </tr>
+        </ng-template>
+  <ng-template *ngIf="groupByCourse" pTemplate="groupfooter" let-customer>
+            <tr class="p-rowgroup-footer">
+                <td colspan="4" style="text-align: right">Total Customers</td>
+            </tr>
+  </ng-template>
+    <ng-template [pTemplate]="this.groupByCourse ? 'rowexpansion' : 'body'" let-module>
+      <tr class="clickable" (click)="openDetailView(module)">
             <td>
               <p-tag severity="success" value="{{ module.course }}" [pTooltip]="tooltipContent" />
               <ng-template #tooltipContent>
@@ -105,5 +132,6 @@
               {{ module.responsible }}</td>
         </tr>
     </ng-template>
+
 </p-table>
 </ng-container>

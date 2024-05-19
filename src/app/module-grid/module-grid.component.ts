@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {TableModule} from "primeng/table";
 import {ModuleDto, ModuleService} from "../../shared/module/module.service";
 import {TagModule} from "primeng/tag";
@@ -10,6 +10,10 @@ import {AvatarModule} from "primeng/avatar";
 import {Router} from "@angular/router";
 import {LanguageService} from "../../shared/language/language.service";
 import {TranslocoDirective} from "@jsverse/transloco";
+import {ButtonModule} from "primeng/button";
+import {RippleModule} from "primeng/ripple";
+import {NgIf} from "@angular/common";
+import {ToggleButtonModule} from "primeng/togglebutton";
 
 @Component({
   selector: 'app-module-grid',
@@ -22,7 +26,11 @@ import {TranslocoDirective} from "@jsverse/transloco";
     FormsModule,
     MultiSelectModule,
     AvatarModule,
-    TranslocoDirective
+    TranslocoDirective,
+    ButtonModule,
+    RippleModule,
+    NgIf,
+    ToggleButtonModule
   ],
   providers: [ModuleService],
   templateUrl: './module-grid.component.html',
@@ -33,8 +41,13 @@ export class ModuleGridComponent implements OnInit{
   statuses!: any[];
   selectedUser: any;
   selectedvalue: any;
+  groupByCourse = true;
 
-  constructor(private moduleService: ModuleService, private router: Router, private languageService: LanguageService) {
+  constructor(private moduleService: ModuleService,
+              private router: Router,
+              private languageService: LanguageService,
+              private cd: ChangeDetectorRef
+  ) {
 
   }
 
