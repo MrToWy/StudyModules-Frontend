@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {TranslocoService} from "@jsverse/transloco";
+import {PrimeNGConfig} from "primeng/api";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LanguageService {
-  constructor(private translocoService: TranslocoService) {
+  constructor(private translocoService: TranslocoService, private config: PrimeNGConfig) {
   }
 
 
