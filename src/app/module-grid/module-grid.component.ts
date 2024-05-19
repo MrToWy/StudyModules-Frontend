@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TableModule} from "primeng/table";
 import {ModuleDto, ModuleService} from "../../shared/module/module.service";
 import {TagModule} from "primeng/tag";
@@ -8,6 +8,8 @@ import {FormsModule} from "@angular/forms";
 import {MultiSelectModule} from "primeng/multiselect";
 import {AvatarModule} from "primeng/avatar";
 import {Router} from "@angular/router";
+import {LanguageService} from "../../shared/language/language.service";
+import {TranslocoDirective} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-module-grid',
@@ -19,20 +21,33 @@ import {Router} from "@angular/router";
     DropdownModule,
     FormsModule,
     MultiSelectModule,
-    AvatarModule
+    AvatarModule,
+    TranslocoDirective
   ],
   providers: [ModuleService],
   templateUrl: './module-grid.component.html',
   styleUrl: './module-grid.component.sass'
 })
-export class ModuleGridComponent {
+export class ModuleGridComponent implements OnInit{
   users!: any[];
   statuses!: any[];
   selectedUser: any;
   selectedvalue: any;
 
-  constructor(moduleService: ModuleService, private router: Router) {
-    moduleService.getAll().subscribe(
+  constructor(private moduleService: ModuleService, private router: Router, private languageService: LanguageService) {
+
+  }
+
+  ngOnInit(): void {
+    this.loadData();
+
+    this.languageService.languageSubject.subscribe(() => {
+      this.loadData()
+    });
+  }
+
+  loadData(){
+    this.moduleService.getAll().subscribe(
       modules => {
             this.modules = modules;
             this.statuses = [...new Set(modules.map(module => module.course))];

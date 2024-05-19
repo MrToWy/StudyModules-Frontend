@@ -5,6 +5,13 @@
   "faculties": {
     "faculty": "Fakultät"
   },
+  "overview": {
+    "course": "Studiengang",
+    "filter": "Filter",
+    "name": "Name",
+    "semester": "Semester",
+    "responsible": "Verantwortlich"
+  },
    "primeng": {
         "startsWith": "Beginnt mit",
         "contains": "Enthält",

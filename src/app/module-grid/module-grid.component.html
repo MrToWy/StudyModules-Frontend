@@ -1,3 +1,4 @@
+<ng-container *transloco="let t; prefix:'overview'">
 <p-table
   [value]="modules"
   [tableStyle]="{ 'min-width': '50rem' }"
@@ -7,7 +8,7 @@
         <tr>
             <th>
               <div>
-                    Studiengang
+                    {{ t('course') }}
                     <p-columnFilter display="menu"
                                     field="course"
                                     matchMode="equals"
@@ -21,7 +22,7 @@
                                 [(ngModel)]="selectedvalue"
                                 [options]="statuses"
                                 (onChange)="filter($event.value)"
-                                placeholder="Select One"
+                                [placeholder]="t('filter')"
                                 [showClear]="false">
                                     <ng-template let-option pTemplate="item">
                                         <p-tag
@@ -35,7 +36,7 @@
             </th>
             <th>
                 <div>
-                    Name
+                    {{ t('name') }}
                     <p-columnFilter
                       type="text"
                       field="name"
@@ -49,7 +50,7 @@
             </th>
             <th>
               <div>
-                    Semester
+                    {{ t('semester') }}
                     <p-columnFilter
                       type="text"
                       field="semester"
@@ -63,7 +64,7 @@
             </th>
             <th>
               <div>
-                Verantwortlich
+                {{ t('responsible') }}
                 <p-columnFilter field="responsible" matchMode="equals" display="menu"
                                 [showMatchModes]="false"
                                 [showOperator]="false"
@@ -71,7 +72,7 @@
                                 [hideOnClear]="true"
                 >
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-dropdown [filter]="true" [showClear]="false" [(ngModel)]="selectedUser" [options]="users" placeholder="Any" (onChange)="filter($event.value)">
+                            <p-dropdown [filter]="true" [showClear]="false" [(ngModel)]="selectedUser" [options]="users" [placeholder]="t('filter')" (onChange)="filter($event.value)">
                                 <ng-template let-option pTemplate="item">
                                     <div class="inline-block vertical-align-middle">
                                         <p-avatar
@@ -105,3 +106,4 @@
         </tr>
     </ng-template>
 </p-table>
+</ng-container>
