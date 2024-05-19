@@ -27,7 +27,7 @@ export class ModuleService {
 }
 
   get(moduleId: number) {
-    return this.http.get<ModuleDto>(this.moduleURL + "/" + moduleId);
+    return this.http.get<ModuleDetail>(this.moduleURL + "/" + moduleId);
   }
 
   getByCourse(courseId: number) {
@@ -43,4 +43,33 @@ export interface ModuleDto {
   semester: string;
   responsible: string;
   facultyId: number;
+}
+
+interface ModuleTranslation {
+  id: number;
+  name: string;
+  subtitle: string;
+  niveau: string;
+  type: string;
+  exam: string;
+  learningOutcomes: string;
+  languageId: number;
+  moduleId: number;
+}
+
+export interface ModuleDetail {
+  id: number;
+  number: number;
+  abbreviation: string;
+  credits: number;
+  hoursPresence: number;
+  hoursSelf: number;
+  semester: string;
+  courseLength: number;
+  requirementsHardId: number;
+  requirementsSoftId: number;
+  responsibleId: number;
+  degreeProgramId: number;
+  groupId: number;
+  translations: ModuleTranslation[];
 }
