@@ -45,7 +45,7 @@ export interface ModuleDto {
   facultyId: number;
 }
 
-interface ModuleTranslation {
+export interface ModuleTranslation {
   id: number;
   name: string;
   subtitle: string;
@@ -55,6 +55,46 @@ interface ModuleTranslation {
   learningOutcomes: string;
   languageId: number;
   moduleId: number;
+  description?: string;  // Newly added field
+}
+
+export interface Person {
+  id: number;
+  email?: string;
+  firstName: string;
+  lastName: string;
+  password?: string;
+  role?: string;
+  degreeProgramId?: number;
+}
+
+export interface RequirementTranslation {
+  name: string;
+}
+
+export interface Requirement {
+  id: number;
+  translations: RequirementTranslation[];
+}
+
+export interface SubModuleTranslation {
+  id: number;
+  type: string;
+  content: string;
+  presenceRequirements: string;
+  selfStudyRequirements: string;
+  spokenlanguage: string;
+  languageId: number;
+  subModuleId: number;
+}
+
+export interface SubModule {
+  id: number;
+  number: number;
+  weeklyHours: number;
+  groupSize: number;
+  moduleId: number;
+  translations: SubModuleTranslation[];
 }
 
 export interface ModuleDetail {
@@ -72,4 +112,13 @@ export interface ModuleDetail {
   degreeProgramId: number;
   groupId: number;
   translations: ModuleTranslation[];
+  results?: any;  // Newly added field
+  contents?: any; // Newly added field
+  eventType?: any; // Newly added field
+  language?: any; // Newly added field
+  material?: any; // Newly added field
+  responsible: Person; // Changed field
+  requirementsSoft: Requirement; // Changed field
+  requirementsHard: Requirement; // Changed field
+  subModules: SubModule[]; // Add new field
 }
