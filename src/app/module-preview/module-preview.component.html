@@ -1,0 +1,35 @@
+<div class="compactGrid">
+  <h1 style="grid-column: span 2">Modul {{ module?.abbreviation }} {{ moduleText?.name }}</h1>
+  <b>Untertitel</b>
+  <span>{{ moduleText?.subtitle }}</span>
+
+  <b>Modulniveau</b>
+  <span>{{ moduleText?.niveau }}</span>
+
+  <b>Pflicht / Wahlpflicht</b>
+  <span>{{ moduleText?.type }}</span>
+
+  <b>Teilmodule</b>
+  <span></span>
+
+  <b>Verantwortliche(r)</b>
+  <span>{{ module?.responsibleId }}</span>
+
+  <b>Credits</b>
+  <span>{{ module?.credits }}</span>
+
+  <b>Moduldauer</b>
+  <span>{{ module?.courseLength }} Semester</span>
+
+  <b>Vorraussetzungen nach Prüfungsordnung</b>
+  <span>{{ module?.requirementsHardId }}</span>
+
+  <b>Empfohlene Vorraussetzungen</b>
+  <span>{{ module?.requirementsSoftId }}</span>
+
+  <b>Studien-/ Prüfungsleistungen</b>
+  <span>{{ moduleText?.exam }}</span>
+
+  <b>Angestrebte Lernergebnisse</b>
+  <span>{{ moduleText?.learningOutcomes }}</span>
+</div>

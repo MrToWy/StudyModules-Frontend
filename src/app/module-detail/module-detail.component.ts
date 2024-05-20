@@ -8,12 +8,18 @@ import {
   SubModule,
   SubModuleTranslation
 } from "../../shared/module/module.service";
+import {ModulePreviewComponent} from "../module-preview/module-preview.component";
+import {FormsModule} from "@angular/forms";
+import {SubmodulePreviewComponent} from "../submodule-preview/submodule-preview.component";
 
 @Component({
   selector: 'app-module-detail',
   standalone: true,
   imports: [
-    ButtonModule
+    ButtonModule,
+    ModulePreviewComponent,
+    FormsModule,
+    SubmodulePreviewComponent
   ],
   providers: [ModuleService],
   templateUrl: './module-detail.component.html',
