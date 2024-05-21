@@ -60,7 +60,7 @@ export class ModuleGridComponent implements OnInit{
   }
 
   loadData(){
-    this.moduleService.getAll().subscribe(
+    this.moduleService.getAll(true).subscribe(
       modules => {
             this.modules = modules;
             this.statuses = [...new Set(modules.map(module => module.course))];
@@ -69,7 +69,8 @@ export class ModuleGridComponent implements OnInit{
   }
 
   async openDetailView(module: ModuleDto) {
-    await this.router.navigate(['module', module.id]);
+    console.log(module);
+    await this.router.navigate(['faculty', module.facultyId, 'department', module.departmentId, 'course', module.courseId, 'module', module.id]);
   }
 
   module: ModuleDto | undefined;

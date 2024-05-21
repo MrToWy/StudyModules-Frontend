@@ -25,4 +25,9 @@ export interface DepartmentDto {
   id: number;
   degreePrograms: CourseDto[];
   faculty: FacultyDto;
+  translations: DepartmentTranslationDto[];
+}
+
+export interface DepartmentTranslationDto {
+  name: string;
 }

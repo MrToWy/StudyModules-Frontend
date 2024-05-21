@@ -13,6 +13,7 @@ import {ModuleSearchComponent} from "../module-search/module-search.component";
 import {LanguageDropdownComponent} from "../language-dropdown/language-dropdown.component";
 import {ModuleDto, ModuleService} from "../../shared/module/module.service";
 import {CourseDto, CourseService} from "../../shared/course/course.service";
+import {DepartmentService} from "../../shared/department/department.service";
 
 @Component({
   selector: 'app-topbar',
@@ -29,14 +30,14 @@ import {CourseDto, CourseService} from "../../shared/course/course.service";
     LanguageDropdownComponent,
     NgForOf
   ],
-  providers: [ModuleService, CourseService],
+  providers: [ModuleService, CourseService, DepartmentService],
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.sass'
 })
 export class TopbarComponent {
   private authService: AuthService;
 
-  constructor(authService: AuthService, protected router: Router, moduleService: ModuleService, courseService: CourseService) {
+  constructor(authService: AuthService, protected router: Router, moduleService: ModuleService, courseService: CourseService, departmentService: DepartmentService) {
     this.authService = authService;
 
     router.events.subscribe(async (val) => {
@@ -53,6 +54,7 @@ export class TopbarComponent {
         };
 
         const facultyId = getIdFromSegment("faculty");
+        const departmentId = getIdFromSegment("department");
         const courseId = getIdFromSegment("course");
         const moduleId = getIdFromSegment("module");
 
@@ -63,37 +65,42 @@ export class TopbarComponent {
           };
           this.items.push(facultyLink);
 
-          if (courseId !== undefined) {
-            const courseNumber = parseInt(courseId);
-            courseService.get(courseNumber).subscribe((course: CourseDto) => {
-              const courseLink = {
-                label: 'Studiengang ' + course.abbreviation,
-                routerLink: '/faculty/' + facultyId + '/department/' + courseId,
+          if (departmentId !== undefined) {
+            departmentService.get(parseInt(departmentId)).subscribe((department) => {
+              const departmentLink = {
+                label: 'Abteilung ' + department.translations[0].name,
+                routerLink: '/faculty/' + facultyId + '/department/' + departmentId,
               };
-              this.items?.push(courseLink);
-
-              if (moduleId !== undefined) {
-
-                // find module with id moduleId
-                course.modules.find((module: ModuleDto) => {
-                  if (module.id === parseInt(moduleId)) {
-                    const moduleLink = {
-                      label: 'Modul ' + module.abbreviation,
-                      routerLink: '/faculty/' + facultyId + '/course/' + courseId + '/module/' + moduleId,
-                    };
-                    this.items?.push(moduleLink);
-                  }
-                });
-              }
+              this.items = [...this.items!, departmentLink]; // this.items.push(departmentLink); would not work here
             });
 
 
+            if (courseId !== undefined) {
+              const courseNumber = parseInt(courseId);
+              courseService.get(courseNumber).subscribe((course: CourseDto) => {
+                const courseLink = {
+                  label: 'Studiengang ' + course.abbreviation,
+                  routerLink: '/faculty/' + facultyId + '/department/' + departmentId + '/course/' + courseId,
+                };
+                this.items = [...this.items!, courseLink]; // this.items.push(courseLink); would not work here
 
+                if (moduleId !== undefined) {
+
+                  // find module with id moduleId
+                  course.modules.find((module: ModuleDto) => {
+                    if (module.id === parseInt(moduleId)) {
+                      const moduleLink = {
+                        label: 'Modul ' + module.abbreviation,
+                        routerLink: '/faculty/' + facultyId + '/department/' + departmentId + '/course/' + courseId + '/module/' + moduleId,
+                      };
+                      this.items = [...this.items!, moduleLink]; // this.items.push(moduleLink); would not work here
+                    }
+                  });
+                }
+              });
+            }
           }
-
         }
-
-
       }
     });
   }

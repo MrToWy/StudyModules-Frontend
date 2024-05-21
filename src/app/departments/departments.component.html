@@ -3,7 +3,7 @@
   <div *ngFor="let department of departments" [style]="'border: 3px solid ' + department.faculty.color + ' ; border-radius: 13px;'">
 
     <div class="grid-card" [style]="'background: ' + department.faculty.color + '; border-radius: 3px 3px 0px 0px'">
-      <header>{{department.name}}</header>
+      <header>{{department.translations[0].name}}</header>
     </div>
 
     <div style="margin-bottom: 2rem; background: white; padding: 3px" class="clickable"

@@ -3,14 +3,19 @@
         <app-sidebar></app-sidebar>
 
         <span class="clickable" role="button" (click)="router.navigateByUrl('/')">StudyModules</span>
+    </div>
 
-    </div>
-    <div *ngIf="items?.length??0 > 0" class="p-toolbar-group-center">
-      -
-      <span style="padding: 3px" *ngFor="let item of items">
-        {{item.label}} -
-      </span>
-    </div>
+
+  <p-breadcrumb class="max-w-full p-toolbar-group-center" [model]="items" *ngIf="items?.length??0 > 0">
+    <ng-template pTemplate="item" let-item>
+        <ng-container *ngIf="item.url">
+            <a [routerLink]="item.url">{{item.label}}</a>
+        </ng-container>
+        <ng-container *ngIf="!item.url">
+            <span>{{item.label}}</span>
+        </ng-container>
+    </ng-template>
+</p-breadcrumb>
 
 
 

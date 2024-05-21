@@ -9,18 +9,26 @@ export class ModuleService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<ModuleDto[]> {
-  return this.http.get<any[]>(this.moduleURL).pipe(
+  getAll(detailed: boolean): Observable<ModuleDto[]> {
+    // add header detailed to the request
+
+  return this.http.get<any[]>(this.moduleURL, {
+    headers: {
+      detailed: detailed.toString()
+    }
+  }).pipe(
     map((modules) =>
       modules.map((module) => ({
         id: module.id,
-        name: module.translations[0].name,  // Assumed 'name' is in 'translations[0].name'
+        name: module.translations[0].name,
         abbreviation: module.abbreviation,
         course: module.degreeProgram.abbreviation,
-        course_name: module.degreeProgram.translations[0].name,  // Assumed 'course_name' is in 'translations[0].name'
+        courseId: module.degreeProgram.id,
+        course_name: module.degreeProgram.translations[0].name,
+        departmentId: module.degreeProgram.department.id,
         semester: module.semester,
         responsible: `${module.responsible.firstName} ${module.responsible.lastName}`,
-        facultyId: module.degreeProgramId   // Assumed 'facultyId' is 'degreeProgramId'
+        facultyId: module.degreeProgram.department.facultyId
       }))
     )
   );
@@ -40,6 +48,8 @@ export interface ModuleDto {
   name: string;
   abbreviation: string;
   course: string;
+  courseId: number;
+  departmentId: number;
   semester: string;
   responsible: string;
   facultyId: number;
