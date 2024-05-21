@@ -9,12 +9,11 @@ export class ModuleService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(detailed: boolean): Observable<ModuleDto[]> {
-    // add header detailed to the request
-
+  getAll(detailed: boolean, courseId: number|undefined): Observable<ModuleDto[]> {
   return this.http.get<any[]>(this.moduleURL, {
     headers: {
-      detailed: detailed.toString()
+      detailed: detailed.toString(),
+      courseId: courseId?.toString() || ""
     }
   }).pipe(
     map((modules) =>

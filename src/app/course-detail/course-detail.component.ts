@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {CoursesComponent} from "../courses/courses.component";
 import {CourseDto} from "../../shared/course/course.service";
-import {ModulesComponent} from "../modules/modules.component";
+import {ModuleGridComponent} from "../module-grid/module-grid.component";
 
 @Component({
   selector: 'app-course-detail',
   standalone: true,
   imports: [
     CoursesComponent,
-    ModulesComponent
+    ModuleGridComponent
   ],
   templateUrl: './course-detail.component.html',
   styleUrl: './course-detail.component.sass'

@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import {TableModule} from "primeng/table";
 import {ModuleDto, ModuleService} from "../../shared/module/module.service";
 import {TagModule} from "primeng/tag";
@@ -41,17 +41,29 @@ export class ModuleGridComponent implements OnInit{
   statuses!: any[];
   selectedUser: any;
   selectedvalue: any;
+  courseId: number | undefined;
+
+  @Input()
   groupByCourse = true;
 
   constructor(private moduleService: ModuleService,
               private router: Router,
-              private languageService: LanguageService,
-              private cd: ChangeDetectorRef
+              private languageService: LanguageService
   ) {
 
   }
 
   ngOnInit(): void {
+    const url = this.router.url;
+    const segments = url.split("/");
+
+    const getIdFromSegment = (segment: string) => {
+          const segmentIndex = segments.indexOf(segment);
+          return segmentIndex !== -1 ? segments[segmentIndex + 1] : undefined;
+    };
+
+    this.courseId = Number(getIdFromSegment("course"));
+
     this.loadData();
 
     this.languageService.languageSubject.subscribe(() => {
@@ -60,7 +72,7 @@ export class ModuleGridComponent implements OnInit{
   }
 
   loadData(){
-    this.moduleService.getAll(true).subscribe(
+    this.moduleService.getAll(true, this.courseId).subscribe(
       modules => {
             this.modules = modules;
             this.statuses = [...new Set(modules.map(module => module.course))];
