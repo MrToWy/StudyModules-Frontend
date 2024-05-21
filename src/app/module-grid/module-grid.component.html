@@ -11,7 +11,7 @@
 >
     <ng-template pTemplate="header">
         <tr>
-            <th>
+            <th *ngIf="!courseId">
               <div>
                     {{ t('course') }}
                     <p-columnFilter display="menu"
@@ -112,14 +112,9 @@
                 </td>
             </tr>
         </ng-template>
-  <ng-template *ngIf="groupByCourse" pTemplate="groupfooter" let-customer>
-            <tr class="p-rowgroup-footer">
-                <td colspan="4" style="text-align: right">Total Customers</td>
-            </tr>
-  </ng-template>
     <ng-template [pTemplate]="this.groupByCourse ? 'rowexpansion' : 'body'" let-module>
       <tr class="clickable" (click)="openDetailView(module)">
-            <td>
+            <td *ngIf="!courseId">
               <p-tag severity="success" value="{{ module.course }}" [pTooltip]="tooltipContent" />
               <ng-template #tooltipContent>
                 <span> <p>{{module.course_name}}</p> </span>
