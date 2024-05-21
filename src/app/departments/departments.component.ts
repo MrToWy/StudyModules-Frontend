@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {FacultyDto, FacultyService} from "../../shared/faculty/faculty.service";
 import {MessageService} from "primeng/api";
@@ -16,13 +16,8 @@ import {CourseDto} from "../../shared/course/course.service";
   templateUrl: './departments.component.html',
   styleUrl: './departments.component.sass'
 })
-export class DepartmentsComponent {
+export class DepartmentsComponent implements OnInit{
     departments!: DepartmentDto[];
-
-    @Input()
-    selectedFaculty: FacultyDto | undefined;
-
-    selectedDepartment!: DepartmentDto;
 
     constructor(private departmentService: DepartmentService,
                 private router: Router,
@@ -32,7 +27,18 @@ export class DepartmentsComponent {
     ngOnInit() {
         this.departmentService.getAll()
           .subscribe((data) => {
-            this.departments = data.filter(department => department.faculty.id === this.selectedFaculty?.id);
+            // read facultyId from url
+            const url = this.router.url;
+            const segments = url.split("/");
+
+            // ToDo: Refactor duplicate code
+            const getIdFromSegment = (segment: string) => {
+              const segmentIndex = segments.indexOf(segment);
+              return segmentIndex !== -1 ? segments[segmentIndex + 1] : undefined;
+            };
+
+            const facultyId = Number(getIdFromSegment("faculty"));
+            this.departments = data.filter(department => department.faculty.id === facultyId);
         });
     }
 

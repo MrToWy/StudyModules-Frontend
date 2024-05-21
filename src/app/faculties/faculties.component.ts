@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ToastModule} from "primeng/toast";
 import {TableModule} from "primeng/table";
 import {FacultyDto, FacultyService} from "../../shared/faculty/faculty.service";
@@ -26,7 +26,7 @@ import {LanguageService} from "../../shared/language/language.service";
   styleUrl: './faculties.component.sass',
   providers: [FacultyService]
 })
-export class FacultiesComponent {
+export class FacultiesComponent implements OnInit{
 faculties!: FacultyDto[];
 
     selectedFaculty!: FacultyDto;
