@@ -3,8 +3,45 @@
     <ng-template pTemplate="content">Body Content</ng-template>
     <ng-template pTemplate="footer">
       <span>Version 1.0.2</span>
-      <p-button label="Logout" [text]="true" [raised]="true" severity="secondary" (onClick)="logout()"></p-button>
+      <p-button *ngIf="!authService.isLoggedIn()" label="Login" [text]="true" [raised]="true" severity="secondary" (onClick)="showLogin()"></p-button>
+      <p-button *ngIf="authService.isLoggedIn()" label="Logout" [text]="true" [raised]="true" severity="secondary" (onClick)="logout()"></p-button>
     </ng-template>
 </p-sidebar>
 
 <p-button [text]="true" (click)="sidebarVisible = true" icon="pi pi-bars"></p-button>
+
+
+<p-dialog
+    header="Header"
+    [(visible)]="loginDialogVisible"
+    [modal]="true">
+        <ng-template pTemplate="header">
+            <h3>StudyModules Login</h3>
+        </ng-template>
+        <div class="smallPadding">
+          <span class="p-float-label">
+            <input pInputText id="username" [(ngModel)]="username"/>
+            <label for="username">E-Mail</label>
+          </span>
+        </div>
+
+        <div class="smallPadding">
+          <span class="p-float-label">
+            <p-password [(ngModel)]="password" [feedback]="false" id="password"></p-password>
+            <label for="password">Password</label>
+          </span>
+        </div>
+        <ng-template pTemplate="footer">
+            <p-button
+                label="Cancel"
+                [text]="true"
+                severity="secondary"
+                (click)="loginDialogVisible = false" />
+            <p-button
+                label="Login"
+                [outlined]="true"
+                severity="primary"
+                (click)="login()"
+              />
+        </ng-template>
+</p-dialog>

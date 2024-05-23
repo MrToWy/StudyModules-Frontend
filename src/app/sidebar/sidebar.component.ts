@@ -5,6 +5,11 @@ import {AvatarModule} from "primeng/avatar";
 import {StyleClassModule} from "primeng/styleclass";
 import {RippleModule} from "primeng/ripple";
 import {AuthService} from "../../shared/auth/auth.service";
+import {NgIf} from "@angular/common";
+import {InputTextModule} from "primeng/inputtext";
+import {DialogModule} from "primeng/dialog";
+import {FormsModule} from "@angular/forms";
+import {PasswordModule} from "primeng/password";
 
 @Component({
   selector: 'app-sidebar',
@@ -14,19 +19,38 @@ import {AuthService} from "../../shared/auth/auth.service";
     ButtonModule,
     AvatarModule,
     StyleClassModule,
-    RippleModule
+    RippleModule,
+    NgIf,
+    InputTextModule,
+    DialogModule,
+    FormsModule,
+    PasswordModule
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.sass'
 })
 export class SidebarComponent {
-  private authService: AuthService;
+  protected authService: AuthService;
+  protected username: string | undefined;
+  protected password: string | undefined;
+
   constructor(authService: AuthService) {
     this.authService = authService;
   }
   sidebarVisible: boolean = false;
+  loginDialogVisible: boolean = false;
 
   logout() {
     this.authService.logout();
+  }
+
+  async showLogin() {
+    this.loginDialogVisible = true;
+    this.sidebarVisible = false;
+  }
+
+   protected login(){
+    this.authService.login(this.username??"", this.password??"");
+    this.loginDialogVisible = false;
   }
 }
