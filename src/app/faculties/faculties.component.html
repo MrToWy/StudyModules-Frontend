@@ -3,9 +3,9 @@
 
   <div (click)="selectFaculty(faculty)" *ngFor="let faculty of faculties"
        class="grid-card clickable"
-  [style]="'background:' + addAlpha(faculty.color, 0.5)">
+  [style.background]="addAlpha(faculty.color, 0.5)">
 
-    <header [style]="'background:' + faculty.color">
+    <header [style.background]="faculty.color">
       {{t('faculty')}} {{faculty.id}}
     </header>
     <span>{{faculty.name}}</span>
@@ -14,9 +14,9 @@
 
   <div (click)="openGrid()"
        class="grid-card clickable"
-  [style]="'background:' + addAlpha('#8a8a8a', 0.5)">
+  [style.background]="addAlpha('#8a8a8a', 0.5)">
 
-    <header [style]="'background:' + '#8a8a8a'">
+    <header [style.background]="'#8a8a8a'">
       Alle Module
     </header>
     <span>Zur Gesamtübersicht</span>
