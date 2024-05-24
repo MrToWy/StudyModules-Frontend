@@ -21,6 +21,10 @@ export class CourseService {
   delete(id: number) {
     return this.http.delete(this.courseURL + "/" + id);
   }
+
+  cloneCourse(id:number, cloneCourseDto: CloneCourseDto) {
+    return this.http.post<number>(this.courseURL + "/" + id + "/clone", cloneCourseDto);
+  }
 }
 
 export interface CourseDto {
@@ -33,5 +37,12 @@ export interface CourseDto {
 
 export interface CourseTranslationDto {
   name: string;
-  abbreviation: string;
+  pruefungsordnung: string | undefined;
+}
+
+
+export interface CloneCourseDto {
+  name: string | undefined;
+  abbreviation: string | undefined;
+  pruefungsordnung: string | undefined;
 }
