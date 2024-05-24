@@ -17,6 +17,10 @@ export class CourseService {
   get(id: number) {
     return this.http.get<CourseDto>(this.courseURL + "/" + id);
   }
+
+  delete(id: number) {
+    return this.http.delete(this.courseURL + "/" + id);
+  }
 }
 
 export interface CourseDto {

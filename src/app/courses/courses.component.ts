@@ -7,6 +7,7 @@ import {RippleModule} from "primeng/ripple";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CourseDto, CourseService} from "../../shared/course/course.service";
 import {DepartmentService} from "../../shared/department/department.service";
+import {DialogModule} from "primeng/dialog";
 
 @Component({
   selector: 'app-courses',
@@ -15,18 +16,23 @@ import {DepartmentService} from "../../shared/department/department.service";
     ToastModule,
     TableModule,
     ButtonModule,
-    RippleModule
+    RippleModule,
+    DialogModule
   ],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.sass',
-  providers: [DepartmentService, MessageService]
+  providers: [CourseService, DepartmentService, MessageService]
 })
 export class CoursesComponent {
 courses!: CourseDto[];
 
+    deleteDialogVisible = false;
+    cloneDialogVisible = false;
+
     selectedCourse!: CourseDto;
 
     constructor(private departmentService: DepartmentService,
+                private courseService: CourseService,
                 private router: Router,
                 private route: ActivatedRoute) {}
 
@@ -51,4 +57,29 @@ courses!: CourseDto[];
     async selectCourse(course: CourseDto) {
         await this.router.navigate(['course', course.id], {relativeTo: this.route});
     }
+
+  cloneCourse(course: CourseDto, $event: MouseEvent) {
+    $event.stopPropagation();
+
+    this.selectedCourse = course;
+    this.cloneDialogVisible = true;
+  }
+
+  deleteCourse(course: CourseDto, $event: MouseEvent) {
+    $event.stopPropagation();
+
+    this.selectedCourse = course;
+    this.deleteDialogVisible = true;
+  }
+
+  async onCourseDeleted() {
+    this.courseService.delete(this.selectedCourse.id).subscribe(() => {
+      this.courses = this.courses.filter(course => course.id !== this.selectedCourse.id);
+      this.deleteDialogVisible = false;
+    });
+  }
+
+  downloadPdf(course: CourseDto, $event: MouseEvent) {
+    $event.stopPropagation();
+  }
 }
