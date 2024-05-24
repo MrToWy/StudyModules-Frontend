@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import {CoursesComponent} from "../courses/courses.component";
-import {CourseDto} from "../../shared/course/course.service";
 import {ModuleGridComponent} from "../module-grid/module-grid.component";
 
 @Component({
@@ -15,15 +13,7 @@ import {ModuleGridComponent} from "../module-grid/module-grid.component";
   styleUrl: './course-detail.component.sass'
 })
 export class CourseDetailComponent {
-  currentCourse: CourseDto | undefined;
 
-  constructor(private route: ActivatedRoute) {
-  }
-
-  ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      let courseId = +params['id']; // (+) converts string 'id' to a number
-      this.currentCourse = { id: courseId, name: "Studiengang " + courseId, abbreviation: '', modules: []};
-    });
+  constructor() {
   }
 }

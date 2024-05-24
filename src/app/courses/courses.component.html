@@ -6,8 +6,8 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-course>
-        <tr>
-            <td>{{ course.name }}</td>
+        <tr class="clickable" (click)="selectCourse(course)">
+            <td>{{ course.translations[0].name }}</td>
             <td>
                 <button type="button" pButton pRipple icon="pi pi-plus" (click)="selectCourse(course)"></button>
             </td>

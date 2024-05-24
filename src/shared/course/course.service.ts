@@ -24,4 +24,10 @@ export interface CourseDto {
   abbreviation: string;
   id: number;
   modules: ModuleDto[];
+  translations: CourseTranslationDto[];
+}
+
+export interface CourseTranslationDto {
+  name: string;
+  abbreviation: string;
 }

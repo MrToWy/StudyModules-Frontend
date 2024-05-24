@@ -6,6 +6,7 @@ import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CourseDto, CourseService} from "../../shared/course/course.service";
+import {DepartmentService} from "../../shared/department/department.service";
 
 @Component({
   selector: 'app-courses',
@@ -18,26 +19,33 @@ import {CourseDto, CourseService} from "../../shared/course/course.service";
   ],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.sass',
-  providers: [CourseService, MessageService]
+  providers: [DepartmentService, MessageService]
 })
 export class CoursesComponent {
 courses!: CourseDto[];
 
     selectedCourse!: CourseDto;
-    facultyId!: number;
 
-    constructor(private courseService: CourseService,
+    constructor(private departmentService: DepartmentService,
                 private router: Router,
                 private route: ActivatedRoute) {}
 
     ngOnInit() {
 
-      // get faculty id from url
-      this.facultyId = Number(this.router.url.split("/")[2]);
+      const url = this.router.url;
+        const segments = url.split("/");
 
-        //this.courseService.mockGetAllObservable(this.facultyId).subscribe((data) => {
-        //    this.courses = data;
-        //});
+        const getIdFromSegment = (segment: string) => {
+          const segmentIndex = segments.indexOf(segment);
+          return segmentIndex !== -1 ? segments[segmentIndex + 1] : undefined;
+        };
+
+
+      const departmentId = Number(getIdFromSegment("department"));
+
+      this.departmentService.get(departmentId).subscribe(department => {
+          this.courses = department.degreePrograms;
+      });
     }
 
     async selectCourse(course: CourseDto) {
