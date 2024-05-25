@@ -4,12 +4,14 @@ import {TableModule} from "primeng/table";
 import {MessageService} from "primeng/api";
 import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {CloneCourseDto, CourseDto, CourseService} from "../../shared/course/course.service";
 import {DepartmentService} from "../../shared/department/department.service";
 import {DialogModule} from "primeng/dialog";
 import {InputTextModule} from "primeng/inputtext";
 import {PaginatorModule} from "primeng/paginator";
+import {StepperModule} from "primeng/stepper";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-courses',
@@ -21,7 +23,10 @@ import {PaginatorModule} from "primeng/paginator";
     RippleModule,
     DialogModule,
     InputTextModule,
-    PaginatorModule
+    PaginatorModule,
+    StepperModule,
+    RouterLink,
+    NgIf
   ],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.sass',
@@ -33,6 +38,9 @@ export class CoursesComponent {
   deleteDialogVisible = false;
   cloneDialogVisible = false;
   cloning = false;
+  refreshPdfDialogVisible = false;
+  refreshingPdf = false;
+  resultDownloaded = false;
 
   selectedCourse: CourseDto | undefined;
   cloneCourseDto: CloneCourseDto = {
@@ -44,7 +52,8 @@ export class CoursesComponent {
   constructor(private departmentService: DepartmentService,
               private courseService: CourseService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private messageService: MessageService) {
   }
 
   ngOnInit() {
@@ -120,5 +129,33 @@ export class CoursesComponent {
 
   refreshPdf(course: CourseDto, $event: MouseEvent) {
     $event.stopPropagation();
+    this.refreshPdfDialogVisible = true;
+  }
+
+  startPdfGeneration(nextCallback: any) {
+    nextCallback.emit();
+
+    this.refreshingPdf = true;
+
+    // ToDo: Implement PDF generation / Call Api
+
+    // after 5 seconds
+    setTimeout(() => {
+      this.refreshingPdf = false;
+      nextCallback.emit();
+    }, 5000);
+  }
+
+  downloadPdfResult() {
+    this.resultDownloaded = true;
+  }
+
+  confirmPdfPublish() {
+    this.refreshPdfDialogVisible = false;
+    this.messageService.add({severity: 'success', summary: 'Success', detail: 'PDF successfully published'});
+  }
+
+  cancelPdfPublish() {
+    this.refreshPdfDialogVisible = false;
   }
 }
