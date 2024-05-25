@@ -32,6 +32,7 @@ export class CoursesComponent {
 
   deleteDialogVisible = false;
   cloneDialogVisible = false;
+  cloning = false;
 
   selectedCourse: CourseDto | undefined;
   cloneCourseDto: CloneCourseDto = {
@@ -100,16 +101,24 @@ export class CoursesComponent {
 
   async onCourseCloned() {
     if (!this.selectedCourse) return;
+    this.cloning = true;
 
     this.courseService.cloneCourse(this.selectedCourse.id, this.cloneCourseDto).subscribe((newCourseId: number) => {
       this.courseService.get(newCourseId).subscribe(
-        course => this.courses.push(course)
-      )
-      this.cloneDialogVisible = false;
+        course => {
+          this.courses.push(course);
+          this.cloneDialogVisible = false;
+          this.cloning = false;
+        }
+      );
     });
   }
 
   downloadPdf(course: CourseDto, $event: MouseEvent) {
+    $event.stopPropagation();
+  }
+
+  refreshPdf(course: CourseDto, $event: MouseEvent) {
     $event.stopPropagation();
   }
 }
