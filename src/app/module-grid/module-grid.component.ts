@@ -42,6 +42,8 @@ export class ModuleGridComponent implements OnInit{
   selectedUser: any;
   selectedvalue: any;
   courseId: number | undefined;
+  selectedColumns!: Column[];
+  availableColumns!: Column[];
 
   @Input()
   groupByCourse = true;
@@ -54,6 +56,11 @@ export class ModuleGridComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.availableColumns = [
+            { field: 'semester', header: 'Semester' },
+        ];
+    this.selectedColumns = this.availableColumns;
+
     const url = this.router.url;
     const segments = url.split("/");
 
@@ -69,6 +76,10 @@ export class ModuleGridComponent implements OnInit{
     this.languageService.languageSubject.subscribe(() => {
       this.loadData()
     });
+  }
+
+  isSemesterIncluded(): boolean {
+    return this.selectedColumns?.some(column => column.field === 'semester');
   }
 
   loadData(){
@@ -91,4 +102,9 @@ export class ModuleGridComponent implements OnInit{
   protected readonly console = console;
 
 
+}
+
+interface Column {
+    field: string;
+    header: string;
 }
