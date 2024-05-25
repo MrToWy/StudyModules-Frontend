@@ -2,7 +2,7 @@
   <p-button label="Save" (click)="saveModule()"/>
   <p-tabView [scrollable]="true">
     <p-tabPanel *ngFor="let language of availableLanguages" [header]="language.abbreviation">
-        <app-module-translator
+        <app-module-translator *ngIf="currentModule"
           [currentModule]="currentModule"
           [languageId]="language.id"
           [languageAbbreviation]="language.abbreviation"

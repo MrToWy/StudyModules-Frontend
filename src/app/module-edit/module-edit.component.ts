@@ -5,7 +5,7 @@ import {UrlSegmentService} from "../../shared/url/url-segment.service";
 import {SubmodulePreviewComponent} from "../submodule-preview/submodule-preview.component";
 import {TabViewModule} from "primeng/tabview";
 import {LanguageDto, LanguageService} from "../../shared/language/language.service";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {ModuleEditEditorComponent} from "../module-edit-editor/module-edit-editor.component";
 import {ButtonModule} from "primeng/button";
 import {ModuleTranslatorComponent} from "../module-translator/module-translator.component";
@@ -20,7 +20,8 @@ import {ModuleTranslatorComponent} from "../module-translator/module-translator.
     NgForOf,
     ModuleEditEditorComponent,
     ButtonModule,
-    ModuleTranslatorComponent
+    ModuleTranslatorComponent,
+    NgIf
   ],
   providers: [
     ModuleService,
