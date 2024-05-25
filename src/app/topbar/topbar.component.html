@@ -6,14 +6,19 @@
     </div>
 
 
-  <p-breadcrumb class="max-w-full p-toolbar-group-center" [model]="items" *ngIf="items?.length??0 > 0">
+  <p-breadcrumb class="max-w-full p-toolbar-group-center" [model]="items" *ngIf="items && items.length > 1">
     <ng-template pTemplate="item" let-item>
+      <ng-container *ngIf="item.icon">
+        <p-button icon="{{item.icon}}" label="{{item.label}}" [routerLink]="item.url" />
+      </ng-container>
+      <ng-container *ngIf="!item.icon">
         <ng-container *ngIf="item.url">
             <a [routerLink]="item.url">{{item.label}}</a>
         </ng-container>
         <ng-container *ngIf="!item.url">
             <span>{{item.label}}</span>
         </ng-container>
+      </ng-container>
     </ng-template>
 </p-breadcrumb>
 

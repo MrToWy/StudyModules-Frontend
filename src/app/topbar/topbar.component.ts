@@ -44,6 +44,7 @@ export class TopbarComponent {
       if (val instanceof NavigationEnd) {
 
         this.items = [];
+        this.items.push({icon: 'pi pi-home', routerLink: '/'});
 
         // url is e.g. /faculty/1/course/3/module/15
         const segments = val.url.split("/");
