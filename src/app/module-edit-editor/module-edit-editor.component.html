@@ -12,6 +12,10 @@
 </span>
 
 <span class="p-float-label smallPadding">
+  <p-autoComplete
+    [(ngModel)]="moduleText.niveau"
+    [suggestions]="filteredSuggestions"
+    (completeMethod)="search($event)" />
   <input pInputText id="niveau" [(ngModel)]="moduleText.niveau" />
   <label for="niveau">Niveau</label>
 </span>
