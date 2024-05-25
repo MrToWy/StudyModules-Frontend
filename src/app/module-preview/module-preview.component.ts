@@ -20,5 +20,5 @@ export class ModulePreviewComponent {
   }
 
   private _module: ModuleDetail | undefined;
-  protected moduleText: ModuleTranslation | undefined;
+  @Input() moduleText: ModuleTranslation | undefined;
 }

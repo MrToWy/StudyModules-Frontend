@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import {environment} from "../../environments/environment";
 import {map, Observable} from "rxjs";
 
@@ -7,34 +7,39 @@ import {map, Observable} from "rxjs";
 export class ModuleService {
   private moduleURL: string = environment.backendURL + "modules";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  getAll(detailed: boolean, courseId: number|undefined): Observable<ModuleDto[]> {
-  return this.http.get<any[]>(this.moduleURL, {
-    headers: {
-      detailed: detailed.toString(),
-      courseId: courseId?.toString() || ""
+  getAll(detailed: boolean, courseId: number | undefined): Observable<ModuleDto[]> {
+    return this.http.get<any[]>(this.moduleURL, {
+      headers: {
+        detailed: detailed.toString(),
+        courseId: courseId?.toString() || ""
+      }
+    }).pipe(
+      map((modules) =>
+        modules.map((module) => ({
+          id: module.id,
+          name: module.translations[0].name,
+          abbreviation: module.abbreviation,
+          course: module.degreeProgram.abbreviation,
+          courseId: module.degreeProgram.id,
+          course_name: module.degreeProgram.translations[0].name,
+          departmentId: module.degreeProgram.department.id,
+          semester: module.semester,
+          responsible: `${module.responsible.firstName} ${module.responsible.lastName}`,
+          facultyId: module.degreeProgram.department.facultyId
+        }))
+      )
+    );
+  }
+
+  get(moduleId: number, language?: string) {
+    let headers = {};
+    if (language) {
+      headers = {'language': language.toUpperCase()};
     }
-  }).pipe(
-    map((modules) =>
-      modules.map((module) => ({
-        id: module.id,
-        name: module.translations[0].name,
-        abbreviation: module.abbreviation,
-        course: module.degreeProgram.abbreviation,
-        courseId: module.degreeProgram.id,
-        course_name: module.degreeProgram.translations[0].name,
-        departmentId: module.degreeProgram.department.id,
-        semester: module.semester,
-        responsible: `${module.responsible.firstName} ${module.responsible.lastName}`,
-        facultyId: module.degreeProgram.department.facultyId
-      }))
-    )
-  );
-}
-
-  get(moduleId: number) {
-    return this.http.get<ModuleDetail>(this.moduleURL + "/" + moduleId);
+    return this.http.get<ModuleDetail>(this.moduleURL + "/" + moduleId, {headers});
   }
 
   getByCourse(courseId: number) {
@@ -121,13 +126,13 @@ export interface ModuleDetail {
   degreeProgramId: number;
   groupId: number;
   translations: ModuleTranslation[];
-  results?: any;  // Newly added field
-  contents?: any; // Newly added field
-  eventType?: any; // Newly added field
-  language?: any; // Newly added field
-  material?: any; // Newly added field
-  responsible: Person; // Changed field
-  requirementsSoft: Requirement; // Changed field
-  requirementsHard: Requirement; // Changed field
-  subModules: SubModule[]; // Add new field
+  results?: any;
+  contents?: any;
+  eventType?: any;
+  language?: any;
+  material?: any;
+  responsible: Person;
+  requirementsSoft: Requirement;
+  requirementsHard: Requirement;
+  subModules: SubModule[];
 }

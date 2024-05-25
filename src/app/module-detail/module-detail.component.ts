@@ -11,6 +11,7 @@ import {
 import {ModulePreviewComponent} from "../module-preview/module-preview.component";
 import {FormsModule} from "@angular/forms";
 import {SubmodulePreviewComponent} from "../submodule-preview/submodule-preview.component";
+import {UrlSegmentService} from "../../shared/url/url-segment.service";
 
 @Component({
   selector: 'app-module-detail',
@@ -21,7 +22,7 @@ import {SubmodulePreviewComponent} from "../submodule-preview/submodule-preview.
     FormsModule,
     SubmodulePreviewComponent
   ],
-  providers: [ModuleService],
+  providers: [ModuleService, UrlSegmentService],
   templateUrl: './module-detail.component.html',
   styleUrl: './module-detail.component.sass'
 })
@@ -32,8 +33,8 @@ export class ModuleDetailComponent implements OnInit{
   subModule: SubModule | undefined;
   subModuleText: SubModuleTranslation | undefined;
 
-  constructor(private router: Router, private route: ActivatedRoute, private moduleService: ModuleService) {
-    this.moduleId = Number(this.getIdFromSegment("module"));
+  constructor(private router: Router, private route: ActivatedRoute, private moduleService: ModuleService, private urlSegmentService: UrlSegmentService) {
+    this.moduleId = Number(urlSegmentService.getIdFromSegment("module"));
   }
 
   ngOnInit(): void {
@@ -46,13 +47,6 @@ export class ModuleDetailComponent implements OnInit{
       });
     }
   }
-
-  // ToDo: Remove duplicate
-  getIdFromSegment = (segment: string) => {
-    const segments = this.router.url.split("/");
-    const segmentIndex = segments.indexOf(segment);
-    return segmentIndex !== -1 ? segments[segmentIndex + 1] : undefined;
-  };
 
   async switchToEditMode() {
     await this.router.navigate(["edit"], {relativeTo: this.route});
