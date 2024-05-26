@@ -21,6 +21,7 @@ export interface ChangelogDto {
   id: number;
   table: string;
   objectId: number;
+  description: string;
   user: {
     id: number;
     firstName: string;

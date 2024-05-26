@@ -12,6 +12,10 @@
     "semester": "Semester",
     "responsible": "Verantwortlich"
   },
+  "changelog": {
+    "description": "Beschreibung",
+    "user": "Benutzer"
+  },
    "primeng": {
         "startsWith": "Beginnt mit",
         "contains": "Enthält",

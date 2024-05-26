@@ -12,6 +12,10 @@
     "semester": "Semester",
     "responsible": "Responsible"
   },
+  "changelog": {
+    "description": "Description",
+    "user": "User"
+  },
   "primeng": {
         "startsWith": "Starts with",
         "contains": "Contains",
