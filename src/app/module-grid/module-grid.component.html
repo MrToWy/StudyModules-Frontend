@@ -91,7 +91,7 @@
                                 <ng-template let-option pTemplate="item">
                                     <div class="inline-block vertical-align-middle">
                                         <p-avatar
-                                          label="{{ option.split(' ')[1].charAt(0) }}"
+                                          label="{{ option.split(' ')[0].charAt(0) }}{{ option.split(' ')[1].charAt(0) }}"
                                           [style]="{ 'background-color': '#dee9fc', color: '#1a2551' }" />
                                       <span class="ml-1 mt-1"> {{ option }}</span>
                                     </div>
@@ -134,7 +134,7 @@
             <td *ngIf="isSemesterIncluded()">{{ module.semester }}</td>
             <td>
               <p-avatar
-                label="{{ module.responsible.split(' ')[1].charAt(0) }}"
+                label="{{ module.responsible.split(' ')[0].charAt(0) }}{{ module.responsible.split(' ')[1].charAt(0) }}"
                 [style]="{ 'background-color': '#dee9fc', color: '#1a2551' }" />
               {{ module.responsible }}</td>
         </tr>

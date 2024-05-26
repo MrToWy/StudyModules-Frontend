@@ -41,7 +41,7 @@
             <td>{{ changelog.description }}</td>
             <td>
               <p-avatar
-                label="{{ changelog.user.lastName.charAt(0) }}"
+                label="{{ changelog.user.firstName.charAt(0) }}{{ changelog.user.lastName.charAt(0) }}"
                 [style]="{ 'background-color': '#dee9fc', color: '#1a2551' }" />
               {{ changelog.user.firstName }} {{changelog.user.lastName}}</td>
         </tr>
