@@ -45,6 +45,16 @@ export class ModuleService {
   getByCourse(courseId: number) {
     return this.http.get<ModuleDto[]>(environment.backendURL + "degrees/" + courseId + "/modules");
   }
+
+  save(currentModule: ModuleDetail) {
+    // wait 4 seconds and return the module
+    return new Observable(subscriber => {
+      setTimeout(() => {
+        subscriber.next(currentModule);
+        subscriber.complete();
+      }, 4000);
+    });
+  }
 }
 
 export interface ModuleDto {

@@ -9,6 +9,14 @@ import {NgForOf, NgIf} from "@angular/common";
 import {ModuleEditEditorComponent} from "../module-edit-editor/module-edit-editor.component";
 import {ButtonModule} from "primeng/button";
 import {ModuleTranslatorComponent} from "../module-translator/module-translator.component";
+import {DialogModule} from "primeng/dialog";
+import {InputTextModule} from "primeng/inputtext";
+import {PasswordModule} from "primeng/password";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {InputTextareaModule} from "primeng/inputtextarea";
+import {ToastModule} from "primeng/toast";
+import {MessageService} from "primeng/api";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-module-edit',
@@ -21,11 +29,19 @@ import {ModuleTranslatorComponent} from "../module-translator/module-translator.
     ModuleEditEditorComponent,
     ButtonModule,
     ModuleTranslatorComponent,
-    NgIf
+    NgIf,
+    DialogModule,
+    InputTextModule,
+    PasswordModule,
+    ReactiveFormsModule,
+    FormsModule,
+    InputTextareaModule,
+    ToastModule
   ],
   providers: [
     ModuleService,
-    UrlSegmentService
+    UrlSegmentService,
+    MessageService
   ],
   templateUrl: './module-edit.component.html',
   styleUrl: './module-edit.component.sass'
@@ -34,7 +50,10 @@ export class ModuleEditComponent implements OnInit {
   constructor(
     private moduleService: ModuleService,
     private urlSegmentService: UrlSegmentService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private messageService: MessageService
   ) {
   }
 
@@ -53,8 +72,25 @@ export class ModuleEditComponent implements OnInit {
 
   availableLanguages: LanguageDto[] | undefined;
   currentModule!: ModuleDetail;
+  saveDialogVisible: boolean = false;
+  saving: boolean = false;
+  summaryText: string = "";
+  summeryInputFieldClass: string = "";
 
   saveModule() {
-    console.log(this.currentModule);
+    // is summary text empty?
+    if (!this.summaryText) {
+      this.messageService.add({severity: 'error', summary: 'Error', detail: 'Summary text is required'});
+      this.summeryInputFieldClass = "ng-invalid ng-dirty";
+      return;
+    }
+
+
+    this.saving = true;
+    this.moduleService.save(this.currentModule).subscribe(() => {
+      this.saving = false;
+      this.saveDialogVisible = false;
+      this.router.navigate(['..'], { relativeTo: this.route });
+    });
   }
 }
