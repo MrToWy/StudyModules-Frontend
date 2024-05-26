@@ -11,6 +11,7 @@
 >
     <ng-template pTemplate="header">
         <tr>
+            <th style="width: 5rem"></th>
             <th>
                 <div>
                     {{ t('description') }}
@@ -32,8 +33,11 @@
             </th>
         </tr>
     </ng-template>
-    <ng-template [pTemplate]="'body'" let-changelog>
+    <ng-template [pTemplate]="'body'" let-changelog let-expanded="expanded">
       <tr>
+            <td>
+              <p-button type="button" pRipple [pRowToggler]="changelog" [text]="true" [rounded]="true" [plain]="true" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" />
+            </td>
             <td>{{ changelog.description }}</td>
             <td>
               <p-avatar
@@ -42,6 +46,36 @@
               {{ changelog.user.firstName }} {{changelog.user.lastName}}</td>
         </tr>
     </ng-template>
+
+  <ng-template pTemplate="rowexpansion" let-changelog>
+            <tr>
+                <td colspan="7">
+                    <div class="p-3">
+                        <p-table [value]="changelog.items" dataKey="id">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="field">Field <p-sortIcon field="field" /></th>
+                                    <th pSortableColumn="oldValue">Old value <p-sortIcon field="oldValue" /></th>
+                                    <th pSortableColumn="newValue">New value <p-sortIcon field="newValue" /></th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-item>
+                                <tr>
+                                    <td>{{ item.field }}</td>
+                                    <td>{{ item.oldValue }}</td>
+                                    <td>{{ item.newValue }}</td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="6">There are no changes yet.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
 
 </p-table>
 </ng-container>
