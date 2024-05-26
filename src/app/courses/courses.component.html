@@ -10,10 +10,10 @@
             <td>{{ course.translations[0].name }}</td>
             <td>
               <div class="flex">
-                <button style="margin-right: 0.5em;" type="button" pButton pRipple icon="pi pi-file-pdf" (click)="downloadPdf(course, $event)"></button>
-                <button style="margin-right: 0.5em;" type="button" pButton pRipple icon="pi pi-refresh" (click)="refreshPdf(course, $event)"></button>
-                <button style="margin-right: 0.5em;" type="button" pButton pRipple icon="pi pi-clone" (click)="cloneCourse(course, $event)"></button>
-                <button style="margin-right: 0.5em;" type="button" pButton pRipple icon="pi pi-trash" (click)="deleteCourse(course, $event)"></button>
+                <button style="margin-right: 0.5em;" type="button" pButton pRipple icon="pi pi-file-pdf" (click)="downloadPdf(course, $event)">PDF runterladen</button>
+                <button *ngIf="authService.isLoggedIn()" style="margin-right: 0.5em;" type="button" pButton pRipple icon="pi pi-refresh" (click)="refreshPdf(course, $event)"></button>
+                <button *ngIf="authService.isLoggedIn()" style="margin-right: 0.5em;" type="button" pButton pRipple icon="pi pi-clone" (click)="cloneCourse(course, $event)"></button>
+                <button *ngIf="authService.isLoggedIn()" style="margin-right: 0.5em;" type="button" pButton pRipple icon="pi pi-trash" (click)="deleteCourse(course, $event)"></button>
               </div>
             </td>
         </tr>

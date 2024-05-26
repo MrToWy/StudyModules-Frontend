@@ -12,6 +12,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {PaginatorModule} from "primeng/paginator";
 import {StepperModule} from "primeng/stepper";
 import {NgIf} from "@angular/common";
+import {AuthService} from "../../shared/auth/auth.service";
 
 @Component({
   selector: 'app-courses',
@@ -30,7 +31,7 @@ import {NgIf} from "@angular/common";
   ],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.sass',
-  providers: [CourseService, DepartmentService, MessageService]
+  providers: [CourseService, DepartmentService, MessageService, AuthService]
 })
 export class CoursesComponent {
   courses!: CourseDto[];
@@ -53,6 +54,7 @@ export class CoursesComponent {
               private courseService: CourseService,
               private router: Router,
               private route: ActivatedRoute,
+              protected authService: AuthService,
               private messageService: MessageService) {
   }
 

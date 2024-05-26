@@ -12,6 +12,8 @@ import {ModulePreviewComponent} from "../module-preview/module-preview.component
 import {FormsModule} from "@angular/forms";
 import {SubmodulePreviewComponent} from "../submodule-preview/submodule-preview.component";
 import {UrlSegmentService} from "../../shared/url/url-segment.service";
+import {AuthService} from "../../shared/auth/auth.service";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-module-detail',
@@ -20,9 +22,10 @@ import {UrlSegmentService} from "../../shared/url/url-segment.service";
     ButtonModule,
     ModulePreviewComponent,
     FormsModule,
-    SubmodulePreviewComponent
+    SubmodulePreviewComponent,
+    NgIf
   ],
-  providers: [ModuleService, UrlSegmentService],
+  providers: [ModuleService, UrlSegmentService, AuthService],
   templateUrl: './module-detail.component.html',
   styleUrl: './module-detail.component.sass'
 })
@@ -33,7 +36,13 @@ export class ModuleDetailComponent implements OnInit{
   subModule: SubModule | undefined;
   subModuleText: SubModuleTranslation | undefined;
 
-  constructor(private router: Router, private route: ActivatedRoute, private moduleService: ModuleService, private urlSegmentService: UrlSegmentService) {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private moduleService: ModuleService,
+    private urlSegmentService: UrlSegmentService,
+    protected authService: AuthService
+  ) {
     this.moduleId = Number(urlSegmentService.getIdFromSegment("module"));
   }
 
