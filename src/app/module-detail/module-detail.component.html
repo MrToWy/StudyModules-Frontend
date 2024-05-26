@@ -1,4 +1,5 @@
 <p-button *ngIf="authService.isLoggedIn()" (onClick)="switchToEditMode()">Edit</p-button>
+<p-button *ngIf="authService.isLoggedIn()" (onClick)="showChanges()">Änderungshistorie</p-button>
 
 <div class="compactGrid">
   <app-module-preview [module]="module" />

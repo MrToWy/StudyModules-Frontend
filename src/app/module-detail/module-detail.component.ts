@@ -60,5 +60,9 @@ export class ModuleDetailComponent implements OnInit{
   async switchToEditMode() {
     await this.router.navigate(["edit"], {relativeTo: this.route});
   }
+
+  async showChanges() {
+    await this.router.navigate(["changes"], {relativeTo: this.route});
+  }
 }
 
