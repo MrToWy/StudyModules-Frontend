@@ -14,6 +14,10 @@ import {SubmodulePreviewComponent} from "../submodule-preview/submodule-preview.
 import {UrlSegmentService} from "../../shared/url/url-segment.service";
 import {AuthService} from "../../shared/auth/auth.service";
 import {NgIf} from "@angular/common";
+import {ModulePreviewModernComponent} from "../module-preview-modern/module-preview-modern.component";
+import {CardModule} from "primeng/card";
+import {PanelModule} from "primeng/panel";
+import {AvatarModule} from "primeng/avatar";
 
 @Component({
   selector: 'app-module-detail',
@@ -23,7 +27,11 @@ import {NgIf} from "@angular/common";
     ModulePreviewComponent,
     FormsModule,
     SubmodulePreviewComponent,
-    NgIf
+    NgIf,
+    ModulePreviewModernComponent,
+    CardModule,
+    PanelModule,
+    AvatarModule
   ],
   providers: [ModuleService, UrlSegmentService, AuthService],
   templateUrl: './module-detail.component.html',
