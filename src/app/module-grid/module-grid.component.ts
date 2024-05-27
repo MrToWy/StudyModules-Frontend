@@ -14,6 +14,7 @@ import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
 import {NgIf} from "@angular/common";
 import {ToggleButtonModule} from "primeng/togglebutton";
+import {CourseDto, CourseService} from "../../shared/course/course.service";
 
 @Component({
   selector: 'app-module-grid',
@@ -32,7 +33,7 @@ import {ToggleButtonModule} from "primeng/togglebutton";
     NgIf,
     ToggleButtonModule
   ],
-  providers: [ModuleService],
+  providers: [ModuleService, CourseService],
   templateUrl: './module-grid.component.html',
   styleUrl: './module-grid.component.sass'
 })
@@ -42,6 +43,7 @@ export class ModuleGridComponent implements OnInit{
   selectedUser: any;
   selectedvalue: any;
   courseId: number | undefined;
+  course: CourseDto | undefined;
   selectedColumns!: Column[];
   availableColumns!: Column[];
 
@@ -50,7 +52,8 @@ export class ModuleGridComponent implements OnInit{
 
   constructor(private moduleService: ModuleService,
               private router: Router,
-              private languageService: LanguageService
+              private languageService: LanguageService,
+              private courseService: CourseService
   ) {
 
   }
@@ -89,6 +92,11 @@ export class ModuleGridComponent implements OnInit{
             this.statuses = [...new Set(modules.map(module => module.course))];
             this.users = [...new Set(modules.map(module => module.responsible))];
         });
+
+    if(this.courseId)
+      this.courseService.get(this.courseId).subscribe(course => {
+        this.course = course;
+      });
   }
 
   async openDetailView(module: ModuleDto) {

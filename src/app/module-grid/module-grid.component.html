@@ -10,7 +10,9 @@
   [columns]="selectedColumns"
 >
   <ng-template pTemplate="caption">
-            <p-multiSelect
+    <div class="compactGrid">
+      <h1 *ngIf="course && course.translations.length > 0">{{course!.translations[0].name}}</h1>
+      <p-multiSelect hidden
                 display="chip"
                 [options]="availableColumns"
                 [(ngModel)]="selectedColumns"
@@ -18,6 +20,8 @@
                 selectedItemsLabel="{0} columns selected"
                 [style]="{'min-width': '200px'}"
                 placeholder="Choose Columns" />
+    </div>
+
         </ng-template>
     <ng-template pTemplate="header">
         <tr>
