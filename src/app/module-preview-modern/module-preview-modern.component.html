@@ -1,57 +1,42 @@
-<div class="fourGrid">
-    <p-card
-      *ngIf="module">
-      <div class="compactGrid">
-        <div>
-          <p-avatar
-            [label]="module.responsible.firstName[0] + module.responsible.lastName[0]"
-            [size]="'xlarge'"
-            [style]="{ 'background-color': '#dee9fc', color: '#1a2551' }"
-          />
-        </div>
-        <div>
-          <h3>{{module.responsible.firstName}} {{module.responsible.lastName}} </h3>
-          <p>Verantwortlich</p>
-        </div>
-      </div>
-    </p-card>
+<div class="">
+  <div class="fiveGrid">
+    <app-info-card
+      *ngIf="module"
+      [label]="'Verantwortlich'"
+      [value]="module.responsible.firstName + ' ' + module.responsible.lastName"
+      [avatarLabel]="module.responsible.firstName[0] + module.responsible.lastName[0]"
+    />
 
-    <p-card
-      *ngIf="module">
-      <div class="compactGrid">
-        <div>
-          Icon
-        </div>
-        <div>
-          <h3>{{module.credits}}</h3>
-          <p>Credits</p>
-        </div>
-      </div>
-    </p-card>
+    <app-info-card
+      *ngIf="module"
+      [label]="'ECTS'"
+      [value]="module.credits.toString()"
+      [icon]="'pi-trophy'"
+    />
 
-    <p-card
-      *ngIf="module">
-      <div class="compactGrid">
-        <div>
-          Icon
-        </div>
-        <div>
-          <h3>{{module.language??"Deutsch"}}</h3>
-          <p>Sprache</p>
-        </div>
-      </div>
-    </p-card>
+    <app-info-card
+      *ngIf="module"
+      [label]="'Sprache'"
+      [value]="module.language ?? 'todo'"
+      [icon]="'pi-language'"
+    />
 
-    <p-card
-      *ngIf="module">
-      <div class="compactGrid">
-        <div>
-          Icon
-        </div>
-        <div>
-          <h3>{{module.semester}}</h3>
-          <p>Semester</p>
-        </div>
-      </div>
-    </p-card>
+    <app-info-card
+      *ngIf="module"
+      [label]="'Sprache'"
+      [value]="module.semester"
+      [icon]="'pi-calendar'"
+    />
+
+    <app-info-card
+      *ngIf="module"
+      [label]="'Gruppengröße'"
+      [value]="module.subModules[0].groupSize.toString()"
+      [icon]="'pi-users'"
+    />
+
+    <app-stats-card
+
+    />
+  </div>
 </div>

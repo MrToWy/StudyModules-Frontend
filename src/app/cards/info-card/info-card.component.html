@@ -1,0 +1,13 @@
+ <div class="info-item">
+   <div class="info-left">
+     <i *ngIf="icon" class="pi {{icon}}"></i>
+     <p-avatar *ngIf="avatarLabel"
+       [label]="avatarLabel"
+            [style]="{ 'background-color': '#dee9fc', color: '#1a2551' }"
+       />
+   </div>
+   <div class="info-right">
+     <span class="value">{{value}}</span>
+     <span class="label">{{label}}</span>
+  </div>
+</div>

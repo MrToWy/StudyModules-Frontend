@@ -3,6 +3,8 @@ import {ModuleDetail, ModuleTranslation} from "../../shared/module/module.servic
 import {AvatarModule} from "primeng/avatar";
 import {CardModule} from "primeng/card";
 import {NgIf} from "@angular/common";
+import {InfoCardComponent} from "../cards/info-card/info-card.component";
+import {StatsCardComponent} from "../cards/stats-card/stats-card.component";
 
 @Component({
   selector: 'app-module-preview-modern',
@@ -10,7 +12,9 @@ import {NgIf} from "@angular/common";
   imports: [
     AvatarModule,
     CardModule,
-    NgIf
+    NgIf,
+    InfoCardComponent,
+    StatsCardComponent
   ],
   templateUrl: './module-preview-modern.component.html',
   styleUrl: './module-preview-modern.component.sass'
