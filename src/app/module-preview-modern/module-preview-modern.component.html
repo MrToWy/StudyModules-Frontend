@@ -23,7 +23,7 @@
 
     <app-info-card
       *ngIf="module"
-      [label]="'Sprache'"
+      [label]="'Semester'"
       [value]="module.semester"
       [icon]="'pi-calendar'"
     />
@@ -36,7 +36,8 @@
     />
 
     <app-stats-card
-
+      class="takeTwoColumns takeThreeRows"
+      [title]="'Zeitaufwand'"
     />
   </div>
 </div>

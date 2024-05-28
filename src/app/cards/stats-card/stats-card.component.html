@@ -1,1 +1,21 @@
-<p>stats-card works!</p>
+<div class="stats-card">
+  <header>
+    <h4>{{ title }}</h4>
+    <p-divider/>
+  </header>
+  <main class="stats-card-content">
+    <div class="stats-left">
+      <p-chart type="doughnut" [data]="data" [options]="options"/>
+    </div>
+    <div class="stats-right">
+      <div class="text-labels">
+        <p>Short:</p>
+        <p>Longlonglong:</p>
+      </div>
+      <div class="text-values">
+        <p>331 h</p>
+        <p>2 h</p>
+      </div>
+    </div>
+  </main>
+</div>
