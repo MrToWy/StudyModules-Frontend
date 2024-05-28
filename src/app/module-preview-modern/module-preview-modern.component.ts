@@ -5,6 +5,7 @@ import {CardModule} from "primeng/card";
 import {NgIf} from "@angular/common";
 import {InfoCardComponent} from "../cards/info-card/info-card.component";
 import {StatsCardComponent} from "../cards/stats-card/stats-card.component";
+import {TextCardComponent} from "../cards/text-card/text-card.component";
 
 @Component({
   selector: 'app-module-preview-modern',
@@ -14,7 +15,8 @@ import {StatsCardComponent} from "../cards/stats-card/stats-card.component";
     CardModule,
     NgIf,
     InfoCardComponent,
-    StatsCardComponent
+    StatsCardComponent,
+    TextCardComponent
   ],
   templateUrl: './module-preview-modern.component.html',
   styleUrl: './module-preview-modern.component.sass'
