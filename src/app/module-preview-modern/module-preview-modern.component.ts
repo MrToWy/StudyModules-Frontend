@@ -6,6 +6,7 @@ import {NgIf} from "@angular/common";
 import {InfoCardComponent} from "../cards/info-card/info-card.component";
 import {StatsCardComponent} from "../cards/stats-card/stats-card.component";
 import {TextCardComponent} from "../cards/text-card/text-card.component";
+import {SplitTextCardComponent} from "../cards/split-text-card/split-text-card.component";
 
 @Component({
   selector: 'app-module-preview-modern',
@@ -16,7 +17,8 @@ import {TextCardComponent} from "../cards/text-card/text-card.component";
     NgIf,
     InfoCardComponent,
     StatsCardComponent,
-    TextCardComponent
+    TextCardComponent,
+    SplitTextCardComponent
   ],
   templateUrl: './module-preview-modern.component.html',
   styleUrl: './module-preview-modern.component.sass'
