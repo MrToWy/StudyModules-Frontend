@@ -2,6 +2,9 @@
   border: 1px solid #ccc
   border-radius: 5px
   background-color: #f9f9f9
+  height: 100%
+  display: flex
+  flex-direction: column
 
   .stats-header h4
     padding-left: 1em
@@ -10,17 +13,29 @@
   .stats-card-content
     display: flex
     flex-direction: row
-
-    .stats-left
-
+    height: 100%
 
     .stats-right
+      .stats-chart
+        width: 100%
+        height: 100%
+        display: flex
+
+        div
+          position: static
+
+
+    .stats-left
       display: flex
-      flex-direction: row
+      flex-direction: column
 
-      .text-labels
-        margin-right: 0.2em
+      .stats-content
+        display: flex
+        flex-direction: row
 
-      .text-labels, .text-values
-        text-align: right
-        font-weight: 500
+        .text-labels
+          margin-right: 0.2em
+
+        .text-labels, .text-values
+          text-align: right
+          font-weight: 500

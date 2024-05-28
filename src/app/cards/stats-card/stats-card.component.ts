@@ -34,6 +34,8 @@ export class StatsCardComponent implements OnInit{
 
 
         this.options = {
+          responsive: true,
+          maintainAspectRatio: false,
             cutout: '60%',
             plugins: {
                 legend: {

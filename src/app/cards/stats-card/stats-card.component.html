@@ -1,21 +1,26 @@
 <div class="stats-card">
-  <header class="stats-header">
-    <h4>{{ title }}</h4>
-    <p-divider/>
-  </header>
+
   <main class="stats-card-content">
+
     <div class="stats-left">
-      <p-chart type="doughnut" [data]="data" [options]="options"/>
+      <header class="stats-header">
+          <h4>{{ title }}</h4>
+            <p-divider/>
+      </header>
+      <div class="stats-content">
+        <div class="text-labels">
+          <p>Short:</p>
+          <p>Longlonglong:</p>
+        </div>
+        <div class="text-values">
+          <p>331 h</p>
+          <p>2 h</p>
+        </div>
+      </div>
     </div>
+
     <div class="stats-right">
-      <div class="text-labels">
-        <p>Short:</p>
-        <p>Longlonglong:</p>
-      </div>
-      <div class="text-values">
-        <p>331 h</p>
-        <p>2 h</p>
-      </div>
+      <p-chart class="stats-chart" type="doughnut" [data]="data" [options]="options"/>
     </div>
   </main>
 </div>
