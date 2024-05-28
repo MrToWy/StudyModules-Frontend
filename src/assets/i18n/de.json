@@ -16,6 +16,23 @@
     "description": "Beschreibung",
     "user": "Benutzer"
   },
+  "preview": {
+    "responsible": "Verantwortlich",
+    "credits": "Credits",
+    "language": "Sprache",
+    "semester": "Semester",
+    "groupSize": "Gruppengröße",
+    "timeRequired": "Zeitaufwand",
+    "recommendedRequirements": "Empfohlene Vorraussetzungen",
+    "event": "Veranstaltung",
+    "requiredRequirements": "Pflicht Vorraussetzungen",
+    "learningObjectives": "Angestrebte Lernergebnisse",
+    "literature": "Literatur",
+    "content": "Inhalt",
+    "requirements": "Anforderungen",
+    "attendance": "Präsenzzeit",
+    "selfStudy": "Selbststudium"
+  },
    "primeng": {
         "startsWith": "Beginnt mit",
         "contains": "Enthält",

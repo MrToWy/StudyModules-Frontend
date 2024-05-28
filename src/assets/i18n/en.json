@@ -16,6 +16,23 @@
     "description": "Description",
     "user": "User"
   },
+  "preview": {
+    "responsible": "Responsible",
+    "credits": "Credits",
+    "language": "Language",
+    "semester": "Semester",
+    "groupSize": "Group size",
+    "timeRequired": "Required time",
+    "recommendedRequirements": "Recommended requirements",
+    "event": "Event",
+    "requiredRequirements": "Required requirements",
+    "learningObjectives": "Learning objectives",
+    "literature": "Literature",
+    "content": "Content",
+    "requirements": "Requirements",
+    "attendance": "Attendance",
+    "selfStudy": "Self study"
+  },
   "primeng": {
         "startsWith": "Starts with",
         "contains": "Contains",

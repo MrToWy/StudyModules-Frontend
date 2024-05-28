@@ -7,19 +7,21 @@ import {InfoCardComponent} from "../cards/info-card/info-card.component";
 import {StatsCardComponent} from "../cards/stats-card/stats-card.component";
 import {TextCardComponent} from "../cards/text-card/text-card.component";
 import {SplitTextCardComponent} from "../cards/split-text-card/split-text-card.component";
+import {TranslocoDirective} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-module-preview-modern',
   standalone: true,
-  imports: [
-    AvatarModule,
-    CardModule,
-    NgIf,
-    InfoCardComponent,
-    StatsCardComponent,
-    TextCardComponent,
-    SplitTextCardComponent
-  ],
+    imports: [
+        AvatarModule,
+        CardModule,
+        NgIf,
+        InfoCardComponent,
+        StatsCardComponent,
+        TextCardComponent,
+        SplitTextCardComponent,
+        TranslocoDirective
+    ],
   templateUrl: './module-preview-modern.component.html',
   styleUrl: './module-preview-modern.component.sass'
 })

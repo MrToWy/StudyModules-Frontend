@@ -1,97 +1,101 @@
+<ng-container *transloco="let t; prefix:'preview'">
+
 <div class="">
   <h1>{{moduleText?.name}}</h1>
 
   <div class="fiveGrid">
     <app-info-card
       *ngIf="module"
-      [label]="'Verantwortlich'"
+      [label]="t('responsible')"
       [value]="module.responsible.firstName + ' ' + module.responsible.lastName"
       [avatarLabel]="module.responsible.firstName[0] + module.responsible.lastName[0]"
     />
 
     <app-info-card
       *ngIf="module"
-      [label]="'ECTS'"
+      [label]="t('credits')"
       [value]="module.credits.toString()"
       [icon]="'pi-trophy'"
     />
 
     <app-info-card
       *ngIf="module"
-      [label]="'Sprache'"
+      [label]="t('language')"
       [value]="module.language ?? 'todo'"
       [icon]="'pi-language'"
     />
 
     <app-info-card
       *ngIf="module"
-      [label]="'Semester'"
+      [label]="t('semester')"
       [value]="module.semester"
       [icon]="'pi-calendar'"
     />
 
     <app-info-card
       *ngIf="module"
-      [label]="'Gruppengröße'"
+      [label]="t('groupSize')"
       [value]="module.subModules[0].groupSize.toString()"
       [icon]="'pi-users'"
     />
 
     <app-stats-card
       class="takeTwoColumns takeThreeRows fullheight"
-      [title]="'Zeitaufwand'"
+      [title]="t('timeRequired')"
     />
 
     <app-text-card
-      [title]="'Empfohlene Vorraussetzungen'"
+      [title]="t('recommendedRequirements')"
       [text]="'Bestandene Vorprüfung, mind. 134 CP erworben aus anderen Modulen des BIN-Programms'"
       [style.grid-column]="'span 3'"
       [style.grid-row]="'span 2'"
     />
 
     <app-text-card
-      [title]="'Veranstaltung'"
+      [title]="t('event')"
       [text]="'Vorlesung mit Übung (4 Stunden pro Woche)  <br> Prüfung (Klausur oder mündliche Prüfung) und experimentelle Arbeit'"
       [style.grid-column]="'span 2'"
       [style.grid-row]="'span 2'"
     />
 
     <app-text-card
-      [title]="'Pflicht Vorraussetzungen'"
+      [title]="t('requiredRequirements')"
       [text]="'Abgeschlossenes Bachelor-Studium mit Informatikanteil, der mindestens den Programmieren-, Datenbanksysteme- und Betriebssysteme/Netze-Veranstaltungen vergleichbar ist.'"
       [style.grid-column]="'span 3'"
       [style.grid-row]="'span 2'"
     />
 
     <app-text-card
-      [title]="'Angestrebte Lernergebnisse'"
+      [title]="t('learningObjectives')"
       [text]="'Formale Kompetenz: Kenntnisse der Logik und Vertrautheit mit mathematischen Formalismen zur Beschreibung von Sachverhalten Algorithmische und mathematische Kompetenz: Kennenlernen mathematischer Algorithmen, geeignete Lösungsverfahren für elementare Probleme der Mathematik und Informatik auswählen und durchführen Übergreifend: kommunikative Kompetenz (Präsentation und Diskussion von Lösungsvorschlägen)'"
       [style.grid-column]="'span 5'"
       [style.grid-row]="'span 2'"
     />
 
     <app-text-card
-      [title]="'Literatur'"
+      [title]="t('literature')"
       [text]="'Skript zur Vorlesung Teschl, G., Teschl, S.: Mathematik für Informatiker, Springer - Verlag Hartmann, P.: Mathematik für Informatiker, Vieweg - Verlag'"
       [style.grid-column]="'span 2'"
       [style.grid-row]="'span 2'"
     />
 
     <app-text-card
-      [title]="'Inhalt'"
+      [title]="t('content')"
       [text]="'Erarbeitung einer Fragestellung und ihrer Lösung in einem vorgegebenen Themengebiet wie Spieleprogrammierung, Robotik, Algorithmen. Erprobung von Methoden, die im Projektkontext in teamindividuellen Beratungsgesprächen vermittelt werden.'"
       [style.grid-column]="'span 3'"
       [style.grid-row]="'span 2'"
     />
 
     <app-split-text-card
-      [title]="'Anforderungen'"
-      [leftCaption]="'Präsenzzeit'"
+      [title]="t('requirements')"
+      [leftCaption]="t('attendance')"
       [leftText]="'Aktive Mitarbeit, Selbständiges Bearbeiten von Übungsaufgaben, Diskussion'"
-      [rightCaption]="'Selbststudium'"
+      [rightCaption]="t('selfStudy')"
       [rightText]="'Vor- und Nachbereitung, Literaturarbeit, Selbständiges Bearbeiten von Übungsaufgaben, Diskussion'"
       [style.grid-column]="'span 5'"
       [style.grid-row]="'span 2'"
     />
   </div>
 </div>
+
+</ng-container>
