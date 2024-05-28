@@ -18,21 +18,23 @@ import {ModulePreviewModernComponent} from "../module-preview-modern/module-prev
 import {CardModule} from "primeng/card";
 import {PanelModule} from "primeng/panel";
 import {AvatarModule} from "primeng/avatar";
+import {TranslocoDirective} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-module-detail',
   standalone: true,
-  imports: [
-    ButtonModule,
-    ModulePreviewComponent,
-    FormsModule,
-    SubmodulePreviewComponent,
-    NgIf,
-    ModulePreviewModernComponent,
-    CardModule,
-    PanelModule,
-    AvatarModule
-  ],
+    imports: [
+        ButtonModule,
+        ModulePreviewComponent,
+        FormsModule,
+        SubmodulePreviewComponent,
+        NgIf,
+        ModulePreviewModernComponent,
+        CardModule,
+        PanelModule,
+        AvatarModule,
+        TranslocoDirective
+    ],
   providers: [ModuleService, UrlSegmentService, AuthService],
   templateUrl: './module-detail.component.html',
   styleUrl: './module-detail.component.sass'

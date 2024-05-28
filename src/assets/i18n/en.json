@@ -1,4 +1,6 @@
 {
+  "edit": "Edit",
+  "changelogCaption": "Changelog",
   "modulesearch": {
     "placeholder": "Search modules"
   },
