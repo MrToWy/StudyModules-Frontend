@@ -1,10 +1,17 @@
 import {Component, Input} from '@angular/core';
 import {ModuleDetail, ModuleTranslation} from "../../shared/module/module.service";
+import {AvatarModule} from "primeng/avatar";
+import {CardModule} from "primeng/card";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-module-preview-modern',
   standalone: true,
-  imports: [],
+  imports: [
+    AvatarModule,
+    CardModule,
+    NgIf
+  ],
   templateUrl: './module-preview-modern.component.html',
   styleUrl: './module-preview-modern.component.sass'
 })
