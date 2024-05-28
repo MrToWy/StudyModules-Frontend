@@ -1,11 +1,17 @@
 {
   "edit": "Bearbeiten",
   "changelogCaption": "Änderungsprotokoll",
+  "login": "Anmelden",
+  "logout": "Abmelden",
+  "password": "Passwort",
+  "cancel": "Abbrechen",
   "modulesearch": {
     "placeholder": "Module suchen"
   },
   "faculties": {
-    "faculty": "Fakultät"
+    "faculty": "Fakultät",
+    "all": "Alle Module",
+    "overview": "Zur Gesamtübersicht"
   },
   "overview": {
     "course": "Studiengang",

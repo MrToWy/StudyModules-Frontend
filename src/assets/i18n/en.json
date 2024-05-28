@@ -1,11 +1,17 @@
 {
   "edit": "Edit",
   "changelogCaption": "Changelog",
+  "login": "Login",
+  "logout": "Logout",
+  "password": "Password",
+  "cancel": "Cancel",
   "modulesearch": {
     "placeholder": "Search modules"
   },
   "faculties": {
-    "faculty": "Faculty"
+    "faculty": "Faculty",
+    "all": "All modules",
+    "overview": "Show all modules"
   },
   "overview":{
     "course": "Course",

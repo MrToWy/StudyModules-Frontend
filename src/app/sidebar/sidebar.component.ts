@@ -10,22 +10,24 @@ import {InputTextModule} from "primeng/inputtext";
 import {DialogModule} from "primeng/dialog";
 import {FormsModule} from "@angular/forms";
 import {PasswordModule} from "primeng/password";
+import {TranslocoDirective} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [
-    SidebarModule,
-    ButtonModule,
-    AvatarModule,
-    StyleClassModule,
-    RippleModule,
-    NgIf,
-    InputTextModule,
-    DialogModule,
-    FormsModule,
-    PasswordModule
-  ],
+    imports: [
+        SidebarModule,
+        ButtonModule,
+        AvatarModule,
+        StyleClassModule,
+        RippleModule,
+        NgIf,
+        InputTextModule,
+        DialogModule,
+        FormsModule,
+        PasswordModule,
+        TranslocoDirective
+    ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.sass'
 })

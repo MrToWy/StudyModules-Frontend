@@ -1,10 +1,13 @@
+<ng-container *transloco="let t;">
+
+
 <p-sidebar [(visible)]="sidebarVisible">
     <ng-template pTemplate="header">StudyModules</ng-template>
     <ng-template pTemplate="content">Body Content</ng-template>
     <ng-template pTemplate="footer">
       <span>Version 1.0.2</span>
-      <p-button *ngIf="!authService.isLoggedIn()" label="Login" [text]="true" [raised]="true" severity="secondary" (onClick)="showLogin()"></p-button>
-      <p-button *ngIf="authService.isLoggedIn()" label="Logout" [text]="true" [raised]="true" severity="secondary" (onClick)="logout()"></p-button>
+      <p-button *ngIf="!authService.isLoggedIn()" [label]="t('login')" [text]="true" [raised]="true" severity="secondary" (onClick)="showLogin()"></p-button>
+      <p-button *ngIf="authService.isLoggedIn()" [label]="t('logout')" [text]="true" [raised]="true" severity="secondary" (onClick)="logout()"></p-button>
     </ng-template>
 </p-sidebar>
 
@@ -28,20 +31,22 @@
         <div class="smallPadding">
           <span class="p-float-label">
             <p-password [(ngModel)]="password" [feedback]="false" id="password"></p-password>
-            <label for="password">Password</label>
+            <label for="password">{{t('password')}}</label>
           </span>
         </div>
         <ng-template pTemplate="footer">
             <p-button
-                label="Cancel"
+                label="{{t('cancel')}}"
                 [text]="true"
                 severity="secondary"
                 (click)="loginDialogVisible = false" />
             <p-button
-                label="Login"
+                label="{{t('login')}}"
                 [outlined]="true"
                 severity="primary"
                 (click)="login()"
               />
         </ng-template>
 </p-dialog>
+
+</ng-container>
