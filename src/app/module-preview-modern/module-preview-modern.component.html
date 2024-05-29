@@ -21,7 +21,7 @@
     <app-info-card
       *ngIf="module"
       [label]="t('language')"
-      [value]="module.language ?? 'todo'"
+      [value]="subModuleText?.spokenlanguage"
       [icon]="'pi-language'"
     />
 
@@ -35,7 +35,7 @@
     <app-info-card
       *ngIf="module"
       [label]="t('groupSize')"
-      [value]="module.subModules[0].groupSize.toString()"
+      [value]="subModule?.groupSize.toString()"
       [icon]="'pi-users'"
     />
 
@@ -53,7 +53,7 @@
 
     <app-text-card
       [title]="t('event')"
-      [text]="'Vorlesung mit Übung (4 Stunden pro Woche)  <br> Prüfung (Klausur oder mündliche Prüfung) und experimentelle Arbeit'"
+      [text]="subModuleText?.type + ' (' + subModule?.weeklyHours + ' Stunden pro Woche)  <br> ' + moduleText?.exam"
       [style.grid-column]="'span 2'"
       [style.grid-row]="'span 2'"
     />
@@ -67,7 +67,7 @@
 
     <app-text-card
       [title]="t('learningObjectives')"
-      [text]="'Formale Kompetenz: Kenntnisse der Logik und Vertrautheit mit mathematischen Formalismen zur Beschreibung von Sachverhalten Algorithmische und mathematische Kompetenz: Kennenlernen mathematischer Algorithmen, geeignete Lösungsverfahren für elementare Probleme der Mathematik und Informatik auswählen und durchführen Übergreifend: kommunikative Kompetenz (Präsentation und Diskussion von Lösungsvorschlägen)'"
+      [text]="moduleText?.learningOutcomes"
       [style.grid-column]="'span 5'"
       [style.grid-row]="'span 2'"
     />
@@ -81,7 +81,7 @@
 
     <app-text-card
       [title]="t('content')"
-      [text]="'Erarbeitung einer Fragestellung und ihrer Lösung in einem vorgegebenen Themengebiet wie Spieleprogrammierung, Robotik, Algorithmen. Erprobung von Methoden, die im Projektkontext in teamindividuellen Beratungsgesprächen vermittelt werden.'"
+      [text]="subModuleText?.content"
       [style.grid-column]="'span 3'"
       [style.grid-row]="'span 2'"
     />
@@ -89,9 +89,9 @@
     <app-split-text-card
       [title]="t('requirements')"
       [leftCaption]="t('attendance')"
-      [leftText]="'Aktive Mitarbeit, Selbständiges Bearbeiten von Übungsaufgaben, Diskussion'"
+      [leftText]="subModuleText?.presenceRequirements"
       [rightCaption]="t('selfStudy')"
-      [rightText]="'Vor- und Nachbereitung, Literaturarbeit, Selbständiges Bearbeiten von Übungsaufgaben, Diskussion'"
+      [rightText]="subModuleText?.selfStudyRequirements"
       [style.grid-column]="'span 5'"
       [style.grid-row]="'span 2'"
     />
