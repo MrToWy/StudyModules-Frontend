@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {ModuleDetail, ModuleTranslation} from "../../shared/module/module.service";
+import {ModuleDetail, ModuleTranslation, SubModule, SubModuleTranslation} from "../../shared/module/module.service";
 import {AvatarModule} from "primeng/avatar";
 import {CardModule} from "primeng/card";
 import {NgIf} from "@angular/common";
@@ -34,8 +34,12 @@ export class ModulePreviewModernComponent {
   set module(value: ModuleDetail | undefined) {
     this._module = value;
     this.moduleText = value?.translations[0];
+    this.subModule = value?.subModules[0];
+    this.subModuleText = this.subModule?.translations[0];
   }
 
   private _module: ModuleDetail | undefined;
-  @Input() moduleText: ModuleTranslation | undefined;
+  moduleText: ModuleTranslation | undefined;
+  subModule: SubModule | undefined;
+  subModuleText: SubModuleTranslation | undefined;
 }
