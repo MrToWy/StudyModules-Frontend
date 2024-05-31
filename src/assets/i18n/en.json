@@ -39,7 +39,8 @@
     "content": "Content",
     "requirements": "Requirements",
     "attendance": "Attendance",
-    "selfStudy": "Self study"
+    "selfStudy": "Self study",
+    "hoursPerWeek": "hours per week"
   },
   "primeng": {
         "startsWith": "Starts with",

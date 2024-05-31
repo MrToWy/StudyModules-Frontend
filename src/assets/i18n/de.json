@@ -39,7 +39,8 @@
     "content": "Inhalt",
     "requirements": "Anforderungen",
     "attendance": "Präsenzzeit",
-    "selfStudy": "Selbststudium"
+    "selfStudy": "Selbststudium",
+    "hoursPerWeek": "Stunden pro Woche"
   },
    "primeng": {
         "startsWith": "Beginnt mit",
