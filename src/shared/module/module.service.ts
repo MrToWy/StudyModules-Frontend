@@ -110,6 +110,7 @@ export interface SubModuleTranslation {
   spokenlanguage: string;
   languageId: number;
   subModuleId: number;
+  literature: string;
 }
 
 export interface SubModule {
