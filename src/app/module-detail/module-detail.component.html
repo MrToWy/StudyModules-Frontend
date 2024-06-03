@@ -1,10 +1,6 @@
 <ng-container *transloco="let t;">
 
 <div class="largePadding">
-
-  <p-button *ngIf="authService.isLoggedIn()" (onClick)="switchToEditMode()">{{t('edit')}}</p-button>
-  <p-button *ngIf="authService.isLoggedIn()" (onClick)="showChanges()">{{t('changelogCaption')}}</p-button>
-
   <app-module-preview-modern [module]="module" />
 </div>
 

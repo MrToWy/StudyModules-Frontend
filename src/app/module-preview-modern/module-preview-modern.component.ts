@@ -8,24 +8,36 @@ import {StatsCardComponent} from "../cards/stats-card/stats-card.component";
 import {TextCardComponent} from "../cards/text-card/text-card.component";
 import {SplitTextCardComponent} from "../cards/split-text-card/split-text-card.component";
 import {TranslocoDirective} from "@jsverse/transloco";
+import {ButtonModule} from "primeng/button";
+import {AuthService} from "../../shared/auth/auth.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-module-preview-modern',
   standalone: true,
-    imports: [
-        AvatarModule,
-        CardModule,
-        NgIf,
-        InfoCardComponent,
-        StatsCardComponent,
-        TextCardComponent,
-        SplitTextCardComponent,
-        TranslocoDirective
-    ],
+  imports: [
+    AvatarModule,
+    CardModule,
+    NgIf,
+    InfoCardComponent,
+    StatsCardComponent,
+    TextCardComponent,
+    SplitTextCardComponent,
+    TranslocoDirective,
+    ButtonModule
+  ],
+  providers: [AuthService],
   templateUrl: './module-preview-modern.component.html',
   styleUrl: './module-preview-modern.component.sass'
 })
 export class ModulePreviewModernComponent {
+
+  constructor(protected authService: AuthService,
+                  private router: Router,
+    private route: ActivatedRoute,
+              ) {
+  }
+
   get module(): ModuleDetail | undefined {
     return this._module;
   }
@@ -42,4 +54,13 @@ export class ModulePreviewModernComponent {
   moduleText: ModuleTranslation | undefined;
   subModule: SubModule | undefined;
   subModuleText: SubModuleTranslation | undefined;
+
+
+  async switchToEditMode() {
+    await this.router.navigate(["edit"], {relativeTo: this.route});
+  }
+
+  async showChanges() {
+    await this.router.navigate(["changes"], {relativeTo: this.route});
+  }
 }

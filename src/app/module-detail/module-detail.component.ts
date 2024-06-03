@@ -47,8 +47,7 @@ export class ModuleDetailComponent implements OnInit{
   subModuleText: SubModuleTranslation | undefined;
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
+
     private moduleService: ModuleService,
     private urlSegmentService: UrlSegmentService,
     protected authService: AuthService
@@ -67,12 +66,5 @@ export class ModuleDetailComponent implements OnInit{
     }
   }
 
-  async switchToEditMode() {
-    await this.router.navigate(["edit"], {relativeTo: this.route});
-  }
-
-  async showChanges() {
-    await this.router.navigate(["changes"], {relativeTo: this.route});
-  }
 }
 

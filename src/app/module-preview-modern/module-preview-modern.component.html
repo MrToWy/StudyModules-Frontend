@@ -1,7 +1,15 @@
 <ng-container *transloco="let t; prefix:'preview'">
 
 <div class="">
-  <h1>{{moduleText?.name}}</h1>
+  <div class="leftRight">
+    <div class="left">
+      <h1>{{moduleText?.name}}</h1>
+    </div>
+    <div class="right">
+      <p-button *ngIf="authService.isLoggedIn()" (onClick)="switchToEditMode()">{{t('edit')}}</p-button>
+      <p-button class="margin-left" *ngIf="authService.isLoggedIn()" (onClick)="showChanges()">{{t('changelogCaption')}}</p-button>
+    </div>
+  </div>
 
   <div class="fiveGrid">
     <app-info-card

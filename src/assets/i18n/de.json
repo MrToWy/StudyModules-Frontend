@@ -1,6 +1,5 @@
 {
-  "edit": "Bearbeiten",
-  "changelogCaption": "Änderungsprotokoll",
+
   "login": "Anmelden",
   "logout": "Abmelden",
   "password": "Passwort",
@@ -40,7 +39,9 @@
     "requirements": "Anforderungen",
     "attendance": "Präsenzzeit",
     "selfStudy": "Selbststudium",
-    "hoursPerWeek": "Stunden pro Woche"
+    "hoursPerWeek": "Stunden pro Woche",
+    "edit": "Bearbeiten",
+    "changelogCaption": "Änderungsprotokoll"
   },
    "primeng": {
         "startsWith": "Beginnt mit",

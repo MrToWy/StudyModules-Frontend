@@ -1,6 +1,5 @@
 {
-  "edit": "Edit",
-  "changelogCaption": "Changelog",
+
   "login": "Login",
   "logout": "Logout",
   "password": "Password",
@@ -40,7 +39,9 @@
     "requirements": "Requirements",
     "attendance": "Attendance",
     "selfStudy": "Self study",
-    "hoursPerWeek": "hours per week"
+    "hoursPerWeek": "hours per week",
+    "edit": "Edit",
+    "changelogCaption": "Changelog"
   },
   "primeng": {
         "startsWith": "Starts with",
