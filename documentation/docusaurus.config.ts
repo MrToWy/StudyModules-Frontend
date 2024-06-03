@@ -81,7 +81,7 @@ const config: Config = {
           position: 'right',
         },
         {
-          href: 'https://studymodules.tobii.uber.space/api',
+          href: 'https://api.hsh.uber.space/api',
           label: 'Live-Backend',
           position: 'right',
         },
