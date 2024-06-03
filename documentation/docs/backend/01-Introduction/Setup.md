@@ -114,3 +114,10 @@ Fix it by running the following command:
 ```shell
 npm rebuild bcrypt --build-from-source
 ```
+
+## CORS Error
+Doesn't have to be related to cors at all. Sometimes the error is thrown when the server is not running.
+
+```http
+Access to XMLHttpRequest at 'https://api.hsh.uber.space/faculty' from origin 'https://studymodules.tobi.win' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+```
