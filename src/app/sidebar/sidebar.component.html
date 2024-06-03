@@ -15,6 +15,7 @@
 
 
 <p-dialog
+  (keydown)="onKeydown($event)"
     header="Header"
     [(visible)]="loginDialogVisible"
     [modal]="true">

@@ -55,4 +55,10 @@ export class SidebarComponent {
     this.authService.login(this.username??"", this.password??"");
     this.loginDialogVisible = false;
   }
+
+  onKeydown($event: KeyboardEvent) {
+    if ($event.key === "Enter") {
+      this.login();
+    }
+  }
 }
