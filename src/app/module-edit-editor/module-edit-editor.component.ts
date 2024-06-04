@@ -6,6 +6,7 @@ import {PasswordModule} from "primeng/password";
 import {InputTextModule} from "primeng/inputtext";
 import {AutoCompleteCompleteEvent, AutoCompleteModule} from "primeng/autocomplete";
 import {TextAutocompleteService} from "../../shared/text-autocomplete/text-autocomplete.service";
+import {ButtonModule} from "primeng/button";
 
 @Component({
   selector: 'app-module-edit-editor',
@@ -15,7 +16,8 @@ import {TextAutocompleteService} from "../../shared/text-autocomplete/text-autoc
     FormsModule,
     PasswordModule,
     InputTextModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    ButtonModule
   ],
   providers: [TextAutocompleteService],
   templateUrl: './module-edit-editor.component.html',
