@@ -3,7 +3,18 @@
 
 <p-sidebar [(visible)]="sidebarVisible">
     <ng-template pTemplate="header">StudyModules</ng-template>
-    <ng-template pTemplate="content">Body Content</ng-template>
+    <ng-template *ngIf="authService.isLoggedIn()" pTemplate="content">
+      <p-panel header="Verwaltung">
+        <a routerLink="/submodules">Veranstaltungen (Teilmodule)</a>
+        <br>
+        <br>
+        <a routerLink="/user">Benutzer</a>
+      </p-panel>
+      <br>
+      <p-panel header="Latex Server">
+        <a routerLink="/jobs">Warteschlange</a>
+      </p-panel>
+    </ng-template>
     <ng-template pTemplate="footer">
       <span>Version 1.0.2</span>
       <p-button *ngIf="!authService.isLoggedIn()" [label]="t('login')" [text]="true" [raised]="true" severity="secondary" (onClick)="showLogin()"></p-button>
