@@ -1,0 +1,74 @@
+<ng-container *transloco="let t; prefix:'overview'">
+
+<p-table
+  [value]="jobs"
+  selectionMode="single"
+  rowGroupMode="subheader"
+  groupRowsBy="course"
+  [scrollable]="true"
+  scrollHeight="73vh"
+>
+  <ng-template pTemplate="caption">
+    <h1>Jobs</h1>
+  </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>
+                <div>
+                    {{ t('name') }}
+                    <p-columnFilter
+                      type="text"
+                      field="name"
+                      display="menu"
+                      [showMatchModes]="false"
+                      [showOperator]="false"
+                      [showAddButton]="false"
+                      [hideOnClear]="true"
+                    />
+                </div>
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th>
+              <div>
+                {{ t('responsible') }}
+                <p-columnFilter field="responsible" matchMode="equals" display="menu"
+                                [showMatchModes]="false"
+                                [showOperator]="false"
+                                [showAddButton]="false"
+                                [hideOnClear]="true"
+                >
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-dropdown [filter]="true" [showClear]="false" [(ngModel)]="selectedUser" [options]="users" [placeholder]="t('filter')" (onChange)="filter($event.value)">
+                                <ng-template let-option pTemplate="item">
+                                    <div class="inline-block vertical-align-middle">
+                                        <p-avatar
+                                          label="{{ option.split(' ')[0].charAt(0) }}{{ option.split(' ')[1].charAt(0) }}"
+                                          [style]="{ 'background-color': '#dee9fc', color: '#1a2551' }" />
+                                      <span class="ml-1 mt-1"> {{ option }}</span>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>
+                        </ng-template>
+                    </p-columnFilter>
+              </div>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template [pTemplate]="'body'" let-job>
+      <tr class="">
+            <td>{{ job.guid }}</td>
+            <td>{{getStatus(job)}}</td>
+            <td>
+              <p-avatar
+                label="{{ job.responsible.split(' ')[0].charAt(0) }}{{ job.responsible.split(' ')[1].charAt(0) }}"
+                [style]="{ 'background-color': '#dee9fc', color: '#1a2551' }" />
+              {{ job.responsible }}</td>
+        </tr>
+    </ng-template>
+
+</p-table>
+</ng-container>
