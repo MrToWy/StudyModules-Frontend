@@ -9,6 +9,7 @@ import {ModuleGridComponent} from "./module-grid/module-grid.component";
 import {LoginComponent} from "./login/login.component";
 import {ModuleChangelogComponent} from "./module-changelog/module-changelog.component";
 import {JobsComponent} from "./jobs/jobs.component";
+import {SubmodulesComponent} from "./submodules/submodules.component";
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -23,5 +24,6 @@ export const routes: Routes = [
   { path: 'faculty/:id/department/:id/course/:id/module/:id/changes', component: ModuleChangelogComponent},
   { path: 'module/:id/edit', component: ModuleEditComponent},
   { path: 'jobs', component: JobsComponent},
+  { path: 'submodules', component: SubmodulesComponent},
   { path: '', redirectTo: '/faculties', pathMatch: 'full' }
 ];
