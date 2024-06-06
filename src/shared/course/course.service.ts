@@ -33,6 +33,7 @@ export interface CourseDto {
   id: number;
   modules: ModuleDto[];
   translations: CourseTranslationDto[];
+  publishedJobId: number | undefined;
 }
 
 export interface CourseTranslationDto {
