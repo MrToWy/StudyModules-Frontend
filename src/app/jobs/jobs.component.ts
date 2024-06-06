@@ -108,11 +108,19 @@ export class JobsComponent implements OnInit{
   publish(job: any, $event: MouseEvent) {
     $event.stopPropagation();
     console.log(job);
+
+    this.jobService.publish(job.guid).subscribe(() => {
+      this.loadData();
+    });
   }
 
   deleteJob(job: any, $event: MouseEvent) {
     $event.stopPropagation();
     console.log(job);
+
+    this.jobService.delete(job.guid).subscribe(() => {
+      this.loadData();
+    });
   }
 
   downloadPdf(job: any, $event: MouseEvent) {

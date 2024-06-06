@@ -24,4 +24,12 @@ export class JobService {
   getOne(guid: string){
     return this.http.get(this.jobURL + "/" + guid);
   }
+
+  publish(guid: string) {
+    return this.http.post(this.jobURL + "/" + guid + "/publish", {});
+  }
+
+  delete(guid: string) {
+    return this.http.delete(this.jobURL + "/" + guid);
+  }
 }
