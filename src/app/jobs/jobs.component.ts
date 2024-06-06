@@ -90,4 +90,18 @@ export class JobsComponent implements OnInit{
 
     return "pending"
   }
+
+  getRunningTime(job: any) {
+    const startTime = new Date(job.startedAt);
+    let endTime = new Date(job.finishedAt);
+
+    if(!endTime)
+      endTime = new Date();
+
+    const seconds = (endTime.getTime() - startTime.getTime()) / 1000;
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.floor(seconds % 60);
+
+    return `${minutes}:${remainingSeconds}min`;
+  }
 }

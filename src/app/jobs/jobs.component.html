@@ -61,7 +61,10 @@
     <ng-template [pTemplate]="'body'" let-job>
       <tr class="">
             <td>{{ job.guid }}</td>
-            <td>{{getStatus(job)}}</td>
+            <td *ngIf="job.errorAt">Error</td>
+            <td *ngIf="job.finishedAt">Fertig in {{getRunningTime(job)}}</td>
+            <td *ngIf="!job.errorAt && !job.finishedAt && job.startedAt">Running for {{getRunningTime(job)}}</td>
+            <td *ngIf="!job.errorAt && !job.finishedAt && !job.startedAt">Waiting for builder</td>
             <td>
               <p-avatar
                 label="{{ job.responsible.split(' ')[0].charAt(0) }}{{ job.responsible.split(' ')[1].charAt(0) }}"
