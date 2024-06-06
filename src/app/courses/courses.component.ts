@@ -11,8 +11,11 @@ import {DialogModule} from "primeng/dialog";
 import {InputTextModule} from "primeng/inputtext";
 import {PaginatorModule} from "primeng/paginator";
 import {StepperModule} from "primeng/stepper";
-import {NgIf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {AuthService} from "../../shared/auth/auth.service";
+import {JobService} from "../../shared/job/job.service";
+import {LanguageDto, LanguageService} from "../../shared/language/language.service";
+import {CheckboxModule} from "primeng/checkbox";
 
 @Component({
   selector: 'app-courses',
@@ -27,14 +30,25 @@ import {AuthService} from "../../shared/auth/auth.service";
     PaginatorModule,
     StepperModule,
     RouterLink,
-    NgIf
+    NgIf,
+    CheckboxModule,
+    NgForOf
   ],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.sass',
-  providers: [CourseService, DepartmentService, MessageService, AuthService]
+  providers: [
+    CourseService,
+    DepartmentService,
+    MessageService,
+    AuthService,
+    LanguageService,
+    JobService
+  ]
 })
 export class CoursesComponent {
   courses!: CourseDto[];
+  languages: LanguageDto[] = [];
+  selectedLanguageIds: number[] = [];
 
   deleteDialogVisible = false;
   cloneDialogVisible = false;
@@ -52,6 +66,8 @@ export class CoursesComponent {
 
   constructor(private departmentService: DepartmentService,
               private courseService: CourseService,
+              private jobService: JobService,
+              private languageService: LanguageService,
               private router: Router,
               private route: ActivatedRoute,
               protected authService: AuthService,
@@ -73,6 +89,11 @@ export class CoursesComponent {
 
     this.departmentService.get(departmentId).subscribe(department => {
       this.courses = department.degreePrograms;
+    });
+
+    this.languageService.getLanguages().subscribe(languages => {
+      this.languages = languages;
+      this.selectedLanguageIds = languages.map(language => language.id);
     });
   }
 
@@ -131,6 +152,7 @@ export class CoursesComponent {
 
   refreshPdf(course: CourseDto, $event: MouseEvent) {
     $event.stopPropagation();
+    this.selectedCourse = course;
     this.refreshPdfDialogVisible = true;
   }
 
@@ -138,14 +160,18 @@ export class CoursesComponent {
     nextCallback.emit();
 
     this.refreshingPdf = true;
+    let finished = 0;
 
-    // ToDo: Implement PDF generation / Call Api
-
-    // after 5 seconds
-    setTimeout(() => {
-      this.refreshingPdf = false;
-      nextCallback.emit();
-    }, 5000);
+    this.selectedLanguageIds.forEach(languageId => {
+      this.jobService.createNew(languageId, this.selectedCourse?.id!).subscribe((result) => {
+        finished++;
+        console.log(result)
+        if (finished === this.selectedLanguageIds.length) {
+          this.refreshingPdf = false;
+          this.messageService.add({severity: 'success', summary: 'Success', detail: 'PDF generation started'});
+        }
+      });
+    });
   }
 
   downloadPdfResult() {

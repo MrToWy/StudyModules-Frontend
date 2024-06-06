@@ -16,4 +16,12 @@ export class JobService {
   getAll(): Observable<any[]> {
     return this.http.get<any[]>(this.jobURL);
   }
+
+  createNew(languageId: number, degreeProgramId: number){
+    return this.http.post(this.jobURL, {languageId: languageId, degreeProgramId: degreeProgramId});
+  }
+
+  getOne(guid: string){
+    return this.http.get(this.jobURL + "/" + guid);
+  }
 }
