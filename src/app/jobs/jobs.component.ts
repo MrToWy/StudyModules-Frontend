@@ -104,4 +104,24 @@ export class JobsComponent implements OnInit{
 
     return `${minutes}:${remainingSeconds}min`;
   }
+
+  publish(job: any, $event: MouseEvent) {
+    $event.stopPropagation();
+    console.log(job);
+  }
+
+  deleteJob(job: any, $event: MouseEvent) {
+    $event.stopPropagation();
+    console.log(job);
+  }
+
+  downloadPdf(job: any, $event: MouseEvent) {
+    $event.stopPropagation();
+    console.log(job);
+  }
+
+  retryJob(job: any, $event: MouseEvent) {
+    $event.stopPropagation();
+    console.log(job);
+  }
 }

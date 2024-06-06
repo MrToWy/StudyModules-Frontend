@@ -56,6 +56,9 @@
                     </p-columnFilter>
               </div>
             </th>
+            <th>
+              Aktionen
+            </th>
         </tr>
     </ng-template>
     <ng-template [pTemplate]="'body'" let-job>
@@ -70,6 +73,53 @@
                 label="{{ job.responsible.split(' ')[0].charAt(0) }}{{ job.responsible.split(' ')[1].charAt(0) }}"
                 [style]="{ 'background-color': '#dee9fc', color: '#1a2551' }" />
               {{ job.responsible }}</td>
+            <td>
+              <div class="flex">
+                <button
+                  *ngIf="job.errorAt"
+                  style="margin-right: 0.5em;"
+                  type="button"
+                  pButton
+                  pRipple
+                  icon="pi pi-refresh"
+                  (click)="retryJob(job, $event)"
+                >
+                  {{ t('retry') }}
+                </button>
+                <button
+                  *ngIf="job.finishedAt"
+                  style="margin-right: 0.5em;"
+                  type="button"
+                  pButton
+                  pRipple
+                  icon="pi pi-file-pdf"
+                  (click)="downloadPdf(job, $event)"
+                >
+                  {{ t('download') }}
+                </button>
+                <button
+                  *ngIf="job.finishedAt"
+                  style="margin-right: 0.5em;"
+                  type="button"
+                  pButton
+                  pRipple
+                  icon="pi pi-trash"
+                  (click)="deleteJob(job, $event)"
+                >
+                  {{ t('delete') }}
+                </button>
+                <button
+                  *ngIf="job.finishedAt && !job.published"
+                  style="margin-right: 0.5em;"
+                  type="button"
+                  pButton
+                  pRipple
+                  icon="pi pi-trash"
+                  (click)="publish(job, $event)"
+                >
+                  Freigeben
+                </button>
+              </div>
         </tr>
     </ng-template>
 
