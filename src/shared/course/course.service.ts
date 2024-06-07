@@ -29,10 +29,6 @@ export class CourseService {
   downloadPdfUrl(id: number, language: number) {
     return this.courseURL + "/" + id + "/pdf/" + language;
   }
-
-  hasPdf(courseId: number, languageId: number) {
-    return this.http.get<boolean>(this.courseURL + "/" + courseId + "/pdf/" + languageId + "/exists");
-  }
 }
 
 export interface CourseDto {
