@@ -29,6 +29,14 @@
             </th>
 
             <th>
+              Sprache
+            </th>
+
+            <th>
+              Studiengang
+            </th>
+
+            <th>
               Status
             </th>
 
@@ -64,6 +72,8 @@
     <ng-template [pTemplate]="'body'" let-job>
       <tr class="">
             <td>{{ job.guid }}</td>
+            <td>{{ job.language.abbreviation }}</td>
+            <td>{{ job.degreeProgram.abbreviation }}</td>
             <td *ngIf="job.errorAt">Error</td>
             <td *ngIf="job.publishedAt">Veröffentlicht</td>
             <td *ngIf="!job.publishedAt && job.finishedAt">PDF erstellt, bitte prüfen & freigeben ({{getRunningTime(job)}})</td>
