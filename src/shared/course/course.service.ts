@@ -25,6 +25,10 @@ export class CourseService {
   cloneCourse(id:number, cloneCourseDto: CloneCourseDto) {
     return this.http.post<number>(this.courseURL + "/" + id + "/clone", cloneCourseDto);
   }
+
+  downloadPdfUrl(id: number, language: number) {
+    return this.courseURL + "/" + id + "/pdf/" + language;
+  }
 }
 
 export interface CourseDto {

@@ -16,6 +16,7 @@ import {AuthService} from "../../shared/auth/auth.service";
 import {JobService} from "../../shared/job/job.service";
 import {LanguageDto, LanguageService} from "../../shared/language/language.service";
 import {CheckboxModule} from "primeng/checkbox";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-courses',
@@ -148,6 +149,10 @@ export class CoursesComponent {
 
   downloadPdf(course: CourseDto, $event: MouseEvent) {
     $event.stopPropagation();
+
+    this.languageService.getLanguageByCode(this.languageService.languageCode).subscribe(language => {
+        window.open(this.courseService.downloadPdfUrl(course.id, language.id), '_blank');
+    });
   }
 
   refreshPdf(course: CourseDto, $event: MouseEvent) {

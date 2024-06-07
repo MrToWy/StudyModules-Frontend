@@ -25,6 +25,10 @@ export class LanguageService {
     return this.http.get<LanguageDto[]>(this.languageURL);
   }
 
+  getLanguageByCode(code: string) {
+    return this.http.get<LanguageDto>(this.languageURL + "/" + code);
+  }
+
  set languageCode(value: string) {
    this.languageSubject.next(value);
    localStorage.setItem('language', value);
