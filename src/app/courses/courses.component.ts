@@ -152,7 +152,7 @@ export class CoursesComponent {
     $event.stopPropagation();
 
     this.languageService.getLanguageByCode(this.languageService.languageCode).subscribe(language => {
-        window.open(this.courseService.downloadPdfUrl(course.id, language.id), '_blank');
+        window.open(this.courseService.downloadPdfUrl(course.id, language[0].id), '_blank');
     });
   }
 
