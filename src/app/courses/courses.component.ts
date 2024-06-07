@@ -16,8 +16,6 @@ import {AuthService} from "../../shared/auth/auth.service";
 import {JobService} from "../../shared/job/job.service";
 import {LanguageDto, LanguageService} from "../../shared/language/language.service";
 import {CheckboxModule} from "primeng/checkbox";
-import {environment} from "../../environments/environment";
-import {firstValueFrom} from "rxjs";
 
 @Component({
   selector: 'app-courses',
@@ -50,6 +48,7 @@ import {firstValueFrom} from "rxjs";
 export class CoursesComponent {
   courses!: CourseDto[];
   languages: LanguageDto[] = [];
+  waitForJobGuids: string[] = [];
   selectedLanguageIds: number[] = [];
 
   deleteDialogVisible = false;

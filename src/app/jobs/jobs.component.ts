@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AvatarModule} from "primeng/avatar";
 import {ButtonModule} from "primeng/button";
 import {DropdownModule} from "primeng/dropdown";
@@ -40,7 +40,10 @@ import {environment} from "../../environments/environment";
   templateUrl: './jobs.component.html',
   styleUrl: './jobs.component.sass'
 })
-export class JobsComponent implements OnInit{
+export class JobsComponent implements OnInit, OnDestroy{
+
+  private intervalId: any;
+  private languageSubscription: any;
 
   jobs!: any[];
   users!: any[];
@@ -60,16 +63,25 @@ export class JobsComponent implements OnInit{
   ngOnInit(): void {
       this.loadData();
 
-    this.languageService.languageSubject.subscribe(() => {
+    this.languageSubscription = this.languageService.languageSubject.subscribe(() => {
       this.loadData()
     });
 
-    // load data every second
-    setInterval(() => {
+    // load data every second while the page is open
+    this.intervalId = setInterval(() => {
       this.loadData();
     }, 1000);
   }
 
+  ngOnDestroy(): void {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
+
+    if (this.languageSubscription) {
+      this.languageSubscription.unsubscribe();
+    }
+  }
 
   loadData(){
     this.jobService.getAll().subscribe(jobs => {
@@ -79,22 +91,6 @@ export class JobsComponent implements OnInit{
         job.responsible = "Tobias Wylega";
       });
     });
-  }
-
-  getStatus(job:any) {
-    if (job.finshed) {
-      return "finished"
-    }
-
-    if (job.running) {
-      return "running"
-    }
-
-    if(job.error) {
-      return "error"
-    }
-
-    return "pending"
   }
 
 getRunningTime(job: any) {
