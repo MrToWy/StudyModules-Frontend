@@ -26,7 +26,7 @@ export class JobService {
   }
 
   publish(guid: string) {
-    return this.http.post(this.jobURL + "/" + guid + "/publish", {});
+    return this.http.patch(this.jobURL + "/" + guid + "/publish", {});
   }
 
   delete(guid: string) {
