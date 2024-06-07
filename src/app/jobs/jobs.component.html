@@ -65,7 +65,8 @@
       <tr class="">
             <td>{{ job.guid }}</td>
             <td *ngIf="job.errorAt">Error</td>
-            <td *ngIf="job.finishedAt">Fertig in {{getRunningTime(job)}}</td>
+            <td *ngIf="job.published">Veröffentlicht</td>
+            <td *ngIf="!job.published && job.finishedAt">PDF erstellt, bitte prüfen & freigeben ({{getRunningTime(job)}})</td>
             <td *ngIf="!job.errorAt && !job.finishedAt && job.startedAt">Running for {{getRunningTime(job)}}</td>
             <td *ngIf="!job.errorAt && !job.finishedAt && !job.startedAt">Waiting for builder</td>
             <td>
