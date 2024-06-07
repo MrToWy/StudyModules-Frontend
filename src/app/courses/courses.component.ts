@@ -192,9 +192,4 @@ export class CoursesComponent {
   cancelPdfPublish() {
     this.refreshPdfDialogVisible = false;
   }
-
-  async hasPdf(course: CourseDto) {
-    const language = await firstValueFrom(this.languageService.getLanguageByCode(this.languageService.languageCode));
-    return this.courseService.hasPdf(course.id, language.id);
-  }
 }
