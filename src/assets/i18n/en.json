@@ -17,7 +17,9 @@
     "filter": "Filter",
     "name": "Name",
     "semester": "Semester",
-    "responsible": "Responsible"
+    "responsible": "Responsible",
+    "download" : "Anzeigen",
+    "delete" : "Löschen"
   },
   "changelog": {
     "description": "Description",
