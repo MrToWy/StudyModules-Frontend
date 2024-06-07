@@ -14,6 +14,7 @@ import {LanguageService} from "../../shared/language/language.service";
 import {JobService} from "../../shared/job/job.service";
 import {FormsModule} from "@angular/forms";
 import {CheckboxModule} from "primeng/checkbox";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-jobs',
@@ -131,6 +132,9 @@ export class JobsComponent implements OnInit{
   downloadPdf(job: any, $event: MouseEvent) {
     $event.stopPropagation();
     console.log(job);
+
+    // open pdf in new tab
+    window.open(`${environment.backendURL}/job/${job.guid}/pdf`, '_blank');
   }
 
   retryJob(job: any, $event: MouseEvent) {
