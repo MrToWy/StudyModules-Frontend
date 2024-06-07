@@ -97,19 +97,16 @@ export class JobsComponent implements OnInit{
     return "pending"
   }
 
-  getRunningTime(job: any) {
-    const startTime = new Date(job.startedAt);
-    let endTime = new Date(job.finishedAt);
+getRunningTime(job: any) {
+  const startTime = new Date(job.startedAt);
+  let endTime = job.finishedAt ? new Date(job.finishedAt) : new Date();
 
-    if(!endTime)
-      endTime = new Date();
+  const seconds = (endTime.getTime() - startTime.getTime()) / 1000;
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = Math.floor(seconds % 60);
 
-    const seconds = (endTime.getTime() - startTime.getTime()) / 1000;
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = Math.floor(seconds % 60);
-
-    return `${minutes}:${remainingSeconds}min`;
-  }
+  return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}min`;
+}
 
   publish(job: any, $event: MouseEvent) {
     $event.stopPropagation();
