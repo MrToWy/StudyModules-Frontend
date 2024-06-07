@@ -62,6 +62,11 @@ export class JobsComponent implements OnInit{
     this.languageService.languageSubject.subscribe(() => {
       this.loadData()
     });
+
+    // load data every second
+    setInterval(() => {
+      this.loadData();
+    }, 1000);
   }
 
 
