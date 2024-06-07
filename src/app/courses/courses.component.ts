@@ -168,9 +168,9 @@ export class CoursesComponent {
     let finished = 0;
 
     this.selectedLanguageIds.forEach(languageId => {
-      this.jobService.createNew(languageId, this.selectedCourse?.id!).subscribe((result) => {
+      this.jobService.createNew(languageId, this.selectedCourse?.id!).subscribe((guid) => {
         finished++;
-        console.log(result)
+        console.log(guid)
         if (finished === this.selectedLanguageIds.length) {
           this.refreshingPdf = false;
           this.messageService.add({severity: 'success', summary: 'Success', detail: 'PDF generation started'});
