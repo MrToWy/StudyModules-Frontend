@@ -134,7 +134,7 @@ export class JobsComponent implements OnInit{
     console.log(job);
 
     // open pdf in new tab
-    window.open(`${environment.backendURL}/job/${job.guid}/pdf`, '_blank');
+    window.open(`${environment.backendURL}job/${job.guid}/pdf`, '_blank');
   }
 
   retryJob(job: any, $event: MouseEvent) {
