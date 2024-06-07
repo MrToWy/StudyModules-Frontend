@@ -17,6 +17,7 @@ import {JobService} from "../../shared/job/job.service";
 import {LanguageDto, LanguageService} from "../../shared/language/language.service";
 import {CheckboxModule} from "primeng/checkbox";
 import {environment} from "../../environments/environment";
+import {firstValueFrom} from "rxjs";
 
 @Component({
   selector: 'app-courses',
@@ -190,5 +191,10 @@ export class CoursesComponent {
 
   cancelPdfPublish() {
     this.refreshPdfDialogVisible = false;
+  }
+
+  async hasPdf(course: CourseDto) {
+    const language = await firstValueFrom(this.languageService.getLanguageByCode(this.languageService.languageCode));
+    return this.courseService.hasPdf(course.id, language.id);
   }
 }
