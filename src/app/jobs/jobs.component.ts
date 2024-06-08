@@ -85,11 +85,10 @@ export class JobsComponent implements OnInit, OnDestroy{
 
   loadData(){
     this.jobService.getAll().subscribe(jobs => {
-      this.jobs = jobs;
 
-      this.jobs.forEach((job:any) => {
-        job.responsible = "Tobias Wylega";
-      });
+      if (JSON.stringify(this.jobs) == JSON.stringify(jobs)) return;
+
+      this.jobs = jobs;
     });
   }
 
