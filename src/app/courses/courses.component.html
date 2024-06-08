@@ -10,10 +10,11 @@
             <td>{{ course.translations[0].name }}</td>
             <td>
               <div class="flex">
-                <button [disabled]="false" style="margin-right: 0.5em;" type="button" pButton pRipple icon="pi pi-file-pdf" (click)="downloadPdf(course, $event)">PDF runterladen</button>
-                <button *ngIf="authService.isLoggedIn()" style="margin-right: 0.5em;" type="button" pButton pRipple icon="pi pi-refresh" (click)="refreshPdf(course, $event)"></button>
-                <button *ngIf="authService.isLoggedIn()" style="margin-right: 0.5em;" type="button" pButton pRipple icon="pi pi-clone" (click)="cloneCourse(course, $event)"></button>
-                <button *ngIf="authService.isLoggedIn()" style="margin-right: 0.5em;" type="button" pButton pRipple icon="pi pi-trash" (click)="deleteCourse(course, $event)"></button>
+                <button [disabled]="false" style="margin-right: 0.5em;" type="button" pButton pRipple icon="pi pi-eye" (click)="selectCourse(course)">Details</button>
+                <button [disabled]="false" style="margin-right: 0.5em;" type="button" pButton pRipple icon="pi pi-file-pdf" (click)="downloadPdf(course, $event)">PDF</button>
+                <button *ngIf="authService.isLoggedIn()" style="margin-right: 0.5em;" type="button" pButton pRipple icon="pi pi-refresh" (click)="refreshPdf(course, $event)">NewPdf</button>
+                <button *ngIf="authService.isLoggedIn()" style="margin-right: 0.5em;" type="button" pButton pRipple icon="pi pi-clone" (click)="cloneCourse(course, $event)">Clone</button>
+                <button *ngIf="authService.isLoggedIn()" style="margin-right: 0.5em;" type="button" pButton pRipple icon="pi pi-trash" (click)="deleteCourse(course, $event)">Delete</button>
               </div>
             </td>
         </tr>
