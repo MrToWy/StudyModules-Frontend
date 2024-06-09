@@ -15,6 +15,7 @@ import {JobService} from "../../shared/job/job.service";
 import {FormsModule} from "@angular/forms";
 import {CheckboxModule} from "primeng/checkbox";
 import {environment} from "../../environments/environment";
+import {ResponsibleAvatarComponent} from "../responsible-avatar/responsible-avatar.component";
 
 @Component({
   selector: 'app-jobs',
@@ -31,7 +32,8 @@ import {environment} from "../../environments/environment";
     TagModule,
     TranslocoDirective,
     FormsModule,
-    CheckboxModule
+    CheckboxModule,
+    ResponsibleAvatarComponent
   ],
   providers: [
     LanguageService,
@@ -132,5 +134,24 @@ getRunningTime(job: any) {
   retryJob(job: any, $event: MouseEvent) {
     $event.stopPropagation();
     console.log(job);
+  }
+
+  getStatus(job: any) {
+    if (job.errorAt) {
+      return 'Error';
+    }
+    if (job.publishedAt) {
+      return `Veröffentlicht ${job.publishedAt}`;
+    }
+    if (!job.publishedAt && job.finishedAt) {
+      return `PDF erstellt, bitte prüfen & freigeben (${this.getRunningTime(job)})`;
+    }
+    if (!job.errorAt && !job.finishedAt && job.startedAt) {
+      return `Running for ${this.getRunningTime(job)}`;
+    }
+    if (!job.errorAt && !job.finishedAt && !job.startedAt) {
+      return 'Waiting for builder';
+    }
+    return '';
   }
 }

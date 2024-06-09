@@ -55,7 +55,7 @@ export class CoursesComponent {
   cloneDialogVisible = false;
   cloning = false;
   refreshPdfDialogVisible = false;
-  refreshingPdf = false;
+  generatingTexFiles = false;
   resultDownloaded = false;
 
   selectedCourse: CourseDto | undefined;
@@ -164,15 +164,15 @@ export class CoursesComponent {
   startPdfGeneration(nextCallback: any) {
     nextCallback.emit();
 
-    this.refreshingPdf = true;
+    this.generatingTexFiles = true;
     let finished = 0;
 
     this.selectedLanguageIds.forEach(languageId => {
       this.jobService.createNew(languageId, this.selectedCourse?.id!).subscribe((guid) => {
         finished++;
-        console.log(guid)
+        this.waitForJobGuids = [...this.waitForJobGuids, guid.toString()];
         if (finished === this.selectedLanguageIds.length) {
-          this.refreshingPdf = false;
+          this.generatingTexFiles = false;
           this.messageService.add({severity: 'success', summary: 'Success', detail: 'PDF generation started'});
         }
       });

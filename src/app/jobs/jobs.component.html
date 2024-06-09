@@ -74,16 +74,8 @@
             <td>{{ job.guid }}</td>
             <td>{{ job.language.abbreviation }}</td>
             <td>{{ job.degreeProgram.abbreviation }}</td>
-            <td *ngIf="job.errorAt">Error</td>
-            <td *ngIf="job.publishedAt">Veröffentlicht</td>
-            <td *ngIf="!job.publishedAt && job.finishedAt">PDF erstellt, bitte prüfen & freigeben ({{getRunningTime(job)}})</td>
-            <td *ngIf="!job.errorAt && !job.finishedAt && job.startedAt">Running for {{getRunningTime(job)}}</td>
-            <td *ngIf="!job.errorAt && !job.finishedAt && !job.startedAt">Waiting for builder</td>
-            <td>
-              <p-avatar *ngIf="job.responsible"
-                label="{{ job.responsible.split(' ')[0].charAt(0) }}{{ job.responsible.split(' ')[1].charAt(0) }}"
-                [style]="{ 'background-color': '#dee9fc', color: '#1a2551' }" />
-              {{ job.responsible }}</td>
+            <td>{{getStatus(job)}}</td>
+            <app-responsible-avatar [responsible]="job.responsible" />
             <td>
               <div class="flex">
                 <button

@@ -85,15 +85,15 @@
     </p-stepperPanel>
     <p-stepperPanel header="Generate Pdf">
         <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
-            <div *ngIf="!refreshingPdf">
+            <div *ngIf="!generatingTexFiles">
               <p>Check the results and then click on "Next" to publish the Pdf.</p>
             </div>
 
-            <div *ngIf="refreshingPdf" class="smallPadding">
+            <div *ngIf="generatingTexFiles" class="smallPadding">
                 The Pdf is generating, please wait...
             </div>
             <div class="flex pt-4 justify-content-between">
-                <p-button [loading]="refreshingPdf" label="Download Result" icon="pi pi-download" (click)="downloadPdfResult()" class="smallPadding" />
+                <p-button [loading]="generatingTexFiles" label="Download Result" icon="pi pi-download" (click)="downloadPdfResult()" class="smallPadding" />
                 <p-button *ngIf="resultDownloaded" label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="nextCallback.emit()" />
             </div>
         </ng-template>
