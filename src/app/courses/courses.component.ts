@@ -13,7 +13,7 @@ import {PaginatorModule} from "primeng/paginator";
 import {StepperModule} from "primeng/stepper";
 import {NgForOf, NgIf} from "@angular/common";
 import {AuthService} from "../../shared/auth/auth.service";
-import {JobService} from "../../shared/job/job.service";
+import {CreateJobResponse, JobService} from "../../shared/job/job.service";
 import {LanguageDto, LanguageService} from "../../shared/language/language.service";
 import {CheckboxModule} from "primeng/checkbox";
 import {JobsComponent} from "../jobs/jobs.component";
@@ -170,9 +170,10 @@ export class CoursesComponent {
     let finished = 0;
 
     this.selectedLanguageIds.forEach(languageId => {
-      this.jobService.createNew(languageId, this.selectedCourse?.id!).subscribe((guid) => {
+      this.jobService.createNew(languageId, this.selectedCourse?.id!).subscribe((response: CreateJobResponse) => {
         finished++;
-        this.waitForJobGuids = [...this.waitForJobGuids, guid.toString()];
+        const guid = response.guid;  // Extract the guid property
+        this.waitForJobGuids = [...this.waitForJobGuids, guid];
         console.log(this.waitForJobGuids);
         if (finished === this.selectedLanguageIds.length) {
           this.generatingTexFiles = false;
@@ -195,3 +196,4 @@ export class CoursesComponent {
     this.refreshPdfDialogVisible = false;
   }
 }
+

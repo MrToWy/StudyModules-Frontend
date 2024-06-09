@@ -21,8 +21,8 @@ export class JobService {
     return this.http.get<any[]>(this.jobURL + "?filterGuids=" + filterGuids.join(","));
   }
 
-  createNew(languageId: number, degreeProgramId: number){
-    return this.http.post(this.jobURL, {languageId: languageId, degreeProgramId: degreeProgramId});
+  createNew(languageId: number, degreeProgramId: number): Observable<CreateJobResponse>{
+    return this.http.post<CreateJobResponse>(this.jobURL, {languageId: languageId, degreeProgramId: degreeProgramId});
   }
 
   getOne(guid: string){
@@ -36,4 +36,8 @@ export class JobService {
   delete(guid: string) {
     return this.http.delete(this.jobURL + "/" + guid);
   }
+}
+
+export interface CreateJobResponse {
+  guid: string;
 }
