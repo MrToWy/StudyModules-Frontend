@@ -173,6 +173,7 @@ export class CoursesComponent {
       this.jobService.createNew(languageId, this.selectedCourse?.id!).subscribe((guid) => {
         finished++;
         this.waitForJobGuids = [...this.waitForJobGuids, guid.toString()];
+        console.log(this.waitForJobGuids);
         if (finished === this.selectedLanguageIds.length) {
           this.generatingTexFiles = false;
           this.messageService.add({severity: 'success', summary: 'Success', detail: 'PDF generation started'});
