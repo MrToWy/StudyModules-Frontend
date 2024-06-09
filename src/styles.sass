@@ -55,6 +55,9 @@ body
 .justifyContentAround
   justify-content: space-around
 
+.justifyContentBetween
+  justify-content: space-between
+
 .facultyOverview
   height: 90vh !important
 
@@ -85,6 +88,11 @@ body
 .compactGrid // two columns
   display: grid
   grid-template-columns: 1fr 1fr
+  grid-gap: 20px
+
+.threeGrid // three columns
+  display: grid
+  grid-template-columns: repeat(3, 1fr)
   grid-gap: 20px
 
 .fiveGrid // five columns
