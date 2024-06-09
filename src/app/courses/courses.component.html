@@ -92,20 +92,10 @@
             <div *ngIf="generatingTexFiles" class="smallPadding">
                 The Pdf is generating, please wait...
             </div>
-            <app-jobs [filterGuids]="waitForJobGuids" [simpleView]="true" />
+            <app-jobs (jobsDone)="onJobsDone()" [filterGuids]="waitForJobGuids" [simpleView]="true" />
             <div class="flex pt-4 justify-content-between">
-                <p-button *ngIf="resultDownloaded" label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="nextCallback.emit()" />
-            </div>
-        </ng-template>
-    </p-stepperPanel>
-    <p-stepperPanel header="Publish Pdf">
-        <ng-template pTemplate="content" let-prevCallback="prevCallback" let-index="index">
-            <div class="flex flex-column h-12rem">
-                <p>Do you want to publish the Pdf?</p>
-            </div>
-            <div class="flex pt-4 justify-content-start">
-                <p-button class="smallPadding" label="Cancel" icon="pi pi-times-circle" (onClick)="cancelPdfPublish()" />
-                <p-button class="smallPadding" label="Publish" icon="pi pi-file-check" (onClick)="confirmPdfPublish()" />
+              <p *ngIf="jobsAreDone">Successfully published the new pdfs.</p>
+              <p-button *ngIf="jobsAreDone" label="Close" icon="pi pi-arrow-right" iconPos="right" (onClick)="nextCallback.emit()" />
             </div>
         </ng-template>
     </p-stepperPanel>

@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {AvatarModule} from "primeng/avatar";
 import {ButtonModule} from "primeng/button";
 import {DropdownModule} from "primeng/dropdown";
@@ -59,6 +59,9 @@ export class JobsComponent implements OnInit, OnDestroy{
   @Input()
   public simpleView: boolean = false;
 
+  @Output() jobsDone = new EventEmitter<void>();
+
+
 
   constructor(
     private languageService : LanguageService,
@@ -89,6 +92,11 @@ export class JobsComponent implements OnInit, OnDestroy{
     }
   }
 
+  onJobsCompleted() {
+    // Emit the event to notify parent component
+    this.jobsDone.emit();
+  }
+
   loadData(){
     const fetchJobs = this.filterGuids
       ? this.jobService.getAllFiltered(this.filterGuids)
@@ -97,6 +105,11 @@ export class JobsComponent implements OnInit, OnDestroy{
     fetchJobs.subscribe(jobs => {
       if (JSON.stringify(this.jobs) !== JSON.stringify(jobs)) {
         this.jobs = jobs;
+
+        // Check if all jobs are done
+        if (this.jobs.every(job => job.finishedAt)) {
+          this.onJobsCompleted();
+        }
       }
     });
   }

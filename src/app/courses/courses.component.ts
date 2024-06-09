@@ -58,7 +58,7 @@ export class CoursesComponent {
   cloning = false;
   refreshPdfDialogVisible = false;
   generatingTexFiles = false;
-  resultDownloaded = false;
+  jobsAreDone = false;
 
   selectedCourse: CourseDto | undefined;
   cloneCourseDto: CloneCourseDto = {
@@ -182,10 +182,6 @@ export class CoursesComponent {
     });
   }
 
-  downloadPdfResult() {
-    this.resultDownloaded = true;
-  }
-
   confirmPdfPublish() {
     this.refreshPdfDialogVisible = false;
     this.messageService.add({severity: 'success', summary: 'Success', detail: 'PDF successfully published'});
@@ -193,6 +189,10 @@ export class CoursesComponent {
 
   cancelPdfPublish() {
     this.refreshPdfDialogVisible = false;
+  }
+
+  onJobsDone() {
+    this.jobsAreDone = true;
   }
 }
 
