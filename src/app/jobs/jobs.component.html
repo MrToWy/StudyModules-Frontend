@@ -9,7 +9,7 @@
   scrollHeight="73vh"
 >
   <ng-template [ngIf]="!simpleView" pTemplate="caption">
-    <h1>Jobs</h1>
+    <h1 *ngIf="!simpleView">Jobs</h1>
   </ng-template>
     <ng-template pTemplate="header">
         <tr>
