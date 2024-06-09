@@ -16,6 +16,7 @@ import {FormsModule} from "@angular/forms";
 import {CheckboxModule} from "primeng/checkbox";
 import {environment} from "../../environments/environment";
 import {ResponsibleAvatarComponent} from "../responsible-avatar/responsible-avatar.component";
+import {filter} from "rxjs";
 
 @Component({
   selector: 'app-jobs',
@@ -103,6 +104,8 @@ export class JobsComponent implements OnInit, OnDestroy{
       : this.jobService.getAll();
 
     fetchJobs.subscribe(jobs => {
+      if(this.simpleView && !this.filterGuids) return;
+
       if (JSON.stringify(this.jobs) !== JSON.stringify(jobs)) {
         this.jobs = jobs;
 
