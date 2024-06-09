@@ -107,7 +107,7 @@ export class JobsComponent implements OnInit, OnDestroy{
         this.jobs = jobs;
 
         // Check if all jobs are done
-        if (this.jobs.every(job => job.finishedAt)) {
+        if (this.filterGuids && this.jobs.every(job => job.finishedAt)) {
           this.onJobsCompleted();
         }
       }
