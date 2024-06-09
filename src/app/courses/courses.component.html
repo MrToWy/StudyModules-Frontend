@@ -92,8 +92,8 @@
             <div *ngIf="generatingTexFiles" class="smallPadding">
                 The Pdf is generating, please wait...
             </div>
+            <app-jobs [filterGuids]="waitForJobGuids" [simpleView]="true" />
             <div class="flex pt-4 justify-content-between">
-                <p-button [loading]="generatingTexFiles" label="Download Result" icon="pi pi-download" (click)="downloadPdfResult()" class="smallPadding" />
                 <p-button *ngIf="resultDownloaded" label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="nextCallback.emit()" />
             </div>
         </ng-template>

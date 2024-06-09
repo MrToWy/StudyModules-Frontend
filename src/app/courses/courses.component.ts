@@ -16,6 +16,7 @@ import {AuthService} from "../../shared/auth/auth.service";
 import {JobService} from "../../shared/job/job.service";
 import {LanguageDto, LanguageService} from "../../shared/language/language.service";
 import {CheckboxModule} from "primeng/checkbox";
+import {JobsComponent} from "../jobs/jobs.component";
 
 @Component({
   selector: 'app-courses',
@@ -32,7 +33,8 @@ import {CheckboxModule} from "primeng/checkbox";
     RouterLink,
     NgIf,
     CheckboxModule,
-    NgForOf
+    NgForOf,
+    JobsComponent
   ],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.sass',

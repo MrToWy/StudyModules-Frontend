@@ -17,6 +17,10 @@ export class JobService {
     return this.http.get<any[]>(this.jobURL);
   }
 
+  getAllFiltered(filterGuids: string[]): Observable<any[]> {
+    return this.http.get<any[]>(this.jobURL + "?filterGuids=" + filterGuids.join(","));
+  }
+
   createNew(languageId: number, degreeProgramId: number){
     return this.http.post(this.jobURL, {languageId: languageId, degreeProgramId: degreeProgramId});
   }

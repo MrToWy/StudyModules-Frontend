@@ -8,12 +8,12 @@
   [scrollable]="true"
   scrollHeight="73vh"
 >
-  <ng-template pTemplate="caption">
+  <ng-template [ngIf]="!simpleView" pTemplate="caption">
     <h1>Jobs</h1>
   </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th>
+            <th *ngIf="!simpleView">
                 <div>
                     {{ t('name') }}
                     <p-columnFilter
@@ -32,7 +32,7 @@
               Sprache
             </th>
 
-            <th>
+            <th *ngIf="!simpleView">
               Studiengang
             </th>
 
@@ -40,7 +40,7 @@
               Status
             </th>
 
-            <th>
+            <th *ngIf="!simpleView">
               <div>
                 {{ t('responsible') }}
                 <p-columnFilter field="responsible" matchMode="equals" display="menu"
@@ -71,11 +71,11 @@
     </ng-template>
     <ng-template [pTemplate]="'body'" let-job>
       <tr class="">
-            <td>{{ job.guid }}</td>
+            <td *ngIf="!simpleView">{{ job.guid }}</td>
             <td>{{ job.language.abbreviation }}</td>
-            <td>{{ job.degreeProgram.abbreviation }}</td>
+            <td *ngIf="!simpleView">{{ job.degreeProgram.abbreviation }}</td>
             <td>{{getStatus(job)}}</td>
-            <app-responsible-avatar [responsible]="job.responsible" />
+            <app-responsible-avatar *ngIf="!simpleView" [responsible]="job.responsible" />
             <td>
               <div class="flex">
                 <button

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {AvatarModule} from "primeng/avatar";
 import {ButtonModule} from "primeng/button";
 import {DropdownModule} from "primeng/dropdown";
@@ -51,9 +51,13 @@ export class JobsComponent implements OnInit, OnDestroy{
   users!: any[];
   statuses!: any[];
   selectedUser: any;
-  selectedvalue: any;
-  courseId: number | undefined;
   course: CourseDto | undefined;
+
+  @Input()
+  public filterGuids: string[] = [];
+
+  @Input()
+  public simpleView: boolean = false;
 
 
   constructor(
@@ -86,11 +90,14 @@ export class JobsComponent implements OnInit, OnDestroy{
   }
 
   loadData(){
-    this.jobService.getAll().subscribe(jobs => {
+    const fetchJobs = this.filterGuids
+      ? this.jobService.getAllFiltered(this.filterGuids)
+      : this.jobService.getAll();
 
-      if (JSON.stringify(this.jobs) == JSON.stringify(jobs)) return;
-
-      this.jobs = jobs;
+    fetchJobs.subscribe(jobs => {
+      if (JSON.stringify(this.jobs) !== JSON.stringify(jobs)) {
+        this.jobs = jobs;
+      }
     });
   }
 
