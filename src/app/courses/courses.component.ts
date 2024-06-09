@@ -174,7 +174,6 @@ export class CoursesComponent {
         finished++;
         const guid = response.guid;  // Extract the guid property
         this.waitForJobGuids = [...this.waitForJobGuids, guid];
-        console.log(this.waitForJobGuids);
         if (finished === this.selectedLanguageIds.length) {
           this.generatingTexFiles = false;
           this.messageService.add({severity: 'success', summary: 'Success', detail: 'PDF generation started'});
