@@ -15,6 +15,7 @@ import {RippleModule} from "primeng/ripple";
 import {NgIf} from "@angular/common";
 import {ToggleButtonModule} from "primeng/togglebutton";
 import {CourseDto, CourseService} from "../../shared/course/course.service";
+import {ABtestService} from "../../shared/abtest/abtest.service";
 
 @Component({
   selector: 'app-module-grid',
@@ -53,7 +54,8 @@ export class ModuleGridComponent implements OnInit{
   constructor(private moduleService: ModuleService,
               private router: Router,
               private languageService: LanguageService,
-              private courseService: CourseService
+              private courseService: CourseService,
+              protected abTestService: ABtestService
   ) {
 
   }

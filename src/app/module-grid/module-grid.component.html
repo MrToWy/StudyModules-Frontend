@@ -107,7 +107,7 @@
             </th>
         </tr>
     </ng-template>
-  <ng-template *ngIf="groupByCourse" pTemplate="groupheader" let-module let-expanded="expanded">
+  <ng-template *ngIf="groupByCourse && !abTestService.aActive" pTemplate="groupheader" let-module let-expanded="expanded">
             <tr>
                 <td colspan="5">
                   <div style="display: flex; align-items: center;">
@@ -126,7 +126,7 @@
                 </td>
             </tr>
         </ng-template>
-    <ng-template [pTemplate]="this.groupByCourse ? 'rowexpansion' : 'body'" let-module>
+    <ng-template [pTemplate]="this.groupByCourse && !abTestService.aActive ? 'rowexpansion' : 'body'" let-module>
       <tr class="clickable" (click)="openDetailView(module)">
             <td *ngIf="!courseId">
               <p-tag severity="success" value="{{ module.course }}" [pTooltip]="tooltipContent" />
