@@ -15,6 +15,7 @@ import {CreateJobResponse, JobService} from "../../shared/job/job.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../shared/auth/auth.service";
 import {LanguageDto, LanguageService} from "../../shared/language/language.service";
+import {ABtestService} from "../../shared/abtest/abtest.service";
 
 @Component({
   selector: 'app-course-panel',
@@ -63,13 +64,14 @@ export class CoursePanelComponent implements OnInit{
   @Input() course!: CourseDto;
 
   constructor(
-              private languageService: LanguageService,
-              private router: Router,
+    private languageService: LanguageService,
+    private router: Router,
     private courseService: CourseService,
-              private jobService: JobService,
-              private route: ActivatedRoute,
-              protected authService: AuthService,
-              private messageService: MessageService
+    private jobService: JobService,
+    private route: ActivatedRoute,
+    protected authService: AuthService,
+    private messageService: MessageService,
+    protected abService: ABtestService
   ) {
   }
 

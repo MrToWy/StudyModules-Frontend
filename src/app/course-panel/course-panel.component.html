@@ -1,4 +1,4 @@
-<p-panel hidden *ngIf="!deleted">
+<p-panel *ngIf="!deleted && !abService.aActive">
     <ng-template pTemplate="header">
         <div class="flex align-items-center gap-2">
             <span class="font-bold">
@@ -32,7 +32,7 @@
     <p>  </p>
 </p-panel>
 
-<p-panel *ngIf="!deleted">
+<p-panel *ngIf="!deleted && abService.aActive">
     <ng-template pTemplate="header">
         <div class="flex align-items-center gap-2">
             <span class="font-bold">
