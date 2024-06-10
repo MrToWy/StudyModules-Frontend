@@ -15,8 +15,13 @@ export class FacultyService {
 }
 
 export interface FacultyDto {
-  name: string;
   id: number;
-  subtitle?: string;
   color?: string;
+  translations: FacultyTranslationDto[];
+}
+
+interface FacultyTranslationDto {
+  name: string;
+  languageId: number;
+  facultyId: number;
 }
