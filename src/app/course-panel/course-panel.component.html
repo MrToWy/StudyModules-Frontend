@@ -1,4 +1,4 @@
-<p-panel *ngIf="!deleted">
+<p-panel hidden *ngIf="!deleted">
     <ng-template pTemplate="header">
         <div class="flex align-items-center gap-2">
             <span class="font-bold">
@@ -7,15 +7,19 @@
         </div>
     </ng-template>
     <ng-template pTemplate="footer">
-        <div class="flex justifyContentBetween">
-            <div class="flex align-items-center gap-2">
-                <p-button (onClick)="selectCourse(course)" [pTooltip]="'Module ansehen'" icon="pi pi-list" severity="secondary" [rounded]="true" [text]="true" />
-                <p-button (onClick)="downloadPdf(course)" [pTooltip]="'PDF ansehen'" icon="pi pi-file-pdf" severity="secondary" [rounded]="true" [text]="true" />
+            <div class="flex justifyContentBetween">
+                <p-button (onClick)="selectCourse(course)"
+                          [pTooltip]="'Auflistung aller Module ansehen'" icon="pi pi-list"
+                          severity="primary"
+                          [label]="'Module'"
+                />
+
+                <p-button (onClick)="downloadPdf(course)"
+                          [pTooltip]="'PDF mit allen Modulen ansehen'" icon="pi pi-file-pdf"
+                          severity="secondary"
+                          [label]="'PDF'"
+                />
             </div>
-            <span class="p-text-secondary">
-                Updated 2 hours ago
-            </span>
-        </div>
     </ng-template>
     <ng-template pTemplate="icons">
         <button class="p-panel-header-icon p-link mr-2" (click)="menu.toggle($event)">
@@ -26,6 +30,39 @@
     <p> 7 Semester </p>
     <p> 240 Credits </p>
     <p>  </p>
+</p-panel>
+
+<p-panel *ngIf="!deleted">
+    <ng-template pTemplate="header">
+        <div class="flex align-items-center gap-2">
+            <span class="font-bold">
+                {{ course.translations[0].name }}
+            </span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="icons">
+        <button class="p-panel-header-icon p-link mr-2" (click)="menu.toggle($event)">
+            <span class="pi pi-cog"></span>
+        </button>
+        <p-menu #menu id="config_menu2" [model]="items" [popup]="true" />
+    </ng-template>
+    <div class="flex justifyContentAround">
+
+
+                <p-button (onClick)="downloadPdf(course)"
+                          [pTooltip]="'PDF mit allen Modulen ansehen'" icon="pi pi-file-pdf"
+                          severity="secondary"
+                          [label]="'PDF'"
+                          [text]="true"
+                />
+
+      <p-button (onClick)="selectCourse(course)"
+                          [pTooltip]="'Auflistung aller Module ansehen'" icon="pi pi-arrow-circle-right"
+                          severity="primary"
+                          [label]="'Module'"
+                          [text]="true"
+                />
+            </div>
 </p-panel>
 
 
