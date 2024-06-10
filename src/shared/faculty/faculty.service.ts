@@ -18,9 +18,16 @@ export interface FacultyDto {
   id: number;
   color?: string;
   translations: FacultyTranslationDto[];
-  _count: {
-    departments: number;
-  };
+  departments: DepartmentIds[];
+}
+
+interface DepartmentIds {
+  id: number;
+  degreePrograms: DegreeProgramIds[];
+}
+
+interface DegreeProgramIds {
+  id: number;
 }
 
 interface FacultyTranslationDto {

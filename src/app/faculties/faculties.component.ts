@@ -34,8 +34,11 @@ faculties!: FacultyDto[];
 
     selectedFaculty!: FacultyDto;
 
-    constructor(private facultyService: FacultyService,
-                private router: Router, private languageService: LanguageService) {}
+    constructor(
+      private facultyService: FacultyService,
+                private router: Router,
+      private languageService: LanguageService
+    ) {}
 
     ngOnInit() {
       this.loadFaculties()
@@ -52,7 +55,17 @@ faculties!: FacultyDto[];
     }
 
     async selectFaculty(faculty: FacultyDto) {
-        await this.router.navigate(['/faculty', faculty.id], { state: {faculty: faculty} });
+
+      const numberOfDepartmentsWithDegreePrograms = faculty.departments.filter(department => department.degreePrograms.length > 0).length;
+
+      if(numberOfDepartmentsWithDegreePrograms === 1) {
+
+        const department = faculty.departments.find(department => department.degreePrograms.length > 0);
+        await this.router.navigate(['/faculty', faculty.id, 'department', department?.id], { state: {faculty: faculty} });
+        return;
+      }
+
+      await this.router.navigate(['/faculty', faculty.id], { state: {faculty: faculty} });
     }
 
     addAlpha(color:string|undefined, opacity:number) {
