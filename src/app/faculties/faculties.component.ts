@@ -9,6 +9,7 @@ import {CardModule} from "primeng/card";
 import {NgForOf, NgStyle} from "@angular/common";
 import {TranslocoDirective} from "@jsverse/transloco";
 import {LanguageService} from "../../shared/language/language.service";
+import {TooltipModule} from "primeng/tooltip";
 
 @Component({
   selector: 'app-faculties',
@@ -21,7 +22,8 @@ import {LanguageService} from "../../shared/language/language.service";
     CardModule,
     NgForOf,
     TranslocoDirective,
-    NgStyle
+    NgStyle,
+    TooltipModule
   ],
   templateUrl: './faculties.component.html',
   styleUrl: './faculties.component.sass',

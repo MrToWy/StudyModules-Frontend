@@ -18,6 +18,9 @@ export interface FacultyDto {
   id: number;
   color?: string;
   translations: FacultyTranslationDto[];
+  _count: {
+    departments: number;
+  };
 }
 
 interface FacultyTranslationDto {
