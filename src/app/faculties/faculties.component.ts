@@ -6,7 +6,7 @@ import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
 import {Router} from "@angular/router";
 import {CardModule} from "primeng/card";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgStyle} from "@angular/common";
 import {TranslocoDirective} from "@jsverse/transloco";
 import {LanguageService} from "../../shared/language/language.service";
 
@@ -20,7 +20,8 @@ import {LanguageService} from "../../shared/language/language.service";
     RippleModule,
     CardModule,
     NgForOf,
-    TranslocoDirective
+    TranslocoDirective,
+    NgStyle
   ],
   templateUrl: './faculties.component.html',
   styleUrl: './faculties.component.sass',
@@ -63,4 +64,6 @@ faculties!: FacultyDto[];
   async openGrid() {
     await this.router.navigate(['/overview']);
   }
+
+  protected readonly console = console;
 }
