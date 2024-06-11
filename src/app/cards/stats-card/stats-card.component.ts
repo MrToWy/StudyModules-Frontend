@@ -14,8 +14,10 @@ import {ChartModule} from "primeng/chart";
 })
 export class StatsCardComponent implements OnInit{
   data: any;
-
   options: any;
+
+  @Input() hoursPresence: any;
+  @Input() hoursSelf: any;
 
   ngOnInit(): void {
       const documentStyle = getComputedStyle(document.documentElement);
@@ -25,7 +27,7 @@ export class StatsCardComponent implements OnInit{
             labels: ['Präsenz', 'Selbststudium'],
             datasets: [
                 {
-                    data: [50, 350],
+                    data: [this.hoursPresence, this.hoursSelf],
                     backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500')],
                     hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400')]
                 }

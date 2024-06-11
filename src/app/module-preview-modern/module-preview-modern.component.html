@@ -50,6 +50,8 @@
     <app-stats-card
       class="takeTwoColumns takeThreeRows fullheight"
       [title]="t('timeRequired')"
+      [hoursPresence]="module?.hoursPresence"
+      [hoursSelf]="module?.hoursSelf"
     />
 
     <app-text-card
