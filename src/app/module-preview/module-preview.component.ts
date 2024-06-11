@@ -1,10 +1,14 @@
 import {Component, Input} from '@angular/core';
 import {ModuleDetail, ModuleTranslation} from "../../shared/module/module.service";
+import {NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-module-preview',
   standalone: true,
-  imports: [],
+  imports: [
+    NgForOf,
+    NgIf
+  ],
   templateUrl: './module-preview.component.html',
   styleUrl: './module-preview.component.sass'
 })

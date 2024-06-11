@@ -10,7 +10,11 @@
   <span>{{ moduleText?.type }}</span>
 
   <b>Teilmodule</b>
-  <span></span>
+  <div *ngIf="module?.subModules;">
+    <div *ngFor="let subModule of module!.subModules!">
+      {{subModule?.abbreviation}}  {{module?.translations?.[0]?.name}}, Pflicht
+    </div>
+  </div>
 
   <b>Verantwortliche(r)</b>
   <span>{{ module?.responsible?.translations?.at(0)?.title }} {{ module?.responsible?.firstName }} {{ module?.responsible?.lastName }}</span>

@@ -123,6 +123,7 @@ export interface SubModuleTranslation {
 
 export interface SubModule {
   id: number;
+  abbreviation: string;
   number: number;
   weeklyHours: number;
   groupSize: number;
