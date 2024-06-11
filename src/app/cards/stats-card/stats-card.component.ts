@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {DividerModule} from "primeng/divider";
 import {ChartModule} from "primeng/chart";
 
@@ -12,15 +12,15 @@ import {ChartModule} from "primeng/chart";
   templateUrl: './stats-card.component.html',
   styleUrl: './stats-card.component.sass'
 })
-export class StatsCardComponent implements OnInit{
+export class StatsCardComponent implements OnChanges {
   data: any;
   options: any;
 
   @Input() hoursPresence: any;
   @Input() hoursSelf: any;
 
-  ngOnInit(): void {
-      const documentStyle = getComputedStyle(document.documentElement);
+  initializeChart() {
+    const documentStyle = getComputedStyle(document.documentElement);
       const textColor = documentStyle.getPropertyValue('--text-color');
 
       this.data = {
@@ -33,7 +33,6 @@ export class StatsCardComponent implements OnInit{
                 }
             ]
         };
-
 
         this.options = {
           responsive: true,
@@ -50,8 +49,12 @@ export class StatsCardComponent implements OnInit{
         };
   }
 
+
+  ngOnChanges(changes: SimpleChanges): void {
+      if (changes['hoursPresence'] || changes['hoursSelf']) {
+        this.initializeChart();
+      }
+  }
+
   @Input() title: string | undefined;
-
-
-
 }
