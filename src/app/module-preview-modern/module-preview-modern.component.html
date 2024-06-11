@@ -36,7 +36,7 @@
     <app-info-card
       *ngIf="module"
       [label]="t('semester')"
-      [value]="module.semester"
+      [value]="addPointsToNumbers(module.semester)"
       [icon]="'pi-calendar'"
     />
 

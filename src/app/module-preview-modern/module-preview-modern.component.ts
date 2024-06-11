@@ -42,6 +42,10 @@ export class ModulePreviewModernComponent {
     return this._module;
   }
 
+  addPointsToNumbers(input: string): string {
+    return input.replace(/(\d+)(?=-?\d*)/g, '$1.');
+  }
+
   @Input()
   set module(value: ModuleDetail | undefined) {
     this._module = value;
