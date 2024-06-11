@@ -13,7 +13,7 @@
   <span></span>
 
   <b>Verantwortliche(r)</b>
-  <span>{{ module?.responsibleId }}</span>
+  <span>{{ module?.responsible?.translations?.at(0)?.title }} {{ module?.responsible?.firstName }} {{ module?.responsible?.lastName }}</span>
 
   <b>Credits</b>
   <span>{{ module?.credits }}</span>
@@ -22,10 +22,10 @@
   <span>{{ module?.courseLength }} Semester</span>
 
   <b>Vorraussetzungen nach Prüfungsordnung</b>
-  <span>{{ module?.requirementsHardId }}</span>
+  <span>{{ module?.requirementsHard?.translations?.at(0)?.name }}</span>
 
   <b>Empfohlene Vorraussetzungen</b>
-  <span>{{ module?.requirementsSoftId }}</span>
+  <span>{{ module?.requirementsSoft?.translations?.at(0)?.name }}</span>
 
   <b>Studien-/ Prüfungsleistungen</b>
   <span>{{ moduleText?.exam }}</span>

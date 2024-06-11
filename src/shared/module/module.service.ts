@@ -90,6 +90,14 @@ export interface Person {
   password?: string;
   role?: string;
   degreeProgramId?: number;
+  translations?: PersonTranslation[];
+}
+
+export interface PersonTranslation {
+  id: number;
+  languageId: number;
+  userId: number;
+  title: string;
 }
 
 export interface RequirementTranslation {
