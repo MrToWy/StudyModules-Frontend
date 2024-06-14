@@ -1,13 +1,17 @@
 import {Component, Input} from '@angular/core';
 import {ModuleDetail, ModuleTranslation} from "../../shared/module/module.service";
 import {NgForOf, NgIf} from "@angular/common";
+import {SelectButtonModule} from "primeng/selectbutton";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-module-preview',
   standalone: true,
   imports: [
     NgForOf,
-    NgIf
+    NgIf,
+    SelectButtonModule,
+    FormsModule
   ],
   templateUrl: './module-preview.component.html',
   styleUrl: './module-preview.component.sass'

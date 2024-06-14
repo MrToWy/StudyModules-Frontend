@@ -11,15 +11,17 @@
   <label for="name">Name</label>
 </span>
 
-<span class="p-float-label">
-  <p-autoComplete
-    id="niveau"
-    [(ngModel)]="moduleText.niveau"
-    [suggestions]="filteredSuggestions"
-    [emptyMessage]="'Neuer Eintrag wird erstellt'"
-    (completeMethod)="search($event)" />
-  <label for="niveau">Niveau</label>
-</span>
+<label for="elective">Wahlpflichtmodul</label>
+<p-checkbox id="elective" [binary]="true"  [(ngModel)]="module.elective" />
+<br>
+<label for="specialization">Vertiefungsmodul</label>
+<p-checkbox id="specialization" [binary]="true"  [(ngModel)]="module.specialization" />
+
+
+
+<br>
+<br>
+<br>
 
 <span class="p-float-label smallPadding">
   <p-inputNumber id="credits" [(ngModel)]="module.credits" />

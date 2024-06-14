@@ -23,7 +23,7 @@ export class ModuleTranslatorComponent implements OnInit{
   constructor(private moduleService: ModuleService) {
     // initialize moduleText to prevent error
     this.moduleText = {
-      exam: "", id: 0, learningOutcomes: "", moduleId: 0, niveau: "", subtitle: "", type: "",
+      exam: "", id: 0, learningOutcomes: "", moduleId: 0, subtitle: "",
       languageId: 0,
       name: "",
       description: ""

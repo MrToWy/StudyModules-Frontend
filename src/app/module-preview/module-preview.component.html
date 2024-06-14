@@ -4,10 +4,10 @@
   <span>{{ moduleText?.subtitle }}</span>
 
   <b>Modulniveau</b>
-  <span>{{ moduleText?.niveau }}</span>
+  <span>{{ module?.specialization? "Vertiefungsmodul" : "Grundlagenmodul" }}</span>
 
   <b>Pflicht / Wahlpflicht</b>
-  <span>{{ moduleText?.type }}</span>
+  <span>{{ module?.elective? "Wahlpflichtmodul" : "Pflichtmodul" }}</span>
 
   <b>Teilmodule</b>
   <div *ngIf="module?.subModules;">

@@ -28,7 +28,9 @@ export class ModuleService {
           departmentId: module.degreeProgram.department.id,
           semester: module.semester,
           responsible: `${module.responsible.firstName} ${module.responsible.lastName}`,
-          facultyId: module.degreeProgram.department.facultyId
+          facultyId: module.degreeProgram.department.facultyId,
+          specialization: module.specialization,
+          elective: module.elective
         }))
       )
     );
@@ -67,14 +69,14 @@ export interface ModuleDto {
   semester: string;
   responsible: string;
   facultyId: number;
+  specialization: boolean;
+  elective: boolean;
 }
 
 export interface ModuleTranslation {
   id: number;
   name: string;
   subtitle: string;
-  niveau: string;
-  type: string;
   exam: string;
   learningOutcomes: string;
   languageId: number;
@@ -136,6 +138,8 @@ export interface ModuleDetail {
   number: number;
   abbreviation: string;
   credits: number;
+  specialization: boolean;
+  elective: boolean;
   hoursPresence: number;
   hoursSelf: number;
   semester: string;

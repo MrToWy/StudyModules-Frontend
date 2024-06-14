@@ -7,6 +7,8 @@ import {InputTextModule} from "primeng/inputtext";
 import {AutoCompleteCompleteEvent, AutoCompleteModule} from "primeng/autocomplete";
 import {TextAutocompleteService} from "../../shared/text-autocomplete/text-autocomplete.service";
 import {ButtonModule} from "primeng/button";
+import {SelectButtonModule} from "primeng/selectbutton";
+import {CheckboxModule} from "primeng/checkbox";
 
 @Component({
   selector: 'app-module-edit-editor',
@@ -17,7 +19,9 @@ import {ButtonModule} from "primeng/button";
     PasswordModule,
     InputTextModule,
     AutoCompleteModule,
-    ButtonModule
+    ButtonModule,
+    SelectButtonModule,
+    CheckboxModule
   ],
   providers: [TextAutocompleteService],
   templateUrl: './module-edit-editor.component.html',
@@ -32,6 +36,11 @@ export class ModuleEditEditorComponent implements OnInit{
       this.autocomplete.getAutocompleteSuggestions(this.languageId).subscribe((suggestions) => {
           this.suggestions = suggestions;
           this.filteredSuggestions = suggestions;
+
+          this.niveauOptions = this.suggestions.map((suggestion) => ({
+            label: suggestion,
+            value: suggestion
+          }));
       });
     }
 
@@ -41,6 +50,8 @@ export class ModuleEditEditorComponent implements OnInit{
 
     suggestions!: any[];
     filteredSuggestions!: any[];
+    niveauOptions: any[] = [];
+
 
     search(event: AutoCompleteCompleteEvent) {
         this.filteredSuggestions = this.suggestions.filter((suggestion) => {
