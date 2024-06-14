@@ -16,6 +16,7 @@ import {NgIf} from "@angular/common";
 import {ToggleButtonModule} from "primeng/togglebutton";
 import {CourseDto, CourseService} from "../../shared/course/course.service";
 import {ABtestService} from "../../shared/abtest/abtest.service";
+import {ResponsibleAvatarComponent} from "../responsible-avatar/responsible-avatar.component";
 
 @Component({
   selector: 'app-module-grid',
@@ -32,7 +33,8 @@ import {ABtestService} from "../../shared/abtest/abtest.service";
     ButtonModule,
     RippleModule,
     NgIf,
-    ToggleButtonModule
+    ToggleButtonModule,
+    ResponsibleAvatarComponent
   ],
   providers: [ModuleService, CourseService],
   templateUrl: './module-grid.component.html',
