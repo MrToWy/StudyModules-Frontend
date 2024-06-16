@@ -1,0 +1,58 @@
+<h1>{{requirement?.translations?.at(0)?.name}}</h1>
+
+<p-dropdown
+  [options]="courses"
+  [(ngModel)]="selectedCourse"
+  optionLabel="abbreviation"
+  [style]="{'width':'30%'}"
+  (onChange)="onCourseChange($event)"
+
+  placeholder="Select a Course">
+</p-dropdown>
+
+
+
+<p-multiSelect
+    [options]="selectedCourse?.modules"
+    [(ngModel)]="selectedModules"
+    [showToggleAll]="false"
+    [optionLabel]="'abbreviation'"
+    [optionValue]="'id'"
+    [maxSelectedLabels]="selectedCourse?.modules?.length??0"
+    placeholder="Modul"
+    scrollHeight="250px"
+    [style]="{'width':'40%'}"
+    display="chip">
+        <ng-template let-module pTemplate="item">
+          <span>{{ module.abbreviation }}</span>
+        </ng-template>
+</p-multiSelect>
+
+
+<p-multiSelect
+    [options]="requirements"
+    [(ngModel)]="selectedRequirements"
+    [showToggleAll]="false"
+    placeholder="Semester"
+    scrollHeight="250px"
+    [style]="{'width':'50%'}"
+    display="chip">
+        <ng-template let-group pTemplate="group">
+          <span>{{ group.label }}</span>
+        </ng-template>
+</p-multiSelect>
+
+
+<p-multiSelect
+    [options]="hardRequirements"
+    [(ngModel)]="selectedHardRequirements"
+    [showToggleAll]="false"
+    placeholder="Semester"
+    scrollHeight="250px"
+    [style]="{'width':'50%'}"
+    display="chip">
+        <ng-template let-group pTemplate="group">
+          <span>{{ group.label }}</span>
+        </ng-template>
+</p-multiSelect>
+

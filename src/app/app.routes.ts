@@ -10,6 +10,8 @@ import {LoginComponent} from "./login/login.component";
 import {ModuleChangelogComponent} from "./module-changelog/module-changelog.component";
 import {JobsComponent} from "./jobs/jobs.component";
 import {SubmodulesComponent} from "./submodules/submodules.component";
+import {RequirementsComponent} from "./requirements/requirements.component";
+import {RequirementDetailComponent} from "../requirement-detail/requirement-detail.component";
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -25,5 +27,7 @@ export const routes: Routes = [
   { path: 'module/:id/edit', component: ModuleEditComponent},
   { path: 'jobs', component: JobsComponent},
   { path: 'submodules', component: SubmodulesComponent},
+  { path: 'requirements', component: RequirementsComponent},
+  { path: 'requirement/:id', component: RequirementDetailComponent},
   { path: '', redirectTo: '/faculties', pathMatch: 'full' }
 ];
