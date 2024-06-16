@@ -11,6 +11,11 @@
   <label for="name">Name</label>
 </span>
 
+<span class="p-float-label smallPadding">
+  <input pInputText id="subtitle" [(ngModel)]="moduleText.subtitle" />
+  <label for="subtitle">Untertitel</label>
+</span>
+
 <label for="elective">Wahlpflichtmodul</label>
 <p-checkbox id="elective" [binary]="true"  [(ngModel)]="module.elective" />
 <br>
@@ -44,6 +49,21 @@
   <p-inputNumber id="credits" [(ngModel)]="module.credits" />
   <label for="credits">Credits</label>
 </span>
+<br>
+
+<span class="p-float-label smallPadding">
+  <p-inputNumber id="semester" [(ngModel)]="module.courseLength" />
+  <label for="credits">Moduldauer</label>
+</span>
+
+
+<textarea
+    rows="5"
+    cols="30"
+    pInputTextarea
+    [(ngModel)]="moduleText.learningOutcomes"
+>
+</textarea>
 
 <p-button
   [text]="true"

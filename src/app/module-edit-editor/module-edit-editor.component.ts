@@ -13,6 +13,7 @@ import {UserDto, UserService} from "../../shared/user/user.service";
 import {DropdownModule} from "primeng/dropdown";
 import {NgIf} from "@angular/common";
 import {ResponsibleAvatarComponent} from "../responsible-avatar/responsible-avatar.component";
+import {InputTextareaModule} from "primeng/inputtextarea";
 
 @Component({
   selector: 'app-module-edit-editor',
@@ -28,7 +29,8 @@ import {ResponsibleAvatarComponent} from "../responsible-avatar/responsible-avat
     CheckboxModule,
     DropdownModule,
     NgIf,
-    ResponsibleAvatarComponent
+    ResponsibleAvatarComponent,
+    InputTextareaModule
   ],
   providers: [TextAutocompleteService],
   templateUrl: './module-edit-editor.component.html',
