@@ -65,6 +65,21 @@
 >
 </textarea>
 
+<br>
+
+<p-multiSelect
+    [options]="submodulesForDropdown"
+    [group]="true"
+    [(ngModel)]="selectedSubmodules"
+    (onChange)="selectedSubmodulesChange($event)"
+    placeholder="Select Cities"
+    scrollHeight="250px"
+    display="chip">
+</p-multiSelect>
+
+
+<br>
+
 <p-button
   [text]="true"
                 severity="primary"
