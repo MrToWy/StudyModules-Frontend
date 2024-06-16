@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from "../../environments/environment";
 import {map, Observable} from "rxjs";
+import {UserDto} from "../user/user.service";
 
 @Injectable()
 export class ModuleService {
@@ -84,24 +85,6 @@ export interface ModuleTranslation {
   description?: string;  // Newly added field
 }
 
-export interface Person {
-  id: number;
-  email?: string;
-  firstName: string;
-  lastName: string;
-  password?: string;
-  role?: string;
-  degreeProgramId?: number;
-  translations?: PersonTranslation[];
-}
-
-export interface PersonTranslation {
-  id: number;
-  languageId: number;
-  userId: number;
-  title: string;
-}
-
 export interface RequirementTranslation {
   name: string;
 }
@@ -155,7 +138,7 @@ export interface ModuleDetail {
   eventType?: any;
   language?: any;
   material?: any;
-  responsible: Person;
+  responsible: UserDto;
   requirementsSoft: Requirement;
   requirementsHard: Requirement;
   subModules: SubModule[];

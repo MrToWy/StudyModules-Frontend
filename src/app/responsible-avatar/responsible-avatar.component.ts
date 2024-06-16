@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {AvatarModule} from "primeng/avatar";
 import {NgIf} from "@angular/common";
 
@@ -12,15 +12,27 @@ import {NgIf} from "@angular/common";
   templateUrl: './responsible-avatar.component.html',
   styleUrl: './responsible-avatar.component.sass'
 })
-export class ResponsibleAvatarComponent implements OnInit{
+export class ResponsibleAvatarComponent implements OnInit, OnChanges {
   @Input() responsible: string = '';
 
   initials: string = '';
 
   ngOnInit(): void {
+    this.updateInitials();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['responsible']) {
+      this.updateInitials();
+    }
+  }
+
+  private updateInitials(): void {
     if (this.responsible) {
       const names = this.responsible.split(' ');
       this.initials = names.length > 1 ? `${names[0].charAt(0)}${names[1].charAt(0)}` : `${names[0].charAt(0)}`;
+    } else {
+      this.initials = '';
     }
   }
 }
