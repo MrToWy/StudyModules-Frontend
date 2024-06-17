@@ -1,58 +1,77 @@
-<h1>{{requirement?.translations?.at(0)?.name}}</h1>
+<main class="largePadding">
+  <h1>{{ requirement?.translations?.at(0)?.name }}</h1>
 
-<p-dropdown
-  [options]="courses"
-  [(ngModel)]="selectedCourse"
-  optionLabel="abbreviation"
-  [style]="{'width':'30%'}"
-  (onChange)="onCourseChange($event)"
+  <div class="compactGrid">
+    <div id="leftSide">
+      <div>
+        <label for="courseSelect" class="block">Studiengang</label>
+        <p-dropdown
+          id="courseSelect"
+          [options]="courses"
+          [(ngModel)]="selectedCourse"
+          optionLabel="abbreviation"
+          [style]="{'width':'30%'}"
+          (onChange)="onCourseChange($event)"
 
-  placeholder="Select a Course">
-</p-dropdown>
-<br>
+          placeholder="Select a Course">
+        </p-dropdown>
+      </div>
+
+      <div>
+        <label for="semesterSelect" class="block">Benötigte Semester</label>
+        <p-multiSelect
+          id="semesterSelect"
+          [options]="requirements"
+          [(ngModel)]="selectedRequirements"
+          [showToggleAll]="false"
+          placeholder="Semester"
+          scrollHeight="250px"
+          [style]="{'width':'50%'}"
+          display="chip">
+          <ng-template let-group pTemplate="group">
+            <span>{{ group.label }}</span>
+          </ng-template>
+        </p-multiSelect>
+      </div>
+
+      <div>
+        <label for="moduleSelect" class="block">Zusätzlich benötigte Module</label>
+        <p-multiSelect
+          id="moduleSelect"
+          [options]="selectedCourse?.modules"
+          [(ngModel)]="selectedModules"
+          [showToggleAll]="false"
+          [optionLabel]="'abbreviation'"
+          [optionValue]="'id'"
+          [maxSelectedLabels]="selectedCourse?.modules?.length??0"
+          placeholder="Module"
+          scrollHeight="250px"
+          [style]="{'width':'100%'}"
+          display="chip">
+          <ng-template let-module pTemplate="item">
+            <span>{{ module.abbreviation }}</span>
+          </ng-template>
+        </p-multiSelect>
+      </div>
+
+      <div *ngIf="requirement">
+        <label for="additionalText" class="block">Zusätzliche Vorraussetzungen</label>
+        <textarea
+          id="additionalText"
+          rows="5"
+          cols="30"
+          pInputTextarea
+          [(ngModel)]="requirement.additionalText">
+  </textarea>
+
+      </div>
+
+    </div>
+    <div id="rightSide">
+      <label for="usedInModules" class="block">Die aktuelle Vorraussetzung wird in diesen Modulen genutzt:</label>
+      <p-table id="usedInModules"></p-table>
+    </div>
+  </div>
 
 
-<p-multiSelect
-    [options]="selectedCourse?.modules"
-    [(ngModel)]="selectedModules"
-    [showToggleAll]="false"
-    [optionLabel]="'abbreviation'"
-    [optionValue]="'id'"
-    [maxSelectedLabels]="selectedCourse?.modules?.length??0"
-    placeholder="Module"
-    scrollHeight="250px"
-    [style]="{'width':'40%'}"
-    display="chip">
-        <ng-template let-module pTemplate="item">
-          <span>{{ module.abbreviation }}</span>
-        </ng-template>
-</p-multiSelect>
-
-<br>
-<p-multiSelect
-    [options]="requirements"
-    [(ngModel)]="selectedRequirements"
-    [showToggleAll]="false"
-    placeholder="Semester"
-    scrollHeight="250px"
-    [style]="{'width':'50%'}"
-    display="chip">
-        <ng-template let-group pTemplate="group">
-          <span>{{ group.label }}</span>
-        </ng-template>
-</p-multiSelect>
-
-<br>
-<p-multiSelect
-    [options]="hardRequirements"
-    [(ngModel)]="selectedHardRequirements"
-    [showToggleAll]="false"
-    placeholder="Semester"
-    scrollHeight="250px"
-    [style]="{'width':'50%'}"
-    display="chip">
-        <ng-template let-group pTemplate="group">
-          <span>{{ group.label }}</span>
-        </ng-template>
-</p-multiSelect>
-
+</main>

@@ -11,6 +11,7 @@ import {ModuleDto} from "../../shared/module/module.service";
 import {TableModule} from "primeng/table";
 import {ChipModule} from "primeng/chip";
 import {MultiSelectModule} from "primeng/multiselect";
+import {InputTextareaModule} from "primeng/inputtextarea";
 
 @Component({
   selector: 'app-requirement-detail',
@@ -23,7 +24,8 @@ import {MultiSelectModule} from "primeng/multiselect";
     NgIf,
     TableModule,
     ChipModule,
-    MultiSelectModule
+    MultiSelectModule,
+    InputTextareaModule
   ],
   providers: [
     RequirementService,
@@ -40,14 +42,10 @@ export class RequirementDetailComponent implements OnInit {
   filteredModules: ModuleDto[] | undefined;
   selectedModules: number[] = [];
 
-  selectionKeys = {};
   files: TreeNode<any>[] | undefined;
 
   requirements: any[] | undefined;
   selectedRequirements: any;
-
-  hardRequirements: any[] | undefined;
-  selectedHardRequirements: any;
 
   constructor(
     private segmentService: UrlSegmentService,
@@ -75,23 +73,13 @@ export class RequirementDetailComponent implements OnInit {
 
     this.requirements = [
 
-                    { label: '1. Semester besucht', value: '1' },
-                    { label: '2. Semester besucht', value: '2' },
-                    { label: '3. Semester besucht', value: '3' },
-                    { label: '4. Semester besucht', value: '4' },
-                    { label: '5. Semester besucht', value: '5' },
-                    { label: '6. Semester besucht', value: '6' },
-                    { label: '7. Semester besucht', value: '7' }
-                ];
-
-     this.hardRequirements = [
-                    { label: '1. Semester bestanden', value: '1b' },
-                    { label: '2. Semester bestanden', value: '2b' },
-                    { label: '3. Semester bestanden', value: '3b' },
-                    { label: '4. Semester bestanden', value: '4b' },
-                    { label: '5. Semester bestanden', value: '5b' },
-                    { label: '6. Semester bestanden', value: '6b' },
-                    { label: '7. Semester bestanden', value: '7b' }
+                    { label: '1. Semester', value: '1' },
+                    { label: '2. Semester', value: '2' },
+                    { label: '3. Semester', value: '3' },
+                    { label: '4. Semester', value: '4' },
+                    { label: '5. Semester', value: '5' },
+                    { label: '6. Semester', value: '6' },
+                    { label: '7. Semester', value: '7' }
                 ];
 
   }
