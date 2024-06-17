@@ -41,6 +41,8 @@ export class RequirementDetailComponent implements OnInit {
   selectedCourse: CourseDto | undefined;
   filteredModules: ModuleDto[] | undefined;
   selectedModules: number[] = [];
+  modulesInUseSoft: ModuleDto[] = [];
+  modulesInUseHard: ModuleDto[] = [];
 
   files: TreeNode<any>[] | undefined;
 
@@ -65,6 +67,9 @@ export class RequirementDetailComponent implements OnInit {
         this.selectedCourse = this.courses.find(course => course.id === this.requirement?.degreeProgramId);
 
         this.selectedModules = this.requirement!.modules.map(module => module.id);
+
+        this.modulesInUseSoft = this.selectedCourse?.modules.filter(module => module.requirementsSoftId === this.requirement?.id) || [];
+        this.modulesInUseHard = this.selectedCourse?.modules.filter(module => module.requirementsHardId === this.requirement?.id) || [];
       });
     });
 

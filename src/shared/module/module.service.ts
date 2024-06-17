@@ -31,7 +31,9 @@ export class ModuleService {
           responsible: `${module.responsible.firstName} ${module.responsible.lastName}`,
           facultyId: module.degreeProgram.department.facultyId,
           specialization: module.specialization,
-          elective: module.elective
+          elective: module.elective,
+          requirementsHardId: module.requirementsHardId,
+          requirementsSoftId: module.requirementsSoftId
         }))
       )
     );
@@ -72,6 +74,8 @@ export interface ModuleDto {
   facultyId: number;
   specialization: boolean;
   elective: boolean;
+  requirementsHardId: number;
+  requirementsSoftId: number;
 }
 
 export interface ModuleTranslation {

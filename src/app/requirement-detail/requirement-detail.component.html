@@ -68,8 +68,41 @@
 
     </div>
     <div id="rightSide">
-      <label for="usedInModules" class="block">Die aktuelle Vorraussetzung wird in diesen Modulen genutzt:</label>
-      <p-table id="usedInModules"></p-table>
+      <label *ngIf="modulesInUseSoft.length > 0" for="usedInModules" class="block">Die aktuelle Vorraussetzung wird in diesen Modulen als empfohlene Vorraussetzung genutzt:</label>
+      <p-table
+        *ngIf="modulesInUseSoft.length > 0"
+        [value]="modulesInUseSoft"
+        [scrollable]="true"
+        id="usedInModules">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Name</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-module>
+          <tr>
+            <td>{{ module.abbreviation }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+
+      <label *ngIf="modulesInUseHard.length > 0" for="usedInModulesHard" class="block">Die aktuelle Vorraussetzung wird in diesen Modulen als Pflicht-Vorraussetzung genutzt:</label>
+      <p-table
+        *ngIf="modulesInUseHard.length > 0"
+        [value]="modulesInUseHard"
+        [scrollable]="true"
+        id="usedInModulesHard">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Name</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-module>
+          <tr>
+            <td>{{ module.abbreviation }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
     </div>
   </div>
 
