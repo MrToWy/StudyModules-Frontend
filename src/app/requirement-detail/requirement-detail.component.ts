@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {RequirementDto, RequirementService} from "../shared/requirement/requirement.service";
-import {UrlSegmentService} from "../shared/url/url-segment.service";
-import {CourseDto, CourseService} from "../shared/course/course.service";
+import {RequirementDto, RequirementService} from "../../shared/requirement/requirement.service";
+import {UrlSegmentService} from "../../shared/url/url-segment.service";
+import {CourseDto, CourseService} from "../../shared/course/course.service";
 import {DropdownChangeEvent, DropdownModule} from "primeng/dropdown";
 import {FormsModule} from "@angular/forms";
 import {TreeTableModule} from "primeng/treetable";
 import {NgForOf, NgIf} from "@angular/common";
 import {TreeNode} from "primeng/api";
-import {ModuleDto, ModuleService} from "../shared/module/module.service";
+import {ModuleDto} from "../../shared/module/module.service";
 import {TableModule} from "primeng/table";
 import {ChipModule} from "primeng/chip";
 import {MultiSelectModule} from "primeng/multiselect";
@@ -38,7 +38,7 @@ export class RequirementDetailComponent implements OnInit {
   courses: CourseDto[] | undefined;
   selectedCourse: CourseDto | undefined;
   filteredModules: ModuleDto[] | undefined;
-  selectedModules: ModuleDto[] = [];
+  selectedModules: number[] = [];
 
   selectionKeys = {};
   files: TreeNode<any>[] | undefined;
@@ -60,11 +60,17 @@ export class RequirementDetailComponent implements OnInit {
     const requirementId = Number(this.segmentService.getIdFromSegment("requirement"));
     this.requirementService.getOne(requirementId).subscribe(requirement => {
       this.requirement = requirement;
+
+      this.courseService.getAll().subscribe(courses => {
+        this.courses = courses;
+
+        this.selectedCourse = this.courses.find(course => course.id === this.requirement?.degreeProgramId);
+
+        this.selectedModules = this.requirement!.modules.map(module => module.id);
+      });
     });
 
-    this.courseService.getAll().subscribe(courses => {
-      this.courses = courses;
-    });
+
 
 
     this.requirements = [
@@ -91,6 +97,7 @@ export class RequirementDetailComponent implements OnInit {
   }
 
   onCourseChange($event: DropdownChangeEvent) {
+    this.selectedModules = [];
     this.loadCourses();
   }
 

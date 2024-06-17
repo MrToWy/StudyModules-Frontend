@@ -11,7 +11,7 @@ import {ModuleChangelogComponent} from "./module-changelog/module-changelog.comp
 import {JobsComponent} from "./jobs/jobs.component";
 import {SubmodulesComponent} from "./submodules/submodules.component";
 import {RequirementsComponent} from "./requirements/requirements.component";
-import {RequirementDetailComponent} from "../requirement-detail/requirement-detail.component";
+import {RequirementDetailComponent} from "./requirement-detail/requirement-detail.component";
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent},

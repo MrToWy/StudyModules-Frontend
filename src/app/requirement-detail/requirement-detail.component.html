@@ -9,7 +9,7 @@
 
   placeholder="Select a Course">
 </p-dropdown>
-
+<br>
 
 
 <p-multiSelect
@@ -19,7 +19,7 @@
     [optionLabel]="'abbreviation'"
     [optionValue]="'id'"
     [maxSelectedLabels]="selectedCourse?.modules?.length??0"
-    placeholder="Modul"
+    placeholder="Module"
     scrollHeight="250px"
     [style]="{'width':'40%'}"
     display="chip">
@@ -28,7 +28,7 @@
         </ng-template>
 </p-multiSelect>
 
-
+<br>
 <p-multiSelect
     [options]="requirements"
     [(ngModel)]="selectedRequirements"
@@ -42,7 +42,7 @@
         </ng-template>
 </p-multiSelect>
 
-
+<br>
 <p-multiSelect
     [options]="hardRequirements"
     [(ngModel)]="selectedHardRequirements"
