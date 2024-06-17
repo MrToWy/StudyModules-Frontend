@@ -60,6 +60,7 @@ export class RequirementDetailComponent implements OnInit {
     const requirementId = Number(this.segmentService.getIdFromSegment("requirement"));
     this.requirementService.getOne(requirementId).subscribe(requirement => {
       this.requirement = requirement;
+      this.selectedRequirements = this.requirement.requiredSemesters.split(',');
 
       this.courseService.getAll().subscribe(courses => {
         this.courses = courses;

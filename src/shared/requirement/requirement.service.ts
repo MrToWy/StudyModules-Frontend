@@ -30,6 +30,7 @@ export interface RequirementDto {
   id: number;
   degreeProgramId: number;
   additionalText: string;
+  requiredSemesters: string;
   modules: {id:number}[]
   translations: RequirementTranslationDto[];
 }
