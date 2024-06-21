@@ -58,11 +58,16 @@ export class ModuleEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const moduleId = Number(this.urlSegmentService.getIdFromSegment("module"));
+    const moduleIdParameter = this.urlSegmentService.getIdFromSegment("module");
+    const moduleId = Number(moduleIdParameter);
     if (moduleId) {
       this.moduleService.get(moduleId).subscribe((module) => {
         this.currentModule = module;
       });
+    }
+
+    if(moduleIdParameter === "new") {
+      this.currentModule = this.moduleService.getEmptyModuleDetail();
     }
 
     this.languageService.getLanguages().subscribe((languages) => {

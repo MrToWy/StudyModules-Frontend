@@ -60,6 +60,32 @@ export class ModuleService {
       }, 4000);
     });
   }
+
+  getEmptyModuleDetail(): ModuleDetail {
+    return {
+      id: 0,
+      number: 0,
+      abbreviation: "",
+      credits: 0,
+      specialization: false,
+      elective: false,
+      hoursPresence: 0,
+      hoursSelf: 0,
+      semester: "",
+      courseLength: 0,
+      requirementsHardId: 0,
+      requirementsSoftId: 0,
+      responsibleId: 0,
+      degreeProgramId: 0,
+      groupId: 0,
+      translations: [],
+      responsible: {id: 0, firstName: "", lastName: "", translations: [{title: ""}]},
+      requirementsSoft: {id: 0, translations: [{name: ""}]},
+      requirementsHard: {id: 0, translations: [{name: ""}]},
+      subModules: []
+    };
+
+  }
 }
 
 export interface ModuleDto {
