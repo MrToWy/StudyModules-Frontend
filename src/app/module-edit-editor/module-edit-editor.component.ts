@@ -48,6 +48,7 @@ import {ResponsibleDropdownComponent} from "../responsible-dropdown/responsible-
 export class ModuleEditEditorComponent implements OnInit, OnChanges {
   protected submodules: any[] = [];
   protected submodulesForDropdown: any[] = [];
+  protected creditClass: string = "";
 
   constructor(
     private userService: UserService,
@@ -143,5 +144,21 @@ export class ModuleEditEditorComponent implements OnInit, OnChanges {
     });
 
     this.module.subModules = subModulesFromApi;
+  }
+
+  validate(): boolean {
+    let valid = true;
+    this.creditClass = "";
+
+    if(!this.validateCredits()){
+      valid = false;
+      this.creditClass = "ng-invalid ng-dirty";
+    }
+
+    return valid;
+  }
+
+  validateCredits(): boolean {
+    return this.module.credits > 0;
   }
 }

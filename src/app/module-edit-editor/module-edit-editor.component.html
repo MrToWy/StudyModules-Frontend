@@ -1,6 +1,11 @@
 <br>
 <br>
 
+<p-button
+  (onClick)="validate()"
+  label="Validate"
+/>
+
 <div class="compactGrid">
   <span class="p-float-label smallPadding fullwidth">
     <p-inputNumber [style]="{'width':'100%'}" class="fullwidth" id="number" [(ngModel)]="module.number"/>
@@ -18,7 +23,7 @@
   </span>
 
   <span class="p-float-label smallPadding">
-    <p-inputNumber [style]="{width: '100%'}" id="credits" [(ngModel)]="module.credits"/>
+    <p-inputNumber [style]="{width: '100%'}" id="credits" [(ngModel)]="module.credits" [classList]="creditClass"/>
     <label for="credits">Credits</label>
   </span>
 
