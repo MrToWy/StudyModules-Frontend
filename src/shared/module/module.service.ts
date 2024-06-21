@@ -72,7 +72,7 @@ export class ModuleService {
       hoursPresence: 0,
       hoursSelf: 0,
       semester: "",
-      courseLength: 0,
+      courseLength: 1,
       requirementsHardId: 0,
       requirementsSoftId: 0,
       responsibleId: 0,
