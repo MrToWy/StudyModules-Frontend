@@ -18,6 +18,7 @@ import {MultiSelectChangeEvent, MultiSelectModule} from "primeng/multiselect";
 import {LanguageService} from "../../shared/language/language.service";
 import {SubmoduleService} from "../../shared/submodule/submodule.service";
 import {firstValueFrom} from "rxjs";
+import {StyleClassModule} from "primeng/styleclass";
 
 @Component({
   selector: 'app-module-edit-editor',
@@ -35,7 +36,8 @@ import {firstValueFrom} from "rxjs";
     NgIf,
     ResponsibleAvatarComponent,
     InputTextareaModule,
-    MultiSelectModule
+    MultiSelectModule,
+    StyleClassModule
   ],
   providers: [TextAutocompleteService],
   templateUrl: './module-edit-editor.component.html',
