@@ -7,7 +7,7 @@ import {DropdownModule} from "primeng/dropdown";
 import {FormsModule} from "@angular/forms";
 import {MultiSelectModule} from "primeng/multiselect";
 import {AvatarModule} from "primeng/avatar";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {LanguageService} from "../../shared/language/language.service";
 import {TranslocoDirective} from "@jsverse/transloco";
 import {ButtonModule} from "primeng/button";
@@ -17,6 +17,7 @@ import {ToggleButtonModule} from "primeng/togglebutton";
 import {CourseDto, CourseService} from "../../shared/course/course.service";
 import {ABtestService} from "../../shared/abtest/abtest.service";
 import {ResponsibleAvatarComponent} from "../responsible-avatar/responsible-avatar.component";
+import {AuthService} from "../../shared/auth/auth.service";
 
 @Component({
   selector: 'app-module-grid',
@@ -55,9 +56,11 @@ export class ModuleGridComponent implements OnInit{
 
   constructor(private moduleService: ModuleService,
               private router: Router,
+              private route: ActivatedRoute,
               private languageService: LanguageService,
               private courseService: CourseService,
-              protected abTestService: ABtestService
+              protected abTestService: ABtestService,
+              protected authService: AuthService
   ) {
 
   }
@@ -104,8 +107,7 @@ export class ModuleGridComponent implements OnInit{
   }
 
   async openDetailView(module: ModuleDto) {
-    console.log(module);
-    await this.router.navigate(['faculty', module.facultyId, 'department', module.departmentId, 'course', module.courseId, 'module', module.id]);
+    await this.router.navigate(['module', module.id], {relativeTo: this.route});
   }
 
   module: ModuleDto | undefined;
@@ -114,6 +116,9 @@ export class ModuleGridComponent implements OnInit{
   protected readonly console = console;
 
 
+  async addNewModule() {
+    await this.router.navigate(['module', 'new', 'edit'], {relativeTo: this.route});
+  }
 }
 
 interface Column {

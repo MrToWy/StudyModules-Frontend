@@ -19,7 +19,8 @@
     "semester": "Semester",
     "responsible": "Verantwortlich",
     "download" : "Anzeigen",
-    "delete" : "Löschen"
+    "delete" : "Löschen",
+    "newModule": "Neues Modul"
   },
   "changelog": {
     "description": "Beschreibung",

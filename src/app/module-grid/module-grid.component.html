@@ -1,145 +1,145 @@
 <ng-container *transloco="let t; prefix:'overview'">
 
-<p-table
-  [value]="modules"
-  selectionMode="single"
-  rowGroupMode="subheader"
-  groupRowsBy="course"
-  [scrollable]="true"
-  scrollHeight="73vh"
-  [columns]="selectedColumns"
->
-  <ng-template pTemplate="caption">
-    <div class="compactGrid">
-      <h1 *ngIf="course && course.translations.length > 0">{{course!.translations[0].name}}</h1>
-      <p-multiSelect hidden
-                display="chip"
-                [options]="availableColumns"
-                [(ngModel)]="selectedColumns"
-                optionLabel="header"
-                selectedItemsLabel="{0} columns selected"
-                [style]="{'min-width': '200px'}"
-                placeholder="Choose Columns" />
-    </div>
+  <p-table
+    [value]="modules"
+    selectionMode="single"
+    rowGroupMode="subheader"
+    groupRowsBy="course"
+    [scrollable]="true"
+    scrollHeight="73vh"
+    [columns]="selectedColumns"
+  >
+    <ng-template pTemplate="caption">
+      <div class="leftRight">
+        <div class="left">
+          <h1 *ngIf="course && course.translations.length > 0">{{ course!.translations[0].name }}</h1>
+        </div>
+        <div class="right">
+          <p-button *ngIf="authService.isLoggedIn()" (onClick)="addNewModule()">{{ t('newModule') }}</p-button>
+        </div>
+      </div>
 
-        </ng-template>
-    <ng-template pTemplate="header">
-        <tr>
-            <th *ngIf="!courseId">
-              <div>
-                    {{ t('course') }}
-                    <p-columnFilter display="menu"
-                                    field="course"
-                                    matchMode="equals"
-                                    [showMatchModes]="false"
-                                    [showOperator]="false"
-                                    [showAddButton]="false"
-                                    [hideOnClear]="true"
-                    >
-                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-dropdown
-                                [(ngModel)]="selectedvalue"
-                                [options]="statuses"
-                                (onChange)="filter($event.value)"
-                                [placeholder]="t('filter')"
-                                [showClear]="false">
-                                    <ng-template let-option pTemplate="item">
-                                        <p-tag
-                                            [value]="option"
-                                            severity="success" />
-                                    </ng-template>
-                            </p-dropdown>
-                        </ng-template>
-                    </p-columnFilter>
-                </div>
-            </th>
-            <th>
-                <div>
-                    {{ t('name') }}
-                    <p-columnFilter
-                      type="text"
-                      field="name"
-                      display="menu"
-                      [showMatchModes]="false"
-                      [showOperator]="false"
-                      [showAddButton]="false"
-                      [hideOnClear]="true"
-                    />
-                </div>
-            </th>
-            <th *ngIf="isSemesterIncluded()">
-              <div>
-                    {{ t('semester') }}
-                    <p-columnFilter
-                      type="text"
-                      field="semester"
-                      display="menu"
-                      [showMatchModes]="false"
-                      [showOperator]="false"
-                      [showAddButton]="false"
-                      [hideOnClear]="true"
-                    />
-                </div>
-            </th>
-            <th>
-              <div>
-                {{ t('responsible') }}
-                <p-columnFilter field="responsible" matchMode="equals" display="menu"
-                                [showMatchModes]="false"
-                                [showOperator]="false"
-                                [showAddButton]="false"
-                                [hideOnClear]="true"
-                >
-                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-dropdown [filter]="true" [showClear]="false" [(ngModel)]="selectedUser" [options]="users" [placeholder]="t('filter')" (onChange)="filter($event.value)">
-                                <ng-template let-option pTemplate="item">
-                                    <div class="inline-block vertical-align-middle">
-                                        <app-responsible-avatar [responsible]="option" />
-                                    </div>
-                                </ng-template>
-                            </p-dropdown>
-                        </ng-template>
-                    </p-columnFilter>
-              </div>
-            </th>
-        </tr>
     </ng-template>
-  <ng-template *ngIf="groupByCourse && !abTestService.aActive" pTemplate="groupheader" let-module let-expanded="expanded">
-            <tr>
-                <td colspan="5">
-                  <div style="display: flex; align-items: center;">
-                    <p-button
-                        [text]="true"
-                        type="button"
-                        pButton
-                        pRipple
-                        [pRowToggler]="module"
-                        class="p-button-text p-button-rounded "
-                        [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">
-                    </p-button>
+    <ng-template pTemplate="header">
+      <tr>
+        <th *ngIf="!courseId">
+          <div>
+            {{ t('course') }}
+            <p-columnFilter display="menu"
+                            field="course"
+                            matchMode="equals"
+                            [showMatchModes]="false"
+                            [showOperator]="false"
+                            [showAddButton]="false"
+                            [hideOnClear]="true"
+            >
+              <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                <p-dropdown
+                  [(ngModel)]="selectedvalue"
+                  [options]="statuses"
+                  (onChange)="filter($event.value)"
+                  [placeholder]="t('filter')"
+                  [showClear]="false">
+                  <ng-template let-option pTemplate="item">
+                    <p-tag
+                      [value]="option"
+                      severity="success"/>
+                  </ng-template>
+                </p-dropdown>
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </th>
+        <th>
+          <div>
+            {{ t('name') }}
+            <p-columnFilter
+              type="text"
+              field="name"
+              display="menu"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false"
+              [hideOnClear]="true"
+            />
+          </div>
+        </th>
+        <th *ngIf="isSemesterIncluded()">
+          <div>
+            {{ t('semester') }}
+            <p-columnFilter
+              type="text"
+              field="semester"
+              display="menu"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false"
+              [hideOnClear]="true"
+            />
+          </div>
+        </th>
+        <th>
+          <div>
+            {{ t('responsible') }}
+            <p-columnFilter field="responsible" matchMode="equals" display="menu"
+                            [showMatchModes]="false"
+                            [showOperator]="false"
+                            [showAddButton]="false"
+                            [hideOnClear]="true"
+            >
+              <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                <p-dropdown [filter]="true" [showClear]="false" [(ngModel)]="selectedUser" [options]="users"
+                            [placeholder]="t('filter')" (onChange)="filter($event.value)">
+                  <ng-template let-option pTemplate="item">
+                    <div class="inline-block vertical-align-middle">
+                      <app-responsible-avatar [responsible]="option"/>
+                    </div>
+                  </ng-template>
+                </p-dropdown>
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template *ngIf="groupByCourse && !abTestService.aActive" pTemplate="groupheader" let-module
+                 let-expanded="expanded">
+      <tr>
+        <td colspan="5">
+          <div style="display: flex; align-items: center;">
+            <p-button
+              [text]="true"
+              type="button"
+              pButton
+              pRipple
+              [pRowToggler]="module"
+              class="p-button-text p-button-rounded "
+              [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">
+            </p-button>
 
-                    <span>{{module.course_name}} ({{module.course}})</span>
-                  </div>
-                </td>
-            </tr>
-        </ng-template>
+            <span>{{ module.course_name }} ({{ module.course }})</span>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
     <ng-template [pTemplate]="this.groupByCourse && !abTestService.aActive ? 'rowexpansion' : 'body'" let-module>
       <tr class="clickable" (click)="openDetailView(module)">
-            <td *ngIf="!courseId">
-              <p-tag severity="success" value="{{ module.course }}" [pTooltip]="tooltipContent" />
-              <ng-template #tooltipContent>
-                <span> <p>{{module.course_name}}</p> </span>
-              </ng-template>
-            </td>
-            <td>{{ module.name }}</td>
-            <td *ngIf="isSemesterIncluded()">{{ module.semester }}</td>
-            <td>
-              <p-avatar
-                label="{{ module.responsible.split(' ')[0].charAt(0) }}{{ module.responsible.split(' ')[1].charAt(0) }}"
-                [style]="{ 'background-color': '#dee9fc', color: '#1a2551' }" />
-              {{ module.responsible }}</td>
-        </tr>
+        <td *ngIf="!courseId">
+          <p-tag severity="success" value="{{ module.course }}" [pTooltip]="tooltipContent"/>
+          <ng-template #tooltipContent>
+            <span> <p>{{ module.course_name }}</p> </span>
+          </ng-template>
+        </td>
+        <td>{{ module.name }}</td>
+        <td *ngIf="isSemesterIncluded()">{{ module.semester }}</td>
+        <td>
+          <p-avatar
+            label="{{ module.responsible.split(' ')[0].charAt(0) }}{{ module.responsible.split(' ')[1].charAt(0) }}"
+            [style]="{ 'background-color': '#dee9fc', color: '#1a2551' }"/>
+          {{ module.responsible }}
+        </td>
+      </tr>
     </ng-template>
 
-</p-table>
+  </p-table>
 </ng-container>
