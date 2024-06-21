@@ -1,0 +1,14 @@
+<p-dropdown
+    [options]="users"
+    [(ngModel)]="module.responsible"
+    optionLabel="name"
+    placeholder="Select a responsible">
+    <ng-template pTemplate="selectedItem">
+      <div class="" *ngIf="module.responsible">
+        <app-responsible-avatar [responsible]="module.responsible.firstName + ' ' + module.responsible.lastName"/>
+      </div>
+    </ng-template>
+    <ng-template let-user pTemplate="item">
+      <app-responsible-avatar [responsible]="user.firstName + ' ' + user.lastName"/>
+    </ng-template>
+  </p-dropdown>

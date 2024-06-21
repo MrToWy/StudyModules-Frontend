@@ -19,6 +19,7 @@ import {LanguageService} from "../../shared/language/language.service";
 import {SubmoduleService} from "../../shared/submodule/submodule.service";
 import {firstValueFrom} from "rxjs";
 import {StyleClassModule} from "primeng/styleclass";
+import {ResponsibleDropdownComponent} from "../responsible-dropdown/responsible-dropdown.component";
 
 @Component({
   selector: 'app-module-edit-editor',
@@ -37,7 +38,8 @@ import {StyleClassModule} from "primeng/styleclass";
     ResponsibleAvatarComponent,
     InputTextareaModule,
     MultiSelectModule,
-    StyleClassModule
+    StyleClassModule,
+    ResponsibleDropdownComponent
   ],
   providers: [TextAutocompleteService],
   templateUrl: './module-edit-editor.component.html',
