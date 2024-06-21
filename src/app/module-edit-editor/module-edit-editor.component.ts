@@ -76,6 +76,8 @@ export class ModuleEditEditorComponent implements OnInit, OnChanges {
 
   protected users: UserDto[] = [];
   selectedSubmodules: any;
+  electiveOptions: any[] | undefined;
+  specializationOptions: any[] | undefined;
 
   private setInitialResponsible(): void {
     if (this.module && this.module.responsible && this.users.length) {
@@ -119,6 +121,16 @@ export class ModuleEditEditorComponent implements OnInit, OnChanges {
             });
         });
     });
+
+    this.electiveOptions = [
+      { label: 'Pflichtmodul', value: false },
+      { label: 'Wahlpflichtmodul', value: true }
+    ];
+
+    this.specializationOptions = [
+      { label: 'Grundlagenmodul', value: false },
+      { label: 'Vertiefungsmodul', value: true }
+    ];
   }
 
   selectedSubmodulesChange($event: MultiSelectChangeEvent) {

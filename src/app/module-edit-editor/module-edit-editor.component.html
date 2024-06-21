@@ -8,50 +8,69 @@
   </span>
 
   <span class="p-float-label smallPadding fullwidth">
-    <input [style]="{'width':'100%'}" pInputText id="name" [(ngModel)]="moduleText.name"/>
+    <input pInputText id="name" [(ngModel)]="moduleText.name"/>
     <label for="name">Name</label>
   </span>
 
   <span class="p-float-label smallPadding takeTwoColumns">
-    <input [style]="{'width':'100%'}" pInputText id="subtitle" [(ngModel)]="moduleText.subtitle"/>
+    <input pInputText id="subtitle" [(ngModel)]="moduleText.subtitle"/>
     <label for="subtitle">Untertitel</label>
   </span>
 
 
 
   <span class="p-float-label smallPadding">
-    <p-inputNumber id="credits" [(ngModel)]="module.credits"/>
+    <p-inputNumber [style]="{width: '100%'}" id="credits" [(ngModel)]="module.credits"/>
     <label for="credits">Credits</label>
   </span>
 
+  <span class="takeTwoRows flexColumn justifyContentBetween fullwidth">
+    <p-dropdown
+      class="fullwidth"
+      [style]="{width: '100%'}"
+      [options]="electiveOptions"
+      [(ngModel)]="module.elective"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Select Elective">
+    </p-dropdown>
+
+    <p-dropdown
+      class="fullwidth"
+      [style]="{width: '100%'}"
+      [options]="specializationOptions"
+      [(ngModel)]="module.specialization"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Select Specialization">
+    </p-dropdown>
+  </span>
+
   <span class="p-float-label smallPadding">
-    <p-inputNumber id="semester" [(ngModel)]="module.courseLength"/>
+    <p-inputNumber [style]="{width: '100%'}" id="semester" [(ngModel)]="module.courseLength"/>
     <label for="credits">Moduldauer</label>
   </span>
 
    <app-responsible-dropdown [module]="module" [users]="users" />
 
-  <span>
-    <label for="elective">Wahlpflichtmodul</label>
-    <p-checkbox id="elective" [binary]="true" [(ngModel)]="module.elective"/>
-    <br>
-    <label for="specialization">Vertiefungsmodul</label>
-    <p-checkbox id="specialization" [binary]="true" [(ngModel)]="module.specialization"/>
-  </span>
-
-  <p-multiSelect
-    [options]="submodulesForDropdown"
-    [group]="true"
-    [(ngModel)]="selectedSubmodules"
-    (onChange)="selectedSubmodulesChange($event)"
-    placeholder="Select Cities"
-    scrollHeight="250px"
-    display="chip">
-  </p-multiSelect>
-
-  <textarea
+    <textarea
+      class="takeTwoRows"
     rows="5"
     cols="30"
     pInputTextarea
     [(ngModel)]="moduleText.learningOutcomes"></textarea>
+
+
+  <p-multiSelect
+    [style]="{width: '100%'}"
+    [options]="submodulesForDropdown"
+    [group]="true"
+    [(ngModel)]="selectedSubmodules"
+    (onChange)="selectedSubmodulesChange($event)"
+    placeholder="Select Submodules"
+    scrollHeight="250px"
+    display="chip">
+  </p-multiSelect>
+
+
 </div>

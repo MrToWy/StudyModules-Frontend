@@ -6,6 +6,7 @@ import {SharedModule} from "primeng/api";
 import {FormsModule} from "@angular/forms";
 import {ModuleDetail} from "../../shared/module/module.service";
 import {UserDto} from "../../shared/user/user.service";
+import {InputNumberModule} from "primeng/inputnumber";
 
 @Component({
   selector: 'app-responsible-dropdown',
@@ -15,7 +16,8 @@ import {UserDto} from "../../shared/user/user.service";
     NgIf,
     ResponsibleAvatarComponent,
     SharedModule,
-    FormsModule
+    FormsModule,
+    InputNumberModule
   ],
   templateUrl: './responsible-dropdown.component.html',
   styleUrl: './responsible-dropdown.component.sass'
