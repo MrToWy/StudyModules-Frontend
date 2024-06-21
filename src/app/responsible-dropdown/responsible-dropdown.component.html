@@ -1,4 +1,7 @@
+  <span class="p-float-label smallPadding fullwidth">
+
 <p-dropdown
+    id="responsible"
   [style]="{width: '100%'}"
     [options]="users"
     [(ngModel)]="module.responsible"
@@ -13,3 +16,6 @@
       <app-responsible-avatar [responsible]="user.firstName + ' ' + user.lastName"/>
     </ng-template>
   </p-dropdown>
+    <label for="responsible">Responsible</label>
+
+    </span>
