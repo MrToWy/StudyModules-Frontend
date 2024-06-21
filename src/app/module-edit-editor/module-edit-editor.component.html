@@ -7,64 +7,66 @@
 />
 
 <div class="compactGrid">
-  <span class="p-float-label smallPadding fullwidth">
-    <p-inputNumber [style]="{'width':'100%'}" class="fullwidth" id="number" [(ngModel)]="module.number"/>
+  <span class="smallPadding fullwidth">
     <label for="number">Nummer</label>
+    <p-inputNumber [style]="{'width':'100%'}" class="fullwidth" id="number" [(ngModel)]="module.number"/>
   </span>
 
-  <span class="p-float-label smallPadding fullwidth">
-    <input pInputText id="name" [(ngModel)]="moduleText.name"/>
+  <span class="smallPadding fullwidth">
     <label for="name">Name</label>
+    <input pInputText id="name" [(ngModel)]="moduleText.name"/>
   </span>
 
-  <span class="p-float-label smallPadding takeTwoColumns">
-    <input pInputText id="subtitle" [(ngModel)]="moduleText.subtitle"/>
+  <span class="smallPadding takeTwoColumns">
     <label for="subtitle">Untertitel</label>
+    <input pInputText id="subtitle" [(ngModel)]="moduleText.subtitle"/>
   </span>
 
-  <span class="p-float-label smallPadding">
-    <p-inputNumber [style]="{width: '100%'}" id="credits" [(ngModel)]="module.credits" [classList]="creditClass"/>
+  <span class="smallPadding">
     <label for="credits">Credits</label>
+    <p-inputNumber [style]="{'width':'100%'}" id="credits" [(ngModel)]="module.credits" [classList]="creditClass"/>
   </span>
 
-
-
-  <span class="p-float-label smallPadding fullwidth">
+  <span class="smallPadding fullwidth">
+    <label for="specialization">Specialization</label>
     <p-dropdown
       id="specialization"
       class="fullwidth"
-      [style]="{width: '100%'}"
+      [style]="{'width':'100%'}"
       [options]="specializationOptions"
       [(ngModel)]="module.specialization"
       optionLabel="label"
       optionValue="value"
       placeholder="Select Specialization">
     </p-dropdown>
-    <label for="specialization">Specialization</label>
   </span>
 
-  <span class="p-float-label smallPadding">
-    <p-inputNumber [style]="{width: '100%'}" id="semester" [(ngModel)]="module.courseLength"/>
+  <span class="smallPadding">
     <label for="semester">Moduldauer</label>
+    <p-inputNumber [style]="{'width':'100%'}" id="semester" [(ngModel)]="module.courseLength"/>
   </span>
 
-  <span class="p-float-label smallPadding fullwidth">
+  <span class="smallPadding fullwidth">
+    <label for="elective">Elective</label>
     <p-dropdown
       id="elective"
       class="fullwidth"
-      [style]="{width: '100%'}"
+      [style]="{'width':'100%'}"
       [options]="electiveOptions"
       [(ngModel)]="module.elective"
       optionLabel="label"
       optionValue="value"
       placeholder="Select Elective">
     </p-dropdown>
-    <label for="elective">Elective</label>
   </span>
 
+  <span class="smallPadding">
+    <label for="responsible">Responsible</label>
   <app-responsible-dropdown id="responsible" [module]="module" [users]="users"></app-responsible-dropdown>
+  </span>
 
-  <span class="p-float-label smallPadding takeTwoRows">
+  <span class="smallPadding takeTwoRows">
+    <label for="learningOutcomes">Learning Outcomes</label>
     <textarea
       class="fullwidth fullheight"
       id="learningOutcomes"
@@ -72,13 +74,13 @@
       cols="30"
       pInputTextarea
       [(ngModel)]="moduleText.learningOutcomes"></textarea>
-    <label for="learningOutcomes">Learning Outcomes</label>
   </span>
 
-  <span class="p-float-label smallPadding fullwidth">
+  <span class="smallPadding fullwidth">
+    <label for="submodules">Submodules</label>
     <p-multiSelect
       id="submodules"
-      [style]="{width: '100%'}"
+      [style]="{'width':'100%'}"
       [options]="submodulesForDropdown"
       [group]="true"
       [(ngModel)]="selectedSubmodules"
@@ -87,6 +89,5 @@
       scrollHeight="250px"
       display="chip">
     </p-multiSelect>
-    <label for="submodules">Submodules</label>
   </span>
 </div>
