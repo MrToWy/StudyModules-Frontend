@@ -148,17 +148,28 @@ export class ModuleEditEditorComponent implements OnInit, OnChanges {
 
   validate(): boolean {
     let valid = true;
-    this.creditClass = "";
 
     if(!this.validateCredits()){
       valid = false;
-      this.creditClass = "ng-invalid ng-dirty";
     }
 
     return valid;
   }
 
-  validateCredits(): boolean {
-    return this.module.credits > 0;
+  validateCredits(onlyIfInvalid: boolean = false): boolean {
+    this.creditClass = "";
+
+    if (onlyIfInvalid && this.creditClass === "") {
+      return true;
+    }
+
+    const hasCredits = this.module.credits !== undefined && this.module.credits > 0;
+
+    if (!hasCredits) {
+      this.creditClass = "ng-invalid ng-dirty";
+      return false;
+    }
+
+    return true;
   }
 }

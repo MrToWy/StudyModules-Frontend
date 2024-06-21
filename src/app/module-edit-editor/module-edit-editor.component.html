@@ -24,7 +24,7 @@
 
   <span class="smallPadding">
     <label for="credits">Credits</label>
-    <p-inputNumber [style]="{'width':'100%'}" id="credits" [(ngModel)]="module.credits" [classList]="creditClass"/>
+    <p-inputNumber (onInput)="validateCredits(true)" [style]="{'width':'100%'}" id="credits" [(ngModel)]="module.credits" [classList]="creditClass"/>
   </span>
 
   <span class="smallPadding fullwidth">
