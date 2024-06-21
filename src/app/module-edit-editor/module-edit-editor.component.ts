@@ -20,6 +20,7 @@ import {SubmoduleService} from "../../shared/submodule/submodule.service";
 import {firstValueFrom} from "rxjs";
 import {StyleClassModule} from "primeng/styleclass";
 import {ResponsibleDropdownComponent} from "../responsible-dropdown/responsible-dropdown.component";
+import {TooltipModule} from "primeng/tooltip";
 
 @Component({
   selector: 'app-module-edit-editor',
@@ -39,7 +40,8 @@ import {ResponsibleDropdownComponent} from "../responsible-dropdown/responsible-
     InputTextareaModule,
     MultiSelectModule,
     StyleClassModule,
-    ResponsibleDropdownComponent
+    ResponsibleDropdownComponent,
+    TooltipModule
   ],
   providers: [TextAutocompleteService],
   templateUrl: './module-edit-editor.component.html',
@@ -79,6 +81,7 @@ export class ModuleEditEditorComponent implements OnInit, OnChanges {
   selectedSubmodules: any;
   electiveOptions: any[] | undefined;
   specializationOptions: any[] | undefined;
+  creditTooltip: string | undefined;
 
   private setInitialResponsible(): void {
     if (this.module && this.module.responsible && this.users.length) {
@@ -158,6 +161,7 @@ export class ModuleEditEditorComponent implements OnInit, OnChanges {
 
   validateCredits(onlyIfInvalid: boolean = false): boolean {
     this.creditClass = "";
+    this.creditTooltip = "";
 
     if (onlyIfInvalid && this.creditClass === "") {
       return true;
@@ -167,6 +171,7 @@ export class ModuleEditEditorComponent implements OnInit, OnChanges {
 
     if (!hasCredits) {
       this.creditClass = "ng-invalid ng-dirty";
+      this.creditTooltip = "Bitte geben Sie eine gültige Anzahl an Credits ein (>0).";
       return false;
     }
 
