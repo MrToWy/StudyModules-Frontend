@@ -4,7 +4,7 @@ import {InputNumberModule} from "primeng/inputnumber";
 import {FormsModule} from "@angular/forms";
 import {PasswordModule} from "primeng/password";
 import {InputTextModule} from "primeng/inputtext";
-import {AutoCompleteCompleteEvent, AutoCompleteModule} from "primeng/autocomplete";
+import {AutoCompleteModule} from "primeng/autocomplete";
 import {TextAutocompleteService} from "../../shared/text-autocomplete/text-autocomplete.service";
 import {ButtonModule} from "primeng/button";
 import {SelectButtonModule} from "primeng/selectbutton";
