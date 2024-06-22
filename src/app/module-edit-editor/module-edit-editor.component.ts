@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ModuleDetail, ModuleTranslation, SubModule} from "../../shared/module/module.service";
 import {InputNumberModule} from "primeng/inputnumber";
 import {FormsModule} from "@angular/forms";

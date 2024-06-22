@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ModulePreviewComponent} from "../module-preview/module-preview.component";
-import {ModuleDetail, ModuleService} from "../../shared/module/module.service";
+import {ModuleDetail, ModuleDto, ModuleService} from "../../shared/module/module.service";
 import {UrlSegmentService} from "../../shared/url/url-segment.service";
 import {SubmodulePreviewComponent} from "../submodule-preview/submodule-preview.component";
 import {TabViewModule} from "primeng/tabview";
@@ -93,11 +93,13 @@ export class ModuleEditComponent implements OnInit {
     }
 
 
+    console.log(this.currentModule);
+
     this.saving = true;
-    this.moduleService.save(this.currentModule).subscribe(() => {
+    this.moduleService.save(this.currentModule).subscribe((module: any) => {
       this.saving = false;
       this.saveDialogVisible = false;
-      this.router.navigate(['..'], { relativeTo: this.route });
+      this.router.navigate(['..', '..', module.id], { relativeTo: this.route });
     });
   }
 

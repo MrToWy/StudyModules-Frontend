@@ -52,13 +52,7 @@ export class ModuleService {
   }
 
   save(currentModule: ModuleDetail) {
-    // wait 4 seconds and return the module
-    return new Observable(subscriber => {
-      setTimeout(() => {
-        subscriber.next(currentModule);
-        subscriber.complete();
-      }, 4000);
-    });
+    return this.http.put(this.moduleURL, currentModule);
   }
 
   getEmptyModuleDetail(): ModuleDetail {
