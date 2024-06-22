@@ -42,11 +42,6 @@ export class ModuleTranslatorComponent implements OnInit{
     }
 
   @Input() currentModule: any;
-  @Output() currentModuleChange = new EventEmitter<any>();
-  onModuleChange(module: ModuleDetail) {
-    this.currentModuleChange.emit(module);
-  }
-
 
   @Input()
   languageAbbreviation: string | undefined;

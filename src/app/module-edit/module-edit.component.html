@@ -3,7 +3,7 @@
     <p-stepperPanel *ngFor="let language of availableLanguages" [header]="getHeader(language)">
       <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
         <app-module-translator *ngIf="currentModule"
-                               [(currentModule)]="currentModule"
+                               [currentModule]="currentModule"
                                [languageId]="language.id"
                                [languageAbbreviation]="language.abbreviation"
                                [nextCallback]="nextCallback"
