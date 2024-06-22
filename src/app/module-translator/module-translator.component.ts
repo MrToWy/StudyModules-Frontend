@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ModuleEditEditorComponent} from "../module-edit-editor/module-edit-editor.component";
 import {ModulePreviewComponent} from "../module-preview/module-preview.component";
 import {ModuleDetail, ModuleService, ModuleTranslation} from "../../shared/module/module.service";
@@ -20,6 +20,9 @@ import {firstValueFrom} from "rxjs";
 export class ModuleTranslatorComponent implements OnInit{
   public moduleText: ModuleTranslation;
 
+  @Input()
+  nextCallback: EventEmitter<void> = new EventEmitter<void>();
+
   constructor(private moduleService: ModuleService) {
     // initialize moduleText to prevent error
     this.moduleText = {
@@ -38,8 +41,12 @@ export class ModuleTranslatorComponent implements OnInit{
     }
     }
 
-  @Input()
-  currentModule!: ModuleDetail;
+  @Input() currentModule: any;
+  @Output() currentModuleChange = new EventEmitter<any>();
+  onModuleChange(module: ModuleDetail) {
+    this.currentModuleChange.emit(module);
+  }
+
 
   @Input()
   languageAbbreviation: string | undefined;
@@ -50,13 +57,14 @@ export class ModuleTranslatorComponent implements OnInit{
   async getModuleText(): Promise<ModuleTranslation> {
     // try get translation from this.module
     if (this.currentModule.translations) {
-      const moduleTranslation= this.currentModule.translations.find((translation) => translation.languageId === this.languageId);
+      const moduleTranslation= this.currentModule.translations.find((translation: { languageId: number | undefined; }) => translation.languageId === this.languageId);
       if (moduleTranslation) {
         return moduleTranslation;
       }
     }
 
     const moduleDetail = await firstValueFrom(this.moduleService.get(this.currentModule.id, this.languageAbbreviation));
+
 
     // attach new translation to this.module
     this.currentModule.translations.push(moduleDetail.translations[0]);

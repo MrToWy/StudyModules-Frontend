@@ -1,14 +1,37 @@
 <div>
-  <p-button label="Save" (click)="saveDialogVisible = true"/>
-  <p-tabView [scrollable]="true">
-    <p-tabPanel *ngFor="let language of availableLanguages" [header]="language.abbreviation">
-      <app-module-translator *ngIf="currentModule"
-                             [currentModule]="currentModule"
-                             [languageId]="language.id"
-                             [languageAbbreviation]="language.abbreviation"
-      />
-    </p-tabPanel>
-  </p-tabView>
+  <p-stepper class="largePadding" *ngIf="availableLanguages">
+    <p-stepperPanel *ngFor="let language of availableLanguages" [header]="getHeader(language)">
+      <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
+        <app-module-translator *ngIf="currentModule"
+                               [(currentModule)]="currentModule"
+                               [languageId]="language.id"
+                               [languageAbbreviation]="language.abbreviation"
+                               [nextCallback]="nextCallback"
+        />
+      </ng-template>
+    </p-stepperPanel>
+    <p-stepperPanel [header]="'Änderungen speichern'">
+      <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
+      <textarea
+        id="changeSummary"
+        rows="5"
+        cols="30"
+        pInputTextarea
+        (ngModelChange)="summeryInputFieldClass = ''"
+        [class]="summeryInputFieldClass"
+        [(ngModel)]="summaryText">
+            </textarea>
+        <p-button
+          label="Save"
+          [loading]="saving"
+          [outlined]="true"
+          severity="primary"
+          (click)="saveModule()"
+        />
+      </ng-template>
+
+    </p-stepperPanel>
+  </p-stepper>
 </div>
 
 
@@ -50,4 +73,4 @@
   </ng-template>
 </p-dialog>
 
-<p-toast />
+<p-toast/>

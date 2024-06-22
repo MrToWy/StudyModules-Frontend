@@ -78,7 +78,29 @@ export class ModuleService {
       responsibleId: 0,
       degreeProgramId: 0,
       groupId: 0,
-      translations: [],
+      translations: [
+        {
+          id: 0,
+          name: "",
+          subtitle: "",
+          exam: "",
+          learningOutcomes: "",
+          languageId: 1,
+          moduleId: 0,
+          description: ""
+        },
+        {
+          id: 0,
+          name: "",
+          subtitle: "",
+          exam: "",
+          learningOutcomes: "",
+          languageId: 2,
+          moduleId: 0,
+          description: ""
+        }
+
+      ],
       responsible: {id: 0, firstName: "", lastName: "", translations: [{title: ""}]},
       requirementsSoft: {id: 0, translations: [{name: ""}]},
       requirementsHard: {id: 0, translations: [{name: ""}]},

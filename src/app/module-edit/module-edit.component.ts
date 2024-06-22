@@ -17,6 +17,7 @@ import {InputTextareaModule} from "primeng/inputtextarea";
 import {ToastModule} from "primeng/toast";
 import {MessageService} from "primeng/api";
 import {ActivatedRoute, Router} from "@angular/router";
+import {StepperModule} from "primeng/stepper";
 
 @Component({
   selector: 'app-module-edit',
@@ -36,7 +37,8 @@ import {ActivatedRoute, Router} from "@angular/router";
     ReactiveFormsModule,
     FormsModule,
     InputTextareaModule,
-    ToastModule
+    ToastModule,
+    StepperModule
   ],
   providers: [
     ModuleService,
@@ -97,5 +99,11 @@ export class ModuleEditComponent implements OnInit {
       this.saveDialogVisible = false;
       this.router.navigate(['..'], { relativeTo: this.route });
     });
+  }
+
+  getHeader(language: LanguageDto) {
+    if(language.abbreviation === "DE") return "Modulbeschreibung ausfüllen";
+    if(language.abbreviation === "EN") return "Englische Texte ergänzen";
+    return "Fill in module description in " + language.abbreviation;
   }
 }

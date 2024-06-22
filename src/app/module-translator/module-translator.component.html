@@ -1,6 +1,12 @@
 <div class="compactGrid">
 
-  <app-module-edit-editor [module]="currentModule" [moduleText]="moduleText" [languageId]="languageId??0"/>
+  <app-module-edit-editor
+    [(module)]="currentModule"
+    [moduleText]="moduleText"
+    [languageId]="languageId??0"
+    [nextCallback]="nextCallback"
+    (moduleChange)="onModuleChange($event)"
+  />
 
   <app-module-preview [module]="currentModule" [moduleText]="moduleText"/>
 

@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ModuleDetail, ModuleTranslation, SubModule} from "../../shared/module/module.service";
 import {InputNumberModule} from "primeng/inputnumber";
 import {FormsModule} from "@angular/forms";
@@ -52,6 +52,8 @@ export class ModuleEditEditorComponent implements OnInit, OnChanges {
   protected submodulesForDropdown: any[] = [];
   protected creditClass: string = "";
 
+  @Input() nextCallback: EventEmitter<void> = new EventEmitter<void>();
+
   constructor(
     private userService: UserService,
     private languageService: LanguageService,
@@ -73,7 +75,12 @@ export class ModuleEditEditorComponent implements OnInit, OnChanges {
     });
   }
 
+  onModuleChange() {
+    this.moduleChange.emit(this.module);
+  }
+
   @Input() module!: ModuleDetail;
+  @Output() moduleChange = new EventEmitter<any>();
   @Input() languageId!: number;
   @Input() moduleText!: ModuleTranslation;
 
@@ -154,6 +161,11 @@ export class ModuleEditEditorComponent implements OnInit, OnChanges {
 
     if(!this.validateCredits()){
       valid = false;
+    }
+
+    if(valid) {
+      this.onModuleChange();
+      this.nextCallback.emit();
     }
 
     return valid;
