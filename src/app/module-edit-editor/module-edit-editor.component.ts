@@ -75,7 +75,12 @@ export class ModuleEditEditorComponent implements OnInit, OnChanges {
     });
   }
 
+  onModuleChange() {
+    this.moduleChange.emit(this.module);
+  }
+
   @Input() module!: ModuleDetail;
+  @Output() moduleChange = new EventEmitter<any>();
   @Input() languageId!: number;
   @Input() moduleText!: ModuleTranslation;
 
@@ -160,6 +165,7 @@ export class ModuleEditEditorComponent implements OnInit, OnChanges {
     }
 
     if(valid) {
+      this.onModuleChange();
       this.nextCallback.emit();
     }
 
