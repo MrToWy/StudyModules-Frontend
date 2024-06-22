@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ModuleDetail, ModuleTranslation, SubModule} from "../../shared/module/module.service";
 import {InputNumberModule} from "primeng/inputnumber";
 import {FormsModule} from "@angular/forms";
@@ -96,6 +96,7 @@ export class ModuleEditEditorComponent implements OnInit, OnChanges {
         this.users = users;
 
         this.setInitialResponsible();
+        this.selectedSubmodules = this.module.subModules.map(submodule => submodule.id);
 
         this.submoduleService.getAll().subscribe(submodules => {
             this.submodules = submodules;
