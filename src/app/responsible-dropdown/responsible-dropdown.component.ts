@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {DropdownModule} from "primeng/dropdown";
+import {DropdownChangeEvent, DropdownModule} from "primeng/dropdown";
 import {NgIf} from "@angular/common";
 import {ResponsibleAvatarComponent} from "../responsible-avatar/responsible-avatar.component";
 import {SharedModule} from "primeng/api";
@@ -32,4 +32,8 @@ export class ResponsibleDropdownComponent {
 
   @Input()
   users!: UserDto[];
+
+  responsibleChange($event: DropdownChangeEvent) {
+    this.module.responsibleId = $event.value.id;
+  }
 }

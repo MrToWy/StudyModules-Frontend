@@ -1,5 +1,6 @@
 <p-dropdown
     id="responsible"
+    (onChange)="responsibleChange($event)"
   [style]="{width: '100%'}"
     [options]="users"
     [(ngModel)]="module.responsible"
