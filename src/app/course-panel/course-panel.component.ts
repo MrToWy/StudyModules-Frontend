@@ -16,6 +16,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../shared/auth/auth.service";
 import {LanguageDto, LanguageService} from "../../shared/language/language.service";
 import {ABtestService} from "../../shared/abtest/abtest.service";
+import {TagModule} from "primeng/tag";
 
 @Component({
   selector: 'app-course-panel',
@@ -32,7 +33,8 @@ import {ABtestService} from "../../shared/abtest/abtest.service";
     NgForOf,
     NgIf,
     PaginatorModule,
-    StepperModule
+    StepperModule,
+    TagModule
   ],
   templateUrl: './course-panel.component.html',
   styleUrl: './course-panel.component.sass'
@@ -82,6 +84,13 @@ export class CoursePanelComponent implements OnInit{
         icon: 'pi pi-fw pi-pencil',
         command: () => {
           this.refreshPdf(this.course);
+        }
+      },
+      {
+        label: this.course.hidden ? 'Unhide' : 'Hide',
+        icon: this.course.hidden ? 'pi pi-fw pi-eye' : 'pi pi-fw pi-eye-slash',
+        command: () => {
+          this.toggleHide(this.course)
         }
       },
       {
@@ -192,5 +201,12 @@ export class CoursePanelComponent implements OnInit{
 
   onJobsDone() {
     this.jobsAreDone = true;
+  }
+
+  private toggleHide(course: CourseDto) {
+    this.courseService.toggleHide(course).subscribe(() => {
+      this.coursesChanged.emit();
+      course.hidden = !course.hidden;
+    });
   }
 }

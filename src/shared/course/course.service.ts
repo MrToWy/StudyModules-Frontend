@@ -29,11 +29,16 @@ export class CourseService {
   downloadPdfUrl(id: number, language: number) {
     return this.courseURL + "/" + id + "/pdf/" + language;
   }
+
+  toggleHide(course: CourseDto) {
+    return this.http.patch(this.courseURL + "/" + course.id, {hidden: !course.hidden});
+  }
 }
 
 export interface CourseDto {
   name: string;
   abbreviation: string;
+  hidden: boolean;
   id: number;
   modules: ModuleDto[];
   translations: CourseTranslationDto[];

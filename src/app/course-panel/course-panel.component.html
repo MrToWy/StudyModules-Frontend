@@ -2,8 +2,9 @@
     <ng-template pTemplate="header">
         <div class="flex align-items-center gap-2">
             <p>
-                {{ course.translations[0].name }}
+                s{{ course.translations[0].name }}
             </p>
+          <p-tag [value]="'Hidden'" severity="info" />
         </div>
     </ng-template>
     <ng-template pTemplate="footer">
@@ -34,10 +35,11 @@
 
 <p-panel *ngIf="!deleted && abService.aActive">
     <ng-template pTemplate="header">
-        <div class="flex align-items-center gap-2">
-            <span class="font-bold">
+        <div class="flex">
+            <p>
                 {{ course.translations[0].name }}
-            </span>
+            </p>
+          <p-tag class="smallPadding" *ngIf="course.hidden" [value]="'Hidden'" severity="info" />
         </div>
     </ng-template>
     <ng-template pTemplate="icons">
