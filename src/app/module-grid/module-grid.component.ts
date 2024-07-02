@@ -17,8 +17,6 @@ import {ToggleButtonModule} from "primeng/togglebutton";
 import {CourseDto, CourseService} from "../../shared/course/course.service";
 import {ABtestService} from "../../shared/abtest/abtest.service";
 import {ResponsibleAvatarComponent} from "../responsible-avatar/responsible-avatar.component";
-import {AuthService} from "../../shared/auth/auth.service";
-
 @Component({
   selector: 'app-module-grid',
   standalone: true,
@@ -59,8 +57,7 @@ export class ModuleGridComponent implements OnInit{
               private route: ActivatedRoute,
               private languageService: LanguageService,
               private courseService: CourseService,
-              protected abTestService: ABtestService,
-              protected authService: AuthService
+              protected abTestService: ABtestService
   ) {
 
   }
