@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {PdfStructureItem} from "../../app/pdf-structure/pdf-structure.component";
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,10 @@ export class JobService {
 
   delete(guid: string) {
     return this.http.delete(this.jobURL + "/" + guid);
+  }
+
+  getStructure(): Observable<PdfStructureItem[]> {
+    return this.http.get<PdfStructureItem[]>(this.jobURL + "/structure?moduleBased=true");
   }
 }
 

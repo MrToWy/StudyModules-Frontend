@@ -12,6 +12,7 @@ import {JobsComponent} from "./jobs/jobs.component";
 import {SubmodulesComponent} from "./submodules/submodules.component";
 import {RequirementsComponent} from "./requirements/requirements.component";
 import {RequirementDetailComponent} from "./requirement-detail/requirement-detail.component";
+import {PdfStructureComponent} from "./pdf-structure/pdf-structure.component";
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -29,5 +30,6 @@ export const routes: Routes = [
   { path: 'submodules', component: SubmodulesComponent},
   { path: 'requirements', component: RequirementsComponent},
   { path: 'requirement/:id', component: RequirementDetailComponent},
+  { path: 'pdfStructure', component: PdfStructureComponent},
   { path: '', redirectTo: '/faculties', pathMatch: 'full' }
 ];
