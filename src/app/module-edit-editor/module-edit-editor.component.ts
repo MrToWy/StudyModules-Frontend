@@ -21,6 +21,7 @@ import {firstValueFrom} from "rxjs";
 import {StyleClassModule} from "primeng/styleclass";
 import {ResponsibleDropdownComponent} from "../responsible-dropdown/responsible-dropdown.component";
 import {TooltipModule} from "primeng/tooltip";
+import {translate, TranslocoDirective} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-module-edit-editor',
@@ -41,7 +42,8 @@ import {TooltipModule} from "primeng/tooltip";
     MultiSelectModule,
     StyleClassModule,
     ResponsibleDropdownComponent,
-    TooltipModule
+    TooltipModule,
+    TranslocoDirective
   ],
   providers: [TextAutocompleteService],
   templateUrl: './module-edit-editor.component.html',
@@ -134,14 +136,15 @@ export class ModuleEditEditorComponent implements OnInit, OnChanges {
         });
     });
 
+
     this.electiveOptions = [
-      { label: 'Pflichtmodul', value: false },
-      { label: 'Wahlpflichtmodul', value: true }
+      { label: translate("noElectiveModule"), value: false },
+      { label: translate("electiveModule"), value: true }
     ];
 
     this.specializationOptions = [
-      { label: 'Grundlagenmodul', value: false },
-      { label: 'Vertiefungsmodul', value: true }
+      { label: translate("noSpecializationModule"), value: false },
+      { label: translate("specializationModule"), value: true }
     ];
   }
 

@@ -18,6 +18,7 @@ import {ToastModule} from "primeng/toast";
 import {MessageService} from "primeng/api";
 import {ActivatedRoute, Router} from "@angular/router";
 import {StepperModule} from "primeng/stepper";
+import {translate, TranslocoDirective} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-module-edit',
@@ -38,7 +39,8 @@ import {StepperModule} from "primeng/stepper";
     FormsModule,
     InputTextareaModule,
     ToastModule,
-    StepperModule
+    StepperModule,
+    TranslocoDirective
   ],
   providers: [
     ModuleService,
@@ -104,8 +106,8 @@ export class ModuleEditComponent implements OnInit {
   }
 
   getHeader(language: LanguageDto) {
-    if(language.abbreviation === "DE") return "Modulbeschreibung ausfüllen";
-    if(language.abbreviation === "EN") return "Englische Texte ergänzen";
-    return "Fill in module description in " + language.abbreviation;
+    if(language.abbreviation === "DE") return translate("fillModuleText");
+    if(language.abbreviation === "EN") return translate("addEnglishTexts");
+    return translate("addOtherLanguageTexts") + language.abbreviation;
   }
 }

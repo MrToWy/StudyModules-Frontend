@@ -4,13 +4,47 @@
   "logout": "Logout",
   "password": "Password",
   "cancel": "Cancel",
+  "name": "Name",
+  "subtitle": "Subtitle",
+  "credits": "Credits",
+  "niveau": "Niveau",
+  "moduleLength": "Module length",
+  "elective": "Elective / Compulsory",
+  "responsible": "Responsible",
+  "learningObjectives": "Learning outcomes",
+  "module": "Module",
+  "subModules": "Submodules",
+  "proceed": "Proceed",
+  "saveChanges": "Save changes",
+  "fillModuleText": "Enter module text",
+  "addEnglishTexts": "Add English texts",
+  "addOtherLanguageTexts": "Fill in module description in ",
+  "subTitle": "Subtitle",
+  "required": "Compulsory",
+  "semester": "Semester",
+  "exam": "Exam",
+  "softRequirements": "Soft requirements",
+  "hardRequirements": "Hard requirements",
+  "specializationModule": "Specialization module",
+  "noSpecializationModule": "No specialization module",
+  "electiveModule": "Elective module",
+  "noElectiveModule": "No elective module",
+  "showModules": "Show all modules",
+  "showPdf": "Show PDF with all modules",
+  "pdf": "PDF",
+  "hidden": "Hidden",
+  "deleteDegreeProgramQuery": "Do you really want to delete this course?",
+  "shortName": "Short name",
+
+
   "modulesearch": {
     "placeholder": "Search modules"
   },
   "faculties": {
     "faculty": "Faculty",
     "all": "All modules",
-    "overview": "Show all modules"
+    "overview": "Show all modules",
+    "facultyNotAvailable": "This faculty is not yet available in StudyModules."
   },
   "overview":{
     "course": "Course",

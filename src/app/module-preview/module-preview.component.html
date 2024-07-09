@@ -1,39 +1,42 @@
+<ng-container *transloco="let t;">
+
 <div class="compactGrid">
-  <h1 style="grid-column: span 2">Modul {{ module?.abbreviation }} {{ moduleText?.name }}</h1>
-  <b>Untertitel</b>
+  <h1 style="grid-column: span 2">{{t('module')}} {{ module?.abbreviation }} {{ moduleText?.name }}</h1>
+  <b>{{t('subTitle')}}</b>
   <span>{{ moduleText?.subtitle }}</span>
 
-  <b>Modulniveau</b>
-  <span>{{ module?.specialization? "Vertiefungsmodul" : "Grundlagenmodul" }}</span>
+  <b>{{t('niveau')}}</b>
+  <span>{{ module?.specialization? translate("specializationModule") : translate("noSpecializationModule") }}</span>
 
-  <b>Pflicht / Wahlpflicht</b>
-  <span>{{ module?.elective? "Wahlpflichtmodul" : "Pflichtmodul" }}</span>
+  <b>{{t('elective')}}</b>
+  <span>{{ module?.elective? translate("electiveModule") : translate("noElectiveModule") }}</span>
 
-  <b>Teilmodule</b>
+  <b>{{t('subModules')}}</b>
   <div *ngIf="module?.subModules;">
     <div *ngFor="let subModule of module!.subModules!">
-      {{subModule?.abbreviation}}  {{module?.translations?.[0]?.name}}, Pflicht
+      {{subModule?.abbreviation}}  {{module?.translations?.[0]?.name}}, {{t('required')}}
     </div>
   </div>
 
-  <b>Verantwortliche(r)</b>
+  <b>{{t('responsible')}}</b>
   <span>{{ module?.responsible?.translations?.at(0)?.title }} {{ module?.responsible?.firstName }} {{ module?.responsible?.lastName }}</span>
 
-  <b>Credits</b>
+  <b>{{t('credits')}}</b>
   <span>{{ module?.credits }}</span>
 
-  <b>Moduldauer</b>
-  <span>{{ module?.courseLength }} Semester</span>
+  <b>{{t('moduleLength')}}</b>
+  <span>{{ module?.courseLength }} {{t('semester')}}</span>
 
-  <b>Vorraussetzungen nach Prüfungsordnung</b>
+  <b>{{t('hardRequirements')}}</b>
   <span>{{ module?.requirementsHard?.translations?.at(0)?.name }}</span>
 
-  <b>Empfohlene Vorraussetzungen</b>
+  <b>{{t('softRequirements')}}</b>
   <span>{{ module?.requirementsSoft?.translations?.at(0)?.name }}</span>
 
-  <b>Studien-/ Prüfungsleistungen</b>
+  <b>{{t('exam')}}</b>
   <span>{{ moduleText?.exam }}</span>
 
-  <b>Angestrebte Lernergebnisse</b>
+  <b>{{t('learningObjectives')}}</b>
   <span>{{ moduleText?.learningOutcomes }}</span>
 </div>
+</ng-container>

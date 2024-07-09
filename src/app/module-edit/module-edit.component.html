@@ -1,3 +1,5 @@
+<ng-container *transloco="let t;">
+
 <div>
   <p-stepper class="largePadding" *ngIf="availableLanguages">
     <p-stepperPanel *ngFor="let language of availableLanguages" [header]="getHeader(language)">
@@ -10,7 +12,7 @@
         />
       </ng-template>
     </p-stepperPanel>
-    <p-stepperPanel [header]="'Änderungen speichern'">
+    <p-stepperPanel [header]="t('saveChanges')">
       <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
       <textarea
         id="changeSummary"
@@ -35,3 +37,4 @@
 </div>
 
 <p-toast/>
+</ng-container>

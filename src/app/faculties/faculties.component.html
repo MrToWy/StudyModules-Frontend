@@ -4,7 +4,7 @@
   <div (click)="selectFaculty(faculty)" *ngFor="let faculty of faculties"
        [class]="'grid-card' + (faculty.departments.length > 0 ? ' clickable' : '')"
   [style.background]="addAlpha('#' + faculty.color, 0.5)"
-    [pTooltip]="(faculty.departments.length > 0 ? '' : 'Diese Fakultät steht leider noch nicht in StudyModules bereit.')"
+    [pTooltip]="(faculty.departments.length > 0 ? '' : t('facultyNotAvailable'))"
   >
 
     <header [style.background]="'#' + faculty.color">

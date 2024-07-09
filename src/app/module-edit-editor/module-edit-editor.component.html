@@ -1,4 +1,4 @@
-
+<ng-container *transloco="let t;">
 
 <div class="compactGrid">
   <span class="smallPadding fullwidth">
@@ -7,17 +7,17 @@
   </span>
 
   <span class="smallPadding fullwidth">
-    <label for="name">Name</label>
+    <label for="name">{{t('name')}}</label>
     <input pInputText id="name" [(ngModel)]="moduleText.name"/>
   </span>
 
   <span class="smallPadding takeTwoColumns">
-    <label for="subtitle">Untertitel</label>
+    <label for="subtitle">{{t('subtitle')}}</label>
     <input pInputText id="subtitle" [(ngModel)]="moduleText.subtitle"/>
   </span>
 
   <span class="smallPadding">
-    <label for="credits">Credits</label>
+    <label for="credits">{{t('credits')}}</label>
     <p-inputNumber
       (onInput)="validateCredits(true)"
       [style]="{'width':'100%'}"
@@ -29,7 +29,7 @@
   </span>
 
   <span class="smallPadding fullwidth">
-    <label for="specialization">Specialization</label>
+    <label for="specialization">{{t('niveau')}}</label>
     <p-dropdown
       id="specialization"
       class="fullwidth"
@@ -43,12 +43,12 @@
   </span>
 
   <span class="smallPadding">
-    <label for="semester">Moduldauer</label>
+    <label for="semester">{{t('moduleLength')}}</label>
     <p-inputNumber [style]="{'width':'100%'}" id="semester" [(ngModel)]="module.courseLength"/>
   </span>
 
   <span class="smallPadding fullwidth">
-    <label for="elective">Elective</label>
+    <label for="elective">{{t('elective')}}</label>
     <p-dropdown
       id="elective"
       class="fullwidth"
@@ -62,12 +62,12 @@
   </span>
 
   <span class="smallPadding">
-    <label for="responsible">Responsible</label>
+    <label for="responsible">{{t('responsible')}}</label>
   <app-responsible-dropdown id="responsible" [module]="module" [users]="users"></app-responsible-dropdown>
   </span>
 
   <span class="smallPadding takeTwoRows">
-    <label for="learningOutcomes">Learning Outcomes</label>
+    <label for="learningOutcomes">{{t('learningObjectives')}}</label>
     <textarea
       class="fullwidth fullheight"
       id="learningOutcomes"
@@ -78,7 +78,7 @@
   </span>
 
   <span class="smallPadding fullwidth">
-    <label for="submodules">Submodules</label>
+    <label for="submodules">{{t('subModules')}}</label>
     <p-multiSelect
       id="submodules"
       [style]="{'width':'100%'}"
@@ -95,6 +95,7 @@
 
 <p-button
   (onClick)="validate()"
-  label="Weiter"
+  [label]="t('proceed')"
 />
 </div>
+</ng-container>

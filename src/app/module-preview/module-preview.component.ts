@@ -3,16 +3,18 @@ import {ModuleDetail, ModuleTranslation} from "../../shared/module/module.servic
 import {NgForOf, NgIf} from "@angular/common";
 import {SelectButtonModule} from "primeng/selectbutton";
 import {FormsModule} from "@angular/forms";
+import {translate, TranslocoDirective} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-module-preview',
   standalone: true,
-  imports: [
-    NgForOf,
-    NgIf,
-    SelectButtonModule,
-    FormsModule
-  ],
+    imports: [
+        NgForOf,
+        NgIf,
+        SelectButtonModule,
+        FormsModule,
+        TranslocoDirective
+    ],
   templateUrl: './module-preview.component.html',
   styleUrl: './module-preview.component.sass'
 })
@@ -29,4 +31,5 @@ export class ModulePreviewComponent {
 
   private _module: ModuleDetail | undefined;
   @Input() moduleText: ModuleTranslation | undefined;
+  protected readonly translate = translate;
 }

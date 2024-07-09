@@ -30,9 +30,10 @@ export class LanguageService {
   }
 
  set languageCode(value: string) {
+   this.translocoService.setActiveLang(value);
+
    this.languageSubject.next(value);
    localStorage.setItem('language', value);
-   this.translocoService.setActiveLang(value);
  }
 
  get languageCode() {

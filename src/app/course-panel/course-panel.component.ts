@@ -17,25 +17,27 @@ import {AuthService} from "../../shared/auth/auth.service";
 import {LanguageDto, LanguageService} from "../../shared/language/language.service";
 import {ABtestService} from "../../shared/abtest/abtest.service";
 import {TagModule} from "primeng/tag";
+import {TranslocoDirective} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-course-panel',
   standalone: true,
-  imports: [
-    ButtonModule,
-    MenuModule,
-    PanelModule,
-    SharedModule,
-    CheckboxModule,
-    DialogModule,
-    InputTextModule,
-    JobsComponent,
-    NgForOf,
-    NgIf,
-    PaginatorModule,
-    StepperModule,
-    TagModule
-  ],
+    imports: [
+        ButtonModule,
+        MenuModule,
+        PanelModule,
+        SharedModule,
+        CheckboxModule,
+        DialogModule,
+        InputTextModule,
+        JobsComponent,
+        NgForOf,
+        NgIf,
+        PaginatorModule,
+        StepperModule,
+        TagModule,
+        TranslocoDirective
+    ],
   templateUrl: './course-panel.component.html',
   styleUrl: './course-panel.component.sass'
 })
