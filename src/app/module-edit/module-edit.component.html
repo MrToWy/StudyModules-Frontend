@@ -34,43 +34,4 @@
   </p-stepper>
 </div>
 
-
-<p-dialog
-  header="Header"
-  [(visible)]="saveDialogVisible"
-  [modal]="true">
-  <ng-template pTemplate="header">
-    <p>Please summarize your changes.</p>
-  </ng-template>
-  <div class="smallPadding">
-          <span class="p-float-label">
-            <textarea
-              id="summary"
-              rows="5"
-              cols="30"
-              pInputTextarea
-              (ngModelChange)="summeryInputFieldClass = ''"
-              [class]="summeryInputFieldClass"
-              [(ngModel)]="summaryText">
-            </textarea>
-            <label for="summary">Summary</label>
-          </span>
-  </div>
-
-  <ng-template pTemplate="footer">
-    <p-button
-      label="Cancel"
-      [text]="true"
-      severity="secondary"
-      (click)="saveDialogVisible = false"/>
-    <p-button
-      label="Save"
-      [loading]="saving"
-      [outlined]="true"
-      severity="primary"
-      (click)="saveModule()"
-    />
-  </ng-template>
-</p-dialog>
-
 <p-toast/>
