@@ -1,8 +1,26 @@
 <p-pickList
-    [source]="availableItems"
-    [target]="activeItems"
-    sourceHeader="Available"
-    targetHeader="Selected"
+    [source]="availableModuleItems"
+    [target]="activeModuleItems"
+    sourceHeader="Available Module Fields"
+    targetHeader="Selected Module Fields"
+    [dragdrop]="true"
+    [responsive]="true"
+    [sourceStyle]="{ height: '30rem' }"
+    [targetStyle]="{ height: '30rem' }"
+    filterBy="name"
+    sourceFilterPlaceholder="Search by name"
+    targetFilterPlaceholder="Search by name"
+    breakpoint="1400px">
+        <ng-template let-item pTemplate="item">
+          {{ item.translations[0].name }}
+        </ng-template>
+</p-pickList>
+
+<p-pickList
+    [source]="availableSubModuleItems"
+    [target]="activeSubModuleItems"
+    sourceHeader="Available SubModule Fields"
+    targetHeader="Selected SubModule Fields"
     [dragdrop]="true"
     [responsive]="true"
     [sourceStyle]="{ height: '30rem' }"

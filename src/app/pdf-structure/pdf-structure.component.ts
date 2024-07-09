@@ -14,23 +14,33 @@ import {JobService} from "../../shared/job/job.service";
 })
 
 export class PdfStructureComponent implements OnInit {
-  availableItems: PdfStructureItem[] | undefined;
-  activeItems: PdfStructureItem[] | undefined;
+  availableModuleItems: PdfStructureItem[] | undefined;
+  activeModuleItems: PdfStructureItem[] | undefined;
+
+  availableSubModuleItems: PdfStructureItem[] | undefined;
+  activeSubModuleItems: PdfStructureItem[] | undefined;
 
 
   constructor(
     private jobService: JobService
   ) {
-    this.activeItems = [];
-    this.availableItems = [];
+    this.availableModuleItems = [];
+    this.activeModuleItems = [];
+
+    this.availableSubModuleItems = [];
+    this.activeSubModuleItems = [];
   }
 
   ngOnInit(): void {
-    this.jobService.getStructure().subscribe((data: PdfStructureItem[]) => {
+    this.jobService.getModuleStructure().subscribe((data: PdfStructureItem[]) => {
       const newTargetItems = data;
 
-      // fill with spread operator
-      this.activeItems = [...newTargetItems];
+      this.activeModuleItems = [...newTargetItems];
+    });
+    this.jobService.getSubModuleStructure().subscribe((data: PdfStructureItem[]) => {
+      const newTargetItems = data;
+
+      this.activeSubModuleItems = [...newTargetItems];
     });
   }
 

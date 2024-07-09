@@ -38,8 +38,11 @@ export class JobService {
     return this.http.delete(this.jobURL + "/" + guid);
   }
 
-  getStructure(): Observable<PdfStructureItem[]> {
+  getModuleStructure(): Observable<PdfStructureItem[]> {
     return this.http.get<PdfStructureItem[]>(this.jobURL + "/structure?moduleBased=true");
+  }
+  getSubModuleStructure(): Observable<PdfStructureItem[]> {
+    return this.http.get<PdfStructureItem[]>(this.jobURL + "/structure?submoduleBased=true");
   }
 }
 
