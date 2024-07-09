@@ -1,4 +1,5 @@
 <div class="main">
   <app-topbar></app-topbar>
+  <p-messages [(value)]="errorService.errors" [closable]="false" />
   <router-outlet />
 </div>

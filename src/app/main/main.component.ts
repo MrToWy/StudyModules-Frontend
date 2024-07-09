@@ -13,6 +13,8 @@ import {BreadcrumbModule} from "primeng/breadcrumb";
 import {TopbarComponent} from "../topbar/topbar.component";
 import {SidebarComponent} from "../sidebar/sidebar.component";
 import {FacultiesComponent} from "../faculties/faculties.component";
+import {MessagesModule} from "primeng/messages";
+import {ErrorService} from "../../shared/error/error.service";
 
 @Component({
   selector: 'app-main',
@@ -31,11 +33,15 @@ import {FacultiesComponent} from "../faculties/faculties.component";
     BreadcrumbModule,
     TopbarComponent,
     SidebarComponent,
-    FacultiesComponent
+    FacultiesComponent,
+    MessagesModule
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.sass'
 })
 export class MainComponent {
+
+  constructor(protected errorService: ErrorService) {
+  }
 
 }
