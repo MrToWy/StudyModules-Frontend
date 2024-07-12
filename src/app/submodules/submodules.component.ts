@@ -8,6 +8,7 @@ import {FormsModule} from "@angular/forms";
 import {CourseDto} from "../../shared/course/course.service";
 import {LanguageService} from "../../shared/language/language.service";
 import {SubmoduleService} from "../../shared/submodule/submodule.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-submodules',
@@ -35,6 +36,8 @@ export class SubmodulesComponent {
   constructor(
     private languageService : LanguageService,
     private submoduleService: SubmoduleService,
+    private router : Router,
+    private route: ActivatedRoute
   ) {
   }
 
@@ -51,5 +54,9 @@ export class SubmodulesComponent {
     this.submoduleService.getAll().subscribe(submodules => {
       this.submodules = submodules;
     });
+  }
+
+  async openDetailView(submodule: any) {
+    await this.router.navigate([submodule.id], {relativeTo: this.route});
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {TranslocoService} from "@jsverse/transloco";
+import {translate, TranslocoService} from "@jsverse/transloco";
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 
@@ -39,4 +39,10 @@ export class LanguageService {
  get languageCode() {
    return localStorage.getItem('language')??"de";
  }
+
+ getHeader(language: LanguageDto) {
+    if(language.abbreviation === "DE") return translate("fillModuleText");
+    if(language.abbreviation === "EN") return translate("addEnglishTexts");
+    return translate("addOtherLanguageTexts") + language.abbreviation;
+  }
 }

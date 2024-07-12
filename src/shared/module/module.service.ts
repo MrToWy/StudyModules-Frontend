@@ -142,11 +142,17 @@ export interface Requirement {
 
 export interface SubModuleTranslation {
   id: number;
+  name: string;
+  subtitle: string;
   type: string;
+  semester: string;
+  exam: string;
   content: string;
   presenceRequirements: string;
   selfStudyRequirements: string;
   spokenlanguage: string;
+  learningOutcomes: string;
+  selfStudyHints: string;
   languageId: number;
   subModuleId: number;
   literature: string;

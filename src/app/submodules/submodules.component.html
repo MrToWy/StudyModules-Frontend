@@ -58,9 +58,9 @@
             </th>
         </tr>
     </ng-template>
-    <ng-template [pTemplate]="'body'" let-job>
-      <tr class="">
-            <td>{{ job.abbreviation }}</td>
+    <ng-template [pTemplate]="'body'" let-submodule>
+      <tr class="clickable" (click)="openDetailView(submodule)">
+            <td>{{ submodule.abbreviation }}</td>
             <td></td>
             <td>
               </td>

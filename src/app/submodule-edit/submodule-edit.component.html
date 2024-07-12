@@ -4,8 +4,8 @@
   <p-stepper class="largePadding" *ngIf="availableLanguages">
     <p-stepperPanel *ngFor="let language of availableLanguages" [header]="this.languageService.getHeader(language)">
       <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
-        <app-module-translator *ngIf="currentModule"
-                               [(currentModule)]="currentModule"
+        <app-submodule-translator *ngIf="currentSubmodule"
+                               [(currentSubModule)]="currentSubmodule"
                                [languageId]="language.id"
                                [languageAbbreviation]="language.abbreviation"
                                [nextCallback]="nextCallback"
@@ -28,7 +28,7 @@
           [loading]="saving"
           [outlined]="true"
           severity="primary"
-          (click)="saveModule()"
+          (click)="saveSubModule()"
         />
       </ng-template>
 

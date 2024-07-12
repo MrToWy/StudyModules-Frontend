@@ -35,6 +35,7 @@
   "hidden": "Versteckt",
   "deleteDegreeProgramQuery": "Soll der Studiengang wirklich vollständig gelöscht werden?",
   "shortName": "Kurzname",
+  "respectively": "bzw.",
 
   "modulesearch": {
     "placeholder": "Module suchen"

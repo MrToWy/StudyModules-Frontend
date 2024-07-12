@@ -1,5 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {ModuleDetail, ModuleTranslation, SubModule, SubModuleTranslation} from "../../shared/module/module.service";
+import {SubModuleDetail} from "../../shared/submodule/submodule.service";
+import {translate} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-submodule-preview',
@@ -9,20 +11,46 @@ import {ModuleDetail, ModuleTranslation, SubModule, SubModuleTranslation} from "
   styleUrl: './submodule-preview.component.sass'
 })
 export class SubmodulePreviewComponent {
-  get module(): ModuleDetail | undefined {
-    return this._module;
+  distinctAbbreviations: string[] = [];
+  requirements: string = "";
+
+  get submodule(): SubModuleDetail | undefined {
+    return this._submodule;
   }
 
   @Input()
-  set module(value: ModuleDetail | undefined) {
-    this._module = value;
-    this.moduleText = value?.translations[0];
-    this.subModule = value?.subModules[0];
-    this.subModuleText = this.subModule?.translations[0];
+  set submodule(value: SubModuleDetail | undefined) {
+    this._submodule = value;
+    this.submoduleText = value?.translations[0];
+    this.extractDistinctAbbreviations();
+    this.requirements = this.extractRequirements();
   }
 
-  private _module: ModuleDetail | undefined;
-  protected moduleText: ModuleTranslation | undefined;
-  protected subModule: SubModule | undefined;
-  protected subModuleText: SubModuleTranslation | undefined;
+  private _submodule: SubModuleDetail | undefined;
+  @Input() submoduleText: SubModuleTranslation | undefined;
+
+  extractDistinctAbbreviations(): void {
+    if (this.submodule?.modules) {
+      const abbreviations = this.submodule.modules.map(module => module.degreeProgram.abbreviation);
+      this.distinctAbbreviations = [...new Set(abbreviations)];
+    }
+  }
+
+  extractRequirements(): string {
+    const requirementsNames = this.submodule?.modules.map(
+        (module) => module.requirementsSoft.translations[0].name
+    );
+
+    if (!requirementsNames) {
+        return "";
+    }
+
+    const uniqueNames = Array.from(new Set(requirementsNames));
+
+    if (uniqueNames.length === 1) {
+        return uniqueNames[0];
+    } else {
+        return uniqueNames.join('\n\n' + translate("respectively") + '\n\n');
+    }
+}
 }

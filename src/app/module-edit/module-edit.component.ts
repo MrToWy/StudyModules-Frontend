@@ -54,7 +54,7 @@ export class ModuleEditComponent implements OnInit {
   constructor(
     private moduleService: ModuleService,
     private urlSegmentService: UrlSegmentService,
-    private languageService: LanguageService,
+    protected languageService: LanguageService,
     private router: Router,
     private route: ActivatedRoute,
     private messageService: MessageService
@@ -94,9 +94,6 @@ export class ModuleEditComponent implements OnInit {
       return;
     }
 
-
-    console.log(this.currentModule);
-
     this.saving = true;
     this.moduleService.save(this.currentModule).subscribe((module: any) => {
       this.saving = false;
@@ -105,9 +102,5 @@ export class ModuleEditComponent implements OnInit {
     });
   }
 
-  getHeader(language: LanguageDto) {
-    if(language.abbreviation === "DE") return translate("fillModuleText");
-    if(language.abbreviation === "EN") return translate("addEnglishTexts");
-    return translate("addOtherLanguageTexts") + language.abbreviation;
-  }
+
 }

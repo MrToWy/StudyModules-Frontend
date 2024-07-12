@@ -1,0 +1,19 @@
+<ng-container *transloco="let t;">
+
+<div class="compactGrid">
+  <span class="smallPadding fullwidth">
+    <label for="number">Nummer</label>
+    <p-inputNumber [style]="{'width':'100%'}" class="fullwidth" id="number" [(ngModel)]="subModule.number"/>
+  </span>
+
+   <span class="smallPadding fullwidth">
+    <label for="name">{{t('name')}}</label>
+    <input pInputText id="name" [(ngModel)]="subModuleText.name"/>
+  </span>
+
+  <span class="smallPadding takeTwoColumns">
+    <label for="subtitle">{{t('subtitle')}}</label>
+    <input pInputText id="subtitle" [(ngModel)]="subModuleText.subtitle"/>
+  </span>
+</div>
+</ng-container>

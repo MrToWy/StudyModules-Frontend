@@ -1,54 +1,54 @@
 <div class="compactGrid">
-  <h1 style="grid-column: span 2">Teilmodul {{ module?.abbreviation }} {{ moduleText?.name }}</h1>
+  <h1 style="grid-column: span 2">Teilmodul {{ submodule?.abbreviation }} {{ submoduleText?.name }}</h1>
 
   <b>Untertitel</b>
-  <span>todo</span>
+  <span>{{ submoduleText?.subtitle }}</span>
 
   <b>Verantwortliche(r)</b>
-  <span>{{ module?.responsible?.firstName }} {{ module?.responsible?.lastName }} </span>
+  <span>{{ submodule?.responsible?.translations?.at(0)?.title }} {{ submodule?.responsible?.firstName }} {{ submodule?.responsible?.lastName }}</span>
 
   <b>Sprache</b>
-  <span>{{ subModuleText?.spokenlanguage }}</span>
+  <span>{{ submoduleText?.spokenlanguage }}</span>
 
   <b>Zuordnung zu Curricula</b>
-  <span>todo</span>
+  <span>{{ distinctAbbreviations.join(', ') }}</span>
 
   <b>Veranstaltungsart, SWS</b>
-  <span>{{subModuleText?.type}}, {{subModule?.weeklyHours}} SWS</span>
+  <span>{{submoduleText?.type}}, {{submodule?.weeklyHours}} SWS</span>
 
   <b>Credits</b>
-  <span>{{ module?.credits }}</span>
+  <span>{{ submodule?.credits }}</span>
 
   <b>Präsenzstunden / Selbststudium</b>
-  <span>{{module?.hoursPresence}} h / {{module?.hoursSelf}} h</span>
+  <span>{{submodule?.hoursPresence}} h / {{submodule?.hoursSelf}} h</span>
 
   <b>Studiensemester</b>
-  <span>todo</span>
+  <span>{{submodule?.semester}}</span>
 
   <b>Empfehlungen zum Selbststudium</b>
-  <span>todo</span>
+  <span>{{ submoduleText?.selfStudyHints }}</span>
 
   <b>Empfohlene Voraussetzungen</b>
-  <span>todo</span>
+  <span>{{ requirements }}</span>
 
   <b>Studien-/ Prüfungsleistungen</b>
-  <span>{{ moduleText?.exam }}</span>
+  <span>{{ submoduleText?.exam }}</span>
 
   <b>Gruppengröße</b>
-  <span>{{ subModule?.groupSize }}</span>
+  <span>{{ submodule?.groupSize }}</span>
 
   <b style="grid-column: span 2">Angestrebte Lernergebnisse</b>
-  <span style="grid-column: span 2">todo</span>
+  <span style="grid-column: span 2">{{ submoduleText?.learningOutcomes }}</span>
 
   <b style="grid-column: span 2">Inhalt</b>
-  <span style="grid-column: span 2">{{ subModuleText?.content }}</span>
+  <span style="grid-column: span 2">{{ submoduleText?.content }}</span>
 
   <b style="grid-column: span 2">Anforderungen der Präsenzzeit</b>
-  <span style="grid-column: span 2">{{ subModuleText?.presenceRequirements }}</span>
+  <span style="grid-column: span 2">{{ submoduleText?.presenceRequirements }}</span>
 
   <b style="grid-column: span 2">Anforderungen des Selbststudiums</b>
-  <span style="grid-column: span 2">{{ subModuleText?.selfStudyRequirements }}</span>
+  <span style="grid-column: span 2">{{ submoduleText?.selfStudyRequirements }}</span>
 
   <b style="grid-column: span 2">Literatur</b>
-  <span style="grid-column: span 2">todo</span>
+  <span style="grid-column: span 2">{{ submoduleText?.literature }}</span>
 </div>
