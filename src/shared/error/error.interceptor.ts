@@ -15,7 +15,9 @@ import {ErrorService} from "./error.service";
 })
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(private errorService: ErrorService) {
+  constructor(
+    private errorService: ErrorService
+  ) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -37,6 +39,16 @@ export class ErrorInterceptor implements HttpInterceptor {
                   severity: 'error',
                   summary: 'Server unreachable',
                   detail: 'The server is unreachable. Please try again later.'
+                };
+                this.errorService.errors = [...this.errorService.errors, error];
+              }
+            }
+            if (error.status === 401) {
+              if (this.errorService.errors.length === 0) {
+                const error = {
+                  severity: 'error',
+                  summary: 'Unauthorized',
+                  detail: 'You are not authorized to perform this action. Please logout, login and try again.'
                 };
                 this.errorService.errors = [...this.errorService.errors, error];
               }
