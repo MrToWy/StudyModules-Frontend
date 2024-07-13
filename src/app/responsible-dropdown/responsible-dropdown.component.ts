@@ -7,6 +7,7 @@ import {FormsModule} from "@angular/forms";
 import {ModuleDetail} from "../../shared/module/module.service";
 import {UserDto} from "../../shared/user/user.service";
 import {InputNumberModule} from "primeng/inputnumber";
+import {SubModuleDetail} from "../../shared/submodule/submodule.service";
 
 @Component({
   selector: 'app-responsible-dropdown',
@@ -31,9 +32,16 @@ export class ResponsibleDropdownComponent {
   module!: ModuleDetail;
 
   @Input()
+  subModule!: SubModuleDetail;
+
+  @Input()
   users!: UserDto[];
 
   responsibleChange($event: DropdownChangeEvent) {
-    this.module.responsibleId = $event.value.id;
+    if(this.subModule)
+      this.subModule.responsibleId = $event.value.id;
+
+    if(this.module)
+      this.module.responsibleId = $event.value.id;
   }
 }

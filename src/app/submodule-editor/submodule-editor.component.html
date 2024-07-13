@@ -15,5 +15,33 @@
     <label for="subtitle">{{t('subtitle')}}</label>
     <input pInputText id="subtitle" [(ngModel)]="subModuleText.subtitle"/>
   </span>
+
+  <span class="smallPadding">
+    <label for="credits">{{t('credits')}}</label>
+    <p-inputNumber
+      (onInput)="validateCredits(true)"
+      [style]="{'width':'100%'}"
+      id="credits"
+      [(ngModel)]="subModule.credits"
+      [classList]="creditClass"
+      [pTooltip]="creditTooltip"
+    />
+  </span>
+
+  <span class="smallPadding">
+    <label for="responsible">{{t('responsible')}}</label>
+  <app-responsible-dropdown id="responsible" [subModule]="subModule" [users]="users"></app-responsible-dropdown>
+  </span>
+
+  <span class="smallPadding takeTwoRows">
+    <label for="learningOutcomes">{{t('learningObjectives')}}</label>
+    <textarea
+      class="fullwidth fullheight"
+      id="learningOutcomes"
+      rows="5"
+      cols="30"
+      pInputTextarea
+      [(ngModel)]="subModuleText.learningOutcomes"></textarea>
+  </span>
 </div>
 </ng-container>

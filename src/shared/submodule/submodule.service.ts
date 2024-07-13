@@ -42,6 +42,7 @@ export interface SubModuleDetail {
   departmentId: number;
   semester: number;
   responsible: UserDto;
+  responsibleId: number;
   facultyId: number;
   specialization: string;
   elective: boolean;

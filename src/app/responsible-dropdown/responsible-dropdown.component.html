@@ -1,4 +1,5 @@
 <p-dropdown
+  *ngIf="module"
     id="responsible"
     (onChange)="responsibleChange($event)"
   [style]="{width: '100%'}"
@@ -9,6 +10,25 @@
     <ng-template pTemplate="selectedItem">
       <div class="" *ngIf="module.responsible">
         <app-responsible-avatar [responsible]="module.responsible.firstName + ' ' + module.responsible.lastName"/>
+      </div>
+    </ng-template>
+    <ng-template let-user pTemplate="item">
+      <app-responsible-avatar [responsible]="user.firstName + ' ' + user.lastName"/>
+    </ng-template>
+  </p-dropdown>
+
+<p-dropdown
+  *ngIf="subModule"
+    id="responsibleSubmodule"
+    (onChange)="responsibleChange($event)"
+  [style]="{width: '100%'}"
+    [options]="users"
+    [(ngModel)]="subModule.responsible"
+    optionLabel="name"
+    placeholder="Select a responsible">
+    <ng-template pTemplate="selectedItem">
+      <div class="" *ngIf="subModule.responsible">
+        <app-responsible-avatar [responsible]="subModule.responsible.firstName + ' ' + subModule.responsible.lastName"/>
       </div>
     </ng-template>
     <ng-template let-user pTemplate="item">
