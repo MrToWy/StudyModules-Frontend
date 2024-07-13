@@ -10,6 +10,7 @@ import {TranslocoDirective} from "@jsverse/transloco";
 import {InputTextModule} from "primeng/inputtext";
 import {ResponsibleDropdownComponent} from "../responsible-dropdown/responsible-dropdown.component";
 import {InputTextareaModule} from "primeng/inputtextarea";
+import {InputMaskModule} from "primeng/inputmask";
 
 @Component({
   selector: 'app-submodule-editor',
@@ -21,7 +22,8 @@ import {InputTextareaModule} from "primeng/inputtextarea";
     InputTextModule,
     TooltipModule,
     ResponsibleDropdownComponent,
-    InputTextareaModule
+    InputTextareaModule,
+    InputMaskModule
   ],
   templateUrl: './submodule-editor.component.html',
   styleUrl: './submodule-editor.component.sass'
