@@ -1,48 +1,48 @@
 <ng-container *transloco="let t;">
 
-<div class="compactGrid">
+  <div class="compactGrid">
   <span class="smallPadding fullwidth">
     <label for="number">Nummer</label>
     <p-inputNumber [style]="{'width':'100%'}" class="fullwidth" id="number" [(ngModel)]="subModule.number"/>
   </span>
 
-   <span class="smallPadding fullwidth">
-    <label for="name">{{t('name')}}</label>
+    <span class="smallPadding fullwidth">
+    <label for="name">{{ t('name') }}</label>
     <input pInputText id="name" [(ngModel)]="subModuleText.name"/>
   </span>
 
-  <span class="smallPadding takeTwoColumns">
-    <label for="subtitle">{{t('subtitle')}}</label>
+    <span class="smallPadding takeTwoColumns">
+    <label for="subtitle">{{ t('subtitle') }}</label>
     <input pInputText id="subtitle" [(ngModel)]="subModuleText.subtitle"/>
   </span>
 
-  <span class="smallPadding">
-    <label for="language">{{t('language')}}</label>
+    <span class="smallPadding">
+    <label for="language">{{ t('language') }}</label>
     <input pInputText id="language" [(ngModel)]="subModuleText.spokenlanguage"/>
   </span>
 
-  <span class="smallPadding">
-    <label for="selfStudyHints">{{t('selfStudyHints')}}</label>
+    <span class="smallPadding">
+    <label for="selfStudyHints">{{ t('selfStudyHints') }}</label>
     <input pInputText id="selfStudyHints" [(ngModel)]="subModuleText.selfStudyHints"/>
   </span>
 
-  <span class="smallPadding">
-    <label for="semester">{{t('semester')}}</label>
+    <span class="smallPadding">
+    <label for="semester">{{ t('semester') }}</label>
     <input pInputText id="semester" [(ngModel)]="subModule.semester"/>
   </span>
 
-  <span class="smallPadding">
-    <label for="type">{{t('type')}}</label>
+    <span class="smallPadding">
+    <label for="type">{{ t('type') }}</label>
     <input pInputText id="type" [(ngModel)]="subModuleText.type"/>
   </span>
 
-  <span class="smallPadding">
-    <label for="exam">{{t('exam')}}</label>
+    <span class="smallPadding">
+    <label for="exam">{{ t('exam') }}</label>
     <input pInputText id="exam" [(ngModel)]="subModuleText.exam"/>
   </span>
 
-  <span class="smallPadding">
-    <label for="weeklyHours">{{t('weeklyHours')}}</label>
+    <span class="smallPadding">
+    <label for="weeklyHours">{{ t('weeklyHours') }}</label>
     <p-inputNumber
       (onInput)="validateCredits(true)"
       [style]="{'width':'100%'}"
@@ -53,8 +53,8 @@
     />
   </span>
 
-  <span class="smallPadding">
-    <label for="groupSize">{{t('groupSize')}}</label>
+    <span class="smallPadding">
+    <label for="groupSize">{{ t('groupSize') }}</label>
     <p-inputNumber
       (onInput)="validateCredits(true)"
       [style]="{'width':'100%'}"
@@ -65,8 +65,8 @@
     />
   </span>
 
-  <span class="smallPadding">
-    <label for="credits">{{t('credits')}}</label>
+    <span class="smallPadding">
+    <label for="credits">{{ t('credits') }}</label>
     <p-inputNumber
       (onInput)="validateCredits(true)"
       [style]="{'width':'100%'}"
@@ -78,9 +78,8 @@
   </span>
 
 
-
-  <span class="smallPadding">
-    <label for="presenceHours">{{t('presenceHours')}}</label>
+    <span class="smallPadding">
+    <label for="presenceHours">{{ t('presenceHours') }}</label>
     <p-inputNumber
       (onInput)="validateCredits(true)"
       [style]="{'width':'100%'}"
@@ -91,8 +90,8 @@
     />
   </span>
 
-  <span class="smallPadding">
-    <label for="selfStudyHours">{{t('selfStudyHours')}}</label>
+    <span class="smallPadding">
+    <label for="selfStudyHours">{{ t('selfStudyHours') }}</label>
     <p-inputNumber
       (onInput)="validateCredits(true)"
       [style]="{'width':'100%'}"
@@ -103,13 +102,13 @@
     />
   </span>
 
-  <span class="smallPadding">
-    <label for="responsible">{{t('responsible')}}</label>
+    <span class="smallPadding">
+    <label for="responsible">{{ t('responsible') }}</label>
   <app-responsible-dropdown id="responsible" [subModule]="subModule" [users]="users"></app-responsible-dropdown>
   </span>
 
-  <span class="smallPadding takeTwoRows">
-    <label for="learningOutcomes">{{t('learningObjectives')}}</label>
+    <span class="smallPadding takeTwoRows">
+    <label for="learningOutcomes">{{ t('learningObjectives') }}</label>
     <textarea
       class="fullwidth fullheight"
       id="learningOutcomes"
@@ -118,5 +117,50 @@
       pInputTextarea
       [(ngModel)]="subModuleText.learningOutcomes"></textarea>
   </span>
-</div>
+
+    <span class="smallPadding takeTwoRows">
+    <label for="content">{{ t('content') }}</label>
+    <textarea
+      class="fullwidth fullheight"
+      id="content"
+      rows="5"
+      cols="30"
+      pInputTextarea
+      [(ngModel)]="subModuleText.content"></textarea>
+  </span>
+
+    <span class="smallPadding takeTwoRows">
+    <label for="presenceRequirements">{{ t('presenceRequirements') }}</label>
+    <textarea
+      class="fullwidth fullheight"
+      id="presenceRequirements"
+      rows="5"
+      cols="30"
+      pInputTextarea
+      [(ngModel)]="subModuleText.presenceRequirements"></textarea>
+  </span>
+
+    <span class="smallPadding takeTwoRows">
+    <label for="selfStudyRequirements">{{ t('selfStudyRequirements') }}</label>
+    <textarea
+      class="fullwidth fullheight"
+      id="selfStudyRequirements"
+      rows="5"
+      cols="30"
+      pInputTextarea
+      [(ngModel)]="subModuleText.selfStudyRequirements"></textarea>
+  </span>
+    <div class="takeTwoRows">
+    <span class="smallPadding takeTwoRows">
+    <label for="literature">{{ t('literature') }}</label>
+    <textarea
+      class="fullwidth fullheight"
+      id="literature"
+      rows="5"
+      cols="30"
+      pInputTextarea
+      [(ngModel)]="subModuleText.literature"></textarea>
+  </span>
+    </div>
+  </div>
 </ng-container>
