@@ -13,17 +13,17 @@ import {RequirementService} from "../../shared/requirement/requirement.service";
 @Component({
   selector: 'app-module-translator',
   standalone: true,
-    imports: [
-        ModuleEditEditorComponent,
-        ModulePreviewComponent
-    ],
+  imports: [
+    ModuleEditEditorComponent,
+    ModulePreviewComponent
+  ],
   providers: [
     ModuleService
   ],
   templateUrl: './module-translator.component.html',
   styleUrl: './module-translator.component.sass'
 })
-export class ModuleTranslatorComponent implements OnInit{
+export class ModuleTranslatorComponent implements OnInit {
   public moduleText: ModuleTranslation;
   public hardRequirementText!: RequirementTranslation;
   public softRequirementText!: RequirementTranslation;
@@ -34,6 +34,7 @@ export class ModuleTranslatorComponent implements OnInit{
   @Input()
   currentModule!: ModuleDetail;
   @Output() currentModuleChange = new EventEmitter<any>();
+
   onModuleChange(module: ModuleDetail) {
     this.currentModuleChange.emit(module);
   }
@@ -48,13 +49,18 @@ export class ModuleTranslatorComponent implements OnInit{
   constructor(
     private moduleService: ModuleService,
     private requirementService: RequirementService
-    ) {
+  ) {
     // initialize moduleText to prevent error
     this.moduleText = {
       exam: "", id: 0, learningOutcomes: "", moduleId: 0, subtitle: "",
       languageId: 0,
       name: "",
       description: ""
+    };
+
+    this.hardRequirementText = {
+      languageId: 0,
+      name: ""
     };
   }
 
@@ -65,20 +71,31 @@ export class ModuleTranslatorComponent implements OnInit{
       });
 
       this.getRequirementText(this.currentModule.requirementsHardId).then((requirementText) => {
+        let translations = this.currentModule.requirementsHard.translations;
+        let index = translations.indexOf(requirementText);
+        if (index > -1) {
+          // Remove requirementText from its current position
+          translations.splice(index, 1);
+
+          // Insert requirementText at the first position
+          translations.unshift(requirementText);
+        }
+
         this.hardRequirementText = requirementText;
       });
-      this.getRequirementText(this.currentModule.requirementsSoftId).then((requirementText) => {
+
+      this.getRequirementTextSoft(this.currentModule.requirementsSoftId).then((requirementText) => {
         this.softRequirementText = requirementText;
       });
     }
-    }
-
+  }
 
 
   async getModuleText(): Promise<ModuleTranslation> {
     // try get translation from this.module
     if (this.currentModule.translations) {
-      const moduleTranslation= this.currentModule.translations.find((translation: { languageId: number | undefined; }) => translation.languageId === this.languageId);
+      const moduleTranslation = this.currentModule.translations.find(
+        (translation: { languageId: number | undefined; }) => translation.languageId === this.languageId);
       if (moduleTranslation) {
         return moduleTranslation;
       }
@@ -94,7 +111,38 @@ export class ModuleTranslatorComponent implements OnInit{
   }
 
   async getRequirementText(requirementId: number): Promise<RequirementTranslation> {
+    // try get translation from this.module
+    if (this.currentModule.requirementsHard.translations) {
+      const requirementTranslation = this.currentModule.requirementsHard.translations.find(
+        (translation: { languageId: number | undefined; }) => translation.languageId === this.languageId);
+      if (requirementTranslation) {
+        return requirementTranslation;
+      }
+    }
+
     const requirementDetail = await firstValueFrom(this.requirementService.get(requirementId, this.languageAbbreviation!));
+
+    // attach new translation to this.module
+    this.currentModule.requirementsHard.translations.push(requirementDetail.translations[0]);
+
+    return requirementDetail.translations[0];
+  }
+
+  async getRequirementTextSoft(requirementId: number): Promise<RequirementTranslation> {
+    // try get translation from this.module
+    if (this.currentModule.requirementsSoft.translations) {
+      const requirementTranslation = this.currentModule.requirementsSoft.translations.find(
+        (translation: { languageId: number | undefined; }) => translation.languageId === this.languageId);
+      if (requirementTranslation) {
+        return requirementTranslation;
+      }
+    }
+
+    const requirementDetail = await firstValueFrom(this.requirementService.get(requirementId, this.languageAbbreviation!));
+
+    // attach new translation to this.module
+    this.currentModule.requirementsSoft.translations.push(requirementDetail.translations[0]);
+
     return requirementDetail.translations[0];
   }
 }

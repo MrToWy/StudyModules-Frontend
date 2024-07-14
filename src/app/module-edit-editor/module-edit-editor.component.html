@@ -84,7 +84,7 @@
     <app-requirement-editor
       class="takeTwoColumns"
       [requirement]="hardRequirement"
-      [requirementText]="hardRequirementText"
+      [(requirementText)]="module.requirementsHard.translations[0]"
     />
 
 
@@ -95,7 +95,7 @@
         type="text"
         pInputText
         [readOnly]="true"
-        [ngModel]="module.requirementsSoft.translations[0].name"
+        [(ngModel)]="module.requirementsSoft.translations[0].name"
       />
     </div>
 

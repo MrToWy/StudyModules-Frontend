@@ -1,11 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DialogModule} from "primeng/dialog";
 import {TranslocoDirective} from "@jsverse/transloco";
 import {MultiSelectModule} from "primeng/multiselect";
 import {FormsModule} from "@angular/forms";
 import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
-import {ModuleDto, Requirement, RequirementTranslation} from "../../shared/module/module.service";
+import {ModuleDetail, ModuleDto, Requirement, RequirementTranslation} from "../../shared/module/module.service";
 import {CourseService} from "../../shared/course/course.service";
 import {UrlSegmentService} from "../../shared/url/url-segment.service";
 
@@ -58,5 +58,10 @@ export class RequirementEditorComponent implements OnInit{
 
 
   @Input() requirement: Requirement | undefined;
-  @Input() requirementText: RequirementTranslation | undefined;
+
+  @Input() requirementText!: RequirementTranslation;
+  @Output() requirementTextChange = new EventEmitter<RequirementTranslation>();
+  onRequirementChange(requirementText: RequirementTranslation) {
+    this.requirementTextChange.emit(requirementText);
+  }
 }

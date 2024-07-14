@@ -34,7 +34,7 @@ import {RequirementDetailComponent} from "../requirement-detail/requirement-deta
 import {RequirementEditorComponent} from "../requirement-editor/requirement-editor.component";
 
 @Component({
-  selector: 'app-module-edit-editor',
+  selector: 'app-module-editor',
   standalone: true,
   imports: [
     InputNumberModule,
@@ -120,6 +120,7 @@ export class ModuleEditEditorComponent implements OnInit, OnChanges {
   creditTooltip: string | undefined;
   hardRequirementsPopupVisible: boolean = false;
   softRequirementsPopupVisible: boolean = false;
+  currentLanguageId: number = 2;
 
   private setInitialResponsible(): void {
     if (this.module && this.module.responsible && this.users.length) {

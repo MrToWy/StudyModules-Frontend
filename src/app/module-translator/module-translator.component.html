@@ -1,6 +1,6 @@
 <div class="compactGrid">
 
-  <app-module-edit-editor
+  <app-module-editor
     [(module)]="currentModule"
     [moduleText]="moduleText"
 
@@ -14,6 +14,7 @@
     (moduleChange)="onModuleChange($event)"
   />
 
+  <!--  ToDo: use languageId instead of moduleText -->
   <app-module-preview
     [module]="currentModule" [moduleText]="moduleText"
   />

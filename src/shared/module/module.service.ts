@@ -96,8 +96,8 @@ export class ModuleService {
 
       ],
       responsible: {id: 0, firstName: "", lastName: "", translations: [{title: ""}]},
-      requirementsSoft: {id: 0, translations: [{name: ""}]},
-      requirementsHard: {id: 0, translations: [{name: ""}]},
+      requirementsSoft: {id: 0, translations: [{name: "", languageId: 1}]},
+      requirementsHard: {id: 0, translations: [{name: "", languageId: 1}]},
       subModules: []
     };
 
@@ -133,6 +133,7 @@ export interface ModuleTranslation {
 
 export interface RequirementTranslation {
   name: string;
+  languageId: number;
 }
 
 export interface Requirement {
