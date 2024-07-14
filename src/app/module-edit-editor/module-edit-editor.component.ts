@@ -108,9 +108,7 @@ export class ModuleEditEditorComponent implements OnInit, OnChanges {
   @Input() languageId!: number;
   @Input() moduleText!: ModuleTranslation;
 
-  @Input() hardRequirement!: Requirement;
   @Input() softRequirement!: Requirement;
-  @Input() hardRequirementText!: RequirementTranslation;
   @Input() softRequirementText!: RequirementTranslation;
 
   protected users: UserDto[] = [];

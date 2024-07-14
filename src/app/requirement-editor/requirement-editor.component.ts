@@ -57,11 +57,9 @@ export class RequirementEditorComponent implements OnInit{
   selectedModules: number[] = [];
 
 
-  @Input() requirement: Requirement | undefined;
-
-  @Input() requirementText!: RequirementTranslation;
-  @Output() requirementTextChange = new EventEmitter<RequirementTranslation>();
+  @Input() requirement!: Requirement;
+  @Output() requirementChange = new EventEmitter<RequirementTranslation>();
   onRequirementChange(requirementText: RequirementTranslation) {
-    this.requirementTextChange.emit(requirementText);
+    this.requirementChange.emit(requirementText);
   }
 }

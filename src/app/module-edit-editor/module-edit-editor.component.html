@@ -83,21 +83,13 @@
 
     <app-requirement-editor
       class="takeTwoColumns"
-      [requirement]="hardRequirement"
-      [(requirementText)]="module.requirementsHard.translations[0]"
+      [(requirement)]="module.requirementsHard"
     />
 
-
-    <div class="takeTwoColumns">
-      <label for="softRequirements">{{ t('softRequirements') }}</label>
-      <input
-        id="softRequirements"
-        type="text"
-        pInputText
-        [readOnly]="true"
-        [(ngModel)]="module.requirementsSoft.translations[0].name"
-      />
-    </div>
+    <app-requirement-editor
+      class="takeTwoColumns"
+      [(requirement)]="module.requirementsSoft"
+    />
 
     <span class="smallPadding takeTwoRows takeTwoColumns">
     <label for="learningOutcomes">{{ t('learningObjectives') }}</label>

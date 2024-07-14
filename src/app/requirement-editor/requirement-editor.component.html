@@ -6,7 +6,7 @@
         type="text"
         pInputText
         [readOnly]="true"
-        [(ngModel)]=requirementText.name
+        [(ngModel)]=requirement.translations[0].name
         (click)="dialogVisible = true"
       />
 
@@ -56,7 +56,7 @@
         id="hardRequirementsText"
         type="text"
         pInputText
-        [(ngModel)]=requirementText.name
+        [(ngModel)]=requirement.translations[0].name
       />
     </div>
 

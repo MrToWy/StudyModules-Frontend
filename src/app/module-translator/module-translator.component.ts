@@ -25,8 +25,6 @@ import {RequirementService} from "../../shared/requirement/requirement.service";
 })
 export class ModuleTranslatorComponent implements OnInit {
   public moduleText: ModuleTranslation;
-  public hardRequirementText!: RequirementTranslation;
-  public softRequirementText!: RequirementTranslation;
 
   @Input()
   nextCallback: EventEmitter<void> = new EventEmitter<void>();
@@ -57,11 +55,6 @@ export class ModuleTranslatorComponent implements OnInit {
       name: "",
       description: ""
     };
-
-    this.hardRequirementText = {
-      languageId: 0,
-      name: ""
-    };
   }
 
   ngOnInit(): void {
@@ -80,12 +73,18 @@ export class ModuleTranslatorComponent implements OnInit {
           // Insert requirementText at the first position
           translations.unshift(requirementText);
         }
-
-        this.hardRequirementText = requirementText;
       });
 
       this.getRequirementTextSoft(this.currentModule.requirementsSoftId).then((requirementText) => {
-        this.softRequirementText = requirementText;
+        let translations = this.currentModule.requirementsSoft.translations;
+        let index = translations.indexOf(requirementText);
+        if (index > -1) {
+          // Remove requirementText from its current position
+          translations.splice(index, 1);
+
+          // Insert requirementText at the first position
+          translations.unshift(requirementText);
+        }
       });
     }
   }
