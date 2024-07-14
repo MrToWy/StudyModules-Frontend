@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {ModuleDetail, ModuleTranslation} from "../../shared/module/module.service";
+import {ModuleDetail} from "../../shared/module/module.service";
 import {NgForOf, NgIf} from "@angular/common";
 import {SelectButtonModule} from "primeng/selectbutton";
 import {FormsModule} from "@angular/forms";

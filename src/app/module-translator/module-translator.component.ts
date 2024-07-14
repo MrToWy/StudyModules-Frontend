@@ -30,6 +30,7 @@ export class ModuleTranslatorComponent implements OnInit {
   @Input()
   currentModule!: ModuleDetail;
   @Output() currentModuleChange = new EventEmitter<any>();
+
   onModuleChange(module: ModuleDetail) {
     this.currentModuleChange.emit(module);
   }
@@ -82,17 +83,17 @@ export class ModuleTranslatorComponent implements OnInit {
     translations: T[],
     serviceCall: () => Observable<{ translations: T[] }>
   ): Promise<T> {
-    const existingTranslation = translations.find(
+    let result = translations.find(
       (translation) => translation.languageId === this.languageId
     );
-    if (existingTranslation) {
-      return existingTranslation;
+
+    if (!result) {
+      const detail = await firstValueFrom(serviceCall());
+      result = detail.translations[0];
+      translations.push(result);
     }
 
-    const detail = await firstValueFrom(serviceCall());
-    translations.push(detail.translations[0]);
-
-    return detail.translations[0];
+    return result;
   }
 
   async getModuleText(): Promise<ModuleTranslation> {

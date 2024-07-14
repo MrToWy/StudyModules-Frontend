@@ -2,8 +2,6 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
 import {
   ModuleDetail,
   ModuleDto,
-  ModuleTranslation, Requirement,
-  RequirementTranslation,
   SubModule
 } from "../../shared/module/module.service";
 import {InputNumberModule} from "primeng/inputnumber";
