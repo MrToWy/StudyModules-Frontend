@@ -26,10 +26,8 @@ export class ModulePreviewComponent {
   @Input()
   set module(value: ModuleDetail | undefined) {
     this._module = value;
-    this.moduleText = value?.translations[0];
   }
 
   private _module: ModuleDetail | undefined;
-  @Input() moduleText: ModuleTranslation | undefined;
   protected readonly translate = translate;
 }

@@ -2,7 +2,6 @@
 
   <app-module-editor
     [(module)]="currentModule"
-    [moduleText]="moduleText"
 
     [languageId]="languageId??0"
     [nextCallback]="nextCallback"
@@ -11,7 +10,7 @@
 
   <!--  ToDo: use languageId instead of moduleText -->
   <app-module-preview
-    [module]="currentModule" [moduleText]="moduleText"
+    [module]="currentModule"
   />
 
 </div>

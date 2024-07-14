@@ -8,12 +8,12 @@
 
     <span class="smallPadding fullwidth">
     <label for="name">{{ t('name') }}</label>
-    <input pInputText id="name" [(ngModel)]="moduleText.name"/>
+    <input pInputText id="name" [(ngModel)]="module.translations[0].name"/>
   </span>
 
     <span class="smallPadding takeTwoColumns">
     <label for="subtitle">{{ t('subtitle') }}</label>
-    <input pInputText id="subtitle" [(ngModel)]="moduleText.subtitle"/>
+    <input pInputText id="subtitle" [(ngModel)]="module.translations[0].subtitle"/>
   </span>
 
     <span class="smallPadding">
@@ -99,7 +99,7 @@
       rows="5"
       cols="30"
       pInputTextarea
-      [(ngModel)]="moduleText.learningOutcomes"></textarea>
+      [(ngModel)]="module.translations[0].learningOutcomes"></textarea>
   </span>
 
 

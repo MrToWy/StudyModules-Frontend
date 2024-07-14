@@ -1,9 +1,9 @@
 <ng-container *transloco="let t;">
 
 <div class="compactGrid">
-  <h1 style="grid-column: span 2">{{t('module')}} {{ module?.abbreviation }} {{ moduleText?.name }}</h1>
+  <h1 style="grid-column: span 2">{{t('module')}} {{ module?.abbreviation }} {{ module?.translations?.at(0)?.name }}</h1>
   <b>{{t('subTitle')}}</b>
-  <span>{{ moduleText?.subtitle }}</span>
+  <span>{{ module?.translations?.at(0)?.subtitle }}</span>
 
   <b>{{t('niveau')}}</b>
   <span>{{ module?.specialization? translate("specializationModule") : translate("noSpecializationModule") }}</span>
@@ -34,9 +34,9 @@
   <span>{{ module?.requirementsSoft?.translations?.at(0)?.name }}</span>
 
   <b>{{t('exam')}}</b>
-  <span>{{ moduleText?.exam }}</span>
+  <span>{{ module?.translations?.at(0)?.exam }}</span>
 
   <b>{{t('learningObjectives')}}</b>
-  <span>{{ moduleText?.learningOutcomes }}</span>
+  <span>{{ module?.translations?.at(0)?.learningOutcomes }}</span>
 </div>
 </ng-container>

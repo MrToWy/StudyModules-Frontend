@@ -106,10 +106,6 @@ export class ModuleEditEditorComponent implements OnInit, OnChanges {
   @Input() module!: ModuleDetail;
   @Output() moduleChange = new EventEmitter<any>();
   @Input() languageId!: number;
-  @Input() moduleText!: ModuleTranslation;
-
-  @Input() softRequirement!: Requirement;
-  @Input() softRequirementText!: RequirementTranslation;
 
   protected users: UserDto[] = [];
   selectedSubmodules: any;

@@ -24,19 +24,15 @@ import {RequirementService} from "../../shared/requirement/requirement.service";
   styleUrl: './module-translator.component.sass'
 })
 export class ModuleTranslatorComponent implements OnInit {
-  public moduleText: ModuleTranslation;
-
   @Input()
   nextCallback: EventEmitter<void> = new EventEmitter<void>();
 
   @Input()
   currentModule!: ModuleDetail;
   @Output() currentModuleChange = new EventEmitter<any>();
-
   onModuleChange(module: ModuleDetail) {
     this.currentModuleChange.emit(module);
   }
-
 
   @Input()
   languageAbbreviation: string | undefined;
@@ -48,20 +44,14 @@ export class ModuleTranslatorComponent implements OnInit {
     private moduleService: ModuleService,
     private requirementService: RequirementService
   ) {
-    // initialize moduleText to prevent error
-    this.moduleText = {
-      exam: "", id: 0, learningOutcomes: "", moduleId: 0, subtitle: "",
-      languageId: 0,
-      name: "",
-      description: ""
-    };
   }
 
   ngOnInit(): void {
     if (this.languageAbbreviation) {
-      this.getModuleText().then((moduleText) => {
-        this.moduleText = moduleText;
-      });
+      this.reorderTranslations(
+        this.getModuleText(),
+        this.currentModule.translations
+      )
 
       this.reorderTranslations(
         this.getRequirementText(this.currentModule.requirementsHardId),
