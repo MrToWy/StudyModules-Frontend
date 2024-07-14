@@ -7,7 +7,7 @@ import {
   ModuleTranslation,
   RequirementTranslation
 } from "../../shared/module/module.service";
-import {firstValueFrom} from "rxjs";
+import {firstValueFrom, Observable} from "rxjs";
 import {RequirementService} from "../../shared/requirement/requirement.service";
 
 @Component({
@@ -63,85 +63,70 @@ export class ModuleTranslatorComponent implements OnInit {
         this.moduleText = moduleText;
       });
 
-      this.getRequirementText(this.currentModule.requirementsHardId).then((requirementText) => {
-        let translations = this.currentModule.requirementsHard.translations;
-        let index = translations.indexOf(requirementText);
-        if (index > -1) {
-          // Remove requirementText from its current position
-          translations.splice(index, 1);
+      this.reorderTranslations(
+        this.getRequirementText(this.currentModule.requirementsHardId),
+        this.currentModule.requirementsHard.translations
+      );
 
-          // Insert requirementText at the first position
-          translations.unshift(requirementText);
-        }
-      });
-
-      this.getRequirementTextSoft(this.currentModule.requirementsSoftId).then((requirementText) => {
-        let translations = this.currentModule.requirementsSoft.translations;
-        let index = translations.indexOf(requirementText);
-        if (index > -1) {
-          // Remove requirementText from its current position
-          translations.splice(index, 1);
-
-          // Insert requirementText at the first position
-          translations.unshift(requirementText);
-        }
-      });
+      this.reorderTranslations(
+        this.getRequirementTextSoft(this.currentModule.requirementsSoftId),
+        this.currentModule.requirementsSoft.translations
+      );
     }
   }
 
+  reorderTranslations(requirementTextPromise: Promise<any>, translations: any[]) {
+    requirementTextPromise.then((requirementText: any) => {
+      let index = translations.indexOf(requirementText);
+      if (index > -1) {
+        // Remove requirementText from its current position
+        translations.splice(index, 1);
 
-  async getModuleText(): Promise<ModuleTranslation> {
-    // try get translation from this.module
-    if (this.currentModule.translations) {
-      const moduleTranslation = this.currentModule.translations.find(
-        (translation: { languageId: number | undefined; }) => translation.languageId === this.languageId);
-      if (moduleTranslation) {
-        return moduleTranslation;
+        // Insert requirementText at the first position
+        translations.unshift(requirementText);
       }
+    });
+  }
+
+  async getTranslation<T extends Translation>(
+    translations: T[],
+    serviceCall: () => Observable<{ translations: T[] }>
+  ): Promise<T> {
+    const existingTranslation = translations.find(
+      (translation) => translation.languageId === this.languageId
+    );
+    if (existingTranslation) {
+      return existingTranslation;
     }
 
-    const moduleDetail = await firstValueFrom(this.moduleService.get(this.currentModule.id, this.languageAbbreviation));
+    const detail = await firstValueFrom(serviceCall());
+    translations.push(detail.translations[0]);
 
+    return detail.translations[0];
+  }
 
-    // attach new translation to this.module
-    this.currentModule.translations.push(moduleDetail.translations[0]);
-
-    return moduleDetail.translations[0];
+  async getModuleText(): Promise<ModuleTranslation> {
+    return this.getTranslation<ModuleTranslation>(
+      this.currentModule.translations,
+      () => this.moduleService.get(this.currentModule.id, this.languageAbbreviation)
+    );
   }
 
   async getRequirementText(requirementId: number): Promise<RequirementTranslation> {
-    // try get translation from this.module
-    if (this.currentModule.requirementsHard.translations) {
-      const requirementTranslation = this.currentModule.requirementsHard.translations.find(
-        (translation: { languageId: number | undefined; }) => translation.languageId === this.languageId);
-      if (requirementTranslation) {
-        return requirementTranslation;
-      }
-    }
-
-    const requirementDetail = await firstValueFrom(this.requirementService.get(requirementId, this.languageAbbreviation!));
-
-    // attach new translation to this.module
-    this.currentModule.requirementsHard.translations.push(requirementDetail.translations[0]);
-
-    return requirementDetail.translations[0];
+    return this.getTranslation<RequirementTranslation>(
+      this.currentModule.requirementsHard.translations,
+      () => this.requirementService.get(requirementId, this.languageAbbreviation!)
+    );
   }
 
   async getRequirementTextSoft(requirementId: number): Promise<RequirementTranslation> {
-    // try get translation from this.module
-    if (this.currentModule.requirementsSoft.translations) {
-      const requirementTranslation = this.currentModule.requirementsSoft.translations.find(
-        (translation: { languageId: number | undefined; }) => translation.languageId === this.languageId);
-      if (requirementTranslation) {
-        return requirementTranslation;
-      }
-    }
-
-    const requirementDetail = await firstValueFrom(this.requirementService.get(requirementId, this.languageAbbreviation!));
-
-    // attach new translation to this.module
-    this.currentModule.requirementsSoft.translations.push(requirementDetail.translations[0]);
-
-    return requirementDetail.translations[0];
+    return this.getTranslation<RequirementTranslation>(
+      this.currentModule.requirementsSoft.translations,
+      () => this.requirementService.get(requirementId, this.languageAbbreviation!)
+    );
   }
+}
+
+interface Translation {
+  languageId: number | undefined;
 }
