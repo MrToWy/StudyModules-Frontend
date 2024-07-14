@@ -1,0 +1,70 @@
+<ng-container *transloco="let t;">
+
+  <label for="softRequirements">{{ t('softRequirements') }}</label>
+      <input
+        id="softRequirements"
+        type="text"
+        pInputText
+        [readOnly]="true"
+        [ngModel]=requirementText?.name
+        (click)="dialogVisible = true"
+      />
+
+
+  <p-dialog [header]="t('editHardRequirements')" [modal]="true" [(visible)]="dialogVisible"
+            [style]="{ width: '35rem', height: '75vh' }">
+    <div class="mediumPadding">
+      <label for="semesterSelect" class="block">Benötigte Semester</label>
+      <p-multiSelect
+        id="semesterSelect"
+        [options]="availableSemester"
+        [(ngModel)]="selectedSemesters"
+        [showToggleAll]="false"
+        placeholder="Semester"
+        scrollHeight="250px"
+        [style]="{'width':'100%'}"
+        display="chip">
+        <ng-template let-group pTemplate="group">
+          <span>{{ group.label }}</span>
+        </ng-template>
+      </p-multiSelect>
+    </div>
+
+    <div class="mediumPadding">
+      <label for="moduleSelect" class="block">Zusätzlich benötigte Module</label>
+      <p-multiSelect
+        id="moduleSelect"
+        [options]="availableModules"
+        [(ngModel)]="selectedModules"
+        [showToggleAll]="false"
+        [optionLabel]="'abbreviation'"
+        [optionValue]="'id'"
+        [maxSelectedLabels]="availableModules?.length??0"
+        placeholder="Module"
+        scrollHeight="250px"
+        [style]="{'width':'100%'}"
+        display="chip">
+        <ng-template let-module pTemplate="item">
+          <span>{{ module.abbreviation }}</span>
+        </ng-template>
+      </p-multiSelect>
+    </div>
+
+    <div class="mediumPadding">
+      <label for="hardRequirementsText">{{ t('hardRequirementsText') }}</label>
+      <input
+        id="hardRequirementsText"
+        type="text"
+        pInputText
+        [ngModel]=requirementText?.name
+      />
+    </div>
+
+    <ng-template pTemplate="footer">
+      <div class="flex justify-content-end gap-2">
+        <p-button [label]="t('cancel')" severity="secondary" (onClick)="dialogVisible = false"/>
+        <p-button [label]="t('save')" (onClick)="dialogVisible = false"/>
+      </div>
+    </ng-template>
+  </p-dialog>
+</ng-container>

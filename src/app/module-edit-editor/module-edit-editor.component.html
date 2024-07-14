@@ -1,23 +1,23 @@
 <ng-container *transloco="let t;">
 
-<div class="compactGrid">
+  <div class="compactGrid">
   <span class="smallPadding fullwidth">
     <label for="number">Nummer</label>
     <p-inputNumber [style]="{'width':'100%'}" class="fullwidth" id="number" [(ngModel)]="module.number"/>
   </span>
 
-  <span class="smallPadding fullwidth">
-    <label for="name">{{t('name')}}</label>
+    <span class="smallPadding fullwidth">
+    <label for="name">{{ t('name') }}</label>
     <input pInputText id="name" [(ngModel)]="moduleText.name"/>
   </span>
 
-  <span class="smallPadding takeTwoColumns">
-    <label for="subtitle">{{t('subtitle')}}</label>
+    <span class="smallPadding takeTwoColumns">
+    <label for="subtitle">{{ t('subtitle') }}</label>
     <input pInputText id="subtitle" [(ngModel)]="moduleText.subtitle"/>
   </span>
 
-  <span class="smallPadding">
-    <label for="credits">{{t('credits')}}</label>
+    <span class="smallPadding">
+    <label for="credits">{{ t('credits') }}</label>
     <p-inputNumber
       (onInput)="validateCredits(true)"
       [style]="{'width':'100%'}"
@@ -28,8 +28,8 @@
     />
   </span>
 
-  <span class="smallPadding fullwidth">
-    <label for="specialization">{{t('niveau')}}</label>
+    <span class="smallPadding fullwidth">
+    <label for="specialization">{{ t('niveau') }}</label>
     <p-dropdown
       id="specialization"
       class="fullwidth"
@@ -42,13 +42,13 @@
     </p-dropdown>
   </span>
 
-  <span class="smallPadding">
-    <label for="semester">{{t('moduleLength')}}</label>
+    <span class="smallPadding">
+    <label for="semester">{{ t('moduleLength') }}</label>
     <p-inputNumber [style]="{'width':'100%'}" id="semester" [(ngModel)]="module.courseLength"/>
   </span>
 
-  <span class="smallPadding fullwidth">
-    <label for="elective">{{t('elective')}}</label>
+    <span class="smallPadding fullwidth">
+    <label for="elective">{{ t('elective') }}</label>
     <p-dropdown
       id="elective"
       class="fullwidth"
@@ -61,24 +61,13 @@
     </p-dropdown>
   </span>
 
-  <span class="smallPadding">
-    <label for="responsible">{{t('responsible')}}</label>
+    <span class="smallPadding">
+    <label for="responsible">{{ t('responsible') }}</label>
   <app-responsible-dropdown id="responsible" [module]="module" [users]="users"></app-responsible-dropdown>
   </span>
 
-  <span class="smallPadding takeTwoRows">
-    <label for="learningOutcomes">{{t('learningObjectives')}}</label>
-    <textarea
-      class="fullwidth fullheight"
-      id="learningOutcomes"
-      rows="5"
-      cols="30"
-      pInputTextarea
-      [(ngModel)]="moduleText.learningOutcomes"></textarea>
-  </span>
-
-  <span class="smallPadding fullwidth">
-    <label for="submodules">{{t('subModules')}}</label>
+    <span class="smallPadding fullwidth">
+    <label for="submodules">{{ t('subModules') }}</label>
     <p-multiSelect
       id="submodules"
       [style]="{'width':'100%'}"
@@ -92,10 +81,41 @@
     </p-multiSelect>
   </span>
 
+    <app-requirement-editor
+      class="takeTwoColumns"
+      [requirement]="hardRequirement"
+      [requirementText]="hardRequirementText"
+    />
 
-<p-button
-  (onClick)="validate()"
-  [label]="t('proceed')"
-/>
-</div>
+
+    <div class="takeTwoColumns">
+      <label for="softRequirements">{{ t('softRequirements') }}</label>
+      <input
+        id="softRequirements"
+        type="text"
+        pInputText
+        [readOnly]="true"
+        [ngModel]="module.requirementsSoft.translations[0].name"
+      />
+    </div>
+
+    <span class="smallPadding takeTwoRows takeTwoColumns">
+    <label for="learningOutcomes">{{ t('learningObjectives') }}</label>
+    <textarea
+      class="fullwidth fullheight"
+      id="learningOutcomes"
+      rows="5"
+      cols="30"
+      pInputTextarea
+      [(ngModel)]="moduleText.learningOutcomes"></textarea>
+  </span>
+
+
+    <p-button
+      (onClick)="validate()"
+      [label]="t('proceed')"
+    />
+  </div>
+
+
 </ng-container>

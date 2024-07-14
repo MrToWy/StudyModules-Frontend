@@ -1,5 +1,11 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {ModuleDetail, ModuleTranslation, SubModule} from "../../shared/module/module.service";
+import {
+  ModuleDetail,
+  ModuleDto,
+  ModuleTranslation, Requirement,
+  RequirementTranslation,
+  SubModule
+} from "../../shared/module/module.service";
 import {InputNumberModule} from "primeng/inputnumber";
 import {FormsModule} from "@angular/forms";
 import {PasswordModule} from "primeng/password";
@@ -22,6 +28,10 @@ import {StyleClassModule} from "primeng/styleclass";
 import {ResponsibleDropdownComponent} from "../responsible-dropdown/responsible-dropdown.component";
 import {TooltipModule} from "primeng/tooltip";
 import {translate, TranslocoDirective} from "@jsverse/transloco";
+import {InputGroupModule} from "primeng/inputgroup";
+import {DialogModule} from "primeng/dialog";
+import {RequirementDetailComponent} from "../requirement-detail/requirement-detail.component";
+import {RequirementEditorComponent} from "../requirement-editor/requirement-editor.component";
 
 @Component({
   selector: 'app-module-edit-editor',
@@ -43,7 +53,11 @@ import {translate, TranslocoDirective} from "@jsverse/transloco";
     StyleClassModule,
     ResponsibleDropdownComponent,
     TooltipModule,
-    TranslocoDirective
+    TranslocoDirective,
+    InputGroupModule,
+    DialogModule,
+    RequirementDetailComponent,
+    RequirementEditorComponent
   ],
   providers: [TextAutocompleteService],
   templateUrl: './module-edit-editor.component.html',
@@ -53,6 +67,14 @@ export class ModuleEditEditorComponent implements OnInit, OnChanges {
   protected submodules: any[] = [];
   protected submodulesForDropdown: any[] = [];
   protected creditClass: string = "";
+
+  availableSemester: any[] | undefined;
+  requiredSoftSemester: any;
+  requiredHardSemester: any;
+
+  availableModules: ModuleDto[] | undefined;
+  requiredSoftModules: any;
+  requiredHardModules: number[] = [];
 
   @Input() nextCallback: EventEmitter<void> = new EventEmitter<void>();
 
@@ -86,11 +108,18 @@ export class ModuleEditEditorComponent implements OnInit, OnChanges {
   @Input() languageId!: number;
   @Input() moduleText!: ModuleTranslation;
 
+  @Input() hardRequirement!: Requirement;
+  @Input() softRequirement!: Requirement;
+  @Input() hardRequirementText!: RequirementTranslation;
+  @Input() softRequirementText!: RequirementTranslation;
+
   protected users: UserDto[] = [];
   selectedSubmodules: any;
   electiveOptions: any[] | undefined;
   specializationOptions: any[] | undefined;
   creditTooltip: string | undefined;
+  hardRequirementsPopupVisible: boolean = false;
+  softRequirementsPopupVisible: boolean = false;
 
   private setInitialResponsible(): void {
     if (this.module && this.module.responsible && this.users.length) {
@@ -99,6 +128,17 @@ export class ModuleEditEditorComponent implements OnInit, OnChanges {
   }
 
   private loadData() {
+    this.availableSemester = [
+
+                    { label: '1. Semester', value: '1' },
+                    { label: '2. Semester', value: '2' },
+                    { label: '3. Semester', value: '3' },
+                    { label: '4. Semester', value: '4' },
+                    { label: '5. Semester', value: '5' },
+                    { label: '6. Semester', value: '6' },
+                    { label: '7. Semester', value: '7' }
+                ];
+
     this.userService.getAll().subscribe(users => {
         this.users = users;
 

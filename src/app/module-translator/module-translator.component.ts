@@ -1,8 +1,14 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ModuleEditEditorComponent} from "../module-edit-editor/module-edit-editor.component";
 import {ModulePreviewComponent} from "../module-preview/module-preview.component";
-import {ModuleDetail, ModuleService, ModuleTranslation} from "../../shared/module/module.service";
+import {
+  ModuleDetail,
+  ModuleService,
+  ModuleTranslation,
+  RequirementTranslation
+} from "../../shared/module/module.service";
 import {firstValueFrom} from "rxjs";
+import {RequirementService} from "../../shared/requirement/requirement.service";
 
 @Component({
   selector: 'app-module-translator',
@@ -19,11 +25,30 @@ import {firstValueFrom} from "rxjs";
 })
 export class ModuleTranslatorComponent implements OnInit{
   public moduleText: ModuleTranslation;
+  public hardRequirementText!: RequirementTranslation;
+  public softRequirementText!: RequirementTranslation;
 
   @Input()
   nextCallback: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private moduleService: ModuleService) {
+  @Input()
+  currentModule!: ModuleDetail;
+  @Output() currentModuleChange = new EventEmitter<any>();
+  onModuleChange(module: ModuleDetail) {
+    this.currentModuleChange.emit(module);
+  }
+
+
+  @Input()
+  languageAbbreviation: string | undefined;
+
+  @Input()
+  languageId: number | undefined;
+
+  constructor(
+    private moduleService: ModuleService,
+    private requirementService: RequirementService
+    ) {
     // initialize moduleText to prevent error
     this.moduleText = {
       exam: "", id: 0, learningOutcomes: "", moduleId: 0, subtitle: "",
@@ -38,21 +63,17 @@ export class ModuleTranslatorComponent implements OnInit{
       this.getModuleText().then((moduleText) => {
         this.moduleText = moduleText;
       });
+
+      this.getRequirementText(this.currentModule.requirementsHardId).then((requirementText) => {
+        this.hardRequirementText = requirementText;
+      });
+      this.getRequirementText(this.currentModule.requirementsSoftId).then((requirementText) => {
+        this.softRequirementText = requirementText;
+      });
     }
     }
 
-  @Input() currentModule: any;
-  @Output() currentModuleChange = new EventEmitter<any>();
-  onModuleChange(module: ModuleDetail) {
-    this.currentModuleChange.emit(module);
-  }
 
-
-  @Input()
-  languageAbbreviation: string | undefined;
-
-  @Input()
-  languageId: number | undefined;
 
   async getModuleText(): Promise<ModuleTranslation> {
     // try get translation from this.module
@@ -70,5 +91,10 @@ export class ModuleTranslatorComponent implements OnInit{
     this.currentModule.translations.push(moduleDetail.translations[0]);
 
     return moduleDetail.translations[0];
+  }
+
+  async getRequirementText(requirementId: number): Promise<RequirementTranslation> {
+    const requirementDetail = await firstValueFrom(this.requirementService.get(requirementId, this.languageAbbreviation!));
+    return requirementDetail.translations[0];
   }
 }

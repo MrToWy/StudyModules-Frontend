@@ -3,11 +3,19 @@
   <app-module-edit-editor
     [(module)]="currentModule"
     [moduleText]="moduleText"
+
+    [hardRequirement]="currentModule.requirementsHard"
+    [hardRequirementText]="hardRequirementText"
+    [softRequirement]="currentModule.requirementsSoft"
+    [softRequirementText]="softRequirementText"
+
     [languageId]="languageId??0"
     [nextCallback]="nextCallback"
     (moduleChange)="onModuleChange($event)"
   />
 
-  <app-module-preview [module]="currentModule" [moduleText]="moduleText"/>
+  <app-module-preview
+    [module]="currentModule" [moduleText]="moduleText"
+  />
 
 </div>

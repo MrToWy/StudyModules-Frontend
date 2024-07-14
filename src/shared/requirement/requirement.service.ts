@@ -20,6 +20,11 @@ export class RequirementService {
   getOne(id: number): Observable<RequirementDto> {
     return this.http.get<any>(this.requirementURL + "/" + id);
   }
+
+  get(requirementId: number, languageAbbreviation: string) {
+    const headers = { 'language': languageAbbreviation };
+    return this.http.get<any>(this.requirementURL + "/" + requirementId, { headers });
+  }
 }
 
 export interface RequirementTranslationDto {
