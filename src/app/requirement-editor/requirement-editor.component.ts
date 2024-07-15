@@ -8,6 +8,7 @@ import {ButtonModule} from "primeng/button";
 import {ModuleDto, Requirement, RequirementTranslation} from "../../shared/module/module.service";
 import {CourseService} from "../../shared/course/course.service";
 import {UrlSegmentService} from "../../shared/url/url-segment.service";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-requirement-editor',
@@ -18,7 +19,8 @@ import {UrlSegmentService} from "../../shared/url/url-segment.service";
     MultiSelectModule,
     FormsModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    NgIf
   ],
   providers: [CourseService],
   templateUrl: './requirement-editor.component.html',
@@ -45,7 +47,10 @@ export class RequirementEditorComponent implements OnInit{
 
       this.courseService.get(Number(this.urlSegmentService.getIdFromSegment("course"))).subscribe(course => {
         this.availableModules = course.modules;
+        console.log(this.availableModules);
       });
+
+      this.onRequirementChange(this.requirement);
   }
 
   dialogVisible: boolean = false;
@@ -58,8 +63,19 @@ export class RequirementEditorComponent implements OnInit{
 
 
   @Input() requirement!: Requirement;
-  @Output() requirementChange = new EventEmitter<RequirementTranslation>();
-  onRequirementChange(requirementText: RequirementTranslation) {
-    this.requirementChange.emit(requirementText);
+  @Output() requirementChange = new EventEmitter<Requirement>();
+  onRequirementChange(requirement1: Requirement) {
+
+    this.selectedSemesters = this.requirement.requiredSemesters != "" ? this.requirement.requiredSemesters.split(',') : [];
+    this.selectedModules = this.requirement.modules.map(module => module.id);
+    this.selectedModules = [...this.selectedModules];
+    console.log(this.selectedModules);
+
+    this.requirementChange.emit(requirement1);
+
+  }
+
+  loglog() {
+    console.log(this.selectedModules)
   }
 }

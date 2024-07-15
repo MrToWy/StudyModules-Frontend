@@ -44,8 +44,6 @@ export class RequirementDetailComponent implements OnInit {
   modulesInUseSoft: ModuleDto[] = [];
   modulesInUseHard: ModuleDto[] = [];
 
-  files: TreeNode<any>[] | undefined;
-
   requirements: any[] | undefined;
   selectedRequirements: any;
 
@@ -75,9 +73,6 @@ export class RequirementDetailComponent implements OnInit {
       });
     });
 
-
-
-
     this.requirements = [
 
                     { label: '1. Semester', value: '1' },
@@ -98,40 +93,5 @@ export class RequirementDetailComponent implements OnInit {
 
   private loadCourses() {
     this.filteredModules = this.selectedCourse?.modules;
-
-    if (this.filteredModules) {
-      this.files = this.transformModulesToTreeNodes(this.filteredModules);
-    }
   }
-
-  private transformModulesToTreeNodes(modules: ModuleDto[]): TreeNode[] {
-    const semesterMap: { [key: string]: TreeNode } = {};
-
-    modules.forEach(module => {
-      const semesters = module.semester.split('-').map((s: string) => s.trim());
-
-      semesters.forEach(semester => {
-        if (!semesterMap[semester]) {
-          console.log(semester)
-          semesterMap[semester] = {
-            label: `Semester ${semester}`,
-            children: []
-          };
-        }
-
-        semesterMap[semester].children?.push({
-          label: module.abbreviation,
-          data: module
-        });
-      });
-    });
-
-    return Object.values(semesterMap);
-  }
-
-  onModuleRemove($event: MouseEvent, module: any) {
-
-  }
-
-  protected readonly console = console;
 }

@@ -32,7 +32,8 @@
 
     <div class="mediumPadding">
       <label for="moduleSelect" class="block">Zusätzlich benötigte Module</label>
-      <p-multiSelect
+      <p-multiSelect *ngIf="dialogVisible"
+        (onClick)="loglog()"
         id="moduleSelect"
         [options]="availableModules"
         [(ngModel)]="selectedModules"
