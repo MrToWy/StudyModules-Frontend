@@ -2,12 +2,11 @@
 
   <app-submodule-editor
     [(subModule)]="currentSubModule"
-    [subModuleText]="submoduleText"
     [languageId]="languageId??0"
     [nextCallback]="nextCallback"
     (subModuleChange)="onSubModuleChange($event)"
   />
 
-  <app-submodule-preview [submodule]="currentSubModule" [submoduleText]="submoduleText" />
+  <app-submodule-preview [submodule]="currentSubModule" />
 
 </div>

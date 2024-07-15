@@ -1,5 +1,4 @@
 import {Component, Input} from '@angular/core';
-import {ModuleDetail, ModuleTranslation, SubModule, SubModuleTranslation} from "../../shared/module/module.service";
 import {SubModuleDetail} from "../../shared/submodule/submodule.service";
 import {translate} from "@jsverse/transloco";
 
@@ -14,20 +13,18 @@ export class SubmodulePreviewComponent {
   distinctAbbreviations: string[] = [];
   requirements: string = "";
 
-  get submodule(): SubModuleDetail | undefined {
+  get submodule(): SubModuleDetail {
     return this._submodule;
   }
 
   @Input()
-  set submodule(value: SubModuleDetail | undefined) {
+  set submodule(value: SubModuleDetail) {
     this._submodule = value;
-    this.submoduleText = value?.translations[0];
     this.extractDistinctAbbreviations();
     this.requirements = this.extractRequirements();
   }
 
-  private _submodule: SubModuleDetail | undefined;
-  @Input() submoduleText: SubModuleTranslation | undefined;
+  private _submodule!: SubModuleDetail;
 
   extractDistinctAbbreviations(): void {
     if (this.submodule?.modules) {

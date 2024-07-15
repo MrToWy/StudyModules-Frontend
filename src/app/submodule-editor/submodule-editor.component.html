@@ -8,22 +8,22 @@
 
     <span class="smallPadding fullwidth">
     <label for="name">{{ t('name') }}</label>
-    <input pInputText id="name" [(ngModel)]="subModuleText.name"/>
+    <input pInputText id="name" [(ngModel)]="subModule.translations[0].name"/>
   </span>
 
     <span class="smallPadding takeTwoColumns">
     <label for="subtitle">{{ t('subtitle') }}</label>
-    <input pInputText id="subtitle" [(ngModel)]="subModuleText.subtitle"/>
+    <input pInputText id="subtitle" [(ngModel)]="subModule.translations[0].subtitle"/>
   </span>
 
     <span class="smallPadding">
     <label for="language">{{ t('language') }}</label>
-    <input pInputText id="language" [(ngModel)]="subModuleText.spokenlanguage"/>
+    <input pInputText id="language" [(ngModel)]="subModule.translations[0].spokenlanguage"/>
   </span>
 
     <span class="smallPadding">
     <label for="selfStudyHints">{{ t('selfStudyHints') }}</label>
-    <input pInputText id="selfStudyHints" [(ngModel)]="subModuleText.selfStudyHints"/>
+    <input pInputText id="selfStudyHints" [(ngModel)]="subModule.translations[0].selfStudyHints"/>
   </span>
 
     <span class="smallPadding">
@@ -33,12 +33,12 @@
 
     <span class="smallPadding">
     <label for="type">{{ t('type') }}</label>
-    <input pInputText id="type" [(ngModel)]="subModuleText.type"/>
+    <input pInputText id="type" [(ngModel)]="subModule.translations[0].type"/>
   </span>
 
     <span class="smallPadding">
     <label for="exam">{{ t('exam') }}</label>
-    <input pInputText id="exam" [(ngModel)]="subModuleText.exam"/>
+    <input pInputText id="exam" [(ngModel)]="subModule.translations[0].exam"/>
   </span>
 
     <span class="smallPadding">
@@ -115,7 +115,7 @@
       rows="5"
       cols="30"
       pInputTextarea
-      [(ngModel)]="subModuleText.learningOutcomes"></textarea>
+      [(ngModel)]="subModule.translations[0].learningOutcomes"></textarea>
   </span>
 
     <span class="smallPadding takeTwoRows">
@@ -126,7 +126,7 @@
       rows="5"
       cols="30"
       pInputTextarea
-      [(ngModel)]="subModuleText.content"></textarea>
+      [(ngModel)]="subModule.translations[0].content"></textarea>
   </span>
 
     <span class="smallPadding takeTwoRows">
@@ -137,7 +137,7 @@
       rows="5"
       cols="30"
       pInputTextarea
-      [(ngModel)]="subModuleText.presenceRequirements"></textarea>
+      [(ngModel)]="subModule.translations[0].presenceRequirements"></textarea>
   </span>
 
     <span class="smallPadding takeTwoRows">
@@ -148,7 +148,7 @@
       rows="5"
       cols="30"
       pInputTextarea
-      [(ngModel)]="subModuleText.selfStudyRequirements"></textarea>
+      [(ngModel)]="subModule.translations[0].selfStudyRequirements"></textarea>
   </span>
     <div class="takeTwoRows">
     <span class="smallPadding takeTwoRows">
@@ -159,7 +159,7 @@
       rows="5"
       cols="30"
       pInputTextarea
-      [(ngModel)]="subModuleText.literature"></textarea>
+      [(ngModel)]="subModule.translations[0].literature"></textarea>
   </span>
     </div>
   </div>

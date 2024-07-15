@@ -1,8 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UserDto, UserService} from "../../shared/user/user.service";
 import {LanguageService} from "../../shared/language/language.service";
-import {SubModuleDetail, SubmoduleService} from "../../shared/submodule/submodule.service";
-import {ModuleDetail, ModuleTranslation, SubModuleTranslation} from "../../shared/module/module.service";
+import {SubModuleDetail} from "../../shared/submodule/submodule.service";
 import {InputNumberModule} from "primeng/inputnumber";
 import {FormsModule} from "@angular/forms";
 import {TooltipModule} from "primeng/tooltip";
@@ -34,7 +33,6 @@ export class SubmoduleEditorComponent implements OnInit {
   @Input() subModule!: SubModuleDetail;
   @Output() subModuleChange = new EventEmitter<any>();
   @Input() languageId!: number;
-  @Input() subModuleText!: SubModuleTranslation;
 
   protected users: UserDto[] = [];
 
