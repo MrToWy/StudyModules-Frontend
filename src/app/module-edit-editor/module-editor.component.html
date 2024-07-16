@@ -82,11 +82,15 @@
   </span>
 
     <app-requirement-editor
+      [label]="t('hardRequirements')"
+      [caption]="t('editHardRequirements')"
       class="takeTwoColumns"
       [(requirement)]="module.requirementsHard"
     />
 
     <app-requirement-editor
+      [label]="t('softRequirements')"
+      [caption]="t('editSoftRequirements')"
       class="takeTwoColumns"
       [(requirement)]="module.requirementsSoft"
     />

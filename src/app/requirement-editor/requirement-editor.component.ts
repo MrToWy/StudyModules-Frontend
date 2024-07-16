@@ -61,6 +61,8 @@ export class RequirementEditorComponent implements OnInit{
   availableModules: ModuleDto[] | undefined;
   selectedModules: number[] = [];
 
+  @Input() label!: string;
+  @Input() caption!: string;
 
   @Input() requirement!: Requirement;
   @Output() requirementChange = new EventEmitter<Requirement>();

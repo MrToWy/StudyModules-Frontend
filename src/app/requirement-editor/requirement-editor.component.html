@@ -1,6 +1,6 @@
 <ng-container *transloco="let t;">
 
-  <label for="softRequirements">{{ t('softRequirements') }}</label>
+  <label for="softRequirements">{{label}}</label>
       <input
         id="softRequirements"
         type="text"
@@ -11,7 +11,7 @@
       />
 
 
-  <p-dialog [header]="t('editHardRequirements')" [modal]="true" [(visible)]="dialogVisible"
+  <p-dialog [header]="caption" [modal]="true" [(visible)]="dialogVisible"
             [style]="{ width: '35rem', height: '75vh' }">
     <div class="mediumPadding">
       <label for="semesterSelect" class="block">Benötigte Semester</label>

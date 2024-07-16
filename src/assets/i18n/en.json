@@ -36,6 +36,8 @@
   "deleteDegreeProgramQuery": "Do you really want to delete this course?",
   "shortName": "Short name",
   "respectively": "resp.",
+  "editHardRequirements": "Edit hard requirements",
+  "editSoftRequirements": "Edit soft requirements",
 
 
   "modulesearch": {

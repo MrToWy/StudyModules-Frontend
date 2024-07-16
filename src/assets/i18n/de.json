@@ -36,6 +36,8 @@
   "deleteDegreeProgramQuery": "Soll der Studiengang wirklich vollständig gelöscht werden?",
   "shortName": "Kurzname",
   "respectively": "bzw.",
+  "editHardRequirements": "Vorraussetzungen nach Prüfungsordnung bearbeiten",
+  "editSoftRequirements": "Empfohlene Voraussetzungen bearbeiten",
 
   "modulesearch": {
     "placeholder": "Module suchen"
