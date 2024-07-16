@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ModuleEditEditorComponent} from "../module-edit-editor/module-edit-editor.component";
+import {ModuleEditorComponent} from "../module-edit-editor/module-editor.component";
 import {ModulePreviewComponent} from "../module-preview/module-preview.component";
 import {SubmodulePreviewComponent} from "../submodule-preview/submodule-preview.component";
 import {SubModuleTranslation} from "../../shared/module/module.service";
@@ -11,7 +11,7 @@ import {SubmoduleEditorComponent} from "../submodule-editor/submodule-editor.com
   selector: 'app-submodule-translator',
   standalone: true,
   imports: [
-    ModuleEditEditorComponent,
+    ModuleEditorComponent,
     ModulePreviewComponent,
     SubmodulePreviewComponent,
     SubmoduleEditorComponent

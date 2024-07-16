@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ModuleEditEditorComponent} from "../module-edit-editor/module-edit-editor.component";
+import {ModuleEditorComponent} from "../module-edit-editor/module-editor.component";
 import {ModulePreviewComponent} from "../module-preview/module-preview.component";
 import {
   ModuleDetail,
@@ -14,7 +14,7 @@ import {RequirementService} from "../../shared/requirement/requirement.service";
   selector: 'app-module-translator',
   standalone: true,
   imports: [
-    ModuleEditEditorComponent,
+    ModuleEditorComponent,
     ModulePreviewComponent
   ],
   providers: [

@@ -58,10 +58,10 @@ import {RequirementEditorComponent} from "../requirement-editor/requirement-edit
     RequirementEditorComponent
   ],
   providers: [TextAutocompleteService],
-  templateUrl: './module-edit-editor.component.html',
+  templateUrl: './module-editor.component.html',
   styleUrl: './module-edit-editor.component.sass'
 })
-export class ModuleEditEditorComponent implements OnInit, OnChanges {
+export class ModuleEditorComponent implements OnInit, OnChanges {
   protected submodules: any[] = [];
   protected submodulesForDropdown: any[] = [];
   protected creditClass: string = "";

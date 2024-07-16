@@ -6,7 +6,7 @@ import {SubmodulePreviewComponent} from "../submodule-preview/submodule-preview.
 import {TabViewModule} from "primeng/tabview";
 import {LanguageDto, LanguageService} from "../../shared/language/language.service";
 import {NgForOf, NgIf} from "@angular/common";
-import {ModuleEditEditorComponent} from "../module-edit-editor/module-edit-editor.component";
+import {ModuleEditorComponent} from "../module-edit-editor/module-editor.component";
 import {ButtonModule} from "primeng/button";
 import {ModuleTranslatorComponent} from "../module-translator/module-translator.component";
 import {DialogModule} from "primeng/dialog";
@@ -28,7 +28,7 @@ import {translate, TranslocoDirective} from "@jsverse/transloco";
     SubmodulePreviewComponent,
     TabViewModule,
     NgForOf,
-    ModuleEditEditorComponent,
+    ModuleEditorComponent,
     ButtonModule,
     ModuleTranslatorComponent,
     NgIf,
