@@ -28,7 +28,7 @@ export class ModuleService {
           course_name: module.degreeProgram.translations[0].name,
           departmentId: module.degreeProgram.department.id,
           semester: module.semester,
-          responsible: `${module.responsible.firstName} ${module.responsible.lastName}`,
+          responsible: `${module.responsible?.firstName} ${module.responsible?.lastName}`,
           facultyId: module.degreeProgram.department.facultyId,
           specialization: module.specialization,
           elective: module.elective,
