@@ -70,8 +70,11 @@ export class ModuleEditComponent implements OnInit {
       });
     }
 
+    const degreeProgramId = Number(this.urlSegmentService.getIdFromSegment("course"));
+
     if(moduleIdParameter === "new") {
       this.currentModule = this.moduleService.getEmptyModuleDetail();
+      this.currentModule.degreeProgramId = degreeProgramId;
     }
 
     this.languageService.getLanguages().subscribe((languages) => {
