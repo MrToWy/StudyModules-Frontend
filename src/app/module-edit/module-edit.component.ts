@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ModulePreviewComponent} from "../module-preview/module-preview.component";
-import {ModuleDetail, ModuleDto, ModuleService} from "../../shared/module/module.service";
+import {ModuleDetail, ModuleService} from "../../shared/module/module.service";
 import {UrlSegmentService} from "../../shared/url/url-segment.service";
 import {SubmodulePreviewComponent} from "../submodule-preview/submodule-preview.component";
 import {TabViewModule} from "primeng/tabview";
@@ -18,7 +18,7 @@ import {ToastModule} from "primeng/toast";
 import {MessageService} from "primeng/api";
 import {ActivatedRoute, Router} from "@angular/router";
 import {StepperModule} from "primeng/stepper";
-import {translate, TranslocoDirective} from "@jsverse/transloco";
+import {TranslocoDirective} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-module-edit',
