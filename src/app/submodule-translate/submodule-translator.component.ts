@@ -74,7 +74,10 @@ export class SubmoduleTranslatorComponent {
 
     if (!result) {
       const detail = await firstValueFrom(serviceCall());
-      result = detail.translations[0];
+      if(detail?.translations?.length > 0)
+        result = detail.translations[0];
+      else
+        result = {languageId: this.languageId} as T;
       translations.push(result);
     }
 
