@@ -29,6 +29,10 @@ export class SubmoduleService {
     }
     return this.http.get<SubModuleDetail>(this.submoduleURL + "/" + id, {headers});
   }
+
+  save(currentSubmodule: SubModule) {
+    return this.http.put(this.submoduleURL, currentSubmodule);
+  }
 }
 
 export interface SubModuleDetail {

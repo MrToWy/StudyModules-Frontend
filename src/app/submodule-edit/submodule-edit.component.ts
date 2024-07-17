@@ -11,6 +11,8 @@ import {MessageService} from "primeng/api";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {UrlSegmentService} from "../../shared/url/url-segment.service";
 import {SubmoduleService} from "../../shared/submodule/submodule.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {SubModule} from "../../shared/module/module.service";
 
 @Component({
   selector: 'app-submodule-edit',
@@ -35,7 +37,7 @@ import {SubmoduleService} from "../../shared/submodule/submodule.service";
 export class SubmoduleEditComponent implements OnInit {
 
   availableLanguages: LanguageDto[] | undefined;
-  currentSubmodule: any;
+  currentSubmodule!: SubModule;
   saveDialogVisible: boolean = false;
   saving: boolean = false;
   summaryText: string = "";
@@ -44,7 +46,9 @@ export class SubmoduleEditComponent implements OnInit {
   constructor(
     protected languageService: LanguageService,
     private urlSegmentService: UrlSegmentService,
-    private subModuleService: SubmoduleService
+    private subModuleService: SubmoduleService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {
   }
 
@@ -52,7 +56,7 @@ export class SubmoduleEditComponent implements OnInit {
     const subModuleIdParameter = this.urlSegmentService.getIdFromSegment("submodules");
     const subModuleId = Number(subModuleIdParameter);
 
-    if(subModuleId) {
+    if (subModuleId) {
       this.subModuleService.getOne(subModuleId).subscribe((subModule) => {
         this.currentSubmodule = subModule;
       });
@@ -64,6 +68,17 @@ export class SubmoduleEditComponent implements OnInit {
   }
 
   saveSubModule() {
+// is summary text empty?
+    if (!this.summaryText) {
+      this.summeryInputFieldClass = "ng-invalid ng-dirty";
+      return;
+    }
 
+    this.saving = true;
+    this.subModuleService.save(this.currentSubmodule).subscribe(async (module: any) => {
+      this.saving = false;
+      this.saveDialogVisible = false;
+      await this.router.navigate(['..', '..', module.id], {relativeTo: this.route});
+    });
   }
 }
