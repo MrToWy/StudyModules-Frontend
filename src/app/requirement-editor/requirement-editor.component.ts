@@ -47,7 +47,6 @@ export class RequirementEditorComponent implements OnInit{
 
       this.courseService.get(Number(this.urlSegmentService.getIdFromSegment("course"))).subscribe(course => {
         this.availableModules = course.modules;
-        console.log(this.availableModules);
       });
 
       this.onRequirementChange(this.requirement);
@@ -61,8 +60,11 @@ export class RequirementEditorComponent implements OnInit{
   availableModules: ModuleDto[] | undefined;
   selectedModules: number[] = [];
 
+  text: string = "";
+
   @Input() label!: string;
   @Input() caption!: string;
+  @Input() languageId!: number;
 
   @Input() requirement!: Requirement;
   @Output() requirementChange = new EventEmitter<Requirement>();
@@ -70,14 +72,27 @@ export class RequirementEditorComponent implements OnInit{
 
     this.selectedSemesters = this.requirement.requiredSemesters != "" ? this.requirement.requiredSemesters.split(',') : [];
     this.selectedModules = this.requirement.modules.map(module => module.id);
-    this.selectedModules = [...this.selectedModules];
-    console.log(this.selectedModules);
+    this.selectedModules = [...this.selectedModules]
+    this.text = this.requirement.translations.find(translation => translation.languageId === this.languageId)?.name || "";
+    //console.log("requirement", this.requirement);
+    //console.log("languageId", this.languageId);
+    //console.log("text", this.text);
+    //console.log("find", this.requirement.translations.find(translation => translation.languageId === this.languageId));
 
     this.requirementChange.emit(requirement1);
-
   }
 
-  loglog() {
-    console.log(this.selectedModules)
+  save() {
+    this.requirement.requiredSemesters = this.selectedSemesters.join(',');
+    console.log(JSON.stringify(this.requirement.modules));
+    this.requirement.modules = this.availableModules!.filter(module => this.selectedModules.includes(module.id));
+    console.log(JSON.stringify(this.requirement.modules));
+    this.requirement.translations.find(translation => translation.languageId === this.languageId)!.name = this.text;
+    this.dialogVisible = false;
+  }
+
+  openDialog() {
+    this.dialogVisible = true
+    this.ngOnInit();
   }
 }

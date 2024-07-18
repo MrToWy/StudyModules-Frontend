@@ -7,7 +7,7 @@
         pInputText
         [readOnly]="true"
         [(ngModel)]=requirement.translations[0].name
-        (click)="dialogVisible = true"
+        (click)="openDialog()"
       />
 
 
@@ -33,7 +33,6 @@
     <div class="mediumPadding">
       <label for="moduleSelect" class="block">Zusätzlich benötigte Module</label>
       <p-multiSelect *ngIf="dialogVisible"
-        (onClick)="loglog()"
         id="moduleSelect"
         [options]="availableModules"
         [(ngModel)]="selectedModules"
@@ -57,14 +56,14 @@
         id="hardRequirementsText"
         type="text"
         pInputText
-        [(ngModel)]=requirement.translations[0].name
+        [(ngModel)]=text
       />
     </div>
 
     <ng-template pTemplate="footer">
       <div class="flex justify-content-end gap-2">
         <p-button [label]="t('cancel')" severity="secondary" (onClick)="dialogVisible = false"/>
-        <p-button [label]="t('save')" (onClick)="dialogVisible = false"/>
+        <p-button [label]="t('save')" (onClick)="save()"/>
       </div>
     </ng-template>
   </p-dialog>
