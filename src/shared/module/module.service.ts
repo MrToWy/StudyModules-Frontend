@@ -173,7 +173,6 @@ export interface SubModule {
   number: number;
   weeklyHours: number;
   groupSize: number;
-  moduleId: number;
   translations: SubModuleTranslation[];
 }
 

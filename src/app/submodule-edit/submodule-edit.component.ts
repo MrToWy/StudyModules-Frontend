@@ -55,11 +55,14 @@ export class SubmoduleEditComponent implements OnInit {
   ngOnInit(): void {
     const subModuleIdParameter = this.urlSegmentService.getIdFromSegment("submodules");
     const subModuleId = Number(subModuleIdParameter);
-
     if (subModuleId) {
       this.subModuleService.getOne(subModuleId).subscribe((subModule) => {
         this.currentSubmodule = subModule;
       });
+    }
+
+    if(subModuleIdParameter === "new") {
+      this.currentSubmodule = this.subModuleService.getEmpty();
     }
 
     this.languageService.getLanguages().subscribe((languages) => {

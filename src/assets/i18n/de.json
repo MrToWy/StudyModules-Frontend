@@ -57,7 +57,8 @@
     "responsible": "Verantwortlich",
     "download" : "Anzeigen",
     "delete" : "Löschen",
-    "newModule": "Neues Modul"
+    "newModule": "Neues Modul",
+    "newSubModule": "Neues Teilmodul"
   },
   "changelog": {
     "description": "Beschreibung",

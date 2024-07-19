@@ -9,8 +9,16 @@
   scrollHeight="73vh"
 >
   <ng-template pTemplate="caption">
-    <h1>Veranstaltungen (Teilmodule)</h1>
-  </ng-template>
+      <div class="leftRight">
+        <div class="left">
+          <h1>Teilmodule</h1>
+        </div>
+        <div class="right">
+          <p-button *ngIf="authService.isLoggedIn()" (onClick)="addNewSubModule()">{{ t('newSubModule') }}</p-button>
+        </div>
+      </div>
+
+    </ng-template>
     <ng-template pTemplate="header">
         <tr>
             <th>

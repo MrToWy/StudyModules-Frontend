@@ -9,6 +9,9 @@ import {CourseDto} from "../../shared/course/course.service";
 import {LanguageService} from "../../shared/language/language.service";
 import {SubmoduleService} from "../../shared/submodule/submodule.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {ButtonModule} from "primeng/button";
+import {NgIf} from "@angular/common";
+import {AuthService} from "../../shared/auth/auth.service";
 
 @Component({
   selector: 'app-submodules',
@@ -19,7 +22,9 @@ import {ActivatedRoute, Router} from "@angular/router";
     SharedModule,
     TableModule,
     TranslocoDirective,
-    FormsModule
+    FormsModule,
+    ButtonModule,
+    NgIf
   ],
   templateUrl: './submodules.component.html',
   styleUrl: './submodules.component.sass'
@@ -37,7 +42,8 @@ export class SubmodulesComponent {
     private languageService : LanguageService,
     private submoduleService: SubmoduleService,
     private router : Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    protected authService: AuthService
   ) {
   }
 
@@ -58,5 +64,9 @@ export class SubmodulesComponent {
 
   async openDetailView(submodule: any) {
     await this.router.navigate([submodule.id], {relativeTo: this.route});
+  }
+
+  async addNewSubModule() {
+    await this.router.navigate(['new', 'edit'], {relativeTo: this.route});
   }
 }

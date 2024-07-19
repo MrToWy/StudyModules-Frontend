@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
@@ -22,7 +22,7 @@ export class SubmoduleService {
     return this.http.get<any>(this.submoduleURL + "/" + id);
   }
 
-  get(id: number, languageAbbreviation: string|undefined): Observable<SubModuleDetail> {
+  get(id: number, languageAbbreviation: string | undefined): Observable<SubModuleDetail> {
     let headers = {};
     if (languageAbbreviation) {
       headers = {'language': languageAbbreviation.toUpperCase()};
@@ -31,8 +31,126 @@ export class SubmoduleService {
   }
 
   save(currentSubmodule: SubModule) {
-    return this.http.put(this.submoduleURL, currentSubmodule);
+    if(currentSubmodule.id > 0)
+      return this.http.put(this.submoduleURL, currentSubmodule);
+
+    return this.http.post(this.submoduleURL, currentSubmodule);
   }
+
+  getEmpty() {
+    return {
+      id: 0,
+      abbreviation: "",
+      number: 0,
+      weeklyHours: 0,
+      groupSize: 0,
+      translations: [
+        {
+          id: 0,
+          name: "",
+          subtitle: "",
+          type: "",
+          semester: "",
+          exam: "",
+          content: "",
+          presenceRequirements: "",
+          selfStudyRequirements: "",
+          spokenlanguage: "",
+          learningOutcomes: "",
+          selfStudyHints: "",
+          languageId: 1,
+          subModuleId: 0,
+          literature: ""
+        },
+        {
+          id: 0,
+          name: "",
+          subtitle: "",
+          type: "",
+          semester: "",
+          exam: "",
+          content: "",
+          presenceRequirements: "",
+          selfStudyRequirements: "",
+          spokenlanguage: "",
+          learningOutcomes: "",
+          selfStudyHints: "",
+          languageId: 2,
+          subModuleId: 0,
+          literature: ""
+        }
+      ],
+    }
+  }
+
+  getEmptySubModuleDetail(): SubModuleDetail {
+    return {
+      id: 0,
+      number: 0,
+      name: "",
+      abbreviation: "",
+      course: "",
+      courseId: 0,
+      course_name: "",
+      departmentId: 0,
+      semester: 0,
+      responsible: {id: 0, firstName: "", lastName: "", translations: [{title: ""}]},
+      responsibleId: 0,
+      facultyId: 0,
+      specialization: "",
+      elective: false,
+      weeklyHours: 0,
+      credits: 0,
+      hoursPresence: 0,
+      hoursSelf: 0,
+      groupSize: 0,
+      requirementsHardId: 0,
+      requirementsSoftId: 0,
+      translations: [
+        {
+          id: 0,
+          name: "",
+          subtitle: "",
+          type: "",
+          semester: "",
+          exam: "",
+          content: "",
+          presenceRequirements: "",
+          selfStudyRequirements: "",
+          spokenlanguage: "",
+          learningOutcomes: "",
+          selfStudyHints: "",
+          languageId: 1,
+          subModuleId: 0,
+          literature: ""
+        },
+        {
+          id: 0,
+          name: "",
+          subtitle: "",
+          type: "",
+          semester: "",
+          exam: "",
+          content: "",
+          presenceRequirements: "",
+          selfStudyRequirements: "",
+          spokenlanguage: "",
+          learningOutcomes: "",
+          selfStudyHints: "",
+          languageId: 2,
+          subModuleId: 0,
+          literature: ""
+        }
+      ],
+      modules: [
+        {
+          degreeProgram: {abbreviation: ""},
+          requirementsSoft: {translations: [{name: ""}]}
+        }
+      ]
+    };
+  }
+
 }
 
 export interface SubModuleDetail {
