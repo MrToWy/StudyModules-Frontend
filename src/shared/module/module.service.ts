@@ -52,7 +52,10 @@ export class ModuleService {
   }
 
   save(currentModule: ModuleDetail) {
-    return this.http.put(this.moduleURL, currentModule);
+    if(currentModule.id > 0){
+      return this.http.put(this.moduleURL, currentModule);
+    }
+    return this.http.post(this.moduleURL, currentModule);
   }
 
   getEmptyModuleDetail(): ModuleDetail {
