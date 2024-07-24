@@ -98,7 +98,7 @@ export class ModuleEditComponent implements OnInit {
     }
 
     this.saving = true;
-    this.moduleService.save(this.currentModule).subscribe((module: any) => {
+    this.moduleService.save(this.currentModule, this.summaryText).subscribe((module: any) => {
       this.saving = false;
       this.saveDialogVisible = false;
       this.router.navigate(['..', '..', module.id], { relativeTo: this.route });

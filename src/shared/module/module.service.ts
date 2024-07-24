@@ -51,9 +51,13 @@ export class ModuleService {
     return this.http.get<ModuleDto[]>(environment.backendURL + "degrees/" + courseId + "/modules");
   }
 
-  save(currentModule: ModuleDetail) {
+  save(currentModule: ModuleDetail, summaryText: string) {
     if(currentModule.id > 0){
-      return this.http.put(this.moduleURL, currentModule);
+      return this.http.put(this.moduleURL,
+        {
+          module: currentModule,
+          summaryText
+        });
     }
     return this.http.post(this.moduleURL, currentModule);
   }
