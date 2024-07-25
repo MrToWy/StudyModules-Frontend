@@ -1,0 +1,48 @@
+version: '3.9'
+
+name: studymodules_project
+
+services:
+  frontend:
+    image: localhost/studymodules-frontend
+    ports:
+      - "4200:4200"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - backend
+
+  backend:
+    image: localhost/studybase-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - C:\Users\lepha\WebstormProjects\studybase\docker-volume:/app/database
+
+  documentation:
+    image: localhost/studymodules-documentation
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - NODE_ENV=production
+      - DOCUSAURUS_DOMAIN=localhost
+      - DOCUSAURUS_EMAIL=letsencrypt@docusaurus.example
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+
+  latex-api:
+    image: localhost/latex-api:latest
+    ports:
+      - "5432:5432"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - backend
+
+volumes:
+  caddy_data:
+  caddy_config:
