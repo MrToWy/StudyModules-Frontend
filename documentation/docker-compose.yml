@@ -6,9 +6,7 @@ services:
   frontend:
     image: localhost/studymodules-frontend
     ports:
-      - "4200:4200"
-    environment:
-      - NODE_ENV=production
+      - "80:80"
     depends_on:
       - backend
 
@@ -16,15 +14,13 @@ services:
     image: localhost/studybase-backend
     ports:
       - "3000:3000"
-    environment:
-      - NODE_ENV=production
     volumes:
       - C:\Users\lepha\WebstormProjects\studybase\docker-volume:/app/docker-volume
 
   documentation:
     image: localhost/studymodules-documentation
     ports:
-      - "80:80"
+      - "8080:80"
       - "443:443"
     environment:
       - NODE_ENV=production
