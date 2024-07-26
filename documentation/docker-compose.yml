@@ -19,7 +19,7 @@ services:
     environment:
       - NODE_ENV=production
     volumes:
-      - C:\Users\lepha\WebstormProjects\studybase\docker-volume:/app/database
+      - C:\Users\lepha\WebstormProjects\studybase\docker-volume:/app/docker-volume
 
   documentation:
     image: localhost/studymodules-documentation
@@ -37,11 +37,17 @@ services:
   latex-api:
     image: localhost/latex-api:latest
     ports:
-      - "5432:5432"
+      - "2345:8080"
+    build: .
+    command: make start
     environment:
-      - NODE_ENV=production
+      # SENTRY_DSN:
+      CACHE_HOST: cache
     depends_on:
       - backend
+
+  latex-poll-script:
+    image: localhost/studymodules-latex:latest
 
 volumes:
   caddy_data:
