@@ -1,14 +1,18 @@
-# syntax=docker/dockerfile:1.4
+FROM node:alpine as build
 
-FROM --platform=$BUILDPLATFORM node:alpine as builder
-
-RUN mkdir /project
 WORKDIR /project
-
 RUN npm install -g @angular/cli
 
-COPY package.json package-lock.json ./
+# only copy the package.json and package-lock.json to install dependencies (Efficient Layer Caching)
+COPY package*.json ./
 RUN npm ci
 
+# copy the rest of the files
 COPY . .
-CMD ["ng", "serve", "--host", "0.0.0.0"]
+RUN npm run build:dev
+
+
+FROM nginx:alpine
+COPY --from=build /project/dist/study-modules/browser /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
