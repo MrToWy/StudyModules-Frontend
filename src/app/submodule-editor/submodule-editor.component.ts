@@ -157,7 +157,7 @@ export class SubmoduleEditorComponent implements OnInit {
     this.nameClass = "";
     this.nameTooltip = "";
 
-    const hasName = this.subModule.name !== undefined && this.subModule.name.length > 0;
+    const hasName = this.subModule?.translations[0].name !== undefined && this.subModule.translations[0].name.length > 0;
 
     if (!hasName) {
       this.nameClass = this.invalidClass;

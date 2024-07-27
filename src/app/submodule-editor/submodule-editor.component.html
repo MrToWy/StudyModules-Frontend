@@ -14,7 +14,13 @@
 
     <span class="smallPadding fullwidth">
     <label for="name">{{ t('name') }}</label>
-    <input pInputText id="name" [(ngModel)]="subModule.translations[0].name"/>
+    <input
+      pInputText
+      id="name"
+      [(ngModel)]="subModule.translations[0].name"
+      (input)="validateName(true)"
+      [class]="nameClass"
+      [pTooltip]="nameTooltip"/>
   </span>
 
     <span class="smallPadding takeTwoColumns">
