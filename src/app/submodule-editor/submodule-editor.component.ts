@@ -46,6 +46,8 @@ export class SubmoduleEditorComponent implements OnInit {
   protected creditClass: string = "";
   abbreviationTooltip: string | undefined;
   protected abbreviationClass: string = "";
+  nameTooltip: string | undefined;
+  protected nameClass: string = "";
 
   private invalidClass = "ng-invalid ng-dirty";
 
@@ -93,15 +95,10 @@ export class SubmoduleEditorComponent implements OnInit {
   }
 
   validate(): boolean {
-    let valid = true;
-
-    if (!this.validateAbbreviation()) {
-      valid = false;
-    }
-
-    if (!this.validateCredits()) {
-      valid = false;
-    }
+    let valid =
+      this.validateAbbreviation() &&
+      this.validateName() &&
+      this.validateCredits();
 
     if (valid) {
       this.onSubModuleChange();
@@ -150,6 +147,25 @@ export class SubmoduleEditorComponent implements OnInit {
     }
 
     return true;
+  }
+
+  validateName(onlyIfInvalid: boolean = false): boolean {
+    if (onlyIfInvalid && this.nameClass === "") {
+      return true;
+    }
+
+    this.nameClass = "";
+    this.nameTooltip = "";
+
+    const hasName = this.subModule.name !== undefined && this.subModule.name.length > 0;
+
+    if (!hasName) {
+      this.nameClass = this.invalidClass;
+      this.nameTooltip = "Bitte geben Sie einen Namen ein.";
+      return false;
+    }
+
+    return true
   }
 
   // ToDo: Refactor duplicate
