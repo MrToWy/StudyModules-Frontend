@@ -2,8 +2,8 @@
 
   <div class="compactGrid">
   <span class="smallPadding fullwidth">
-    <label for="number">Nummer</label>
-    <p-inputNumber [style]="{'width':'100%'}" class="fullwidth" id="number" [(ngModel)]="subModule.number"/>
+    <label for="abbreviation">{{ t('abbreviation') }}</label>
+    <input pInputText id="abbreviation" [(ngModel)]="subModule.abbreviation"/>
   </span>
 
     <span class="smallPadding fullwidth">
