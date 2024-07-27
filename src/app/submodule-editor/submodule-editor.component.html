@@ -37,13 +37,15 @@
 
     <span class="smallPadding">
     <label for="language">{{ t('language') }}</label>
-    <input
-      pInputText
+    <p-autoComplete
+
       id="language"
       [(ngModel)]="subModule.translations[0].spokenlanguage"
       (input)="validateLanguage(true)"
       [class]="languageClass"
       [pTooltip]="languageTooltip"
+      [suggestions]="filteredLanguages"
+      (completeMethod)="searchLanguage($event)"
     />
   </span>
 

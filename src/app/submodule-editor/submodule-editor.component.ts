@@ -13,6 +13,7 @@ import {InputMaskModule} from "primeng/inputmask";
 import {CourseDto, CourseService} from "../../shared/course/course.service";
 import {ButtonModule} from "primeng/button";
 import {TextAutocompleteService} from "../../shared/text-autocomplete/text-autocomplete.service";
+import {AutoCompleteCompleteEvent, AutoCompleteModule} from "primeng/autocomplete";
 
 @Component({
   selector: 'app-submodule-editor',
@@ -26,7 +27,8 @@ import {TextAutocompleteService} from "../../shared/text-autocomplete/text-autoc
     ResponsibleDropdownComponent,
     InputTextareaModule,
     InputMaskModule,
-    ButtonModule
+    ButtonModule,
+    AutoCompleteModule
   ],
   providers: [SubmoduleService, UserService, CourseService],
   templateUrl: './submodule-editor.component.html',
@@ -43,6 +45,7 @@ export class SubmoduleEditorComponent implements OnInit {
   protected degrees: CourseDto[] = [];
   protected submodules: SubModuleDetail[] = [];
   protected usedLanguages: string[] = [];
+  protected filteredLanguages: string[] = [];
 
   creditTooltip: string | undefined;
   protected creditClass: string = "";
@@ -226,6 +229,10 @@ export class SubmoduleEditorComponent implements OnInit {
     }
 
     return true;
+  }
+
+  searchLanguage(event: AutoCompleteCompleteEvent) {
+    this.filteredLanguages = this.usedLanguages.filter(language => language.toLowerCase().includes(event.query.toLowerCase()));
   }
 
   // ToDo: Refactor duplicate
