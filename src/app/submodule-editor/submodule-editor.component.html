@@ -25,12 +25,26 @@
 
     <span class="smallPadding takeTwoColumns">
     <label for="subtitle">{{ t('subtitle') }}</label>
-    <input pInputText id="subtitle" [(ngModel)]="subModule.translations[0].subtitle"/>
+    <input
+      pInputText
+      id="subtitle"
+      [(ngModel)]="subModule.translations[0].subtitle"
+      (input)="validateSubtitle(true)"
+      [class]="subtitleClass"
+      [pTooltip]="subtitleTooltip"
+    />
   </span>
 
     <span class="smallPadding">
     <label for="language">{{ t('language') }}</label>
-    <input pInputText id="language" [(ngModel)]="subModule.translations[0].spokenlanguage"/>
+    <input
+      pInputText
+      id="language"
+      [(ngModel)]="subModule.translations[0].spokenlanguage"
+      (input)="validateLanguage(true)"
+      [class]="languageClass"
+      [pTooltip]="languageTooltip"
+    />
   </span>
 
     <span class="smallPadding">

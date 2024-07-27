@@ -12,6 +12,7 @@ import {InputTextareaModule} from "primeng/inputtextarea";
 import {InputMaskModule} from "primeng/inputmask";
 import {CourseDto, CourseService} from "../../shared/course/course.service";
 import {ButtonModule} from "primeng/button";
+import {TextAutocompleteService} from "../../shared/text-autocomplete/text-autocomplete.service";
 
 @Component({
   selector: 'app-submodule-editor',
@@ -41,6 +42,7 @@ export class SubmoduleEditorComponent implements OnInit {
   protected users: UserDto[] = [];
   protected degrees: CourseDto[] = [];
   protected submodules: SubModuleDetail[] = [];
+  protected usedLanguages: string[] = [];
 
   creditTooltip: string | undefined;
   protected creditClass: string = "";
@@ -48,6 +50,10 @@ export class SubmoduleEditorComponent implements OnInit {
   protected abbreviationClass: string = "";
   nameTooltip: string | undefined;
   protected nameClass: string = "";
+  subtitleTooltip: string | undefined;
+  protected subtitleClass: string = "";
+  languageTooltip: string | undefined;
+  protected languageClass: string = "";
 
   private invalidClass = "ng-invalid ng-dirty";
 
@@ -56,7 +62,8 @@ export class SubmoduleEditorComponent implements OnInit {
     private userService: UserService,
     private languageService: LanguageService,
     private degreeService: CourseService,
-    private submoduleService: SubmoduleService
+    private submoduleService: SubmoduleService,
+    private autocompleteService: TextAutocompleteService
   ) {
   }
 
@@ -86,6 +93,10 @@ export class SubmoduleEditorComponent implements OnInit {
     this.submoduleService.getAll().subscribe(submodules => {
       this.submodules = submodules;
     });
+
+    this.autocompleteService.getAutocompleteSuggestionsSpokenLanguage(this.languageId).subscribe(suggestions => {
+      this.usedLanguages = suggestions;
+    });
   }
 
   private setInitialResponsible(): void {
@@ -98,6 +109,8 @@ export class SubmoduleEditorComponent implements OnInit {
     let valid =
       this.validateAbbreviation() &&
       this.validateName() &&
+      this.validateSubtitle() &&
+      this.validateLanguage() &&
       this.validateCredits();
 
     if (valid) {
@@ -166,6 +179,53 @@ export class SubmoduleEditorComponent implements OnInit {
     }
 
     return true
+  }
+
+  validateSubtitle(onlyIfInvalid: boolean = false): boolean {
+    if (onlyIfInvalid && this.subtitleClass === "") {
+      return true;
+    }
+
+    this.subtitleClass = "";
+    this.subtitleTooltip = "";
+
+    const hasSubtitle = this.subModule?.translations[0].subtitle !== undefined
+      && this.subModule.translations[0].subtitle.length > 0;
+
+    if (!hasSubtitle) {
+      this.subtitleClass = this.invalidClass;
+      this.subtitleTooltip = "Bitte geben Sie einen Untertitel ein.";
+      return false;
+    }
+
+    return true;
+  }
+
+  validateLanguage(onlyIfInvalid: boolean = false): boolean {
+    if (onlyIfInvalid && this.languageClass === "") {
+      return true;
+    }
+
+    this.languageClass = "";
+    this.languageTooltip = "";
+
+    const hasLanguage = this.subModule.translations[0].spokenlanguage !== undefined
+      && this.subModule.translations[0].spokenlanguage.length > 0;
+
+    if (!hasLanguage) {
+      this.languageClass = this.invalidClass;
+      this.languageTooltip = "Bitte wählen Sie eine Sprache aus.";
+      return false;
+    }
+
+    // is in usedLanguages
+    if (!this.usedLanguages.includes(this.subModule.translations[0].spokenlanguage)) {
+      this.languageClass = this.invalidClass;
+      this.languageTooltip = "Die Sprache ist nicht in den verwendeten Sprachen enthalten. Entweder gibt es einen Tippfehler, oder diese Sprache ist neu.";
+      return false;
+    }
+
+    return true;
   }
 
   // ToDo: Refactor duplicate

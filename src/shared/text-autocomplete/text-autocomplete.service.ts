@@ -16,4 +16,7 @@ export class TextAutocompleteService {
   public getAutocompleteSuggestions(languageId: number): Observable<string[]> {
     return this.http.get<string[]>(this.autocompleteURL + "/" + languageId);
   }
+  public getAutocompleteSuggestionsSpokenLanguage(languageId: number): Observable<string[]> {
+    return this.http.get<string[]>(this.autocompleteURL + "/spokenLanguages/" + languageId);
+  }
 }
