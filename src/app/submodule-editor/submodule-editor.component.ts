@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UserDto, UserService} from "../../shared/user/user.service";
 import {LanguageService} from "../../shared/language/language.service";
-import {SubModuleDetail} from "../../shared/submodule/submodule.service";
+import {SubModuleDetail, SubmoduleService} from "../../shared/submodule/submodule.service";
 import {InputNumberModule} from "primeng/inputnumber";
 import {FormsModule} from "@angular/forms";
 import {TooltipModule} from "primeng/tooltip";
@@ -10,6 +10,8 @@ import {InputTextModule} from "primeng/inputtext";
 import {ResponsibleDropdownComponent} from "../responsible-dropdown/responsible-dropdown.component";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {InputMaskModule} from "primeng/inputmask";
+import {CourseDto, CourseService} from "../../shared/course/course.service";
+import {ButtonModule} from "primeng/button";
 
 @Component({
   selector: 'app-submodule-editor',
@@ -22,8 +24,10 @@ import {InputMaskModule} from "primeng/inputmask";
     TooltipModule,
     ResponsibleDropdownComponent,
     InputTextareaModule,
-    InputMaskModule
+    InputMaskModule,
+    ButtonModule
   ],
+  providers: [SubmoduleService, UserService, CourseService],
   templateUrl: './submodule-editor.component.html',
   styleUrl: './submodule-editor.component.sass'
 })
@@ -35,14 +39,22 @@ export class SubmoduleEditorComponent implements OnInit {
   @Input() languageId!: number;
 
   protected users: UserDto[] = [];
+  protected degrees: CourseDto[] = [];
+  protected submodules: SubModuleDetail[] = [];
 
   creditTooltip: string | undefined;
   protected creditClass: string = "";
+  abbreviationTooltip: string | undefined;
+  protected abbreviationClass: string = "";
+
+  private invalidClass = "ng-invalid ng-dirty";
 
 
   constructor(
     private userService: UserService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private degreeService: CourseService,
+    private submoduleService: SubmoduleService
   ) {
   }
 
@@ -65,6 +77,13 @@ export class SubmoduleEditorComponent implements OnInit {
       this.setInitialResponsible();
     });
 
+    this.degreeService.getAll().subscribe(degrees => {
+      this.degrees = degrees;
+    });
+
+    this.submoduleService.getAll().subscribe(submodules => {
+      this.submodules = submodules;
+    });
   }
 
   private setInitialResponsible(): void {
@@ -75,6 +94,10 @@ export class SubmoduleEditorComponent implements OnInit {
 
   validate(): boolean {
     let valid = true;
+
+    if (!this.validateAbbreviation()) {
+      valid = false;
+    }
 
     if (!this.validateCredits()) {
       valid = false;
@@ -88,19 +111,61 @@ export class SubmoduleEditorComponent implements OnInit {
     return valid;
   }
 
+  validateAbbreviation(onlyIfInvalid: boolean = false): boolean {
+    if (onlyIfInvalid && this.abbreviationClass === "") {
+      return true;
+    }
+
+    this.abbreviationClass = "";
+    this.abbreviationTooltip = "";
+
+    const hasAbbreviation = this.subModule.abbreviation !== undefined && this.subModule.abbreviation.length > 0;
+
+    if (!hasAbbreviation) {
+      this.abbreviationClass = this.invalidClass;
+      this.abbreviationTooltip = "Bitte geben Sie eine Abkürzung ein.";
+      return false;
+    }
+
+    const pattern = /^[A-Z]{3}-[0-9]{3}-[0-9]{2}$/;
+    if (!pattern.test(this.subModule.abbreviation)) {
+      this.abbreviationClass = this.invalidClass;
+      this.abbreviationTooltip = "Die Abkürzung sollte dem Muster ABC-100-01 entsprechen.";
+      return false;
+    }
+
+    const courseAbbreviation = this.subModule.abbreviation.split("-")[0];
+    const course = this.degrees.find(degree => degree.abbreviation === courseAbbreviation);
+    if (!course) {
+      this.abbreviationClass = this.invalidClass;
+      this.abbreviationTooltip = "Der Studiengang mit der Abkürzung " + courseAbbreviation + " existiert nicht.";
+      return false;
+    }
+
+    const duplicate = this.submodules.find(submodule => submodule.abbreviation === this.subModule.abbreviation);
+    if (duplicate && duplicate.id !== this.subModule.id) {
+      this.abbreviationClass = this.invalidClass;
+      this.abbreviationTooltip = "Die Abkürzung ist bereits vergeben.";
+      return false;
+    }
+
+    return true;
+  }
+
   // ToDo: Refactor duplicate
   validateCredits(onlyIfInvalid: boolean = false): boolean {
-    this.creditClass = "";
-    this.creditTooltip = "";
-
     if (onlyIfInvalid && this.creditClass === "") {
       return true;
     }
 
+    this.creditClass = "";
+    this.creditTooltip = "";
+
+
     const hasCredits = this.subModule.credits !== undefined && this.subModule.credits > 0;
 
     if (!hasCredits) {
-      this.creditClass = "ng-invalid ng-dirty";
+      this.creditClass = this.invalidClass;
       this.creditTooltip = "Bitte geben Sie eine gültige Anzahl an Credits ein (>0).";
       return false;
     }

@@ -3,7 +3,13 @@
   <div class="compactGrid">
   <span class="smallPadding fullwidth">
     <label for="abbreviation">{{ t('abbreviation') }}</label>
-    <input pInputText id="abbreviation" [(ngModel)]="subModule.abbreviation"/>
+    <input
+      pInputText
+      id="abbreviation"
+      [(ngModel)]="subModule.abbreviation"
+      (input)="validateAbbreviation(true)"
+      [class]="abbreviationClass"
+      [pTooltip]="abbreviationTooltip"/>
   </span>
 
     <span class="smallPadding fullwidth">
@@ -162,5 +168,10 @@
       [(ngModel)]="subModule.translations[0].literature"></textarea>
   </span>
     </div>
+
+    <p-button
+      (onClick)="validate()"
+      [label]="t('proceed')"
+    />
   </div>
 </ng-container>
