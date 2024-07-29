@@ -97,7 +97,7 @@ export class SubmoduleEditorComponent implements OnInit {
       this.submodules = submodules;
     });
 
-    this.autocompleteService.getAutocompleteSuggestionsSpokenLanguage(this.languageId).subscribe(suggestions => {
+    this.autocompleteService.getAutocompleteSuggestions(this.languageId, 'spokenlanguage').subscribe(suggestions => {
       this.usedLanguages = suggestions;
     });
   }
