@@ -51,7 +51,15 @@
 
     <span class="smallPadding">
     <label for="selfStudyHints">{{ t('selfStudyHints') }}</label>
-    <input pInputText id="selfStudyHints" [(ngModel)]="subModule.translations[0].selfStudyHints"/>
+    <p-autoComplete
+      id="selfStudyHints"
+      [(ngModel)]="subModule.translations[0].selfStudyHints"
+      (input)="validateSelfStudyHints(true)"
+      [class]="selfStudyHintsClass"
+      [pTooltip]="selfStudyHintsTooltip"
+      [suggestions]="filteredSelfStudyHints"
+      (completeMethod)="searchSelfStudyHints($event)"
+    />
   </span>
 
     <span class="smallPadding">

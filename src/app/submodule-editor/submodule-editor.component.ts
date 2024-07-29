@@ -44,8 +44,11 @@ export class SubmoduleEditorComponent implements OnInit {
   protected users: UserDto[] = [];
   protected degrees: CourseDto[] = [];
   protected submodules: SubModuleDetail[] = [];
+
   protected usedLanguages: string[] = [];
   protected filteredLanguages: string[] = [];
+  protected usedSelfStudyHints: string[] = [];
+  protected filteredSelfStudyHints: string[] = [];
 
   creditTooltip: string | undefined;
   protected creditClass: string = "";
@@ -57,6 +60,8 @@ export class SubmoduleEditorComponent implements OnInit {
   protected subtitleClass: string = "";
   languageTooltip: string | undefined;
   protected languageClass: string = "";
+  selfStudyHintsTooltip: string | undefined;
+  protected selfStudyHintsClass: string = "";
 
   private invalidClass = "ng-invalid ng-dirty";
 
@@ -100,6 +105,10 @@ export class SubmoduleEditorComponent implements OnInit {
     this.autocompleteService.getAutocompleteSuggestions(this.languageId, 'spokenlanguage').subscribe(suggestions => {
       this.usedLanguages = suggestions;
     });
+
+    this.autocompleteService.getAutocompleteSuggestions(this.languageId, 'selfStudyHints').subscribe(suggestions => {
+      this.usedSelfStudyHints = suggestions;
+    });
   }
 
   private setInitialResponsible(): void {
@@ -114,6 +123,7 @@ export class SubmoduleEditorComponent implements OnInit {
       this.validateName() &&
       this.validateSubtitle() &&
       this.validateLanguage() &&
+      this.validateSelfStudyHints() &&
       this.validateCredits();
 
     if (valid) {
@@ -233,6 +243,36 @@ export class SubmoduleEditorComponent implements OnInit {
 
   searchLanguage(event: AutoCompleteCompleteEvent) {
     this.filteredLanguages = this.usedLanguages.filter(language => language.toLowerCase().includes(event.query.toLowerCase()));
+  }
+
+  validateSelfStudyHints(onlyIfInvalid: boolean = false): boolean {
+    if (onlyIfInvalid && this.selfStudyHintsClass === "") {
+      return true;
+    }
+
+    this.selfStudyHintsClass = "";
+    this.selfStudyHintsTooltip = "";
+
+    const hasSelfStudyHints = this.subModule.translations[0].selfStudyHints !== undefined;
+
+    if (!hasSelfStudyHints) {
+      this.selfStudyHintsClass = this.invalidClass;
+      this.selfStudyHintsTooltip = "Bitte geben Sie einen Hinweis zur Selbststudium ein.";
+      return false;
+    }
+
+    if (!this.usedSelfStudyHints.includes(this.subModule.translations[0].selfStudyHints)) {
+      this.selfStudyHintsClass = this.invalidClass;
+      this.selfStudyHintsTooltip = "Der Hinweis ist nicht in den verwendeten Hinweisen enthalten. Entweder gibt es einen Tippfehler, oder dieser Hinweis ist neu.";
+      return false;
+    }
+
+    return true;
+  }
+
+
+  searchSelfStudyHints(event: AutoCompleteCompleteEvent) {
+    this.filteredSelfStudyHints = this.usedSelfStudyHints.filter(hint => hint.toLowerCase().includes(event.query.toLowerCase()));
   }
 
   // ToDo: Refactor duplicate
