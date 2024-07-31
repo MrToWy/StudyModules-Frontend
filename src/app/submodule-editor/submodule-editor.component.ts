@@ -80,6 +80,16 @@ export class SubmoduleEditorComponent implements OnInit {
   protected selfStudyHoursClass: string = "";
   presenceHoursTooltip: string | undefined;
   protected presenceHoursClass: string = "";
+  learningOutcomesTooltip: string | undefined;
+  protected learningOutcomesClass: string = "";
+  contentTooltip: string | undefined;
+  protected contentClass: string = "";
+  presenceRequirementsTooltip: string | undefined;
+  protected presenceRequirementsClass: string = "";
+  selfStudyRequirementsTooltip: string | undefined;
+  protected selfStudyRequirementsClass: string = "";
+  literatureTooltip: string | undefined;
+  protected literatureClass: string = "";
 
 
   private invalidClass = "ng-invalid ng-dirty";
@@ -158,6 +168,12 @@ export class SubmoduleEditorComponent implements OnInit {
     let isGroupSizeValid = this.validateGroupSize();
     let isSelfStudyHoursValid = this.validateSelfStudyHours();
     let isPresenceHoursValid = this.validatePresenceHours();
+    let isLearningOutcomesValid = this.validateLearningOutcomes();
+    let isContentValid = this.validateContent();
+    let isPresenceRequirementsValid = this.validatePresenceRequirements();
+    let isSelfStudyRequirementsValid = this.validateSelfStudyRequirements();
+    let isLiteratureValid = this.validateLiterature();
+
 
     let valid = isAbbreviationValid &&
       isNameValid &&
@@ -171,6 +187,11 @@ export class SubmoduleEditorComponent implements OnInit {
       isGroupSizeValid &&
       isSelfStudyHoursValid &&
       isPresenceHoursValid &&
+      isLearningOutcomesValid &&
+      isContentValid &&
+      isPresenceRequirementsValid &&
+      isSelfStudyRequirementsValid &&
+      isLiteratureValid &&
       isCreditsValid;
 
 
@@ -500,6 +521,106 @@ export class SubmoduleEditorComponent implements OnInit {
     if (!hasPresenceHours) {
       this.presenceHoursClass = this.invalidClass;
       this.presenceHoursTooltip = "Bitte geben Sie eine gültige Anzahl an Präsenzstunden ein (>0).";
+      return false;
+    }
+
+    return true;
+  }
+
+  validateLearningOutcomes(onlyIfInvalid: boolean = false): boolean {
+    if (onlyIfInvalid && this.learningOutcomesClass === "") {
+      return true;
+    }
+
+    this.learningOutcomesClass = "";
+    this.learningOutcomesTooltip = "";
+
+    const hasLearningOutcomes = this.subModule.translations[0].learningOutcomes !== undefined
+      && this.subModule.translations[0].learningOutcomes.length > 0;
+
+    if (!hasLearningOutcomes) {
+      this.learningOutcomesClass = this.invalidClass;
+      this.learningOutcomesTooltip = "Bitte geben Sie die Lernergebnisse ein.";
+      return false;
+    }
+
+    return true;
+  }
+
+  validateContent(onlyIfInvalid: boolean = false): boolean {
+    if (onlyIfInvalid && this.contentClass === "") {
+      return true;
+    }
+
+    this.contentClass = "";
+    this.contentTooltip = "";
+
+    const hasContent = this.subModule.translations[0].content !== undefined
+      && this.subModule.translations[0].content.length > 0;
+
+    if (!hasContent) {
+      this.contentClass = this.invalidClass;
+      this.contentTooltip = "Bitte geben Sie den Inhalt ein.";
+      return false;
+    }
+
+    return true;
+  }
+
+  validatePresenceRequirements(onlyIfInvalid: boolean = false): boolean {
+    if (onlyIfInvalid && this.presenceRequirementsClass === "") {
+      return true;
+    }
+
+    this.presenceRequirementsClass = "";
+    this.presenceRequirementsTooltip = "";
+
+    const hasPresenceRequirements = this.subModule.translations[0].presenceRequirements !== undefined
+      && this.subModule.translations[0].presenceRequirements.length > 0;
+
+    if (!hasPresenceRequirements) {
+      this.presenceRequirementsClass = this.invalidClass;
+      this.presenceRequirementsTooltip = "Bitte geben Sie die Anforderungen an die Präsenzzeit ein.";
+      return false;
+    }
+
+    return true;
+  }
+
+  validateSelfStudyRequirements(onlyIfInvalid: boolean = false): boolean {
+    if (onlyIfInvalid && this.selfStudyRequirementsClass === "") {
+      return true;
+    }
+
+    this.selfStudyRequirementsClass = "";
+    this.selfStudyRequirementsTooltip = "";
+
+    const hasSelfStudyRequirements = this.subModule.translations[0].selfStudyRequirements !== undefined
+      && this.subModule.translations[0].selfStudyRequirements.length > 0;
+
+    if (!hasSelfStudyRequirements) {
+      this.selfStudyRequirementsClass = this.invalidClass;
+      this.selfStudyRequirementsTooltip = "Bitte geben Sie die Anforderungen an das Selbststudium ein.";
+      return false;
+    }
+
+    return true;
+  }
+
+  validateLiterature(onlyIfInvalid: boolean = false): boolean {
+    if (onlyIfInvalid && this.literatureClass === "") {
+      return true;
+    }
+
+    this.literatureClass = "";
+    this.literatureTooltip = "";
+
+    const hasLiterature = this.subModule.translations[0].literature !== undefined
+      && this.subModule.translations[0].literature.length > 0;
+
+    if (!hasLiterature) {
+      this.literatureClass = this.invalidClass;
+      this.literatureTooltip = "Bitte geben Sie die Literatur ein.";
       return false;
     }
 

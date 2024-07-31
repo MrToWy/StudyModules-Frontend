@@ -163,7 +163,11 @@
 
     <span class="smallPadding">
     <label for="responsible">{{ t('responsible') }}</label>
-  <app-responsible-dropdown id="responsible" [subModule]="subModule" [users]="users"></app-responsible-dropdown>
+  <app-responsible-dropdown
+    id="responsible"
+    [subModule]="subModule"
+    [users]="users"
+  />
   </span>
 
     <span class="smallPadding takeTwoRows">
@@ -174,7 +178,11 @@
       rows="5"
       cols="30"
       pInputTextarea
-      [(ngModel)]="subModule.translations[0].learningOutcomes"></textarea>
+      [(ngModel)]="subModule.translations[0].learningOutcomes"
+      [class]="learningOutcomesClass"
+      [pTooltip]="learningOutcomesTooltip"
+      (input)="validateLearningOutcomes(true)"
+    ></textarea>
   </span>
 
     <span class="smallPadding takeTwoRows">
@@ -185,7 +193,11 @@
       rows="5"
       cols="30"
       pInputTextarea
-      [(ngModel)]="subModule.translations[0].content"></textarea>
+      [(ngModel)]="subModule.translations[0].content"
+      [class]="contentClass"
+      [pTooltip]="contentTooltip"
+      (input)="validateContent(true)"
+    ></textarea>
   </span>
 
     <span class="smallPadding takeTwoRows">
@@ -196,7 +208,11 @@
       rows="5"
       cols="30"
       pInputTextarea
-      [(ngModel)]="subModule.translations[0].presenceRequirements"></textarea>
+      [(ngModel)]="subModule.translations[0].presenceRequirements"
+      [class]="presenceRequirementsClass"
+      [pTooltip]="presenceRequirementsTooltip"
+      (input)="validatePresenceRequirements(true)"
+    ></textarea>
   </span>
 
     <span class="smallPadding takeTwoRows">
@@ -207,7 +223,11 @@
       rows="5"
       cols="30"
       pInputTextarea
-      [(ngModel)]="subModule.translations[0].selfStudyRequirements"></textarea>
+      [(ngModel)]="subModule.translations[0].selfStudyRequirements"
+      [class]="selfStudyRequirementsClass"
+      [pTooltip]="selfStudyRequirementsTooltip"
+      (input)="validateSelfStudyRequirements(true)"
+    ></textarea>
   </span>
     <div class="takeTwoRows">
     <span class="smallPadding takeTwoRows">
@@ -218,7 +238,11 @@
       rows="5"
       cols="30"
       pInputTextarea
-      [(ngModel)]="subModule.translations[0].literature"></textarea>
+      [(ngModel)]="subModule.translations[0].literature"
+      [class]="literatureClass"
+      [pTooltip]="literatureTooltip"
+      (input)="validateLiterature(true)"
+    ></textarea>
   </span>
     </div>
 
