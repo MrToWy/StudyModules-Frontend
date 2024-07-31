@@ -34,7 +34,7 @@ export class SubmodulePreviewComponent {
   }
 
   extractRequirements(): string {
-    const requirementsNames = this.submodule?.modules.map(
+    const requirementsNames = this.submodule?.modules?.map(
         (module) => module.requirementsSoft.translations[0].name
     );
 
