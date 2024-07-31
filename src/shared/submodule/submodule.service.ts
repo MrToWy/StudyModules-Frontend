@@ -44,6 +44,7 @@ export class SubmoduleService {
       number: 0,
       weeklyHours: 0,
       groupSize: 0,
+      responsible: {id: 0, firstName: "", lastName: "", translations: [{title: ""}]},
       translations: [
         {
           id: 0,
