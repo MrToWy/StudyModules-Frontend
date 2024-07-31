@@ -64,40 +64,63 @@
 
     <span class="smallPadding">
     <label for="semester">{{ t('semester') }}</label>
-    <input pInputText id="semester" [(ngModel)]="subModule.semester"/>
+    <input
+      pInputText
+      id="semester"
+      [(ngModel)]="subModule.semester"
+      (input)="validateSemester(true)"
+      [class]="semesterClass"
+      [pTooltip]="semesterTooltip"
+    />
   </span>
 
     <span class="smallPadding">
     <label for="type">{{ t('type') }}</label>
-    <input pInputText id="type" [(ngModel)]="subModule.translations[0].type"/>
+    <p-autoComplete
+      id="type"
+      [(ngModel)]="subModule.translations[0].type"
+      (input)="validateType(true)"
+      [class]="typeClass"
+      [pTooltip]="typeTooltip"
+      [suggestions]="filteredTypes"
+      (completeMethod)="searchType($event)"
+    />
   </span>
 
     <span class="smallPadding">
     <label for="exam">{{ t('exam') }}</label>
-    <input pInputText id="exam" [(ngModel)]="subModule.translations[0].exam"/>
+    <p-autoComplete
+      id="exam"
+      [(ngModel)]="subModule.translations[0].exam"
+      (input)="validateExam(true)"
+      [class]="examClass"
+      [pTooltip]="examTooltip"
+      [suggestions]="filteredExams"
+      (completeMethod)="searchExam($event)"
+    />
   </span>
 
     <span class="smallPadding">
     <label for="weeklyHours">{{ t('weeklyHours') }}</label>
     <p-inputNumber
-      (onInput)="validateCredits(true)"
+      (onInput)="validateWeeklyHours(true)"
       [style]="{'width':'100%'}"
       id="weeklyHours"
       [(ngModel)]="subModule.weeklyHours"
-      [classList]="creditClass"
-      [pTooltip]="creditTooltip"
+      [classList]="weeklyHoursClass"
+      [pTooltip]="weeklyHoursTooltip"
     />
   </span>
 
     <span class="smallPadding">
     <label for="groupSize">{{ t('groupSize') }}</label>
     <p-inputNumber
-      (onInput)="validateCredits(true)"
+      (onInput)="validateGroupSize(true)"
       [style]="{'width':'100%'}"
       id="groupSize"
       [(ngModel)]="subModule.groupSize"
-      [classList]="creditClass"
-      [pTooltip]="creditTooltip"
+      [classList]="groupSizeClass"
+      [pTooltip]="groupSizeTooltip"
     />
   </span>
 
@@ -117,24 +140,24 @@
     <span class="smallPadding">
     <label for="presenceHours">{{ t('presenceHours') }}</label>
     <p-inputNumber
-      (onInput)="validateCredits(true)"
+      (onInput)="validatePresenceHours(true)"
       [style]="{'width':'100%'}"
       id="presenceHours"
       [(ngModel)]="subModule.hoursPresence"
-      [classList]="creditClass"
-      [pTooltip]="creditTooltip"
+      [classList]="presenceHoursClass"
+      [pTooltip]="presenceHoursTooltip"
     />
   </span>
 
     <span class="smallPadding">
     <label for="selfStudyHours">{{ t('selfStudyHours') }}</label>
     <p-inputNumber
-      (onInput)="validateCredits(true)"
+      (onInput)="validateSelfStudyHours(true)"
       [style]="{'width':'100%'}"
       id="selfStudyHours"
       [(ngModel)]="subModule.hoursSelf"
-      [classList]="creditClass"
-      [pTooltip]="creditTooltip"
+      [classList]="selfStudyHoursClass"
+      [pTooltip]="selfStudyHoursTooltip"
     />
   </span>
 

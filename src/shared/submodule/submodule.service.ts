@@ -94,7 +94,7 @@ export class SubmoduleService {
       courseId: 0,
       course_name: "",
       departmentId: 0,
-      semester: 0,
+      semester: "0",
       responsible: {id: 0, firstName: "", lastName: "", translations: [{title: ""}]},
       responsibleId: 0,
       facultyId: 0,
@@ -163,7 +163,7 @@ export interface SubModuleDetail {
   courseId: number;
   course_name: string;
   departmentId: number;
-  semester: number;
+  semester: string;
   responsible: UserDto;
   responsibleId: number;
   facultyId: number;

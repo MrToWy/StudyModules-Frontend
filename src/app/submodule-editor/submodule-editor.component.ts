@@ -49,6 +49,10 @@ export class SubmoduleEditorComponent implements OnInit {
   protected filteredLanguages: string[] = [];
   protected usedSelfStudyHints: string[] = [];
   protected filteredSelfStudyHints: string[] = [];
+  protected usedTypes: string[]= [];
+  protected filteredTypes: string[] = [];
+  protected usedExams: string[] = [];
+  protected filteredExams: string[] = [];
 
   creditTooltip: string | undefined;
   protected creditClass: string = "";
@@ -62,6 +66,21 @@ export class SubmoduleEditorComponent implements OnInit {
   protected languageClass: string = "";
   selfStudyHintsTooltip: string | undefined;
   protected selfStudyHintsClass: string = "";
+  weeklyHoursTooltip: string | undefined;
+  protected weeklyHoursClass: string = "";
+  semesterTooltip: string | undefined;
+  protected semesterClass: string = "";
+  typeTooltip: string | undefined;
+  protected typeClass: string = "";
+  examTooltip: string | undefined;
+  protected examClass: string = "";
+  groupSizeTooltip: string | undefined;
+  protected groupSizeClass: string = "";
+  selfStudyHoursTooltip: string | undefined;
+  protected selfStudyHoursClass: string = "";
+  presenceHoursTooltip: string | undefined;
+  protected presenceHoursClass: string = "";
+
 
   private invalidClass = "ng-invalid ng-dirty";
 
@@ -109,6 +128,14 @@ export class SubmoduleEditorComponent implements OnInit {
     this.autocompleteService.getAutocompleteSuggestions(this.languageId, 'selfStudyHints').subscribe(suggestions => {
       this.usedSelfStudyHints = suggestions;
     });
+
+    this.autocompleteService.getAutocompleteSuggestions(this.languageId, 'type').subscribe(suggestions => {
+      this.usedTypes = suggestions;
+    });
+
+    this.autocompleteService.getAutocompleteSuggestions(this.languageId, 'exam').subscribe(suggestions => {
+      this.usedExams = suggestions;
+    });
   }
 
   private setInitialResponsible(): void {
@@ -118,13 +145,34 @@ export class SubmoduleEditorComponent implements OnInit {
   }
 
   validate(): boolean {
-    let valid =
-      this.validateAbbreviation() &&
-      this.validateName() &&
-      this.validateSubtitle() &&
-      this.validateLanguage() &&
-      this.validateSelfStudyHints() &&
-      this.validateCredits();
+    let isAbbreviationValid = this.validateAbbreviation();
+    let isNameValid = this.validateName();
+    let isSubtitleValid = this.validateSubtitle();
+    let isLanguageValid = this.validateLanguage();
+    let isSelfStudyHintsValid = this.validateSelfStudyHints();
+    let isCreditsValid = this.validateCredits();
+    let isSemesterValid = this.validateSemester();
+    let isTypeValid = this.validateType();
+    let isExamValid = this.validateExam();
+    let isWeeklyHoursValid = this.validateWeeklyHours();
+    let isGroupSizeValid = this.validateGroupSize();
+    let isSelfStudyHoursValid = this.validateSelfStudyHours();
+    let isPresenceHoursValid = this.validatePresenceHours();
+
+    let valid = isAbbreviationValid &&
+      isNameValid &&
+      isSubtitleValid &&
+      isLanguageValid &&
+      isSelfStudyHintsValid &&
+      isSemesterValid &&
+      isTypeValid &&
+      isExamValid &&
+      isWeeklyHoursValid &&
+      isGroupSizeValid &&
+      isSelfStudyHoursValid &&
+      isPresenceHoursValid &&
+      isCreditsValid;
+
 
     if (valid) {
       this.onSubModuleChange();
@@ -253,7 +301,8 @@ export class SubmoduleEditorComponent implements OnInit {
     this.selfStudyHintsClass = "";
     this.selfStudyHintsTooltip = "";
 
-    const hasSelfStudyHints = this.subModule.translations[0].selfStudyHints !== undefined;
+    const hasSelfStudyHints = this.subModule.translations[0].selfStudyHints !== undefined
+      && this.subModule.translations[0].selfStudyHints.length > 0;
 
     if (!hasSelfStudyHints) {
       this.selfStudyHintsClass = this.invalidClass;
@@ -270,12 +319,97 @@ export class SubmoduleEditorComponent implements OnInit {
     return true;
   }
 
+  validateType(onlyIfInvalid: boolean = false): boolean {
+    if (onlyIfInvalid && this.typeClass === "") {
+      return true;
+    }
+
+    this.typeClass = "";
+    this.typeTooltip = "";
+
+    const hasType = this.subModule.translations[0].type !== undefined
+      && this.subModule.translations[0].type.length > 0;
+
+    if (!hasType) {
+      this.typeClass = this.invalidClass;
+      this.typeTooltip = "Bitte geben Sie die Veranstaltungsart ein.";
+      return false;
+    }
+
+    if (!this.usedTypes.includes(this.subModule.translations[0].type)) {
+      this.typeClass = this.invalidClass;
+      this.typeTooltip = "Die Veranstaltungsart ist nicht in den verwendeten Veranstaltungsarten enthalten. Entweder gibt es einen Tippfehler, oder diese Veranstaltungsart ist neu.";
+      return false;
+    }
+
+    return true;
+  }
+
+  validateExam(onlyIfInvalid: boolean = false): boolean {
+    if (onlyIfInvalid && this.examClass === "") {
+      return true;
+    }
+
+    this.examClass = "";
+    this.examTooltip = "";
+
+    const hasExam = this.subModule.translations[0].exam !== undefined
+      && this.subModule.translations[0].exam.length > 0;
+
+    if (!hasExam) {
+      this.examClass = this.invalidClass;
+      this.examTooltip = "Bitte geben Sie die Prüfungsleistung ein.";
+      return false;
+    }
+
+    if (!this.usedExams.includes(this.subModule.translations[0].exam)) {
+      this.examClass = this.invalidClass;
+      this.examTooltip = "Die Prüfungsleistung ist nicht in den verwendeten Prüfungsleistungen enthalten. Entweder gibt es einen Tippfehler, oder diese Prüfungsleistung ist neu.";
+      return false;
+    }
+
+    return true;
+  }
+
 
   searchSelfStudyHints(event: AutoCompleteCompleteEvent) {
     this.filteredSelfStudyHints = this.usedSelfStudyHints.filter(hint => hint.toLowerCase().includes(event.query.toLowerCase()));
   }
 
-  // ToDo: Refactor duplicate
+  searchType(event: AutoCompleteCompleteEvent) {
+    this.filteredTypes = this.usedTypes.filter(type => type.toLowerCase().includes(event.query.toLowerCase()));
+  }
+
+  searchExam(event: AutoCompleteCompleteEvent) {
+    this.filteredExams = this.usedExams.filter(exam => exam.toLowerCase().includes(event.query.toLowerCase()));
+  }
+
+  validateSemester(onlyIfInvalid: boolean = false): boolean {
+    if (onlyIfInvalid && this.semesterClass === "") {
+      return true;
+    }
+
+    this.semesterClass = "";
+    this.semesterTooltip = "";
+
+    const hasSemester = this.subModule.semester !== undefined;
+    if (!hasSemester) {
+      this.semesterClass = this.invalidClass;
+      this.semesterTooltip = "Bitte geben Sie das Semester ein, in dem das Modul belegt werden sollte.";
+      return false;
+    }
+
+    // string is either a number, or number-number
+    const pattern = /^[0-9]+(-[0-9]+)?$/;
+    if (!pattern.test(this.subModule.semester)) {
+      this.semesterClass = this.invalidClass;
+      this.semesterTooltip = "Das Semester sollte entweder eine Zahl oder eine Zahlenkombination (z.B. 1-2) sein.";
+      return false;
+    }
+
+    return true;
+  }
+
   validateCredits(onlyIfInvalid: boolean = false): boolean {
     if (onlyIfInvalid && this.creditClass === "") {
       return true;
@@ -290,6 +424,82 @@ export class SubmoduleEditorComponent implements OnInit {
     if (!hasCredits) {
       this.creditClass = this.invalidClass;
       this.creditTooltip = "Bitte geben Sie eine gültige Anzahl an Credits ein (>0).";
+      return false;
+    }
+
+    return true;
+  }
+
+  protected validateWeeklyHours(onlyIfInvalid: boolean = false): boolean {
+    if (onlyIfInvalid && this.weeklyHoursClass === "") {
+      return true;
+    }
+
+    this.weeklyHoursClass = "";
+    this.weeklyHoursTooltip = "";
+
+    const hasWeeklyHours = this.subModule.weeklyHours !== undefined && this.subModule.weeklyHours > 0;
+
+    if (!hasWeeklyHours) {
+      this.weeklyHoursClass = this.invalidClass;
+      this.weeklyHoursTooltip = "Bitte geben Sie eine gültige Anzahl an Wochenstunden ein (>0).";
+      return false;
+    }
+
+    return true;
+  }
+
+  protected validateGroupSize(onlyIfInvalid: boolean = false): boolean {
+    if (onlyIfInvalid && this.groupSizeClass === "") {
+      return true;
+    }
+
+    this.groupSizeClass = "";
+    this.groupSizeTooltip = "";
+
+    const hasGroupSize = this.subModule.groupSize !== undefined && this.subModule.groupSize > 0;
+
+    if (!hasGroupSize) {
+      this.groupSizeClass = this.invalidClass;
+      this.groupSizeTooltip = "Bitte geben Sie eine gültige Gruppengröße ein (>0).";
+      return false;
+    }
+
+    return true;
+  }
+
+  protected validateSelfStudyHours(onlyIfInvalid: boolean = false): boolean {
+    if (onlyIfInvalid && this.selfStudyHoursClass === "") {
+      return true;
+    }
+
+    this.selfStudyHoursClass = "";
+    this.selfStudyHoursTooltip = "";
+
+    const hasSelfStudyHours = this.subModule.hoursSelf !== undefined && this.subModule.hoursSelf > 0;
+
+    if (!hasSelfStudyHours) {
+      this.selfStudyHoursClass = this.invalidClass;
+      this.selfStudyHoursTooltip = "Bitte geben Sie eine gültige Anzahl an Stunden im Selbststudium ein (>0).";
+      return false;
+    }
+
+    return true;
+  }
+
+  protected validatePresenceHours(onlyIfInvalid: boolean = false): boolean {
+    if (onlyIfInvalid && this.presenceHoursClass === "") {
+      return true;
+    }
+
+    this.presenceHoursClass = "";
+    this.presenceHoursTooltip = "";
+
+    const hasPresenceHours = this.subModule.hoursPresence !== undefined && this.subModule.hoursPresence > 0;
+
+    if (!hasPresenceHours) {
+      this.presenceHoursClass = this.invalidClass;
+      this.presenceHoursTooltip = "Bitte geben Sie eine gültige Anzahl an Präsenzstunden ein (>0).";
       return false;
     }
 
