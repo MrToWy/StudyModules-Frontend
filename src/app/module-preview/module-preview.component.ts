@@ -24,6 +24,9 @@ export class ModulePreviewComponent {
   }
 
   @Input()
+  languageCode: string = 'de';
+
+  @Input()
   set module(value: ModuleDetail | undefined) {
     this._module = value;
   }

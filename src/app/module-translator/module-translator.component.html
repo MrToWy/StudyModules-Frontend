@@ -8,8 +8,9 @@
     (moduleChange)="onModuleChange($event)"
   />
 
-  <app-module-preview
+  <app-module-preview *ngIf="languageAbbreviation"
     [module]="currentModule"
+    [languageCode]="languageAbbreviation.toLowerCase()"
   />
 
 </div>

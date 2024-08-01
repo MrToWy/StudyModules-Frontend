@@ -9,13 +9,15 @@ import {
 } from "../../shared/module/module.service";
 import {firstValueFrom, Observable} from "rxjs";
 import {RequirementService} from "../../shared/requirement/requirement.service";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-module-translator',
   standalone: true,
   imports: [
     ModuleEditorComponent,
-    ModulePreviewComponent
+    ModulePreviewComponent,
+    NgIf
   ],
   providers: [
     ModuleService
