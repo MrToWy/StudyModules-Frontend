@@ -202,7 +202,7 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
       valid = false;
     }
 
-    this.validationResult = valid ? "Alle Eingaben wurden erfolgreich validiert." : "Bitte prüfen Sie die rot markierten Felder.";
+    this.validationResult = valid ? translate("allValid") : translate("validationError");
     this.validationClass = valid ? "success" : "danger";
 
     if(valid) {

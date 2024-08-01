@@ -78,6 +78,9 @@
   "presenceRequirementsMissing": "Bitte geben Sie die Anforderungen an die Präsenzzeit ein.",
   "selfStudyRequirementsMissing": "Bitte geben Sie die Anforderungen an das Selbststudium ein.",
   "literatureMissing": "Bitte geben Sie die Literatur ein.",
+  "changeSummary": "Fassen Sie Ihre Änderungen zusammen",
+  "allValid": "Alle Eingaben wurden erfolgreich validiert.",
+  "validationError": "Bitte prüfen Sie die rot markierten Felder.",
   "modulesearch": {
     "placeholder": "Module suchen"
   },

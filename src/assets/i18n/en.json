@@ -79,6 +79,9 @@
   "presenceRequirementsMissing": "Please provide the presence requirements.",
   "selfStudyRequirementsMissing": "Please provide the self-study requirements.",
   "literatureMissing": "Please provide the literature.",
+  "changeSummary": "Summarize your changes",
+  "allValid": "All inputs have been successfully validated.",
+  "validationError": "Please correct the errors in the form.",
   "modulesearch": {
     "placeholder": "Search modules"
   },
