@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {SubModule, SubModuleTranslation} from "../module/module.service";
+import {Requirement, SubModule, SubModuleTranslation} from "../module/module.service";
 import {UserDto} from "../user/user.service";
 
 @Injectable({
@@ -94,6 +94,7 @@ export class SubmoduleService {
       courseId: 0,
       course_name: "",
       departmentId: 0,
+      degreeProgramId: 0,
       semester: "0",
       responsible: {id: 0, firstName: "", lastName: "", translations: [{title: ""}]},
       responsibleId: 0,
@@ -107,6 +108,7 @@ export class SubmoduleService {
       groupSize: 0,
       requirementsHardId: 0,
       requirementsSoftId: 0,
+      requirementsSoft: {id: 0, requiredSemesters: "", modules: [], translations: [{name: "keine", languageId: 1}, {name: "none", languageId: 2}]},
       translations: [
         {
           id: 0,
@@ -163,6 +165,7 @@ export interface SubModuleDetail {
   courseId: number;
   course_name: string;
   departmentId: number;
+  degreeProgramId: number;
   semester: string;
   responsible: UserDto;
   responsibleId: number;
@@ -176,6 +179,7 @@ export interface SubModuleDetail {
   groupSize: number;
   requirementsHardId: number;
   requirementsSoftId: number;
+  requirementsSoft: Requirement;
 
   translations: SubModuleTranslation[];
   modules: {

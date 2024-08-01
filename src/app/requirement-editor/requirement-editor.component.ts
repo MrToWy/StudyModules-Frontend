@@ -45,7 +45,12 @@ export class RequirementEditorComponent implements OnInit{
                     { label: '7. Semester', value: '7' }
                 ];
 
-      this.courseService.get(Number(this.urlSegmentService.getIdFromSegment("course"))).subscribe(course => {
+      let courseId = Number(this.urlSegmentService.getIdFromSegment("course"))
+      if(!courseId) {
+        courseId = this.courseId;
+      }
+
+      this.courseService.get(courseId).subscribe(course => {
         this.availableModules = course.modules;
       });
 
@@ -65,14 +70,16 @@ export class RequirementEditorComponent implements OnInit{
   @Input() label!: string;
   @Input() caption!: string;
   @Input() languageId!: number;
+  @Input() courseId!: number;
 
   @Input() requirement!: Requirement;
   @Output() requirementChange = new EventEmitter<Requirement>();
   onRequirementChange(requirement1: Requirement) {
 
-    this.selectedSemesters = this.requirement.requiredSemesters != "" ? this.requirement.requiredSemesters.split(',') : [];
-    this.selectedModules = this.requirement.modules.map(module => module.id);
-    this.selectedModules = [...this.selectedModules]
+    this.selectedSemesters = this.requirement.requiredSemesters != "" ? this.requirement.requiredSemesters?.split(',') : [];
+    this.selectedModules = this.requirement.modules?.map(module => module.id);
+    if(this.selectedModules)
+      this.selectedModules = [...this.selectedModules]
     this.text = this.requirement.translations.find(translation => translation.languageId === this.languageId)?.name || "";
     //console.log("requirement", this.requirement);
     //console.log("languageId", this.languageId);

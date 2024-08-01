@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {
   ModuleDetail,
-  ModuleDto,
+  ModuleDto, ModuleService,
   SubModule
 } from "../../shared/module/module.service";
 import {InputNumberModule} from "primeng/inputnumber";
@@ -20,7 +20,7 @@ import {ResponsibleAvatarComponent} from "../responsible-avatar/responsible-avat
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {MultiSelectChangeEvent, MultiSelectModule} from "primeng/multiselect";
 import {LanguageService} from "../../shared/language/language.service";
-import {SubmoduleService} from "../../shared/submodule/submodule.service";
+import {SubModuleDetail, SubmoduleService} from "../../shared/submodule/submodule.service";
 import {firstValueFrom} from "rxjs";
 import {StyleClassModule} from "primeng/styleclass";
 import {ResponsibleDropdownComponent} from "../responsible-dropdown/responsible-dropdown.component";
@@ -30,6 +30,7 @@ import {InputGroupModule} from "primeng/inputgroup";
 import {DialogModule} from "primeng/dialog";
 import {RequirementDetailComponent} from "../requirement-detail/requirement-detail.component";
 import {RequirementEditorComponent} from "../requirement-editor/requirement-editor.component";
+import {CourseDto, CourseService} from "../../shared/course/course.service";
 
 @Component({
   selector: 'app-module-editor',
@@ -57,7 +58,7 @@ import {RequirementEditorComponent} from "../requirement-editor/requirement-edit
     RequirementDetailComponent,
     RequirementEditorComponent
   ],
-  providers: [TextAutocompleteService],
+  providers: [TextAutocompleteService, CourseService, ModuleService],
   templateUrl: './module-editor.component.html',
   styleUrl: './module-edit-editor.component.sass'
 })
@@ -71,6 +72,8 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
   availableSemester: any[] | undefined;
   requiredSoftSemester: any;
   requiredHardSemester: any;
+  protected degrees: CourseDto[] = [];
+  protected modules: ModuleDto[] = [];
 
   nameClass: string = '';
   subtitleClass: string = '';
@@ -78,6 +81,11 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
   courseLengthClass: string = '';
   learningOutcomesClass: string = '';
   responsibleClass: string = '';
+  abbreviationClass: string = '';
+  hoursPresenceClass: string = '';
+  hoursSelfClass: string = '';
+  semesterClass: string = '';
+
 
   nameTooltip: string = '';
   subtitleTooltip: string = '';
@@ -85,6 +93,10 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
   courseLengthTooltip: string = '';
   learningOutcomesTooltip: string = '';
   responsibleTooltip: string = '';
+  abbreviationTooltip: string = '';
+  hoursPresenceTooltip: string = '';
+  hoursSelfTooltip: string = '';
+  semesterTooltip: string = '';
 
   invalidClass: string = 'ng-invalid ng-dirty';
 
@@ -97,7 +109,9 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
   constructor(
     private userService: UserService,
     private languageService: LanguageService,
-    private submoduleService: SubmoduleService
+    private submoduleService: SubmoduleService,
+    private moduleService: ModuleService,
+    private degreeService: CourseService
   ) {
   }
 
@@ -197,6 +211,14 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
       { label: translate("noSpecializationModule"), value: false },
       { label: translate("specializationModule"), value: true }
     ];
+
+    this.degreeService.getAll().subscribe(degrees => {
+      this.degrees = degrees;
+    });
+
+    this.moduleService.getAll(false, this.module.degreeProgramId).subscribe(modules => {
+      this.modules = modules;
+    });
   }
 
   selectedSubmodulesChange($event: MultiSelectChangeEvent) {
@@ -220,6 +242,10 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
     let courseLengthValid = this.validateCourseLength();
     let learningOutcomesValid = this.validateLearningOutcomes();
     let responsibleValid = this.validateResponsible();
+    let abbreviationValid = this.validateAbbreviation();
+    let hoursPresenceValid = this.validateHoursPresence();
+    let hoursSelfValid = this.validateHoursSelf();
+    let semesterValid = this.validateSemester();
 
 
     valid = valid &&
@@ -228,7 +254,11 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
       subtitleValid &&
       courseLengthValid &&
       learningOutcomesValid &&
-      responsibleValid
+      responsibleValid &&
+      abbreviationValid &&
+      hoursPresenceValid &&
+      hoursSelfValid &&
+      semesterValid
 
     ;
 
@@ -362,6 +392,110 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
     return true;
   }
 
+  protected validateAbbreviation(onlyIfInvalid: boolean = false): boolean {
+    this.abbreviationClass = "";
+    this.abbreviationTooltip = "";
 
+    if (onlyIfInvalid && this.abbreviationClass === "") {
+      return true;
+    }
+
+    const hasAbbreviation = this.module.abbreviation !== undefined && this.module.abbreviation.length > 0;
+
+    if (!hasAbbreviation) {
+      this.abbreviationClass = this.invalidClass;
+      this.abbreviationTooltip = "Bitte geben Sie eine Abkürzung ein.";
+      return false;
+    }
+
+    const abbreviationRegex = /^[A-Z]{2,3}-[0-9]{3}$/;
+    const abbreviationValid = abbreviationRegex.test(this.module.abbreviation);
+
+    if (!abbreviationValid) {
+      this.abbreviationClass = this.invalidClass;
+      this.abbreviationTooltip = "Bitte geben Sie eine gültige Abkürzung ein (z.B. 'BIN-123').";
+      return false;
+    }
+
+    const courseAbbreviation = this.module.abbreviation.split("-")[0];
+    const course = this.degrees.find(degree => degree.abbreviation === courseAbbreviation);
+    if (!course) {
+      this.abbreviationClass = this.invalidClass;
+      this.abbreviationTooltip = translate('abbreviationNotInUse');
+      return false;
+    }
+
+    const duplicate = this.modules.find(module => module.abbreviation === this.module.abbreviation);
+    if (duplicate && duplicate.id !== this.module.id) {
+      this.abbreviationClass = this.invalidClass;
+      this.abbreviationTooltip = translate('abbreviationDuplicate');
+      return false;
+    }
+
+    return true;
+  }
+
+  protected validateHoursPresence(onlyIfInvalid: boolean = false): boolean {
+    this.hoursPresenceClass = "";
+    this.hoursPresenceTooltip = "";
+
+    if (onlyIfInvalid && this.hoursPresenceClass === "") {
+      return true;
+    }
+
+    const hasHoursPresence = this.module.hoursPresence !== undefined && this.module.hoursPresence > 0;
+
+    if (!hasHoursPresence) {
+      this.hoursPresenceClass = this.invalidClass;
+      this.hoursPresenceTooltip = "Bitte geben Sie eine gültige Anzahl an Präsenzstunden ein (>0).";
+      return false;
+    }
+
+    return true;
+  }
+
+  protected validateHoursSelf(onlyIfInvalid: boolean = false): boolean {
+    this.hoursSelfClass = "";
+    this.hoursSelfTooltip = "";
+
+    if (onlyIfInvalid && this.hoursSelfClass === "") {
+      return true;
+    }
+
+    const hasHoursSelf = this.module.hoursSelf !== undefined && this.module.hoursSelf > 0;
+
+    if (!hasHoursSelf) {
+      this.hoursSelfClass = this.invalidClass;
+      this.hoursSelfTooltip = "Bitte geben Sie eine gültige Anzahl an Stunden im Selbststudium ein (>0).";
+      return false;
+    }
+
+    return true;
+  }
+
+  validateSemester(onlyIfInvalid: boolean = false): boolean {
+    this.semesterClass = "";
+    this.semesterTooltip = "";
+
+    if (onlyIfInvalid && this.semesterClass === "") {
+      return true;
+    }
+
+    const hasSemester = this.module.semester !== undefined;
+    if (!hasSemester) {
+      this.semesterClass = this.invalidClass;
+      this.semesterTooltip = translate('semesterMissing');
+      return false;
+    }
+
+    const pattern = /^[0-9]+(-[0-9]+)?$/;
+    if (!pattern.test(this.module.semester)) {
+      this.semesterClass = this.invalidClass;
+      this.semesterTooltip = translate('semesterPattern');
+      return false;
+    }
+
+    return true;
+  }
 
 }

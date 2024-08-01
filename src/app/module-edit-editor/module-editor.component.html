@@ -2,12 +2,14 @@
 
   <div class="compactGrid">
   <span class="smallPadding fullwidth">
-    <label for="number">Nummer</label>
-    <p-inputNumber
-      [style]="{'width':'100%'}"
-      class="fullwidth"
-      id="number"
-      [(ngModel)]="module.number"
+    <label for="abbreviation">{{t('abbreviation')}}</label>
+    <input
+      pInputText
+      [class]="abbreviationClass"
+      [pTooltip]="abbreviationTooltip"
+      (input)="validateAbbreviation(true)"
+      id="abbreviation"
+      [(ngModel)]="module.abbreviation"
     />
   </span>
 
@@ -33,6 +35,26 @@
       [pTooltip]="subtitleTooltip"
       (input)="validateSubtitle(true)"
     />
+  </span>
+
+    <span class="smallPadding fullwidth takeTwoColumns">
+    <label for="submodules">{{ t('subModules') }}</label><br>
+    <p-multiSelect
+      id="submodules"
+      [style]="{'width':'90%'}"
+      [options]="submodulesForDropdown"
+      [group]="true"
+      [(ngModel)]="selectedSubmodules"
+      (onChange)="selectedSubmodulesChange($event)"
+      placeholder="Select Submodules"
+      scrollHeight="250px"
+      display="chip">
+    </p-multiSelect>
+      <p-button
+        [style]="{'width':'10%'}"
+        icon="pi pi-sparkles"
+        [pTooltip]="t('importTooltip')"
+      ></p-button>
   </span>
 
     <span class="smallPadding">
@@ -62,10 +84,10 @@
   </span>
 
     <span class="smallPadding">
-    <label for="semester">{{ t('moduleLength') }}</label>
+    <label for="courseLength">{{ t('moduleLength') }}</label>
     <p-inputNumber
       [style]="{'width':'100%'}"
-      id="semester" [(ngModel)]="module.courseLength"
+      id="courseLength" [(ngModel)]="module.courseLength"
       [class]="courseLengthClass"
       [pTooltip]="courseLengthTooltip"
       (onInput)="validateCourseLength(true)"
@@ -98,19 +120,38 @@
   ></app-responsible-dropdown>
   </span>
 
-    <span class="smallPadding fullwidth">
-    <label for="submodules">{{ t('subModules') }}</label>
-    <p-multiSelect
-      id="submodules"
+     <span class="smallPadding">
+    <label for="hoursPresence">{{ t('hoursPresence') }}</label>
+    <p-inputNumber
       [style]="{'width':'100%'}"
-      [options]="submodulesForDropdown"
-      [group]="true"
-      [(ngModel)]="selectedSubmodules"
-      (onChange)="selectedSubmodulesChange($event)"
-      placeholder="Select Submodules"
-      scrollHeight="250px"
-      display="chip">
-    </p-multiSelect>
+      id="hoursPresence" [(ngModel)]="module.hoursPresence"
+      [class]="hoursPresenceClass"
+      [pTooltip]="hoursPresenceTooltip"
+      (onInput)="validateHoursPresence(true)"
+    />
+  </span>
+
+    <span class="smallPadding">
+    <label for="semester">{{ t('semester') }}</label>
+    <input
+      pInputText
+      id="semester"
+      [(ngModel)]="module.semester"
+      [class]="semesterClass"
+      [pTooltip]="semesterTooltip"
+      (input)="validateSemester(true)"
+    />
+  </span>
+
+     <span class="smallPadding">
+    <label for="hoursSelf">{{ t('hoursSelf') }}</label>
+    <p-inputNumber
+      [style]="{'width':'100%'}"
+      id="hoursSelf" [(ngModel)]="module.hoursSelf"
+      [class]="hoursSelfClass"
+      [pTooltip]="hoursSelfTooltip"
+      (onInput)="validateHoursSelf(true)"
+    />
   </span>
 
     <app-requirement-editor

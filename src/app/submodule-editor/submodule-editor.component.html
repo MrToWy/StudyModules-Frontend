@@ -181,6 +181,14 @@
   ></app-responsible-dropdown>
   </span>
 
+    <app-requirement-editor
+      [label]="t('softRequirements')"
+      [caption]="t('editSoftRequirements')"
+      [(requirement)]="subModule.requirementsSoft"
+      [languageId]="languageId"
+      [courseId]="subModule.degreeProgramId"
+    />
+
     <span class="smallPadding takeTwoRows">
     <label for="learningOutcomes">{{ t('learningObjectives') }}</label>
     <textarea

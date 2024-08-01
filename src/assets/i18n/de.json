@@ -81,6 +81,7 @@
   "changeSummary": "Fassen Sie Ihre Änderungen zusammen",
   "allValid": "Alle Eingaben wurden erfolgreich validiert.",
   "validationError": "Bitte prüfen Sie die rot markierten Felder.",
+  "importTooltip": "Werte vom ersten ausgewählten Teilmodul übernehmen",
   "modulesearch": {
     "placeholder": "Module suchen"
   },

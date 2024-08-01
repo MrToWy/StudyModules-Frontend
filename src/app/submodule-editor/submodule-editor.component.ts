@@ -14,6 +14,7 @@ import {CourseDto, CourseService} from "../../shared/course/course.service";
 import {ButtonModule} from "primeng/button";
 import {TextAutocompleteService} from "../../shared/text-autocomplete/text-autocomplete.service";
 import {AutoCompleteCompleteEvent, AutoCompleteModule} from "primeng/autocomplete";
+import {RequirementEditorComponent} from "../requirement-editor/requirement-editor.component";
 
 @Component({
   selector: 'app-submodule-editor',
@@ -28,7 +29,8 @@ import {AutoCompleteCompleteEvent, AutoCompleteModule} from "primeng/autocomplet
     InputTextareaModule,
     InputMaskModule,
     ButtonModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    RequirementEditorComponent
   ],
   providers: [SubmoduleService, UserService, CourseService],
   templateUrl: './submodule-editor.component.html',

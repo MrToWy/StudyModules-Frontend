@@ -82,6 +82,7 @@
   "changeSummary": "Summarize your changes",
   "allValid": "All inputs have been successfully validated.",
   "validationError": "Please correct the errors in the form.",
+  "importTooltip": "Use values from first selected submodule",
   "modulesearch": {
     "placeholder": "Search modules"
   },
