@@ -1,40 +1,43 @@
 <ng-container *transloco="let t;">
 
-<div>
-  <p-stepper class="largePadding" *ngIf="availableLanguages">
-    <p-stepperPanel *ngFor="let language of availableLanguages" [header]="this.languageService.getHeader(language)">
-      <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
-        <app-submodule-translator *ngIf="currentSubmodule"
-                               [(currentSubModule)]="currentSubmodule"
-                               [languageId]="language.id"
-                               [languageAbbreviation]="language.abbreviation"
-                               [nextCallback]="nextCallback"
-        />
-      </ng-template>
-    </p-stepperPanel>
-    <p-stepperPanel [header]="t('saveChanges')">
-      <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
-      <textarea
-        id="changeSummary"
-        rows="5"
-        cols="30"
-        pInputTextarea
-        (ngModelChange)="summeryInputFieldClass = ''"
-        [class]="summeryInputFieldClass"
-        [(ngModel)]="summaryText">
+  <div>
+    <p-stepper class="largePadding" *ngIf="availableLanguages">
+      <p-stepperPanel *ngFor="let language of availableLanguages" [header]="this.languageService.getHeader(language)">
+        <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
+          <app-submodule-translator *ngIf="currentSubmodule"
+                                    [(currentSubModule)]="currentSubmodule"
+                                    [languageId]="language.id"
+                                    [languageAbbreviation]="language.abbreviation"
+                                    [nextCallback]="nextCallback"
+          />
+        </ng-template>
+      </p-stepperPanel>
+      <p-stepperPanel [header]="t('saveChanges')">
+        <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
+          <div class="flexColumn">
+            <label for="changeSummary">{{ t('changeSummary') }}</label>
+            <textarea
+              id="changeSummary"
+              rows="5"
+              cols="30"
+              pInputTextarea
+              (ngModelChange)="summeryInputFieldClass = ''"
+              [class]="summeryInputFieldClass"
+              [(ngModel)]="summaryText">
             </textarea>
-        <p-button
-          label="Save"
-          [loading]="saving"
-          [outlined]="true"
-          severity="primary"
-          (click)="saveSubModule()"
-        />
-      </ng-template>
+            <p-button
+              label="Save"
+              [loading]="saving"
+              [outlined]="true"
+              severity="primary"
+              (click)="saveSubModule()"
+            />
+          </div>
+        </ng-template>
 
-    </p-stepperPanel>
-  </p-stepper>
-</div>
+      </p-stepperPanel>
+    </p-stepper>
+  </div>
 
-<p-toast/>
+  <p-toast/>
 </ng-container>

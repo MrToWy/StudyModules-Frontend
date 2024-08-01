@@ -81,7 +81,11 @@ export class SubmoduleEditComponent implements OnInit {
     this.subModuleService.save(this.currentSubmodule).subscribe(async (module: any) => {
       this.saving = false;
       this.saveDialogVisible = false;
-      await this.router.navigate(['..', '..', module.id], {relativeTo: this.route});
+
+      if(this.currentSubmodule.id > 0)
+        window.location.reload();
+      else
+        await this.router.navigate(['../..', module.id], {relativeTo: this.route});
     });
   }
 }
