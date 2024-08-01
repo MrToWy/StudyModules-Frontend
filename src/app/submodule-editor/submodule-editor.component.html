@@ -46,6 +46,8 @@
       [pTooltip]="languageTooltip"
       [suggestions]="filteredLanguages"
       (completeMethod)="searchLanguage($event)"
+      [style]="{'width':'100%'}"
+      [inputStyle]="{'width':'100%'}"
     />
   </span>
 
@@ -59,6 +61,8 @@
       [pTooltip]="selfStudyHintsTooltip"
       [suggestions]="filteredSelfStudyHints"
       (completeMethod)="searchSelfStudyHints($event)"
+      [style]="{'width':'100%'}"
+      [inputStyle]="{'width':'100%'}"
     />
   </span>
 
@@ -84,6 +88,8 @@
       [pTooltip]="typeTooltip"
       [suggestions]="filteredTypes"
       (completeMethod)="searchType($event)"
+      [style]="{'width':'100%'}"
+      [inputStyle]="{'width':'100%'}"
     />
   </span>
 
@@ -97,6 +103,8 @@
       [pTooltip]="examTooltip"
       [suggestions]="filteredExams"
       (completeMethod)="searchExam($event)"
+      [style]="{'width':'100%'}"
+      [inputStyle]="{'width':'100%'}"
     />
   </span>
 
@@ -167,7 +175,10 @@
     id="responsible"
     [subModule]="subModule"
     [users]="users"
-  />
+    [dropDownClass]="responsibleClass"
+    [dropDownTooltip]="responsibleTooltip??''"
+    (responsibleChanged)="validateResponsible(true)"
+  ></app-responsible-dropdown>
   </span>
 
     <span class="smallPadding takeTwoRows">
@@ -248,6 +259,12 @@
 
     <p-button
       (onClick)="validate()"
+      [label]="t('validate')"
+      [severity]="validationClass"
+    />
+    <p>{{validationResult}}</p>
+    <p-button
+      (onClick)="proceed()"
       [label]="t('proceed')"
     />
   </div>

@@ -5,6 +5,8 @@
   [style]="{width: '100%'}"
     [options]="users"
     [(ngModel)]="module.responsible"
+    [class]="dropDownClass"
+    [tooltip]="dropDownTooltip"
     optionLabel="name"
     placeholder="Select a responsible">
     <ng-template pTemplate="selectedItem">
@@ -24,6 +26,8 @@
   [style]="{width: '100%'}"
     [options]="users"
     [(ngModel)]="subModule.responsible"
+    [class]="dropDownClass"
+    [tooltip]="dropDownTooltip"
     optionLabel="name"
     placeholder="Select a responsible">
     <ng-template pTemplate="selectedItem">

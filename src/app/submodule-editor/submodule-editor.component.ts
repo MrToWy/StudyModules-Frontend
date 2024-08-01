@@ -90,6 +90,10 @@ export class SubmoduleEditorComponent implements OnInit {
   protected selfStudyRequirementsClass: string = "";
   literatureTooltip: string | undefined;
   protected literatureClass: string = "";
+  responsibleTooltip: string | undefined;
+  protected responsibleClass: string = "";
+  protected validationResult = "";
+  protected validationClass = "primary";
 
 
   private invalidClass = "ng-invalid ng-dirty";
@@ -173,7 +177,7 @@ export class SubmoduleEditorComponent implements OnInit {
     let isPresenceRequirementsValid = this.validatePresenceRequirements();
     let isSelfStudyRequirementsValid = this.validateSelfStudyRequirements();
     let isLiteratureValid = this.validateLiterature();
-
+    let isResponsibleValid = this.validateResponsible();
 
     let valid = isAbbreviationValid &&
       isNameValid &&
@@ -192,15 +196,21 @@ export class SubmoduleEditorComponent implements OnInit {
       isPresenceRequirementsValid &&
       isSelfStudyRequirementsValid &&
       isLiteratureValid &&
+      isResponsibleValid &&
       isCreditsValid;
 
-
-    if (valid) {
-      this.onSubModuleChange();
-      this.nextCallback.emit();
-    }
+    this.validationResult = valid ? "Alle Eingaben wurden erfolgreich validiert." : "Bitte prüfen Sie die rot markierten Felder.";
+    this.validationClass = valid ? "success" : "danger";
 
     return valid;
+  }
+
+  proceed() {
+    this.onSubModuleChange();
+    this.nextCallback.emit();
+
+    // scroll to top
+    window.scrollTo(0, 0);
   }
 
   validateAbbreviation(onlyIfInvalid: boolean = false): boolean {
@@ -425,6 +435,24 @@ export class SubmoduleEditorComponent implements OnInit {
     if (!pattern.test(this.subModule.semester)) {
       this.semesterClass = this.invalidClass;
       this.semesterTooltip = "Das Semester sollte entweder eine Zahl oder eine Zahlenkombination (z.B. 1-2) sein.";
+      return false;
+    }
+
+    return true;
+  }
+
+  validateResponsible(onlyIfInvalid: boolean = false): boolean {
+    if (onlyIfInvalid && this.responsibleClass === "") {
+      return true;
+    }
+
+    this.responsibleClass = "";
+    this.responsibleTooltip = "";
+
+    const hasResponsible = this.subModule.responsibleId !== undefined;
+    if (!hasResponsible) {
+      this.responsibleClass = this.invalidClass;
+      this.responsibleTooltip = "Bitte wählen Sie einen Verantwortlichen aus.";
       return false;
     }
 

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {DropdownChangeEvent, DropdownModule} from "primeng/dropdown";
 import {NgIf} from "@angular/common";
 import {ResponsibleAvatarComponent} from "../responsible-avatar/responsible-avatar.component";
@@ -37,11 +37,21 @@ export class ResponsibleDropdownComponent {
   @Input()
   users!: UserDto[];
 
+  @Input()
+  dropDownClass: string = "";
+
+  @Input()
+  dropDownTooltip: string = "";
+
+  @Output() responsibleChanged = new EventEmitter<DropdownChangeEvent>();
+
   responsibleChange($event: DropdownChangeEvent) {
     if(this.subModule)
       this.subModule.responsibleId = $event.value.id;
 
     if(this.module)
       this.module.responsibleId = $event.value.id;
+
+    this.responsibleChanged.emit($event);
   }
 }
