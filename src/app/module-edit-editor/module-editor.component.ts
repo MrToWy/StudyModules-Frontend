@@ -65,6 +65,8 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
   protected submodules: any[] = [];
   protected submodulesForDropdown: any[] = [];
   protected creditClass: string = "";
+  protected validationResult: string = "";
+  protected validationClass: string = "";
 
   availableSemester: any[] | undefined;
   requiredSoftSemester: any;
@@ -200,12 +202,20 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
       valid = false;
     }
 
+    this.validationResult = valid ? "Alle Eingaben wurden erfolgreich validiert." : "Bitte prüfen Sie die rot markierten Felder.";
+    this.validationClass = valid ? "success" : "danger";
+
     if(valid) {
-      this.onModuleChange();
-      this.nextCallback.emit();
+      //this.onModuleChange();
+      //this.nextCallback.emit();
     }
 
     return valid;
+  }
+
+  proceed() {
+    this.onModuleChange();
+    this.nextCallback.emit();
   }
 
   validateCredits(onlyIfInvalid: boolean = false): boolean {

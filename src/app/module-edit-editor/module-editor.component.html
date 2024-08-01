@@ -111,8 +111,17 @@
 
     <p-button
       (onClick)="validate()"
+      [label]="t('validate')"
+      [severity]="validationClass"
+    />
+
+    <p>{{validationResult}}</p>
+
+    <p-button
+      (onClick)="proceed()"
       [label]="t('proceed')"
     />
+
   </div>
 
 
