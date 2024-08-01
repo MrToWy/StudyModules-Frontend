@@ -5,7 +5,7 @@ import {SubModuleDetail, SubmoduleService} from "../../shared/submodule/submodul
 import {InputNumberModule} from "primeng/inputnumber";
 import {FormsModule} from "@angular/forms";
 import {TooltipModule} from "primeng/tooltip";
-import {TranslocoDirective} from "@jsverse/transloco";
+import {translate, TranslocoDirective} from "@jsverse/transloco";
 import {InputTextModule} from "primeng/inputtext";
 import {ResponsibleDropdownComponent} from "../responsible-dropdown/responsible-dropdown.component";
 import {InputTextareaModule} from "primeng/inputtextarea";
@@ -223,16 +223,16 @@ export class SubmoduleEditorComponent implements OnInit {
 
     const hasAbbreviation = this.subModule.abbreviation !== undefined && this.subModule.abbreviation.length > 0;
 
-    if (!hasAbbreviation) {
+        if (!hasAbbreviation) {
       this.abbreviationClass = this.invalidClass;
-      this.abbreviationTooltip = "Bitte geben Sie eine Abkürzung ein.";
+      this.abbreviationTooltip = translate('abbreviationMissing');
       return false;
     }
 
     const pattern = /^[A-Z]{3}-[0-9]{3}-[0-9]{2}$/;
     if (!pattern.test(this.subModule.abbreviation)) {
       this.abbreviationClass = this.invalidClass;
-      this.abbreviationTooltip = "Die Abkürzung sollte dem Muster ABC-100-01 entsprechen.";
+      this.abbreviationTooltip = translate('abbreviationPattern');
       return false;
     }
 
@@ -240,14 +240,14 @@ export class SubmoduleEditorComponent implements OnInit {
     const course = this.degrees.find(degree => degree.abbreviation === courseAbbreviation);
     if (!course) {
       this.abbreviationClass = this.invalidClass;
-      this.abbreviationTooltip = "Der Studiengang mit der Abkürzung " + courseAbbreviation + " existiert nicht.";
+      this.abbreviationTooltip = translate('abbreviationNotInUse');
       return false;
     }
 
     const duplicate = this.submodules.find(submodule => submodule.abbreviation === this.subModule.abbreviation);
     if (duplicate && duplicate.id !== this.subModule.id) {
       this.abbreviationClass = this.invalidClass;
-      this.abbreviationTooltip = "Die Abkürzung ist bereits vergeben.";
+      this.abbreviationTooltip = translate('abbreviationDuplicate');
       return false;
     }
 
@@ -266,11 +266,11 @@ export class SubmoduleEditorComponent implements OnInit {
 
     if (!hasName) {
       this.nameClass = this.invalidClass;
-      this.nameTooltip = "Bitte geben Sie einen Namen ein.";
+      this.nameTooltip = translate('nameMissing');
       return false;
     }
 
-    return true
+    return true;
   }
 
   validateSubtitle(onlyIfInvalid: boolean = false): boolean {
@@ -286,7 +286,7 @@ export class SubmoduleEditorComponent implements OnInit {
 
     if (!hasSubtitle) {
       this.subtitleClass = this.invalidClass;
-      this.subtitleTooltip = "Bitte geben Sie einen Untertitel ein.";
+      this.subtitleTooltip = translate('subtitleMissing');
       return false;
     }
 
@@ -306,14 +306,13 @@ export class SubmoduleEditorComponent implements OnInit {
 
     if (!hasLanguage) {
       this.languageClass = this.invalidClass;
-      this.languageTooltip = "Bitte wählen Sie eine Sprache aus.";
+      this.languageTooltip = translate('languageMissing');
       return false;
     }
 
-    // is in usedLanguages
     if (!this.usedLanguages.includes(this.subModule.translations[0].spokenlanguage)) {
       this.languageClass = this.invalidClass;
-      this.languageTooltip = "Die Sprache ist nicht in den verwendeten Sprachen enthalten. Entweder gibt es einen Tippfehler, oder diese Sprache ist neu.";
+      this.languageTooltip = translate('languageNotInUse');
       return false;
     }
 
@@ -337,13 +336,13 @@ export class SubmoduleEditorComponent implements OnInit {
 
     if (!hasSelfStudyHints) {
       this.selfStudyHintsClass = this.invalidClass;
-      this.selfStudyHintsTooltip = "Bitte geben Sie einen Hinweis zur Selbststudium ein.";
+      this.selfStudyHintsTooltip = translate('selfStudyHintsMissing');
       return false;
     }
 
     if (!this.usedSelfStudyHints.includes(this.subModule.translations[0].selfStudyHints)) {
       this.selfStudyHintsClass = this.invalidClass;
-      this.selfStudyHintsTooltip = "Der Hinweis ist nicht in den verwendeten Hinweisen enthalten. Entweder gibt es einen Tippfehler, oder dieser Hinweis ist neu.";
+      this.selfStudyHintsTooltip = translate('selfStudyHintsNotInUse');
       return false;
     }
 
@@ -363,13 +362,13 @@ export class SubmoduleEditorComponent implements OnInit {
 
     if (!hasType) {
       this.typeClass = this.invalidClass;
-      this.typeTooltip = "Bitte geben Sie die Veranstaltungsart ein.";
+      this.typeTooltip = translate('typeMissing');
       return false;
     }
 
     if (!this.usedTypes.includes(this.subModule.translations[0].type)) {
       this.typeClass = this.invalidClass;
-      this.typeTooltip = "Die Veranstaltungsart ist nicht in den verwendeten Veranstaltungsarten enthalten. Entweder gibt es einen Tippfehler, oder diese Veranstaltungsart ist neu.";
+      this.typeTooltip = translate('typeNotInUse');
       return false;
     }
 
@@ -389,13 +388,13 @@ export class SubmoduleEditorComponent implements OnInit {
 
     if (!hasExam) {
       this.examClass = this.invalidClass;
-      this.examTooltip = "Bitte geben Sie die Prüfungsleistung ein.";
+      this.examTooltip = translate('examMissing');
       return false;
     }
 
     if (!this.usedExams.includes(this.subModule.translations[0].exam)) {
       this.examClass = this.invalidClass;
-      this.examTooltip = "Die Prüfungsleistung ist nicht in den verwendeten Prüfungsleistungen enthalten. Entweder gibt es einen Tippfehler, oder diese Prüfungsleistung ist neu.";
+      this.examTooltip = translate('examNotInUse');
       return false;
     }
 
@@ -426,15 +425,14 @@ export class SubmoduleEditorComponent implements OnInit {
     const hasSemester = this.subModule.semester !== undefined;
     if (!hasSemester) {
       this.semesterClass = this.invalidClass;
-      this.semesterTooltip = "Bitte geben Sie das Semester ein, in dem das Modul belegt werden sollte.";
+      this.semesterTooltip = translate('semesterMissing');
       return false;
     }
 
-    // string is either a number, or number-number
     const pattern = /^[0-9]+(-[0-9]+)?$/;
     if (!pattern.test(this.subModule.semester)) {
       this.semesterClass = this.invalidClass;
-      this.semesterTooltip = "Das Semester sollte entweder eine Zahl oder eine Zahlenkombination (z.B. 1-2) sein.";
+      this.semesterTooltip = translate('semesterPattern');
       return false;
     }
 
@@ -452,7 +450,7 @@ export class SubmoduleEditorComponent implements OnInit {
     const hasResponsible = this.subModule.responsibleId !== undefined;
     if (!hasResponsible) {
       this.responsibleClass = this.invalidClass;
-      this.responsibleTooltip = "Bitte wählen Sie einen Verantwortlichen aus.";
+      this.responsibleTooltip = translate('responsibleMissing');
       return false;
     }
 
@@ -472,7 +470,7 @@ export class SubmoduleEditorComponent implements OnInit {
 
     if (!hasCredits) {
       this.creditClass = this.invalidClass;
-      this.creditTooltip = "Bitte geben Sie eine gültige Anzahl an Credits ein (>0).";
+      this.creditTooltip = translate('creditsMissing');
       return false;
     }
 
@@ -491,7 +489,7 @@ export class SubmoduleEditorComponent implements OnInit {
 
     if (!hasWeeklyHours) {
       this.weeklyHoursClass = this.invalidClass;
-      this.weeklyHoursTooltip = "Bitte geben Sie eine gültige Anzahl an Wochenstunden ein (>0).";
+      this.weeklyHoursTooltip = translate('weeklyHoursMissing');
       return false;
     }
 
@@ -510,7 +508,7 @@ export class SubmoduleEditorComponent implements OnInit {
 
     if (!hasGroupSize) {
       this.groupSizeClass = this.invalidClass;
-      this.groupSizeTooltip = "Bitte geben Sie eine gültige Gruppengröße ein (>0).";
+      this.groupSizeTooltip = translate('groupSizeMissing');
       return false;
     }
 
@@ -529,7 +527,7 @@ export class SubmoduleEditorComponent implements OnInit {
 
     if (!hasSelfStudyHours) {
       this.selfStudyHoursClass = this.invalidClass;
-      this.selfStudyHoursTooltip = "Bitte geben Sie eine gültige Anzahl an Stunden im Selbststudium ein (>0).";
+      this.selfStudyHoursTooltip = translate('selfStudyHoursMissing');
       return false;
     }
 
@@ -548,7 +546,7 @@ export class SubmoduleEditorComponent implements OnInit {
 
     if (!hasPresenceHours) {
       this.presenceHoursClass = this.invalidClass;
-      this.presenceHoursTooltip = "Bitte geben Sie eine gültige Anzahl an Präsenzstunden ein (>0).";
+      this.presenceHoursTooltip = translate('presenceHoursMissing');
       return false;
     }
 
@@ -568,7 +566,7 @@ export class SubmoduleEditorComponent implements OnInit {
 
     if (!hasLearningOutcomes) {
       this.learningOutcomesClass = this.invalidClass;
-      this.learningOutcomesTooltip = "Bitte geben Sie die Lernergebnisse ein.";
+      this.learningOutcomesTooltip = translate('learningOutcomesMissing');
       return false;
     }
 
@@ -588,7 +586,7 @@ export class SubmoduleEditorComponent implements OnInit {
 
     if (!hasContent) {
       this.contentClass = this.invalidClass;
-      this.contentTooltip = "Bitte geben Sie den Inhalt ein.";
+      this.contentTooltip = translate('contentMissing');
       return false;
     }
 
@@ -608,7 +606,7 @@ export class SubmoduleEditorComponent implements OnInit {
 
     if (!hasPresenceRequirements) {
       this.presenceRequirementsClass = this.invalidClass;
-      this.presenceRequirementsTooltip = "Bitte geben Sie die Anforderungen an die Präsenzzeit ein.";
+      this.presenceRequirementsTooltip = translate('presenceRequirementsMissing');
       return false;
     }
 
@@ -628,7 +626,7 @@ export class SubmoduleEditorComponent implements OnInit {
 
     if (!hasSelfStudyRequirements) {
       this.selfStudyRequirementsClass = this.invalidClass;
-      this.selfStudyRequirementsTooltip = "Bitte geben Sie die Anforderungen an das Selbststudium ein.";
+      this.selfStudyRequirementsTooltip = translate('selfStudyRequirementsMissing');
       return false;
     }
 
@@ -648,7 +646,7 @@ export class SubmoduleEditorComponent implements OnInit {
 
     if (!hasLiterature) {
       this.literatureClass = this.invalidClass;
-      this.literatureTooltip = "Bitte geben Sie die Literatur ein.";
+      this.literatureTooltip = translate('literatureMissing');
       return false;
     }
 
