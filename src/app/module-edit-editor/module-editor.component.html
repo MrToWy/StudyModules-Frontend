@@ -3,17 +3,36 @@
   <div class="compactGrid">
   <span class="smallPadding fullwidth">
     <label for="number">Nummer</label>
-    <p-inputNumber [style]="{'width':'100%'}" class="fullwidth" id="number" [(ngModel)]="module.number"/>
+    <p-inputNumber
+      [style]="{'width':'100%'}"
+      class="fullwidth"
+      id="number"
+      [(ngModel)]="module.number"
+    />
   </span>
 
     <span class="smallPadding fullwidth">
     <label for="name">{{ t('name') }}</label>
-    <input pInputText id="name" [(ngModel)]="module.translations[0].name"/>
+    <input
+      pInputText
+      id="name"
+      [(ngModel)]="module.translations[0].name"
+      [class]="nameClass"
+      [pTooltip]="nameTooltip"
+      (input)="validateName(true)"
+    />
   </span>
 
     <span class="smallPadding takeTwoColumns">
     <label for="subtitle">{{ t('subtitle') }}</label>
-    <input pInputText id="subtitle" [(ngModel)]="module.translations[0].subtitle"/>
+    <input
+      pInputText
+      id="subtitle"
+      [(ngModel)]="module.translations[0].subtitle"
+      [class]="subtitleClass"
+      [pTooltip]="subtitleTooltip"
+      (input)="validateSubtitle(true)"
+    />
   </span>
 
     <span class="smallPadding">
@@ -44,7 +63,13 @@
 
     <span class="smallPadding">
     <label for="semester">{{ t('moduleLength') }}</label>
-    <p-inputNumber [style]="{'width':'100%'}" id="semester" [(ngModel)]="module.courseLength"/>
+    <p-inputNumber
+      [style]="{'width':'100%'}"
+      id="semester" [(ngModel)]="module.courseLength"
+      [class]="courseLengthClass"
+      [pTooltip]="courseLengthTooltip"
+      (onInput)="validateCourseLength(true)"
+    />
   </span>
 
     <span class="smallPadding fullwidth">
@@ -63,7 +88,14 @@
 
     <span class="smallPadding">
     <label for="responsible">{{ t('responsible') }}</label>
-  <app-responsible-dropdown id="responsible" [module]="module" [users]="users"></app-responsible-dropdown>
+  <app-responsible-dropdown
+    id="responsible"
+    [module]="module"
+    [users]="users"
+    (responsibleChanged)="validateResponsible(true)"
+    [dropDownClass]="responsibleClass"
+    [dropDownTooltip]="responsibleTooltip"
+  ></app-responsible-dropdown>
   </span>
 
     <span class="smallPadding fullwidth">
@@ -105,7 +137,11 @@
       rows="5"
       cols="30"
       pInputTextarea
-      [(ngModel)]="module.translations[0].learningOutcomes"></textarea>
+      [(ngModel)]="module.translations[0].learningOutcomes"
+      [class]="learningOutcomesClass"
+      [pTooltip]="learningOutcomesTooltip"
+      (input)="validateLearningOutcomes(true)"
+    ></textarea>
   </span>
 
 

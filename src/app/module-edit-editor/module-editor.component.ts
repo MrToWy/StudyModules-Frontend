@@ -72,6 +72,22 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
   requiredSoftSemester: any;
   requiredHardSemester: any;
 
+  nameClass: string = '';
+  subtitleClass: string = '';
+  creditsClass: string = '';
+  courseLengthClass: string = '';
+  learningOutcomesClass: string = '';
+  responsibleClass: string = '';
+
+  nameTooltip: string = '';
+  subtitleTooltip: string = '';
+  creditsTooltip: string = '';
+  courseLengthTooltip: string = '';
+  learningOutcomesTooltip: string = '';
+  responsibleTooltip: string = '';
+
+  invalidClass: string = 'ng-invalid ng-dirty';
+
   availableModules: ModuleDto[] | undefined;
   requiredSoftModules: any;
   requiredHardModules: number[] = [];
@@ -198,9 +214,23 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
   validate(): boolean {
     let valid = true;
 
-    if(!this.validateCredits()){
-      valid = false;
-    }
+    let creditsValid = this.validateCredits();
+    let nameValid = this.validateName();
+    let subtitleValid = this.validateSubtitle();
+    let courseLengthValid = this.validateCourseLength();
+    let learningOutcomesValid = this.validateLearningOutcomes();
+    let responsibleValid = this.validateResponsible();
+
+
+    valid = valid &&
+      creditsValid &&
+      nameValid &&
+      subtitleValid &&
+      courseLengthValid &&
+      learningOutcomesValid &&
+      responsibleValid
+
+    ;
 
     this.validationResult = valid ? translate("allValid") : translate("validationError");
     this.validationClass = valid ? "success" : "danger";
@@ -229,11 +259,109 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
     const hasCredits = this.module.credits !== undefined && this.module.credits > 0;
 
     if (!hasCredits) {
-      this.creditClass = "ng-invalid ng-dirty";
+      this.creditClass = this.invalidClass;
       this.creditTooltip = "Bitte geben Sie eine gültige Anzahl an Credits ein (>0).";
       return false;
     }
 
     return true;
   }
+
+  protected validateName(onlyIfInvalid: boolean = false): boolean {
+    this.nameClass = "";
+    this.nameTooltip = "";
+
+    if (onlyIfInvalid && this.nameClass === "") {
+      return true;
+    }
+
+    const hasName = this.module.translations[0].name !== undefined && this.module.translations[0].name.length > 0;
+
+    if (!hasName) {
+      this.nameClass = this.invalidClass;
+      this.nameTooltip = "Bitte geben Sie einen Namen ein.";
+      return false;
+    }
+
+    return true;
+  }
+
+  protected validateSubtitle(onlyIfInvalid: boolean = false): boolean {
+    this.subtitleClass = "";
+    this.subtitleTooltip = "";
+
+    if (onlyIfInvalid && this.subtitleClass === "") {
+      return true;
+    }
+
+    const hasSubtitle = this.module.translations[0].subtitle !== undefined && this.module.translations[0].subtitle.length > 0;
+
+    if (!hasSubtitle) {
+      this.subtitleClass = this.invalidClass;
+      this.subtitleTooltip = "Bitte geben Sie einen Untertitel ein.";
+      return false;
+    }
+
+    return true;
+  }
+
+  protected validateCourseLength(onlyIfInvalid: boolean = false): boolean {
+    this.courseLengthClass = "";
+    this.courseLengthTooltip = "";
+
+    if (onlyIfInvalid && this.courseLengthClass === "") {
+      return true;
+    }
+
+    const hasCourseLength = this.module.courseLength !== undefined && this.module.courseLength > 0;
+
+    if (!hasCourseLength) {
+      this.courseLengthClass = this.invalidClass;
+      this.courseLengthTooltip = "Bitte geben Sie eine gültige Kurslänge ein (>0).";
+      return false;
+    }
+
+    return true;
+  }
+
+  protected validateLearningOutcomes(onlyIfInvalid: boolean = false): boolean {
+    this.learningOutcomesClass = "";
+    this.learningOutcomesTooltip = "";
+
+    if (onlyIfInvalid && this.learningOutcomesClass === "") {
+      return true;
+    }
+
+    const hasLearningOutcomes = this.module.translations[0].learningOutcomes !== undefined && this.module.translations[0].learningOutcomes.length > 0;
+
+    if (!hasLearningOutcomes) {
+      this.learningOutcomesClass = this.invalidClass;
+      this.learningOutcomesTooltip = "Bitte geben Sie Lernergebnisse ein.";
+      return false;
+    }
+
+    return true;
+  }
+
+  protected validateResponsible(onlyIfInvalid: boolean = false): boolean {
+    this.responsibleClass = "";
+    this.responsibleTooltip = "";
+
+    if (onlyIfInvalid && this.responsibleClass === "") {
+      return true;
+    }
+
+    const hasResponsible = this.module.responsibleId > 0;
+
+    if (!hasResponsible) {
+      this.responsibleClass = this.invalidClass;
+      this.responsibleTooltip = "Bitte wählen Sie eine verantwortliche Person aus.";
+      return false;
+    }
+
+    return true;
+  }
+
+
+
 }

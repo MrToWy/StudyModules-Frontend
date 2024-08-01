@@ -106,11 +106,11 @@ export class ModuleService {
       requirementsSoft: {id: 0,
         requiredSemesters: "",
         modules: [],
-        translations: [{name: "", languageId: 1}]},
+        translations: [{name: "keine", languageId: 1}, {name: "none", languageId: 2}]},
       requirementsHard: {id: 0,
         requiredSemesters: "",
         modules: [],
-        translations: [{name: "", languageId: 1}]},
+        translations: [{name: "keine", languageId: 1}, {name: "none", languageId: 2}]},
       subModules: []
     };
 
