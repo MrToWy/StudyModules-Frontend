@@ -446,11 +446,21 @@ export class SubmoduleEditorComponent implements OnInit {
       return false;
     }
 
-    const pattern = /^[0-9]+(-[0-9]+)?$/;
+    const pattern = /^[1-9]+(-[2-9]+)?$/;
     if (!pattern.test(this.subModule.semester)) {
       this.semesterClass = this.invalidClass;
       this.semesterTooltip = translate('semesterPattern');
       return false;
+    }
+
+    // if there is a dash, check if the second number is greater than the first
+    if (this.subModule.semester.includes("-")) {
+      const semesters = this.subModule.semester.split("-");
+      if (parseInt(semesters[0]) >= parseInt(semesters[1])) {
+        this.semesterClass = this.invalidClass;
+        this.semesterTooltip = translate('semesterOrder');
+        return false;
+      }
     }
 
     return true;
