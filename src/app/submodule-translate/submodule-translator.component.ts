@@ -2,10 +2,11 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ModuleEditorComponent} from "../module-edit-editor/module-editor.component";
 import {ModulePreviewComponent} from "../module-preview/module-preview.component";
 import {SubmodulePreviewComponent} from "../submodule-preview/submodule-preview.component";
-import {SubModuleTranslation} from "../../shared/module/module.service";
+import {RequirementTranslation, SubModuleTranslation} from "../../shared/module/module.service";
 import {firstValueFrom, Observable} from "rxjs";
 import {SubModuleDetail, SubmoduleService} from "../../shared/submodule/submodule.service";
 import {SubmoduleEditorComponent} from "../submodule-editor/submodule-editor.component";
+import {RequirementService} from "../../shared/requirement/requirement.service";
 
 @Component({
   selector: 'app-submodule-translator',
@@ -24,7 +25,10 @@ export class SubmoduleTranslatorComponent {
   @Input()
   nextCallback: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private submoduleService: SubmoduleService) {
+  constructor(
+    private submoduleService: SubmoduleService,
+    private requirementService: RequirementService
+  ) {
   }
 
   ngOnInit(): void {
@@ -32,7 +36,12 @@ export class SubmoduleTranslatorComponent {
       this.reorderTranslations(
         this.getSubModuleText(),
         this.currentSubModule.translations
-      )
+      );
+
+      this.reorderTranslations(
+        this.getRequirementTextSoft(this.currentSubModule.requirementsSoftId),
+        this.currentSubModule.requirementsSoft.translations
+      );
     }
   }
 
@@ -82,6 +91,13 @@ export class SubmoduleTranslatorComponent {
     }
 
     return result;
+  }
+
+  async getRequirementTextSoft(requirementId: number): Promise<RequirementTranslation> {
+    return this.getTranslation<RequirementTranslation>(
+      this.currentSubModule.requirementsSoft.translations,
+      () => this.requirementService.get(requirementId, this.languageAbbreviation!)
+    );
   }
 
   async getSubModuleText(): Promise<SubModuleTranslation> {

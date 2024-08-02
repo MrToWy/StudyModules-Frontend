@@ -46,7 +46,7 @@ export class RequirementEditorComponent implements OnInit{
                 ];
 
       let courseId = Number(this.urlSegmentService.getIdFromSegment("course"))
-      if(!courseId) {
+      if(!courseId || courseId == 0) {
         courseId = this.courseId;
       }
 
@@ -81,10 +81,6 @@ export class RequirementEditorComponent implements OnInit{
     if(this.selectedModules)
       this.selectedModules = [...this.selectedModules]
     this.text = this.requirement.translations.find(translation => translation.languageId === this.languageId)?.name || "";
-    //console.log("requirement", this.requirement);
-    //console.log("languageId", this.languageId);
-    //console.log("text", this.text);
-    //console.log("find", this.requirement.translations.find(translation => translation.languageId === this.languageId));
 
     this.requirementChange.emit(requirement1);
   }

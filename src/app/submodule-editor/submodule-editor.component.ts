@@ -15,6 +15,8 @@ import {ButtonModule} from "primeng/button";
 import {TextAutocompleteService} from "../../shared/text-autocomplete/text-autocomplete.service";
 import {AutoCompleteCompleteEvent, AutoCompleteModule} from "primeng/autocomplete";
 import {RequirementEditorComponent} from "../requirement-editor/requirement-editor.component";
+import {NgIf} from "@angular/common";
+import {DropdownModule} from "primeng/dropdown";
 
 @Component({
   selector: 'app-submodule-editor',
@@ -30,7 +32,9 @@ import {RequirementEditorComponent} from "../requirement-editor/requirement-edit
     InputMaskModule,
     ButtonModule,
     AutoCompleteModule,
-    RequirementEditorComponent
+    RequirementEditorComponent,
+    NgIf,
+    DropdownModule
   ],
   providers: [SubmoduleService, UserService, CourseService],
   templateUrl: './submodule-editor.component.html',
@@ -51,7 +55,7 @@ export class SubmoduleEditorComponent implements OnInit {
   protected filteredLanguages: string[] = [];
   protected usedSelfStudyHints: string[] = [];
   protected filteredSelfStudyHints: string[] = [];
-  protected usedTypes: string[]= [];
+  protected usedTypes: string[] = [];
   protected filteredTypes: string[] = [];
   protected usedExams: string[] = [];
   protected filteredExams: string[] = [];
@@ -96,8 +100,10 @@ export class SubmoduleEditorComponent implements OnInit {
   protected responsibleClass: string = "";
   protected validationResult = "";
   protected validationClass = "primary";
+  protected degreeProgramTooltip: string | undefined;
+  protected degreeProgramClass: string = "";
 
-
+  selectedDegreeProgram: CourseDto | undefined;
   private invalidClass = "ng-invalid ng-dirty";
 
 
@@ -131,6 +137,11 @@ export class SubmoduleEditorComponent implements OnInit {
 
     this.degreeService.getAll().subscribe(degrees => {
       this.degrees = degrees;
+
+      if (this.subModule.degreeProgramId !== undefined || this.subModule.degreeProgramId == 0) {
+        this.selectedDegreeProgram = this.degrees[0];
+        this.subModule.degreeProgramId = this.selectedDegreeProgram.id;
+      }
     });
 
     this.submoduleService.getAll().subscribe(submodules => {
@@ -180,6 +191,7 @@ export class SubmoduleEditorComponent implements OnInit {
     let isSelfStudyRequirementsValid = this.validateSelfStudyRequirements();
     let isLiteratureValid = this.validateLiterature();
     let isResponsibleValid = this.validateResponsible();
+    let isDegreeProgramValid = this.validateDegreeProgram();
 
     let valid = isAbbreviationValid &&
       isNameValid &&
@@ -199,6 +211,7 @@ export class SubmoduleEditorComponent implements OnInit {
       isSelfStudyRequirementsValid &&
       isLiteratureValid &&
       isResponsibleValid &&
+      isDegreeProgramValid &&
       isCreditsValid;
 
     this.validationResult = valid ? translate("allValid") : translate("validationError");
@@ -225,7 +238,7 @@ export class SubmoduleEditorComponent implements OnInit {
 
     const hasAbbreviation = this.subModule.abbreviation !== undefined && this.subModule.abbreviation.length > 0;
 
-        if (!hasAbbreviation) {
+    if (!hasAbbreviation) {
       this.abbreviationClass = this.invalidClass;
       this.abbreviationTooltip = translate('abbreviationMissing');
       return false;
@@ -654,4 +667,30 @@ export class SubmoduleEditorComponent implements OnInit {
 
     return true;
   }
+
+  validateDegreeProgram(onlyIfInvalid: boolean = false): boolean {
+    if (onlyIfInvalid && this.degreeProgramClass === "") {
+      return true;
+    }
+
+    this.degreeProgramClass = "";
+    this.degreeProgramTooltip = "";
+
+    const hasDegreeProgram = this.subModule.degreeProgramId !== undefined && this.subModule.degreeProgramId > 0;
+
+    if (!hasDegreeProgram) {
+      this.degreeProgramClass = this.invalidClass;
+      this.degreeProgramTooltip = translate('degreeProgramMissing');
+      return false;
+    }
+
+    return true;
+  }
+
+  selectedDegreeProgramChanged() {
+    this.subModule.degreeProgramId = this.selectedDegreeProgram?.id || 0;
+    this.validateDegreeProgram(true);
+  }
+
+  protected readonly JSON = JSON;
 }

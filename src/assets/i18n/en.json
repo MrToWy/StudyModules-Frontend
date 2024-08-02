@@ -83,6 +83,8 @@
   "allValid": "All inputs have been successfully validated.",
   "validationError": "Please correct the errors in the form.",
   "importTooltip": "Use values from first selected submodule",
+  "degreeProgram": "Course",
+  "hardRequirementsText": "Hard requirements",
   "modulesearch": {
     "placeholder": "Search modules"
   },

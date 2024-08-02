@@ -62,7 +62,7 @@ export class SubmoduleEditComponent implements OnInit {
     }
 
     if(subModuleIdParameter === "new") {
-      this.currentSubmodule = this.subModuleService.getEmpty();
+      this.currentSubmodule = this.subModuleService.getEmptySubModuleDetail();
     }
 
     this.languageService.getLanguages().subscribe((languages) => {

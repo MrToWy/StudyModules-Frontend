@@ -1,6 +1,21 @@
 <ng-container *transloco="let t;">
 
   <div class="compactGrid">
+
+    <span class="smallPadding">
+    <label for="degreeProgram">{{ t('degreeProgram') }}</label>
+    <p-dropdown
+      id="degreeProgram"
+      [(ngModel)]="selectedDegreeProgram"
+      (onChange)="selectedDegreeProgramChanged()"
+      [options]="degrees"
+      [optionLabel]="'abbreviation'"
+      [class]="degreeProgramClass"
+      [pTooltip]="degreeProgramTooltip"
+      [style]="{'width':'100%'}">
+    </p-dropdown>
+  </span>
+
   <span class="smallPadding fullwidth">
     <label for="abbreviation">{{ t('abbreviation') }}</label>
     <input
@@ -182,6 +197,7 @@
   </span>
 
     <app-requirement-editor
+      *ngIf="subModule && subModule.degreeProgramId > 0"
       [label]="t('softRequirements')"
       [caption]="t('editSoftRequirements')"
       [(requirement)]="subModule.requirementsSoft"

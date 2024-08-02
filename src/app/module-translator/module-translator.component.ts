@@ -50,7 +50,6 @@ export class ModuleTranslatorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(1, this.currentModule);
     if (this.languageAbbreviation) {
       this.reorderTranslations(
         this.getModuleText(),
@@ -67,7 +66,6 @@ export class ModuleTranslatorComponent implements OnInit {
         this.currentModule.requirementsSoft.translations
       );
     }
-    console.log(2, this.currentModule);
   }
 
   reorderTranslations(requirementTextPromise: Promise<any>, translations: any[]) {

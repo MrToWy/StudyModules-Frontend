@@ -82,6 +82,8 @@
   "allValid": "Alle Eingaben wurden erfolgreich validiert.",
   "validationError": "Bitte prüfen Sie die rot markierten Felder.",
   "importTooltip": "Werte vom ersten ausgewählten Teilmodul übernehmen",
+  "degreeProgram": "Studiengang",
+  "hardRequirementsText": "Vorraussetzungen nach Prüfungsordnung",
   "modulesearch": {
     "placeholder": "Module suchen"
   },

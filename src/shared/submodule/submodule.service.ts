@@ -36,77 +36,20 @@ export class SubmoduleService {
 
     return this.http.post(this.submoduleURL, currentSubmodule);
   }
-
-  getEmpty() {
-    return {
-      id: 0,
-      abbreviation: "",
-      number: 0,
-      weeklyHours: 0,
-      groupSize: 0,
-      responsible: {id: 0, firstName: "", lastName: "", translations: [{title: ""}]},
-      translations: [
-        {
-          id: 0,
-          name: "",
-          subtitle: "",
-          type: "",
-          semester: "",
-          exam: "",
-          content: "",
-          presenceRequirements: "",
-          selfStudyRequirements: "",
-          spokenlanguage: "",
-          learningOutcomes: "",
-          selfStudyHints: "",
-          languageId: 1,
-          subModuleId: 0,
-          literature: ""
-        },
-        {
-          id: 0,
-          name: "",
-          subtitle: "",
-          type: "",
-          semester: "",
-          exam: "",
-          content: "",
-          presenceRequirements: "",
-          selfStudyRequirements: "",
-          spokenlanguage: "",
-          learningOutcomes: "",
-          selfStudyHints: "",
-          languageId: 2,
-          subModuleId: 0,
-          literature: ""
-        }
-      ],
-    }
-  }
-
   getEmptySubModuleDetail(): SubModuleDetail {
     return {
       id: 0,
       number: 0,
-      name: "",
       abbreviation: "",
-      course: "",
-      courseId: 0,
-      course_name: "",
-      departmentId: 0,
       degreeProgramId: 0,
       semester: "0",
       responsible: {id: 0, firstName: "", lastName: "", translations: [{title: ""}]},
       responsibleId: 0,
-      facultyId: 0,
-      specialization: "",
-      elective: false,
       weeklyHours: 0,
       credits: 0,
       hoursPresence: 0,
       hoursSelf: 0,
       groupSize: 0,
-      requirementsHardId: 0,
       requirementsSoftId: 0,
       requirementsSoft: {id: 0, requiredSemesters: "", modules: [], translations: [{name: "keine", languageId: 1}, {name: "none", languageId: 2}]},
       translations: [
@@ -159,25 +102,16 @@ export class SubmoduleService {
 export interface SubModuleDetail {
   id: number;
   number: number;
-  name: string;
   abbreviation: string;
-  course: string;
-  courseId: number;
-  course_name: string;
-  departmentId: number;
   degreeProgramId: number;
   semester: string;
   responsible: UserDto;
   responsibleId: number;
-  facultyId: number;
-  specialization: string;
-  elective: boolean;
   weeklyHours: number;
   credits: number;
   hoursPresence: number;
   hoursSelf: number;
   groupSize: number;
-  requirementsHardId: number;
   requirementsSoftId: number;
   requirementsSoft: Requirement;
 
