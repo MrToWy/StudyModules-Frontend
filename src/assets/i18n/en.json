@@ -85,6 +85,7 @@
   "importTooltip": "Use values from first selected submodule",
   "degreeProgram": "Course",
   "hardRequirementsText": "Hard requirements",
+  "semesterOrder": "The semesters must be in ascending order.",
   "modulesearch": {
     "placeholder": "Search modules"
   },

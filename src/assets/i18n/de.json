@@ -84,6 +84,7 @@
   "importTooltip": "Werte vom ersten ausgewählten Teilmodul übernehmen",
   "degreeProgram": "Studiengang",
   "hardRequirementsText": "Vorraussetzungen nach Prüfungsordnung",
+  "semesterOrder": "Die Semester müssen in aufsteigender Reihenfolge sein.",
   "modulesearch": {
     "placeholder": "Module suchen"
   },
