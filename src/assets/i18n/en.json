@@ -86,6 +86,7 @@
   "degreeProgram": "Course",
   "hardRequirementsText": "Hard requirements",
   "semesterOrder": "The semesters must be in ascending order.",
+  "creditsHoursPerCredit": "One credit corresponds to 25-30 hours of work.",
   "modulesearch": {
     "placeholder": "Search modules"
   },

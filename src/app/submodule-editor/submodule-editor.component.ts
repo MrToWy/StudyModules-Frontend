@@ -179,7 +179,6 @@ export class SubmoduleEditorComponent implements OnInit {
     let isSubtitleValid = this.validateSubtitle();
     let isLanguageValid = this.validateLanguage();
     let isSelfStudyHintsValid = this.validateSelfStudyHints();
-    let isCreditsValid = this.validateCredits();
     let isSemesterValid = this.validateSemester();
     let isTypeValid = this.validateType();
     let isExamValid = this.validateExam();
@@ -194,6 +193,7 @@ export class SubmoduleEditorComponent implements OnInit {
     let isLiteratureValid = this.validateLiterature();
     let isResponsibleValid = this.validateResponsible();
     let isDegreeProgramValid = this.validateDegreeProgram();
+    let isCreditsValid = this.validateCredits();
 
     let valid = isAbbreviationValid &&
       isNameValid &&
@@ -498,6 +498,23 @@ export class SubmoduleEditorComponent implements OnInit {
     if (!hasCredits) {
       this.creditClass = this.invalidClass;
       this.creditTooltip = translate('creditsMissing');
+      return false;
+    }
+
+    const hoursPerCreditMax = 30;
+    const hoursPerCreditMin = 25;
+    const totalHours = this.subModule.hoursPresence + this.subModule.hoursSelf;
+    const hoursPerCredit = totalHours / this.subModule.credits;
+
+    if (hoursPerCredit < hoursPerCreditMin || hoursPerCredit > hoursPerCreditMax) {
+      this.creditClass = this.invalidClass;
+      this.creditTooltip = translate('creditsHoursPerCredit');
+
+      this.presenceHoursClass = this.invalidClass;
+      this.presenceHoursTooltip = translate('creditsHoursPerCredit');
+
+      this.selfStudyHoursClass = this.invalidClass;
+      this.selfStudyHoursTooltip = translate('creditsHoursPerCredit');
       return false;
     }
 

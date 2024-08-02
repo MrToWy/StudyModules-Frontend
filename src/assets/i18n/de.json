@@ -85,6 +85,7 @@
   "degreeProgram": "Studiengang",
   "hardRequirementsText": "Vorraussetzungen nach Prüfungsordnung",
   "semesterOrder": "Die Semester müssen in aufsteigender Reihenfolge sein.",
+  "creditsHoursPerCredit": "Ein Credit entspricht 25-30 Stundenarbeitsaufwand.",
   "modulesearch": {
     "placeholder": "Module suchen"
   },

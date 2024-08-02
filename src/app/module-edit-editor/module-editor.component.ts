@@ -236,7 +236,6 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
   validate(): boolean {
     let valid = true;
 
-    let creditsValid = this.validateCredits();
     let nameValid = this.validateName();
     let subtitleValid = this.validateSubtitle();
     let courseLengthValid = this.validateCourseLength();
@@ -246,6 +245,7 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
     let hoursPresenceValid = this.validateHoursPresence();
     let hoursSelfValid = this.validateHoursSelf();
     let semesterValid = this.validateSemester();
+    let creditsValid = this.validateCredits();
 
 
     valid = valid &&
@@ -291,6 +291,23 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
     if (!hasCredits) {
       this.creditClass = this.invalidClass;
       this.creditTooltip = "Bitte geben Sie eine gültige Anzahl an Credits ein (>0).";
+      return false;
+    }
+
+    const hoursPerCreditMax = 30;
+    const hoursPerCreditMin = 25;
+    const totalHours = this.module.hoursPresence + this.module.hoursSelf;
+    const hoursPerCredit = totalHours / this.module.credits;
+
+    if (hoursPerCredit < hoursPerCreditMin || hoursPerCredit > hoursPerCreditMax) {
+      this.creditClass = this.invalidClass;
+      this.creditTooltip = translate('creditsHoursPerCredit');
+
+      this.hoursPresenceClass = this.invalidClass;
+      this.hoursPresenceTooltip = translate('creditsHoursPerCredit');
+
+      this.hoursSelfClass = this.invalidClass;
+      this.hoursSelfTooltip = translate('creditsHoursPerCredit');
       return false;
     }
 
