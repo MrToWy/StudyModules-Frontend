@@ -141,6 +141,8 @@ export class SubmoduleEditorComponent implements OnInit {
       if (this.subModule.degreeProgramId !== undefined || this.subModule.degreeProgramId == 0) {
         this.selectedDegreeProgram = this.degrees[0];
         this.subModule.degreeProgramId = this.selectedDegreeProgram.id;
+
+        this.selectedDegreeProgramChanged();
       }
     });
 
@@ -690,6 +692,11 @@ export class SubmoduleEditorComponent implements OnInit {
   selectedDegreeProgramChanged() {
     this.subModule.degreeProgramId = this.selectedDegreeProgram?.id || 0;
     this.validateDegreeProgram(true);
+
+    // if subModule.abbreviation is empty or only XYZ-
+    if (this.subModule.abbreviation === undefined || this.subModule.abbreviation.length < 5) {
+      this.subModule.abbreviation = this.selectedDegreeProgram?.abbreviation + "-" || "";
+    }
   }
 
   protected readonly JSON = JSON;
