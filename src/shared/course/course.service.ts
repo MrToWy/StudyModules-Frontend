@@ -41,6 +41,7 @@ export interface CourseDto {
   hidden: boolean;
   id: number;
   modules: ModuleDto[];
+  department: { id:number, facultyId: number };
   translations: CourseTranslationDto[];
   publishedJobId: number | undefined;
 }

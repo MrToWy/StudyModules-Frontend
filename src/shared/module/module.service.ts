@@ -131,6 +131,7 @@ export interface ModuleDto {
   elective: boolean;
   requirementsHardId: number;
   requirementsSoftId: number;
+  translations?: ModuleTranslation[];
 }
 
 export interface ModuleTranslation {

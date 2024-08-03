@@ -6,6 +6,8 @@ import {InputGroupModule} from "primeng/inputgroup";
 import {InputGroupAddonModule} from "primeng/inputgroupaddon";
 import {Router} from "@angular/router";
 import {TranslocoDirective} from "@jsverse/transloco";
+import {ModuleService} from "../../shared/module/module.service";
+import {CourseService} from "../../shared/course/course.service";
 
 interface AutoCompleteCompleteEvent {
     originalEvent: Event;
@@ -30,44 +32,42 @@ selectedModule: any;
 
     filteredModules!: any[];
 
-    groupedCities!: SelectItemGroup[];
+    groupedModules!: SelectItemGroup[];
 
-    constructor(private router: Router, private filterService: FilterService) { }
+    constructor(
+      private router: Router,
+      private filterService: FilterService,
+      private moduleService: ModuleService,
+      private courseService: CourseService
+      ) { }
 
     ngOnInit() {
-        this.groupedCities = [
-            {
-                label: 'Bachelor Mediendesigninfomatik',
-                items: [
-                    { label: 'Animation 1', value: '/faculty/4/course/1' },
-                    { label: 'Mediendesign', value: '/faculty/4/course/1' },
-                    { label: 'Animation 2', value: '/faculty/4/course/1' },
-                    { label: 'Mathe 1', value: '/faculty/4/course/1' },
-                    { label: 'Mathe 2', value: '/faculty/4/course/1' }
-                ]
-            },
-            {
-                label: 'Bachelor Angewandte Informatik',
-                items: [
-                    { label: 'Mathe 1', value: '/faculty/4/course/2' },
-                    { label: 'Mathe 2', value: '/faculty/4/course/2' },
-                    { label: 'Mathe 3', value: '/faculty/4/course/2' },
-                    { label: 'Theoretische Informatik', value: '/faculty/4/course/2' }
-                ]
-            }
-        ];
+
+      this.courseService.getAll().subscribe(courses => {
+        this.groupedModules = courses.map(course => {
+          return {
+            label: course?.translations?.at(0)?.name ?? '',
+            items: course.modules.map(module => {
+              return {
+                label: module.translations?.at(0)?.name,
+                value: '/faculty/' + course.department.facultyId + '/department/' + course.department.id + '/course/' + course.id + '/module/' + module.id
+              }
+            })
+          }
+        });
+      });
     }
 
     filterModule(event: AutoCompleteCompleteEvent) {
 
-      if(!this.groupedCities) {
+      if(!this.groupedModules) {
         return;
       }
 
         let query = event.query;
         let filteredGroups = [];
 
-        for (let optgroup of this.groupedCities) {
+        for (let optgroup of this.groupedModules) {
             let filteredSubOptions = this.filterService.filter(optgroup.items, ['label'], query, "contains");
             if (filteredSubOptions && filteredSubOptions.length) {
                 filteredGroups.push({
@@ -99,9 +99,7 @@ selectedModule: any;
         }
 
         await this.router.navigate([this.filteredModules[0].items[0].value]);
-      }
-      else {
-        this.filteredModules = [];
+        window.location.reload();
       }
     }
 }
