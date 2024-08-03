@@ -6,8 +6,8 @@
       <h1>{{moduleText?.name}}</h1>
     </div>
     <div class="right">
-      <p-button *ngIf="authService.isLoggedIn()" (onClick)="switchToEditMode()">{{t('edit')}}</p-button>
-      <p-button class="margin-left" *ngIf="authService.isLoggedIn()" (onClick)="showChanges()">{{t('changelogCaption')}}</p-button>
+      <p-button *ngIf="authService.isLoggedIn()" (onClick)="switchToEditMode()" class="edit-btn">{{t('edit')}}</p-button>
+      <p-button class="margin-left changelog-btn" *ngIf="authService.isLoggedIn()" (onClick)="showChanges()">{{t('changelogCaption')}}</p-button>
     </div>
   </div>
 
