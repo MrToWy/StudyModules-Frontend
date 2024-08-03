@@ -11,9 +11,10 @@
     </div>
   </div>
 
-  <div class="fiveGrid">
+  <div class="fiveGrid module-preview">
     <app-info-card
       *ngIf="module"
+      class="card"
       [label]="t('responsible')"
       [value]="module.responsible.firstName + ' ' + module.responsible.lastName"
       [avatarLabel]="module.responsible.firstName[0] + module.responsible.lastName[0]"
@@ -21,6 +22,7 @@
 
     <app-info-card
       *ngIf="module"
+      class="card"
       [label]="t('credits')"
       [value]="module.credits.toString()"
       [icon]="'pi-trophy'"
@@ -28,6 +30,7 @@
 
     <app-info-card
       *ngIf="module"
+      class="card"
       [label]="t('language')"
       [value]="subModuleText?.spokenlanguage"
       [icon]="'pi-language'"
@@ -35,6 +38,7 @@
 
     <app-info-card
       *ngIf="module"
+      class="card"
       [label]="t('semester')"
       [value]="addPointsToNumbers(module.semester)"
       [icon]="'pi-calendar'"
@@ -42,19 +46,21 @@
 
     <app-info-card
       *ngIf="module"
+      class="card"
       [label]="t('groupSize')"
       [value]="subModule?.groupSize?.toString()"
       [icon]="'pi-users'"
     />
 
     <app-stats-card
-      class="takeTwoColumns takeThreeRows fullheight"
+      class="card takeTwoColumns takeThreeRows fullheight"
       [title]="t('timeRequired')"
       [hoursPresence]="module?.hoursPresence"
       [hoursSelf]="module?.hoursSelf"
     />
 
     <app-text-card
+      class="card"
       [title]="t('recommendedRequirements')"
       [text]="module?.requirementsSoft?.translations?.at(0)?.name"
       [style.grid-column]="'span 3'"
@@ -62,6 +68,7 @@
     />
 
     <app-text-card
+      class="card"
       [title]="t('event')"
       [text]="subModuleText?.type + ' (' + subModule?.weeklyHours + ' ' + t('hoursPerWeek') + ')  <br> ' + moduleText?.exam"
       [style.grid-column]="'span 2'"
@@ -69,6 +76,7 @@
     />
 
     <app-text-card
+      class="card"
       [title]="t('requiredRequirements')"
       [text]="module?.requirementsHard?.translations?.at(0)?.name"
       [style.grid-column]="'span 3'"
@@ -76,6 +84,7 @@
     />
 
     <app-text-card
+      class="card"
       [title]="t('learningObjectives')"
       [text]="moduleText?.learningOutcomes"
       [style.grid-column]="'span 5'"
@@ -83,6 +92,7 @@
     />
 
     <app-text-card
+      class="card"
       [title]="t('literature')"
       [text]="subModuleText?.literature"
       [style.grid-column]="'span 2'"
@@ -90,6 +100,7 @@
     />
 
     <app-text-card
+      class="card"
       [title]="t('content')"
       [text]="subModuleText?.content"
       [style.grid-column]="'span 3'"
@@ -97,6 +108,7 @@
     />
 
     <app-split-text-card
+      class="card"
       [title]="t('requirements')"
       [leftCaption]="t('attendance')"
       [leftText]="subModuleText?.presenceRequirements"
