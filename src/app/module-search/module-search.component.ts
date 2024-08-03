@@ -83,6 +83,7 @@ selectedModule: any;
 
     async onSelect(event: any) {
       await this.router.navigate([event.value.value]);
+      window.location.reload();
     }
 
     async onKey(event: any) {
