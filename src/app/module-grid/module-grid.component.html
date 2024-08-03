@@ -7,6 +7,8 @@
     groupRowsBy="course"
     [scrollable]="true"
     scrollHeight="73vh"
+    responsiveLayout="stack"
+    [breakpoint]="'850px'"
     [columns]="selectedColumns"
   >
     <ng-template pTemplate="caption">
@@ -130,13 +132,16 @@
             <span> <p>{{ module.course_name }}</p> </span>
           </ng-template>
         </td>
-        <td>{{ module.name }}</td>
-        <td *ngIf="isSemesterIncluded()">{{ module.semester }}</td>
+        <td class="module-title"><span class="p-column-title">{{t('name')}}</span>{{ module.name }}</td>
+        <td *ngIf="isSemesterIncluded()"><span class="p-column-title">{{t('semester')}}</span>{{ module.semester }}</td>
         <td>
-          <p-avatar
-            label="{{ module.responsible.split(' ')[0].charAt(0) }}{{ module.responsible.split(' ')[1].charAt(0) }}"
-            [style]="{ 'background-color': '#dee9fc', color: '#1a2551' }"/>
-          {{ module.responsible }}
+          <span class="p-column-title">{{t('responsible')}}</span>
+          <div>
+            <p-avatar
+              label="{{ module.responsible.split(' ')[0].charAt(0) }}{{ module.responsible.split(' ')[1].charAt(0) }}"
+              [style]="{ 'background-color': '#dee9fc', color: '#1a2551' }"/>
+            {{ module.responsible }}
+          </div>
         </td>
       </tr>
     </ng-template>
