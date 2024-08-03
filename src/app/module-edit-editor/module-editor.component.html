@@ -25,7 +25,7 @@
     />
   </span>
 
-    <span class="smallPadding takeTwoColumns">
+    <span class="smallPadding">
     <label for="subtitle">{{ t('subtitle') }}</label>
     <input
       pInputText
@@ -35,6 +35,30 @@
       [pTooltip]="subtitleTooltip"
       (input)="validateSubtitle(true)"
     />
+  </span>
+
+    <span class="smallPadding">
+    <label for="group">{{ t('group') }}</label>
+      <p-dropdown
+        id="group"
+        [style]="{'width':'100%'}"
+        [options]="availableGroups"
+        [(ngModel)]="module.groupId"
+        (onChange)="selectedGroupChanged($event)"
+        optionLabel="id"
+        optionValue="id"
+        [class]="groupClass"
+        [pTooltip]="groupTooltip"
+        placeholder="Select Group">
+        <ng-template pTemplate="selectedItem">
+      <div class="" *ngIf="module.groupId > 0">
+        {{ getGroupLabel(getGroupDto(module.groupId)) }}
+      </div>
+    </ng-template>
+    <ng-template let-group pTemplate="item">
+      {{ getGroupLabel(group) }}
+    </ng-template>
+      </p-dropdown>
   </span>
 
     <span class="smallPadding fullwidth takeTwoColumns">

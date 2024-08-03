@@ -86,6 +86,11 @@
   "hardRequirementsText": "Vorraussetzungen nach Prüfungsordnung",
   "semesterOrder": "Die Semester müssen in aufsteigender Reihenfolge sein.",
   "creditsHoursPerCredit": "Ein Credit entspricht 25-30 Stundenarbeitsaufwand.",
+  "groupTooltip": "Die Module werden im Modulhandbuch in Gruppen angezeigt.",
+  "group": "Gruppe",
+  "hoursPresence": "Präsenzstunden",
+  "hoursSelf": "Stunden im Selbststudium",
+  "groupMissing": "Bitte wählen Sie eine Gruppe aus.",
   "modulesearch": {
     "placeholder": "Module suchen"
   },

@@ -87,6 +87,11 @@
   "hardRequirementsText": "Hard requirements",
   "semesterOrder": "The semesters must be in ascending order.",
   "creditsHoursPerCredit": "One credit corresponds to 25-30 hours of work.",
+  "groupTooltip": "The modules will be grouped for the pdf by the selected attribute.",
+  "group": "Group",
+  "hoursPresence": "Presence hours",
+  "hoursSelf": "Hours of self-study",
+  "groupMissing": "Please provide a valid group.",
   "modulesearch": {
     "placeholder": "Search modules"
   },

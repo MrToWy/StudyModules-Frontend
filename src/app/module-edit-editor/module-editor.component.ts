@@ -14,7 +14,7 @@ import {ButtonModule} from "primeng/button";
 import {SelectButtonModule} from "primeng/selectbutton";
 import {CheckboxModule} from "primeng/checkbox";
 import {UserDto, UserService} from "../../shared/user/user.service";
-import {DropdownModule} from "primeng/dropdown";
+import {DropdownChangeEvent, DropdownModule} from "primeng/dropdown";
 import {NgIf} from "@angular/common";
 import {ResponsibleAvatarComponent} from "../responsible-avatar/responsible-avatar.component";
 import {InputTextareaModule} from "primeng/inputtextarea";
@@ -31,6 +31,7 @@ import {DialogModule} from "primeng/dialog";
 import {RequirementDetailComponent} from "../requirement-detail/requirement-detail.component";
 import {RequirementEditorComponent} from "../requirement-editor/requirement-editor.component";
 import {CourseDto, CourseService} from "../../shared/course/course.service";
+import {GroupDto, GroupService} from "../../shared/group/group.service";
 
 @Component({
   selector: 'app-module-editor',
@@ -85,6 +86,7 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
   hoursPresenceClass: string = '';
   hoursSelfClass: string = '';
   semesterClass: string = '';
+  groupClass: string = '';
 
 
   nameTooltip: string = '';
@@ -97,6 +99,7 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
   hoursPresenceTooltip: string = '';
   hoursSelfTooltip: string = '';
   semesterTooltip: string = '';
+  groupTooltip: string = translate('groupTooltip');
 
   invalidClass: string = 'ng-invalid ng-dirty';
 
@@ -111,7 +114,8 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
     private languageService: LanguageService,
     private submoduleService: SubmoduleService,
     private moduleService: ModuleService,
-    private degreeService: CourseService
+    private degreeService: CourseService,
+    private groupService: GroupService
   ) {
   }
 
@@ -145,6 +149,7 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
   hardRequirementsPopupVisible: boolean = false;
   softRequirementsPopupVisible: boolean = false;
   currentLanguageId: number = 2;
+  availableGroups: GroupDto[] | undefined;
 
   private setInitialResponsible(): void {
     if (this.module && this.module.responsible && this.users.length) {
@@ -219,12 +224,13 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
     this.moduleService.getAll(false, this.module.degreeProgramId).subscribe(modules => {
       this.modules = modules;
     });
+
+    this.groupService.getAll(this.module.degreeProgramId).subscribe((groups: GroupDto[] | undefined) => {
+      this.availableGroups = groups;
+    });
   }
 
   selectedSubmodulesChange($event: MultiSelectChangeEvent) {
-    console.log($event);
-    console.log(this.selectedSubmodules);
-
     const subModulesFromApi: SubModule[] = []
     this.selectedSubmodules.forEach(async (submodule: any) => {
       subModulesFromApi.push(await firstValueFrom(this.submoduleService.getOne(submodule)));
@@ -246,6 +252,7 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
     let hoursSelfValid = this.validateHoursSelf();
     let semesterValid = this.validateSemester();
     let creditsValid = this.validateCredits();
+    let groupValid = this.validateGroup();
 
 
     valid = valid &&
@@ -258,6 +265,7 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
       abbreviationValid &&
       hoursPresenceValid &&
       hoursSelfValid &&
+      groupValid &&
       semesterValid
 
     ;
@@ -515,4 +523,35 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
     return true;
   }
 
+  validateGroup(onlyIfInvalid: boolean = false): boolean {
+    this.groupClass = "";
+    this.groupTooltip = translate('groupTooltip');
+
+    if (onlyIfInvalid && this.groupClass === "") {
+      return true;
+    }
+
+    const hasGroup = this.module.groupId !== undefined && this.module.groupId > 0;
+    if (!hasGroup) {
+      this.groupClass = this.invalidClass;
+      this.groupTooltip = translate('groupMissing');
+      return false;
+    }
+
+    return true;
+  }
+
+  selectedGroupChanged($event: DropdownChangeEvent) {
+    this.module.groupId = $event.value;
+
+    this.validateGroup(true);
+  }
+
+  getGroupDto(groupID: number): GroupDto | undefined {
+    return this.availableGroups?.find(group => group.id === groupID);
+  }
+
+  getGroupLabel(group: GroupDto | undefined): string {
+    return group?.translations?.at(0)?.name ?? "";
+  }
 }
