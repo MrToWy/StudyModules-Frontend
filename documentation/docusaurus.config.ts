@@ -76,6 +76,12 @@ const config: Config = {
           label: 'API',
         },
         {
+          type: 'docSidebar',
+          sidebarId: 'deploymentSidebar',
+          position: 'left',
+          label: 'Deployment (Docker)',
+        },
+        {
           href: 'https://studymodules.tobi.win/',
           label: 'Live-Frontend',
           position: 'right',
