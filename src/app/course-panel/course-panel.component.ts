@@ -214,6 +214,6 @@ export class CoursePanelComponent implements OnInit{
 
   getLastPublish(language: LanguageDto) {
     const lastPublish = this.selectedCourse?.Job.find(job => job.languageId === language.id);
-    return lastPublish?.publishedAt ? new Date(lastPublish.publishedAt).toLocaleString() : undefined;
+    return lastPublish?.publishedAt ? new Date(lastPublish.publishedAt).toLocaleString(this.languageService.languageCode.toLowerCase()) : undefined;
   }
 }
