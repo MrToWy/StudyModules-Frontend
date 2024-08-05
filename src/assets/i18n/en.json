@@ -41,7 +41,7 @@
   "delete": "Löschen",
   "close": "Schließen",
   "waitingForBuilder": "Waiting for builder",
-  "runningFor": "Running for {0} ",
+  "runningFor": "Running for ",
   "pdfCreated": "PDF created, please check and publish ",
   "abbreviation": "Abbreviation",
   "language": "Language",

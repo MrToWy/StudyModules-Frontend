@@ -109,7 +109,7 @@
   "published": "Veröffentlicht",
   "status": "Status",
   "close": "Schließen",
-  "runningFor": "Läuft seit {0} ",
+  "runningFor": "Läuft seit ",
   "pdfCreated": "PDF erstellt, bitte prüfen & freigeben ",
   "waitingForBuilder": "Warten auf Server",
   "overviewCaption": "Übersicht",
