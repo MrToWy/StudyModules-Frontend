@@ -164,7 +164,7 @@ getRunningTime(job: any) {
       return 'Error';
     }
     if (job.publishedAt) {
-      return `Veröffentlicht ${job.publishedAt}`;
+      return `Veröffentlicht ${job.publishedAt.toLocaleString()}`;
     }
     if (!job.publishedAt && job.finishedAt) {
       return `PDF erstellt, bitte prüfen & freigeben (${this.getRunningTime(job)})`;
