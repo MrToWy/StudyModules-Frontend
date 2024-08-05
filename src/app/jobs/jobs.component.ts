@@ -171,7 +171,7 @@ getRunningTime(job: any) {
     }
     if (!job.errorAt && !job.finishedAt && job.startedAt) {
       const runningTime = this.getRunningTime(job);
-      return translate("runningFor", {0: runningTime});
+      return translate("runningFor") + " " + runningTime;
     }
     if (!job.errorAt && !job.finishedAt && !job.startedAt) {
       return translate("waitingForBuilder");
