@@ -1,4 +1,4 @@
-<ng-container *transloco="let t; prefix:'overview'">
+<ng-container *transloco="let t;">
 
 <p-table
   [value]="jobs"
@@ -33,11 +33,11 @@
             </th>
 
             <th *ngIf="!simpleView">
-              Studiengang
+              {{ t("degreeProgram") }}
             </th>
 
             <th>
-              Status
+              {{ t("status") }}
             </th>
 
             <th *ngIf="!simpleView">
@@ -65,7 +65,7 @@
               </div>
             </th>
             <th>
-              Aktionen
+              {{ t("actions") }}
             </th>
         </tr>
     </ng-template>
@@ -119,7 +119,7 @@
                   icon="pi pi-file-check"
                   (click)="publish(job, $event)"
                 >
-                  Freigeben
+                  {{ t("publish") }}
                 </button>
               </div>
         </tr>

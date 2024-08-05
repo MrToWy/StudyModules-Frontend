@@ -36,53 +36,52 @@
 </p-panel>
 
 
-<p-dialog header="Delete Course" [modal]="true" [(visible)]="deleteDialogVisible" [style]="{ width: '25rem' }">
+<p-dialog [header]="t('deleteCourse')" [modal]="true" [(visible)]="deleteDialogVisible" [style]="{ width: '25rem' }">
     <span class="p-text-secondary block mb-5">{{ t('deleteDegreeProgramQuery') }}</span>
 
     <div class="flex justify-content-end gap-2">
-        <p-button label="Cancel" severity="secondary" (click)="deleteDialogVisible = false" />
-        <p-button label="Delete" (click)="onCourseDeleted()" />
+        <p-button [label]="t('cancel')" severity="secondary" (click)="deleteDialogVisible = false" />
+        <p-button [label]="t('delete')" (click)="onCourseDeleted()" />
     </div>
 </p-dialog>
 
 
-<p-dialog header="Clone Course" [modal]="true" [(visible)]="cloneDialogVisible" [style]="{ width: '25rem' }">
+<p-dialog [header]="t('cloneCourse')" [modal]="true" [(visible)]="cloneDialogVisible" [style]="{ width: '25rem' }">
     <div class="smallPadding">
       <br>
       <br>
           <span class="p-float-label">
             <input pInputText id="name" [(ngModel)]="cloneCourseDto.name"/>
-            <label for="name">Name</label>
+            <label for="name">{{ t('name') }}</label>
           </span>
 
           <span class="p-float-label">
             <input pInputText id="shortName" [(ngModel)]="cloneCourseDto.abbreviation"/>
-            <label for="shortName">Short Name</label>
+            <label for="shortName">{{ t('abbreviation') }}</label>
           </span>
 
           <span class="p-float-label">
             <input pInputText id="description" [(ngModel)]="cloneCourseDto.pruefungsordnung"/>
-            <label for="description">Prüfungsordnung</label>
+            <label for="description">{{ t('po') }}</label>
           </span>
         </div>
 
     <div class="flex justify-content-end gap-2">
         <p-button label="Cancel" severity="secondary" (click)="cloneDialogVisible = false" />
-        <p-button [loading]="cloning" label="Clone" (click)="onCourseCloned()" />
+        <p-button [loading]="cloning" [label]="t('clone')" (click)="onCourseCloned()" />
     </div>
 </p-dialog>
 
-<p-dialog header="Regenerate Pdf" [modal]="true" [(visible)]="refreshPdfDialogVisible">
+<p-dialog [header]="t('publishNewPdf')" [modal]="true" [(visible)]="refreshPdfDialogVisible">
 
 <p-stepper [linear]="true">
-    <p-stepperPanel header="Overview">
+    <p-stepperPanel [header]="t('overviewCaption')">
         <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
             <div class="smallPadding">
-                There have been <a [routerLink]="'changes'">20 changes</a> since the last publish.
-                The last publish was on 01.01.2021.
+                {{ t('selectLanguagesToCreatePdf') }}
             </div>
 
-            <div class="flexColumn">
+            <div class="flexColumn margin-top">
               <div class="flex align-items-center smallPadding" *ngFor="let language of languages">
                 <p-checkbox
                     [(ngModel)]="selectedLanguageIds"
@@ -93,23 +92,23 @@
             </div>
 
 
-            <div class="flex pt-4 justify-content-end">
-                <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="startPdfGeneration(nextCallback)" />
+            <div class="flex pt-4 justify-content-end margin-top">
+                <p-button [label]="t('next')" icon="pi pi-arrow-right" iconPos="right" (onClick)="startPdfGeneration(nextCallback)" />
             </div>
         </ng-template>
     </p-stepperPanel>
-    <p-stepperPanel header="Generate Pdf">
+    <p-stepperPanel [header]="t('generatePdf')">
         <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
             <div *ngIf="!generatingTexFiles">
-              <p>Check the results and then click on "Next" to publish the Pdf.</p>
+              <p>{{t('checkResults')}}</p>
             </div>
 
             <div *ngIf="generatingTexFiles" class="smallPadding">
-                The Pdf is generating, please wait...
+                {{ t('generatingPdf') }}
             </div>
             <app-jobs (jobsDone)="onJobsDone()" [filterGuids]="waitForJobGuids" [simpleView]="true" />
             <div class="flex pt-4 justify-content-between">
-              <p *ngIf="jobsAreDone">Successfully published the new pdfs.</p>
+              <p *ngIf="jobsAreDone">{{t('publishedSuccessfully')}}</p>
               <p-button *ngIf="jobsAreDone" label="Close" icon="pi pi-arrow-right" iconPos="right" (onClick)="nextCallback.emit()" />
             </div>
         </ng-template>
