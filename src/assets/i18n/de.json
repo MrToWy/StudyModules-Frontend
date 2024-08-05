@@ -91,6 +91,8 @@
   "hoursPresence": "Präsenzstunden",
   "hoursSelf": "Stunden im Selbststudium",
   "groupMissing": "Bitte wählen Sie eine Gruppe aus.",
+  "lastPublished": "Zuletzt veröffentlicht",
+  "never": "Nie",
   "modulesearch": {
     "placeholder": "Module suchen"
   },

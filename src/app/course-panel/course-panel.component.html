@@ -82,11 +82,11 @@
                 The last publish was on 01.01.2021.
             </div>
 
-            <div class="flex">
-              <div class="flex align-items-center" *ngFor="let language of languages">
+            <div class="flexColumn">
+              <div class="flex align-items-center smallPadding" *ngFor="let language of languages">
                 <p-checkbox
                     [(ngModel)]="selectedLanguageIds"
-                    [label]="language.abbreviation"
+                    [label]="language.abbreviation + ' (' + t('lastPublished') + ': ' + getLastPublish(language) + ')'"
                     [name]="'group1'"
                     [value]="language.id" />
             </div>

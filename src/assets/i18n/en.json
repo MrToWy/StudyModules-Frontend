@@ -92,6 +92,8 @@
   "hoursPresence": "Presence hours",
   "hoursSelf": "Hours of self-study",
   "groupMissing": "Please provide a valid group.",
+  "lastPublished": "Last published",
+  "never": "Never",
   "modulesearch": {
     "placeholder": "Search modules"
   },

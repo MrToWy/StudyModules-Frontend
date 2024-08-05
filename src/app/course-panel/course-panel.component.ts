@@ -17,7 +17,7 @@ import {AuthService} from "../../shared/auth/auth.service";
 import {LanguageDto, LanguageService} from "../../shared/language/language.service";
 import {ABtestService} from "../../shared/abtest/abtest.service";
 import {TagModule} from "primeng/tag";
-import {TranslocoDirective} from "@jsverse/transloco";
+import {translate, TranslocoDirective} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-course-panel',
@@ -210,5 +210,10 @@ export class CoursePanelComponent implements OnInit{
       this.coursesChanged.emit();
       course.hidden = !course.hidden;
     });
+  }
+
+  getLastPublish(language: LanguageDto) {
+    const lastPublish = this.selectedCourse?.Job.find(job => job.languageId === language.id);
+    return lastPublish?.publishedAt ?? translate('never');
   }
 }
