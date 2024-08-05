@@ -109,7 +109,7 @@
             <app-jobs (jobsDone)="onJobsDone()" [filterGuids]="waitForJobGuids" [simpleView]="true" />
             <div class="flex pt-4 justify-content-between">
               <p *ngIf="jobsAreDone">{{t('publishedSuccessfully')}}</p>
-              <p-button *ngIf="jobsAreDone" label="Close" icon="pi pi-arrow-right" iconPos="right" (onClick)="nextCallback.emit()" />
+              <p-button *ngIf="jobsAreDone" [label]="t('close')" icon="pi pi-arrow-right" iconPos="right" (onClick)="nextCallback.emit()" />
             </div>
         </ng-template>
     </p-stepperPanel>

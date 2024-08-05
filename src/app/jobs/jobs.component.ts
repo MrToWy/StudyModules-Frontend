@@ -8,7 +8,7 @@ import {RippleModule} from "primeng/ripple";
 import {SharedModule} from "primeng/api";
 import {TableModule} from "primeng/table";
 import {TagModule} from "primeng/tag";
-import {TranslocoDirective} from "@jsverse/transloco";
+import {translate, TranslocoDirective} from "@jsverse/transloco";
 import {CourseDto} from "../../shared/course/course.service";
 import {LanguageService} from "../../shared/language/language.service";
 import {JobService} from "../../shared/job/job.service";
@@ -164,16 +164,17 @@ getRunningTime(job: any) {
       return 'Error';
     }
     if (job.publishedAt) {
-      return `Veröffentlicht ${new Date(job.publishedAt).toLocaleString(this.languageService.languageCode.toLowerCase())}`;
+      return translate("published") + ` ${new Date(job.publishedAt).toLocaleString(this.languageService.languageCode.toLowerCase())}`;
     }
     if (!job.publishedAt && job.finishedAt) {
-      return `PDF erstellt, bitte prüfen & freigeben (${this.getRunningTime(job)})`;
+      return translate('pdfCreated') + `(${this.getRunningTime(job)})`;
     }
     if (!job.errorAt && !job.finishedAt && job.startedAt) {
-      return `Running for ${this.getRunningTime(job)}`;
+      const runningTime = this.getRunningTime(job);
+      return translate("runningFor", {0: runningTime});
     }
     if (!job.errorAt && !job.finishedAt && !job.startedAt) {
-      return 'Waiting for builder';
+      return translate("waitingForBuilder");
     }
     return '';
   }
