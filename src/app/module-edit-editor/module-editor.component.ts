@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {
   ModuleDetail,
   ModuleDto, ModuleService,
@@ -63,7 +63,7 @@ import {GroupDto, GroupService} from "../../shared/group/group.service";
   templateUrl: './module-editor.component.html',
   styleUrl: './module-edit-editor.component.sass'
 })
-export class ModuleEditorComponent implements OnInit, OnChanges {
+export class ModuleEditorComponent implements OnInit, OnChanges, OnDestroy {
   protected submodules: any[] = [];
   protected submodulesForDropdown: any[] = [];
   protected creditClass: string = "";
@@ -131,6 +131,10 @@ export class ModuleEditorComponent implements OnInit, OnChanges {
     this.languageService.languageSubject.subscribe(() => {
       this.loadData()
     });
+  }
+
+  ngOnDestroy(): void {
+    this.languageService.languageSubject.unsubscribe();
   }
 
   onModuleChange() {

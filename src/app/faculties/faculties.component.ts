@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ToastModule} from "primeng/toast";
 import {TableModule} from "primeng/table";
 import {FacultyDto, FacultyService} from "../../shared/faculty/faculty.service";
@@ -29,7 +29,7 @@ import {TooltipModule} from "primeng/tooltip";
   styleUrl: './faculties.component.sass',
   providers: [FacultyService]
 })
-export class FacultiesComponent implements OnInit{
+export class FacultiesComponent implements OnInit, OnDestroy {
 faculties!: FacultyDto[];
 
     selectedFaculty!: FacultyDto;
@@ -46,6 +46,10 @@ faculties!: FacultyDto[];
       this.languageService.languageSubject.subscribe(() => {
         this.loadFaculties()
       });
+    }
+
+    ngOnDestroy() {
+      this.languageService.languageSubject.unsubscribe();
     }
 
     loadFaculties() {

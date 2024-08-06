@@ -1,4 +1,4 @@
-import { Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {TableModule} from "primeng/table";
 import {ModuleDto, ModuleService} from "../../shared/module/module.service";
 import {TagModule} from "primeng/tag";
@@ -40,7 +40,7 @@ import {AuthService} from "../../shared/auth/auth.service";
   templateUrl: './module-grid.component.html',
   styleUrl: './module-grid.component.sass'
 })
-export class ModuleGridComponent implements OnInit{
+export class ModuleGridComponent implements OnInit, OnDestroy{
   users!: any[];
   statuses!: any[];
   selectedUser: any;
@@ -85,6 +85,10 @@ export class ModuleGridComponent implements OnInit{
     this.languageService.languageSubject.subscribe(() => {
       this.loadData()
     });
+  }
+
+  ngOnDestroy() {
+    this.languageService.languageSubject.unsubscribe();
   }
 
   isSemesterIncluded(): boolean {

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {UserDto, UserService} from "../../shared/user/user.service";
 import {LanguageService} from "../../shared/language/language.service";
 import {SubModuleDetail, SubmoduleService} from "../../shared/submodule/submodule.service";
@@ -40,7 +40,7 @@ import {DropdownModule} from "primeng/dropdown";
   templateUrl: './submodule-editor.component.html',
   styleUrl: './submodule-editor.component.sass'
 })
-export class SubmoduleEditorComponent implements OnInit {
+export class SubmoduleEditorComponent implements OnInit, OnDestroy {
 
   @Input() nextCallback: EventEmitter<void> = new EventEmitter<void>();
   @Input() subModule!: SubModuleDetail;
@@ -122,6 +122,10 @@ export class SubmoduleEditorComponent implements OnInit {
     this.languageService.languageSubject.subscribe(() => {
       this.loadData()
     });
+  }
+
+  ngOnDestroy() {
+    this.languageService.languageSubject.unsubscribe();
   }
 
   onSubModuleChange() {
