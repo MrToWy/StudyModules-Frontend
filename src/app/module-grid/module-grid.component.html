@@ -66,6 +66,9 @@
             />
           </div>
         </th>
+         <th>
+          {{ t('group') }}
+        </th>
         <th *ngIf="isSemesterIncluded()">
           <div>
             {{ t('semester') }}
@@ -79,6 +82,9 @@
               [hideOnClear]="true"
             />
           </div>
+        </th>
+        <th>
+          {{ t('credits') }}
         </th>
         <th>
           <div>
@@ -133,7 +139,9 @@
           </ng-template>
         </td>
         <td class="module-title"><span class="p-column-title">{{t('name')}}</span>{{ module.name }}</td>
+        <td><span class="p-column-title">{{t('group')}}</span>{{module.group}}</td>
         <td *ngIf="isSemesterIncluded()"><span class="p-column-title">{{t('semester')}}</span>{{ module.semester }}</td>
+        <td><span class="p-column-title">{{t('credits')}}</span>{{module.credits}}</td>
         <td>
           <span class="p-column-title">{{t('responsible')}}</span>
           <div>

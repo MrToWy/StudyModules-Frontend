@@ -23,6 +23,7 @@ export class ModuleService {
           id: module.id,
           name: module.translations[0].name,
           abbreviation: module.abbreviation,
+          credits: module.credits,
           course: module.degreeProgram.abbreviation,
           courseId: module.degreeProgram.id,
           course_name: module.degreeProgram.translations[0].name,
@@ -33,7 +34,8 @@ export class ModuleService {
           specialization: module.specialization,
           elective: module.elective,
           requirementsHardId: module.requirementsHardId,
-          requirementsSoftId: module.requirementsSoftId
+          requirementsSoftId: module.requirementsSoftId,
+          group: module.group?.translations?.at(0)?.name ?? "",
         }))
       )
     );
@@ -121,6 +123,7 @@ export interface ModuleDto {
   id: number;
   name: string;
   abbreviation: string;
+  credits: number;
   course: string;
   courseId: number;
   departmentId: number;
@@ -131,6 +134,7 @@ export interface ModuleDto {
   elective: boolean;
   requirementsHardId: number;
   requirementsSoftId: number;
+  group: string;
   translations?: ModuleTranslation[];
 }
 
