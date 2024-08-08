@@ -5,7 +5,7 @@ import {DropdownModule} from "primeng/dropdown";
 import {MultiSelectModule} from "primeng/multiselect";
 import {NgIf} from "@angular/common";
 import {RippleModule} from "primeng/ripple";
-import {SharedModule} from "primeng/api";
+import {ConfirmationService, SharedModule} from "primeng/api";
 import {TableModule} from "primeng/table";
 import {TagModule} from "primeng/tag";
 import {translate, TranslocoDirective} from "@jsverse/transloco";
@@ -17,6 +17,7 @@ import {CheckboxModule} from "primeng/checkbox";
 import {environment} from "../../environments/environment";
 import {ResponsibleAvatarComponent} from "../responsible-avatar/responsible-avatar.component";
 import {filter} from "rxjs";
+import {ConfirmPopupModule} from "primeng/confirmpopup";
 
 @Component({
   selector: 'app-jobs',
@@ -34,11 +35,13 @@ import {filter} from "rxjs";
     TranslocoDirective,
     FormsModule,
     CheckboxModule,
-    ResponsibleAvatarComponent
+    ResponsibleAvatarComponent,
+    ConfirmPopupModule
   ],
   providers: [
     LanguageService,
     JobService,
+    ConfirmationService
   ],
   templateUrl: './jobs.component.html',
   styleUrl: './jobs.component.sass'
@@ -67,6 +70,7 @@ export class JobsComponent implements OnInit, OnDestroy{
   constructor(
     private languageService : LanguageService,
     private jobService: JobService,
+    private confirmationService: ConfirmationService
   ) {
   }
 
@@ -139,10 +143,16 @@ getRunningTime(job: any) {
 
   deleteJob(job: any, $event: MouseEvent) {
     $event.stopPropagation();
-    console.log(job);
 
-    this.jobService.delete(job.guid).subscribe(() => {
-      this.loadData();
+    this.confirmationService.confirm({
+      message: translate('deleteJobConfirmation'),
+      target: $event.target as EventTarget,
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.jobService.delete(job.guid).subscribe(() => {
+          this.loadData();
+        });
+      }
     });
   }
 

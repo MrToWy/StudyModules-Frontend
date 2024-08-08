@@ -115,6 +115,7 @@
   "overviewCaption": "Übersicht",
   "publishNewPdf": "Neues PDF veröffentlichen",
   "next": "Weiter",
+  "deleteJobConfirmation": "Soll der Job wirklich gelöscht werden?",
   "modulesearch": {
     "placeholder": "Module suchen"
   },
