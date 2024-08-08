@@ -134,7 +134,8 @@
     "newModule": "New module",
     "newSubModule": "New submodule",
     "group": "Group",
-    "credits": "Credits"
+    "credits": "Credits",
+    "abbreviation": "Abbreviation"
   },
   "changelog": {
     "description": "Description",

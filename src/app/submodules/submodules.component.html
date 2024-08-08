@@ -23,10 +23,10 @@
         <tr>
             <th>
                 <div>
-                    {{ t('name') }}
+                    {{ t('abbreviation') }}
                     <p-columnFilter
                       type="text"
-                      field="name"
+                      field="abbreviation"
                       display="menu"
                       [showMatchModes]="false"
                       [showOperator]="false"
@@ -37,7 +37,16 @@
             </th>
 
             <th>
-
+              {{t('name')}}
+              <p-columnFilter
+                      type="text"
+                      field="name"
+                      display="menu"
+                      [showMatchModes]="false"
+                      [showOperator]="false"
+                      [showAddButton]="false"
+                      [hideOnClear]="true"
+                    />
             </th>
 
             <th>
@@ -69,9 +78,13 @@
     <ng-template [pTemplate]="'body'" let-submodule>
       <tr class="clickable" (click)="openDetailView(submodule)">
             <td>{{ submodule.abbreviation }}</td>
-            <td></td>
+            <td>{{ submodule.translations[0].name }}</td>
             <td>
-              </td>
+                <p-avatar *ngIf="submodule.responsible"
+                  label="{{ submodule.responsible.firstName.charAt(0) }}{{ submodule.responsible.lastName.charAt(0) }}"
+                  [style]="{ 'background-color': '#dee9fc', color: '#1a2551' }" />
+                <span class="smallPadding">{{ submodule.responsible.firstName }} {{ submodule.responsible.lastName }}</span>
+            </td>
         </tr>
     </ng-template>
 
