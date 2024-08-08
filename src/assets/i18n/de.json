@@ -133,7 +133,9 @@
     "download": "Anzeigen",
     "delete": "Löschen",
     "newModule": "Neues Modul",
-    "newSubModule": "Neues Teilmodul"
+    "newSubModule": "Neues Teilmodul",
+    "group": "Gruppe",
+    "credits": "Credits"
   },
   "changelog": {
     "description": "Beschreibung",

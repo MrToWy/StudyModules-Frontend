@@ -51,7 +51,7 @@ export class ModuleGridComponent implements OnInit, OnDestroy{
   availableColumns!: Column[];
 
   @Input()
-  groupByCourse = true;
+  groupByColumn : null | "course" | "group" = "course";
 
   constructor(private moduleService: ModuleService,
               private router: Router,

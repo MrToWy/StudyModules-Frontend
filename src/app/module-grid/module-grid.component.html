@@ -4,7 +4,7 @@
     [value]="modules"
     selectionMode="single"
     rowGroupMode="subheader"
-    groupRowsBy="course"
+    [groupRowsBy]="groupByColumn"
     [scrollable]="true"
     scrollHeight="73vh"
     responsiveLayout="stack"
@@ -110,7 +110,7 @@
         </th>
       </tr>
     </ng-template>
-    <ng-template *ngIf="groupByCourse && !abTestService.aActive" pTemplate="groupheader" let-module
+    <ng-template *ngIf="groupByColumn != null && !abTestService.aActive" pTemplate="groupheader" let-module
                  let-expanded="expanded">
       <tr>
         <td colspan="5">
@@ -125,12 +125,13 @@
               [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">
             </p-button>
 
-            <span>{{ module.course_name }} ({{ module.course }})</span>
+            <span *ngIf="groupByColumn == 'course'">{{ module.course_name }} ({{ module.course }})</span>
+            <span *ngIf="groupByColumn == 'group'">{{ module.group }} ({{ module.group }})</span>
           </div>
         </td>
       </tr>
     </ng-template>
-    <ng-template [pTemplate]="this.groupByCourse && !abTestService.aActive ? 'rowexpansion' : 'body'" let-module>
+    <ng-template [pTemplate]="this.groupByColumn != null && !abTestService.aActive ? 'rowexpansion' : 'body'" let-module>
       <tr class="clickable" (click)="openDetailView(module)">
         <td *ngIf="!courseId">
           <p-tag severity="success" value="{{ module.course }}" [pTooltip]="tooltipContent"/>

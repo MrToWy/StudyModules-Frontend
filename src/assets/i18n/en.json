@@ -132,7 +132,9 @@
     "responsible": "Responsible",
     "download": "Anzeigen",
     "newModule": "New module",
-    "newSubModule": "New submodule"
+    "newSubModule": "New submodule",
+    "group": "Group",
+    "credits": "Credits"
   },
   "changelog": {
     "description": "Description",
