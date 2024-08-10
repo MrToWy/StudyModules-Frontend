@@ -5,6 +5,7 @@ import {MessageService} from "primeng/api";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DepartmentDto, DepartmentService} from "../../shared/department/department.service";
 import {CourseDto} from "../../shared/course/course.service";
+import {activeTranslationIndex} from "../module-translator/module-translator.component";
 
 @Component({
   selector: 'app-departments',
@@ -53,4 +54,6 @@ export class DepartmentsComponent implements OnInit{
       }
       opacity = Math.round(opacity * 255);
       return color + opacity.toString(16).toUpperCase();  }
+
+  protected readonly activeTranslationIndex = activeTranslationIndex;
 }

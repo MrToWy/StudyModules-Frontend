@@ -18,7 +18,7 @@
     <input
       pInputText
       id="name"
-      [(ngModel)]="module.translations[0].name"
+      [(ngModel)]="module.translations[activeTranslationIndex].name"
       [class]="nameClass"
       [pTooltip]="nameTooltip"
       (input)="validateName(true)"
@@ -30,7 +30,7 @@
     <input
       pInputText
       id="subtitle"
-      [(ngModel)]="module.translations[0].subtitle"
+      [(ngModel)]="module.translations[activeTranslationIndex].subtitle"
       [class]="subtitleClass"
       [pTooltip]="subtitleTooltip"
       (input)="validateSubtitle(true)"
@@ -202,7 +202,7 @@
       rows="5"
       cols="30"
       pInputTextarea
-      [(ngModel)]="module.translations[0].learningOutcomes"
+      [(ngModel)]="module.translations[activeTranslationIndex].learningOutcomes"
       [class]="learningOutcomesClass"
       [pTooltip]="learningOutcomesTooltip"
       (input)="validateLearningOutcomes(true)"

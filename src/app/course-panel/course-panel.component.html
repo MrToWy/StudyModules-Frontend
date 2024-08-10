@@ -5,7 +5,7 @@
     <ng-template pTemplate="header">
         <div class="flex">
             <p>
-                {{ course.translations[0].name }}
+                {{ course.translations[activeTranslationIndex].name }}
             </p>
           <p-tag class="smallPadding" *ngIf="course.hidden" [value]="t('hidden')" severity="info" />
         </div>

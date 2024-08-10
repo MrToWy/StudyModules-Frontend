@@ -78,7 +78,7 @@
     <ng-template [pTemplate]="'body'" let-submodule>
       <tr class="clickable" (click)="openDetailView(submodule)">
             <td>{{ submodule.abbreviation }}</td>
-            <td>{{ submodule.translations[0].name }}</td>
+            <td>{{ submodule.translations[activeTranslationIndex].name }}</td>
             <td>
                 <p-avatar *ngIf="submodule.responsible"
                   label="{{ submodule.responsible?.firstName?.charAt(0) }}{{ submodule.responsible?.lastName?.charAt(0) }}"

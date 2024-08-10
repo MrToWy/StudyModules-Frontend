@@ -11,6 +11,8 @@ import {firstValueFrom, Observable} from "rxjs";
 import {RequirementService} from "../../shared/requirement/requirement.service";
 import {NgIf} from "@angular/common";
 
+export const activeTranslationIndex = 0; // translations will be reordered so that the active translation is always at the first position
+
 @Component({
   selector: 'app-module-translator',
   standalone: true,

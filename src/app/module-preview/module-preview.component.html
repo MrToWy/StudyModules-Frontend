@@ -1,9 +1,9 @@
 <ng-container *transloco="let t;">
 
 <div class="compactGrid">
-  <h1 style="grid-column: span 2">{{t('module')}} {{ module?.abbreviation }} {{ module?.translations?.at(0)?.name }}</h1>
+  <h1 style="grid-column: span 2">{{t('module')}} {{ module?.abbreviation }} {{ module?.translations?.at(activeTranslationIndex)?.name }}</h1>
   <b>{{t('subTitle')}}</b>
-  <span>{{ module?.translations?.at(0)?.subtitle }}</span>
+  <span>{{ module?.translations?.at(activeTranslationIndex)?.subtitle }}</span>
 
   <b>{{t('niveau')}}</b>
   <span>{{ module?.specialization? translate("specializationModule", undefined, languageCode) : translate("noSpecializationModule", undefined, languageCode) }}</span>
@@ -14,12 +14,12 @@
   <b>{{t('subModules')}}</b>
   <div *ngIf="module?.subModules;">
     <div *ngFor="let subModule of module!.subModules!">
-      {{subModule?.abbreviation}}  {{module?.translations?.[0]?.name}}, {{t('required')}}
+      {{subModule?.abbreviation}}  {{module?.translations?.[activeTranslationIndex]?.name}}, {{t('required')}}
     </div>
   </div>
 
   <b>{{t('responsible')}}</b>
-  <span>{{ module?.responsible?.translations?.at(0)?.title }} {{ module?.responsible?.firstName }} {{ module?.responsible?.lastName }}</span>
+  <span>{{ module?.responsible?.translations?.at(activeTranslationIndex)?.title }} {{ module?.responsible?.firstName }} {{ module?.responsible?.lastName }}</span>
 
   <b>{{t('credits')}}</b>
   <span>{{ module?.credits }}</span>
@@ -34,15 +34,15 @@
   <span>{{ module?.courseLength }} {{t('semester')}}</span>
 
   <b>{{t('hardRequirements')}}</b>
-  <span>{{ module?.requirementsHard?.translations?.at(0)?.name }}</span>
+  <span>{{ module?.requirementsHard?.translations?.at(activeTranslationIndex)?.name }}</span>
 
   <b>{{t('softRequirements')}}</b>
-  <span>{{ module?.requirementsSoft?.translations?.at(0)?.name }}</span>
+  <span>{{ module?.requirementsSoft?.translations?.at(activeTranslationIndex)?.name }}</span>
 
   <b>{{t('exam')}}</b>
-  <span>{{ module?.translations?.at(0)?.exam }}</span>
+  <span>{{ module?.translations?.at(activeTranslationIndex)?.exam }}</span>
 
   <b>{{t('learningObjectives')}}</b>
-  <span>{{ module?.translations?.at(0)?.learningOutcomes }}</span>
+  <span>{{ module?.translations?.at(activeTranslationIndex)?.learningOutcomes }}</span>
 </div>
 </ng-container>

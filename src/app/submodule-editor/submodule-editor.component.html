@@ -32,7 +32,7 @@
     <input
       pInputText
       id="name"
-      [(ngModel)]="subModule.translations[0].name"
+      [(ngModel)]="subModule.translations[activeTranslationIndex].name"
       (input)="validateName(true)"
       [class]="nameClass"
       [pTooltip]="nameTooltip"/>
@@ -43,7 +43,7 @@
     <input
       pInputText
       id="subtitle"
-      [(ngModel)]="subModule.translations[0].subtitle"
+      [(ngModel)]="subModule.translations[activeTranslationIndex].subtitle"
       (input)="validateSubtitle(true)"
       [class]="subtitleClass"
       [pTooltip]="subtitleTooltip"
@@ -55,7 +55,7 @@
     <p-autoComplete
 
       id="language"
-      [(ngModel)]="subModule.translations[0].spokenlanguage"
+      [(ngModel)]="subModule.translations[activeTranslationIndex].spokenlanguage"
       (input)="validateLanguage(true)"
       [class]="languageClass"
       [pTooltip]="languageTooltip"
@@ -70,7 +70,7 @@
     <label for="selfStudyHints">{{ t('selfStudyHints') }}</label>
     <p-autoComplete
       id="selfStudyHints"
-      [(ngModel)]="subModule.translations[0].selfStudyHints"
+      [(ngModel)]="subModule.translations[activeTranslationIndex].selfStudyHints"
       (input)="validateSelfStudyHints(true)"
       [class]="selfStudyHintsClass"
       [pTooltip]="selfStudyHintsTooltip"
@@ -97,7 +97,7 @@
     <label for="type">{{ t('type') }}</label>
     <p-autoComplete
       id="type"
-      [(ngModel)]="subModule.translations[0].type"
+      [(ngModel)]="subModule.translations[activeTranslationIndex].type"
       (input)="validateType(true)"
       [class]="typeClass"
       [pTooltip]="typeTooltip"
@@ -112,7 +112,7 @@
     <label for="exam">{{ t('exam') }}</label>
     <p-autoComplete
       id="exam"
-      [(ngModel)]="subModule.translations[0].exam"
+      [(ngModel)]="subModule.translations[activeTranslationIndex].exam"
       (input)="validateExam(true)"
       [class]="examClass"
       [pTooltip]="examTooltip"
@@ -213,7 +213,7 @@
       rows="5"
       cols="30"
       pInputTextarea
-      [(ngModel)]="subModule.translations[0].learningOutcomes"
+      [(ngModel)]="subModule.translations[activeTranslationIndex].learningOutcomes"
       [class]="learningOutcomesClass"
       [pTooltip]="learningOutcomesTooltip"
       (input)="validateLearningOutcomes(true)"
@@ -228,7 +228,7 @@
       rows="5"
       cols="30"
       pInputTextarea
-      [(ngModel)]="subModule.translations[0].content"
+      [(ngModel)]="subModule.translations[activeTranslationIndex].content"
       [class]="contentClass"
       [pTooltip]="contentTooltip"
       (input)="validateContent(true)"
@@ -243,7 +243,7 @@
       rows="5"
       cols="30"
       pInputTextarea
-      [(ngModel)]="subModule.translations[0].presenceRequirements"
+      [(ngModel)]="subModule.translations[activeTranslationIndex].presenceRequirements"
       [class]="presenceRequirementsClass"
       [pTooltip]="presenceRequirementsTooltip"
       (input)="validatePresenceRequirements(true)"
@@ -258,7 +258,7 @@
       rows="5"
       cols="30"
       pInputTextarea
-      [(ngModel)]="subModule.translations[0].selfStudyRequirements"
+      [(ngModel)]="subModule.translations[activeTranslationIndex].selfStudyRequirements"
       [class]="selfStudyRequirementsClass"
       [pTooltip]="selfStudyRequirementsTooltip"
       (input)="validateSelfStudyRequirements(true)"
@@ -273,7 +273,7 @@
       rows="5"
       cols="30"
       pInputTextarea
-      [(ngModel)]="subModule.translations[0].literature"
+      [(ngModel)]="subModule.translations[activeTranslationIndex].literature"
       [class]="literatureClass"
       [pTooltip]="literatureTooltip"
       (input)="validateLiterature(true)"

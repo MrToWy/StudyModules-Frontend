@@ -12,6 +12,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ButtonModule} from "primeng/button";
 import {NgIf} from "@angular/common";
 import {AuthService} from "../../shared/auth/auth.service";
+import {activeTranslationIndex} from "../module-translator/module-translator.component";
 
 @Component({
   selector: 'app-submodules',
@@ -69,4 +70,6 @@ export class SubmodulesComponent {
   async addNewSubModule() {
     await this.router.navigate(['new', 'edit'], {relativeTo: this.route});
   }
+
+  protected readonly activeTranslationIndex = activeTranslationIndex;
 }

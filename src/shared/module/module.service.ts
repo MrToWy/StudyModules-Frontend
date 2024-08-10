@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from "../../environments/environment";
 import {map, Observable} from "rxjs";
 import {UserDto} from "../user/user.service";
+import {activeTranslationIndex} from "../../app/module-translator/module-translator.component";
 
 @Injectable()
 export class ModuleService {
@@ -35,7 +36,7 @@ export class ModuleService {
           elective: module.elective,
           requirementsHardId: module.requirementsHardId,
           requirementsSoftId: module.requirementsSoftId,
-          group: module.group?.translations?.at(0)?.name ?? "",
+          group: module.group?.translations?.at(activeTranslationIndex)?.name ?? "",
         }))
       )
     );

@@ -12,6 +12,7 @@ import {TableModule} from "primeng/table";
 import {ChipModule} from "primeng/chip";
 import {MultiSelectModule} from "primeng/multiselect";
 import {InputTextareaModule} from "primeng/inputtextarea";
+import {activeTranslationIndex} from "../module-translator/module-translator.component";
 
 @Component({
   selector: 'app-requirement-detail',
@@ -94,4 +95,6 @@ export class RequirementDetailComponent implements OnInit {
   private loadCourses() {
     this.filteredModules = this.selectedCourse?.modules;
   }
+
+  protected readonly activeTranslationIndex = activeTranslationIndex;
 }

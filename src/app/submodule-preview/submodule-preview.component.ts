@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {SubModuleDetail} from "../../shared/submodule/submodule.service";
 import {translate} from "@jsverse/transloco";
+import {activeTranslationIndex} from "../module-translator/module-translator.component";
 
 @Component({
   selector: 'app-submodule-preview',
@@ -50,4 +51,6 @@ export class SubmodulePreviewComponent {
         return uniqueNames.join('\n\n' + translate("respectively") + '\n\n');
     }
 }
+
+  protected readonly activeTranslationIndex = activeTranslationIndex;
 }

@@ -32,6 +32,7 @@ import {RequirementDetailComponent} from "../requirement-detail/requirement-deta
 import {RequirementEditorComponent} from "../requirement-editor/requirement-editor.component";
 import {CourseDto, CourseService} from "../../shared/course/course.service";
 import {GroupDto, GroupService} from "../../shared/group/group.service";
+import {activeTranslationIndex} from "../module-translator/module-translator.component";
 
 @Component({
   selector: 'app-module-editor',
@@ -556,6 +557,8 @@ export class ModuleEditorComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getGroupLabel(group: GroupDto | undefined): string {
-    return group?.translations?.at(0)?.name ?? "";
+    return group?.translations?.at(activeTranslationIndex)?.name ?? "";
   }
+
+  protected readonly activeTranslationIndex = activeTranslationIndex;
 }

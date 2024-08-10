@@ -17,6 +17,7 @@ import {AutoCompleteCompleteEvent, AutoCompleteModule} from "primeng/autocomplet
 import {RequirementEditorComponent} from "../requirement-editor/requirement-editor.component";
 import {NgIf} from "@angular/common";
 import {DropdownModule} from "primeng/dropdown";
+import {activeTranslationIndex} from "../module-translator/module-translator.component";
 
 @Component({
   selector: 'app-submodule-editor',
@@ -283,7 +284,7 @@ export class SubmoduleEditorComponent implements OnInit, OnDestroy {
     this.nameClass = "";
     this.nameTooltip = "";
 
-    const hasName = this.subModule?.translations[0].name !== undefined && this.subModule.translations[0].name.length > 0;
+    const hasName = this.subModule?.translations[activeTranslationIndex].name !== undefined && this.subModule.translations[activeTranslationIndex].name.length > 0;
 
     if (!hasName) {
       this.nameClass = this.invalidClass;
@@ -302,8 +303,8 @@ export class SubmoduleEditorComponent implements OnInit, OnDestroy {
     this.subtitleClass = "";
     this.subtitleTooltip = "";
 
-    const hasSubtitle = this.subModule?.translations[0].subtitle !== undefined
-      && this.subModule.translations[0].subtitle.length > 0;
+    const hasSubtitle = this.subModule?.translations[activeTranslationIndex].subtitle !== undefined
+      && this.subModule.translations[activeTranslationIndex].subtitle.length > 0;
 
     if (!hasSubtitle) {
       this.subtitleClass = this.invalidClass;
@@ -322,8 +323,8 @@ export class SubmoduleEditorComponent implements OnInit, OnDestroy {
     this.languageClass = "";
     this.languageTooltip = "";
 
-    const hasLanguage = this.subModule.translations[0].spokenlanguage !== undefined
-      && this.subModule.translations[0].spokenlanguage.length > 0;
+    const hasLanguage = this.subModule.translations[activeTranslationIndex].spokenlanguage !== undefined
+      && this.subModule.translations[activeTranslationIndex].spokenlanguage.length > 0;
 
     if (!hasLanguage) {
       this.languageClass = this.invalidClass;
@@ -331,7 +332,7 @@ export class SubmoduleEditorComponent implements OnInit, OnDestroy {
       return false;
     }
 
-    if (!this.usedLanguages.includes(this.subModule.translations[0].spokenlanguage)) {
+    if (!this.usedLanguages.includes(this.subModule.translations[activeTranslationIndex].spokenlanguage)) {
       this.languageClass = this.invalidClass;
       this.languageTooltip = translate('languageNotInUse');
       return false;
@@ -352,8 +353,8 @@ export class SubmoduleEditorComponent implements OnInit, OnDestroy {
     this.selfStudyHintsClass = "";
     this.selfStudyHintsTooltip = "";
 
-    const hasSelfStudyHints = this.subModule.translations[0].selfStudyHints !== undefined
-      && this.subModule.translations[0].selfStudyHints.length > 0;
+    const hasSelfStudyHints = this.subModule.translations[activeTranslationIndex].selfStudyHints !== undefined
+      && this.subModule.translations[activeTranslationIndex].selfStudyHints.length > 0;
 
     if (!hasSelfStudyHints) {
       this.selfStudyHintsClass = this.invalidClass;
@@ -361,7 +362,7 @@ export class SubmoduleEditorComponent implements OnInit, OnDestroy {
       return false;
     }
 
-    if (!this.usedSelfStudyHints.includes(this.subModule.translations[0].selfStudyHints)) {
+    if (!this.usedSelfStudyHints.includes(this.subModule.translations[activeTranslationIndex].selfStudyHints)) {
       this.selfStudyHintsClass = this.invalidClass;
       this.selfStudyHintsTooltip = translate('selfStudyHintsNotInUse');
       return false;
@@ -378,8 +379,8 @@ export class SubmoduleEditorComponent implements OnInit, OnDestroy {
     this.typeClass = "";
     this.typeTooltip = "";
 
-    const hasType = this.subModule.translations[0].type !== undefined
-      && this.subModule.translations[0].type.length > 0;
+    const hasType = this.subModule.translations[activeTranslationIndex].type !== undefined
+      && this.subModule.translations[activeTranslationIndex].type.length > 0;
 
     if (!hasType) {
       this.typeClass = this.invalidClass;
@@ -387,7 +388,7 @@ export class SubmoduleEditorComponent implements OnInit, OnDestroy {
       return false;
     }
 
-    if (!this.usedTypes.includes(this.subModule.translations[0].type)) {
+    if (!this.usedTypes.includes(this.subModule.translations[activeTranslationIndex].type)) {
       this.typeClass = this.invalidClass;
       this.typeTooltip = translate('typeNotInUse');
       return false;
@@ -404,8 +405,8 @@ export class SubmoduleEditorComponent implements OnInit, OnDestroy {
     this.examClass = "";
     this.examTooltip = "";
 
-    const hasExam = this.subModule.translations[0].exam !== undefined
-      && this.subModule.translations[0].exam.length > 0;
+    const hasExam = this.subModule.translations[activeTranslationIndex].exam !== undefined
+      && this.subModule.translations[activeTranslationIndex].exam.length > 0;
 
     if (!hasExam) {
       this.examClass = this.invalidClass;
@@ -413,7 +414,7 @@ export class SubmoduleEditorComponent implements OnInit, OnDestroy {
       return false;
     }
 
-    if (!this.usedExams.includes(this.subModule.translations[0].exam)) {
+    if (!this.usedExams.includes(this.subModule.translations[activeTranslationIndex].exam)) {
       this.examClass = this.invalidClass;
       this.examTooltip = translate('examNotInUse');
       return false;
@@ -609,8 +610,8 @@ export class SubmoduleEditorComponent implements OnInit, OnDestroy {
     this.learningOutcomesClass = "";
     this.learningOutcomesTooltip = "";
 
-    const hasLearningOutcomes = this.subModule.translations[0].learningOutcomes !== undefined
-      && this.subModule.translations[0].learningOutcomes.length > 0;
+    const hasLearningOutcomes = this.subModule.translations[activeTranslationIndex].learningOutcomes !== undefined
+      && this.subModule.translations[activeTranslationIndex].learningOutcomes.length > 0;
 
     if (!hasLearningOutcomes) {
       this.learningOutcomesClass = this.invalidClass;
@@ -629,8 +630,8 @@ export class SubmoduleEditorComponent implements OnInit, OnDestroy {
     this.contentClass = "";
     this.contentTooltip = "";
 
-    const hasContent = this.subModule.translations[0].content !== undefined
-      && this.subModule.translations[0].content.length > 0;
+    const hasContent = this.subModule.translations[activeTranslationIndex].content !== undefined
+      && this.subModule.translations[activeTranslationIndex].content.length > 0;
 
     if (!hasContent) {
       this.contentClass = this.invalidClass;
@@ -649,8 +650,8 @@ export class SubmoduleEditorComponent implements OnInit, OnDestroy {
     this.presenceRequirementsClass = "";
     this.presenceRequirementsTooltip = "";
 
-    const hasPresenceRequirements = this.subModule.translations[0].presenceRequirements !== undefined
-      && this.subModule.translations[0].presenceRequirements.length > 0;
+    const hasPresenceRequirements = this.subModule.translations[activeTranslationIndex].presenceRequirements !== undefined
+      && this.subModule.translations[activeTranslationIndex].presenceRequirements.length > 0;
 
     if (!hasPresenceRequirements) {
       this.presenceRequirementsClass = this.invalidClass;
@@ -669,8 +670,8 @@ export class SubmoduleEditorComponent implements OnInit, OnDestroy {
     this.selfStudyRequirementsClass = "";
     this.selfStudyRequirementsTooltip = "";
 
-    const hasSelfStudyRequirements = this.subModule.translations[0].selfStudyRequirements !== undefined
-      && this.subModule.translations[0].selfStudyRequirements.length > 0;
+    const hasSelfStudyRequirements = this.subModule.translations[activeTranslationIndex].selfStudyRequirements !== undefined
+      && this.subModule.translations[activeTranslationIndex].selfStudyRequirements.length > 0;
 
     if (!hasSelfStudyRequirements) {
       this.selfStudyRequirementsClass = this.invalidClass;
@@ -689,8 +690,8 @@ export class SubmoduleEditorComponent implements OnInit, OnDestroy {
     this.literatureClass = "";
     this.literatureTooltip = "";
 
-    const hasLiterature = this.subModule.translations[0].literature !== undefined
-      && this.subModule.translations[0].literature.length > 0;
+    const hasLiterature = this.subModule.translations[activeTranslationIndex].literature !== undefined
+      && this.subModule.translations[activeTranslationIndex].literature.length > 0;
 
     if (!hasLiterature) {
       this.literatureClass = this.invalidClass;
@@ -731,4 +732,5 @@ export class SubmoduleEditorComponent implements OnInit, OnDestroy {
   }
 
   protected readonly JSON = JSON;
+  protected readonly activeTranslationIndex = activeTranslationIndex;
 }

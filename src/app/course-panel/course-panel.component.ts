@@ -18,6 +18,7 @@ import {LanguageDto, LanguageService} from "../../shared/language/language.servi
 import {ABtestService} from "../../shared/abtest/abtest.service";
 import {TagModule} from "primeng/tag";
 import {TranslocoDirective} from "@jsverse/transloco";
+import {activeTranslationIndex} from "../module-translator/module-translator.component";
 
 @Component({
   selector: 'app-course-panel',
@@ -124,9 +125,9 @@ export class CoursePanelComponent implements OnInit{
   cloneCourse(course: CourseDto) {
     this.selectedCourse = course;
     this.cloneCourseDto = {
-      name: course.translations[0].name,
+      name: course.translations[activeTranslationIndex].name,
       abbreviation: course.abbreviation,
-      pruefungsordnung: course.translations[0].pruefungsordnung
+      pruefungsordnung: course.translations[activeTranslationIndex].pruefungsordnung
     }
     console.log(course);
 
@@ -216,4 +217,6 @@ export class CoursePanelComponent implements OnInit{
     const lastPublish = this.selectedCourse?.Job.find(job => job.languageId === language.id);
     return lastPublish?.publishedAt ? new Date(lastPublish.publishedAt).toLocaleString(this.languageService.languageCode.toLowerCase()) : undefined;
   }
+
+  protected readonly activeTranslationIndex = activeTranslationIndex;
 }

@@ -4,6 +4,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {SelectButtonModule} from "primeng/selectbutton";
 import {FormsModule} from "@angular/forms";
 import {translate, TranslocoDirective} from "@jsverse/transloco";
+import {activeTranslationIndex} from "../module-translator/module-translator.component";
 
 @Component({
   selector: 'app-module-preview',
@@ -33,4 +34,5 @@ export class ModulePreviewComponent {
 
   private _module: ModuleDetail | undefined;
   protected readonly translate = translate;
+  protected readonly activeTranslationIndex = activeTranslationIndex;
 }
