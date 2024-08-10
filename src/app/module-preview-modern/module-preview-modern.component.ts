@@ -11,6 +11,7 @@ import {TranslocoDirective} from "@jsverse/transloco";
 import {ButtonModule} from "primeng/button";
 import {AuthService} from "../../shared/auth/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {activeTranslationIndex} from "../module-translator/module-translator.component";
 
 @Component({
   selector: 'app-module-preview-modern',
@@ -67,4 +68,6 @@ export class ModulePreviewModernComponent {
   async showChanges() {
     await this.router.navigate(["changes"], {relativeTo: this.route});
   }
+
+  protected readonly activeTranslationIndex = activeTranslationIndex;
 }

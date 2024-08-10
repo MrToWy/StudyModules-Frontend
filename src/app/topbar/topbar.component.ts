@@ -15,7 +15,6 @@ import {ModuleDto, ModuleService} from "../../shared/module/module.service";
 import {CourseDto, CourseService} from "../../shared/course/course.service";
 import {DepartmentService} from "../../shared/department/department.service";
 import {ToggleButtonModule} from "primeng/togglebutton";
-import {ABtestService} from "../../shared/abtest/abtest.service";
 
 @Component({
   selector: 'app-topbar',
@@ -46,7 +45,6 @@ export class TopbarComponent {
     moduleService: ModuleService,
     courseService: CourseService,
     departmentService: DepartmentService,
-    protected abService: ABtestService
     ) {
     this.authService = authService;
 

@@ -15,7 +15,6 @@ import {CreateJobResponse, JobService} from "../../shared/job/job.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../shared/auth/auth.service";
 import {LanguageDto, LanguageService} from "../../shared/language/language.service";
-import {ABtestService} from "../../shared/abtest/abtest.service";
 import {TagModule} from "primeng/tag";
 import {TranslocoDirective} from "@jsverse/transloco";
 import {activeTranslationIndex} from "../module-translator/module-translator.component";
@@ -76,7 +75,6 @@ export class CoursePanelComponent implements OnInit{
     private route: ActivatedRoute,
     protected authService: AuthService,
     private messageService: MessageService,
-    protected abService: ABtestService
   ) {
   }
 

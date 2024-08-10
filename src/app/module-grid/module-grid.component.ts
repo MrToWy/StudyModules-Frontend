@@ -15,7 +15,6 @@ import {RippleModule} from "primeng/ripple";
 import {NgIf} from "@angular/common";
 import {ToggleButtonModule} from "primeng/togglebutton";
 import {CourseDto, CourseService} from "../../shared/course/course.service";
-import {ABtestService} from "../../shared/abtest/abtest.service";
 import {ResponsibleAvatarComponent} from "../responsible-avatar/responsible-avatar.component";
 import {AuthService} from "../../shared/auth/auth.service";
 @Component({
@@ -58,7 +57,6 @@ export class ModuleGridComponent implements OnInit, OnDestroy{
               private route: ActivatedRoute,
               private languageService: LanguageService,
               private courseService: CourseService,
-              protected abTestService: ABtestService,
               protected authService: AuthService,
   ) {
 

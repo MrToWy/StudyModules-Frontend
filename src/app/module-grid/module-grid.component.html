@@ -116,7 +116,7 @@
         </th>
       </tr>
     </ng-template>
-    <ng-template *ngIf="groupByColumn != null && !abTestService.aActive" pTemplate="groupheader" let-module
+    <ng-template *ngIf="groupByColumn != null" pTemplate="groupheader" let-module
                  let-expanded="expanded">
       <tr>
         <td colspan="5">
@@ -137,7 +137,7 @@
         </td>
       </tr>
     </ng-template>
-    <ng-template [pTemplate]="this.groupByColumn != null && !abTestService.aActive ? 'rowexpansion' : 'body'" let-module>
+    <ng-template [pTemplate]="this.groupByColumn != null ? 'rowexpansion' : 'body'" let-module>
       <tr class="clickable" (click)="openDetailView(module)">
         <td *ngIf="!courseId">
           <p-tag severity="success" value="{{ module.course }}" [pTooltip]="tooltipContent"/>
