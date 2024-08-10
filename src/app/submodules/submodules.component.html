@@ -81,9 +81,9 @@
             <td>{{ submodule.translations[0].name }}</td>
             <td>
                 <p-avatar *ngIf="submodule.responsible"
-                  label="{{ submodule.responsible.firstName.charAt(0) }}{{ submodule.responsible.lastName.charAt(0) }}"
+                  label="{{ submodule.responsible?.firstName?.charAt(0) }}{{ submodule.responsible?.lastName?.charAt(0) }}"
                   [style]="{ 'background-color': '#dee9fc', color: '#1a2551' }" />
-                <span class="smallPadding">{{ submodule.responsible.firstName }} {{ submodule.responsible.lastName }}</span>
+                <span class="smallPadding">{{ submodule.responsible?.firstName }} {{ submodule.responsible?.lastName }}</span>
             </td>
         </tr>
     </ng-template>
