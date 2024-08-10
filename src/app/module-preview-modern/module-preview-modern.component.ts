@@ -12,6 +12,7 @@ import {ButtonModule} from "primeng/button";
 import {AuthService} from "../../shared/auth/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {activeTranslationIndex} from "../module-translator/module-translator.component";
+import {TooltipModule} from "primeng/tooltip";
 
 @Component({
   selector: 'app-module-preview-modern',
@@ -25,7 +26,8 @@ import {activeTranslationIndex} from "../module-translator/module-translator.com
     TextCardComponent,
     SplitTextCardComponent,
     TranslocoDirective,
-    ButtonModule
+    ButtonModule,
+    TooltipModule
   ],
   providers: [AuthService],
   templateUrl: './module-preview-modern.component.html',

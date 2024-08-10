@@ -116,6 +116,7 @@
   "publishNewPdf": "Publish a new PDF",
   "next": "Next",
   "deleteJobConfirmation": "Do you really want to delete this job?",
+  "preview.responsibleTooltip": "The person in charge is responsible for maintaining the module. The contact person could be another person (see timetable).",
   "modulesearch": {
     "placeholder": "Search modules"
   },
