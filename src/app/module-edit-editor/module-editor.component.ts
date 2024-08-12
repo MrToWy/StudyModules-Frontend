@@ -33,6 +33,8 @@ import {RequirementEditorComponent} from "../requirement-editor/requirement-edit
 import {CourseDto, CourseService} from "../../shared/course/course.service";
 import {GroupDto, GroupService} from "../../shared/group/group.service";
 import {activeTranslationIndex} from "../module-translator/module-translator.component";
+import {ConfirmPopupModule} from "primeng/confirmpopup";
+import {ConfirmationService} from "primeng/api";
 
 @Component({
   selector: 'app-module-editor',
@@ -58,9 +60,10 @@ import {activeTranslationIndex} from "../module-translator/module-translator.com
     InputGroupModule,
     DialogModule,
     RequirementDetailComponent,
-    RequirementEditorComponent
+    RequirementEditorComponent,
+    ConfirmPopupModule
   ],
-  providers: [TextAutocompleteService, CourseService, ModuleService],
+  providers: [TextAutocompleteService, CourseService, ModuleService, ConfirmationService],
   templateUrl: './module-editor.component.html',
   styleUrl: './module-edit-editor.component.sass'
 })
@@ -116,6 +119,7 @@ export class ModuleEditorComponent implements OnInit, OnChanges, OnDestroy {
     private submoduleService: SubmoduleService,
     private moduleService: ModuleService,
     private degreeService: CourseService,
+    private confirmationService: ConfirmationService,
     private groupService: GroupService
   ) {
   }
@@ -165,61 +169,61 @@ export class ModuleEditorComponent implements OnInit, OnChanges, OnDestroy {
   private loadData() {
     this.availableSemester = [
 
-                    { label: '1. Semester', value: '1' },
-                    { label: '2. Semester', value: '2' },
-                    { label: '3. Semester', value: '3' },
-                    { label: '4. Semester', value: '4' },
-                    { label: '5. Semester', value: '5' },
-                    { label: '6. Semester', value: '6' },
-                    { label: '7. Semester', value: '7' }
-                ];
+      {label: '1. Semester', value: '1'},
+      {label: '2. Semester', value: '2'},
+      {label: '3. Semester', value: '3'},
+      {label: '4. Semester', value: '4'},
+      {label: '5. Semester', value: '5'},
+      {label: '6. Semester', value: '6'},
+      {label: '7. Semester', value: '7'}
+    ];
 
     this.userService.getAll().subscribe(users => {
-        this.users = users;
+      this.users = users;
 
-        this.setInitialResponsible();
-        this.selectedSubmodules = this.module.subModules.map(submodule => submodule.id);
+      this.setInitialResponsible();
+      this.selectedSubmodules = this.module.subModules.map(submodule => submodule.id);
 
-        this.submoduleService.getAll().subscribe(submodules => {
-            this.submodules = submodules;
+      this.submoduleService.getAll().subscribe(submodules => {
+        this.submodules = submodules;
 
-            const groupedSubmodules = submodules.reduce((acc, submodule) => {
-                // Split submodule into parts
-                const [abbr, rest, rest2] = submodule.abbreviation.split('-');
+        const groupedSubmodules = submodules.reduce((acc, submodule) => {
+          // Split submodule into parts
+          const [abbr, rest, rest2] = submodule.abbreviation.split('-');
 
-                // Initialize group if it doesn't exist
-                if (!acc[abbr]) {
-                    acc[abbr] = [];
-                }
+          // Initialize group if it doesn't exist
+          if (!acc[abbr]) {
+            acc[abbr] = [];
+          }
 
-                // Add rest part and id to the group
-                acc[abbr].push({ label: rest + '-' + rest2, value: submodule.id });
+          // Add rest part and id to the group
+          acc[abbr].push({label: rest + '-' + rest2, value: submodule.id});
 
-                return acc;
-            }, {});
+          return acc;
+        }, {});
 
-            this.submodulesForDropdown = Object.keys(groupedSubmodules).map(abbr => {
-                return {
-                    label: abbr,
-                    value: abbr,
-                    items: groupedSubmodules[abbr].map((submodule: any) => ({
-                        label: submodule.label,
-                        value: submodule.value
-                    }))
-                };
-            });
+        this.submodulesForDropdown = Object.keys(groupedSubmodules).map(abbr => {
+          return {
+            label: abbr,
+            value: abbr,
+            items: groupedSubmodules[abbr].map((submodule: any) => ({
+              label: submodule.label,
+              value: submodule.value
+            }))
+          };
         });
+      });
     });
 
 
     this.electiveOptions = [
-      { label: translate("noElectiveModule"), value: false },
-      { label: translate("electiveModule"), value: true }
+      {label: translate("noElectiveModule"), value: false},
+      {label: translate("electiveModule"), value: true}
     ];
 
     this.specializationOptions = [
-      { label: translate("noSpecializationModule"), value: false },
-      { label: translate("specializationModule"), value: true }
+      {label: translate("noSpecializationModule"), value: false},
+      {label: translate("specializationModule"), value: true}
     ];
 
     this.degreeService.getAll().subscribe(degrees => {
@@ -278,7 +282,7 @@ export class ModuleEditorComponent implements OnInit, OnChanges, OnDestroy {
     this.validationResult = valid ? translate("allValid") : translate("validationError");
     this.validationClass = valid ? "success" : "danger";
 
-    if(valid) {
+    if (valid) {
       //this.onModuleChange();
       //this.nextCallback.emit();
     }
@@ -561,4 +565,26 @@ export class ModuleEditorComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   protected readonly activeTranslationIndex = activeTranslationIndex;
+
+  useSubmoduleData($event: MouseEvent) {
+    this.confirmationService.confirm({
+      message: translate('getDataFromSubmodule'),
+      target: $event.target as EventTarget,
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        if (this.module.subModules.length > 0) {
+          const submodule = this.module.subModules[0];
+          this.submoduleService.get(submodule.id, this.languageService.languageCode).subscribe(submodule => {
+            this.module.credits = submodule.credits;
+            this.module.responsible = submodule.responsible;
+            this.module.responsibleId = submodule.responsibleId;
+            this.module.hoursPresence = submodule.hoursPresence;
+            this.module.hoursSelf = submodule.hoursSelf;
+            this.module.semester = submodule.semester;
+            this.setInitialResponsible();
+          });
+        }
+      }
+    });
+  }
 }

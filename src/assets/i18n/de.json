@@ -112,6 +112,7 @@
   "published": "Veröffentlicht",
   "status": "Status",
   "close": "Schließen",
+  "getDataFromSubmodule": "Daten vom ersten Teilmodul übernehmen",
   "runningFor": "Läuft seit ",
   "pdfCreated": "PDF erstellt, bitte prüfen & freigeben ",
   "waitingForBuilder": "Warten auf Server",

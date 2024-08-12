@@ -74,10 +74,12 @@
       scrollHeight="250px"
       display="chip">
     </p-multiSelect>
+      <p-confirmPopup />
       <p-button
         [style]="{'width':'10%'}"
         icon="pi pi-sparkles"
         [pTooltip]="t('importTooltip')"
+        (onClick)="useSubmoduleData($event)"
       ></p-button>
   </span>
 
