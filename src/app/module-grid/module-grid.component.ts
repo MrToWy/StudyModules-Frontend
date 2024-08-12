@@ -108,7 +108,15 @@ export class ModuleGridComponent implements OnInit, OnDestroy{
   }
 
   async openDetailView(module: ModuleDto) {
-    await this.router.navigate(['module', module.id], {relativeTo: this.route});
+    // check if we are in /overview or /faculty/4/department/2/course/1
+    if(this.courseId)
+      await this.router.navigate(['module', module.id], {relativeTo: this.route});
+    else{
+      const facultyId = module.facultyId;
+      const departmentId = module.departmentId;
+      const courseId = module.courseId;
+      await this.router.navigate([`faculty/${facultyId}/department/${departmentId}/course/${courseId}/module/${module.id}`]);
+    }
   }
 
   module: ModuleDto | undefined;
