@@ -20,7 +20,7 @@ import {ResponsibleAvatarComponent} from "../responsible-avatar/responsible-avat
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {MultiSelectChangeEvent, MultiSelectModule} from "primeng/multiselect";
 import {LanguageService} from "../../shared/language/language.service";
-import {SubModuleDetail, SubmoduleService} from "../../shared/submodule/submodule.service";
+import {SubmoduleService} from "../../shared/submodule/submodule.service";
 import {firstValueFrom} from "rxjs";
 import {StyleClassModule} from "primeng/styleclass";
 import {ResponsibleDropdownComponent} from "../responsible-dropdown/responsible-dropdown.component";

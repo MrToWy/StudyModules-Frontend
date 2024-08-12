@@ -1,6 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgForOf} from "@angular/common";
-import {MessageService} from "primeng/api";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DepartmentDto, DepartmentService} from "../../shared/department/department.service";
 import {CourseDto} from "../../shared/course/course.service";

@@ -6,7 +6,6 @@ import {DropdownChangeEvent, DropdownModule} from "primeng/dropdown";
 import {FormsModule} from "@angular/forms";
 import {TreeTableModule} from "primeng/treetable";
 import {NgForOf, NgIf} from "@angular/common";
-import {TreeNode} from "primeng/api";
 import {ModuleDto} from "../../shared/module/module.service";
 import {TableModule} from "primeng/table";
 import {ChipModule} from "primeng/chip";

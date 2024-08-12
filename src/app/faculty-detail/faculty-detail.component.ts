@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {FacultyDto} from "../../shared/faculty/faculty.service";
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {CoursesComponent} from "../courses/courses.component";
 import {DepartmentsComponent} from "../departments/departments.component";
 

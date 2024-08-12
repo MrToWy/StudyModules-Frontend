@@ -4,7 +4,7 @@ import {TableModule} from "primeng/table";
 import {MenuItem, MessageService} from "primeng/api";
 import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
-import {Router, RouterLink} from "@angular/router";
+import {RouterLink} from "@angular/router";
 import {CourseDto, CourseService} from "../../shared/course/course.service";
 import {DepartmentService} from "../../shared/department/department.service";
 import {DialogModule} from "primeng/dialog";

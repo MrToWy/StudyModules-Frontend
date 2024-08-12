@@ -16,7 +16,6 @@ import {FormsModule} from "@angular/forms";
 import {CheckboxModule} from "primeng/checkbox";
 import {environment} from "../../environments/environment";
 import {ResponsibleAvatarComponent} from "../responsible-avatar/responsible-avatar.component";
-import {filter} from "rxjs";
 import {ConfirmPopupModule} from "primeng/confirmpopup";
 
 @Component({

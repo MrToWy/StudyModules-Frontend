@@ -5,7 +5,7 @@ import {MultiSelectModule} from "primeng/multiselect";
 import {FormsModule} from "@angular/forms";
 import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
-import {ModuleDto, Requirement, RequirementTranslation} from "../../shared/module/module.service";
+import {ModuleDto, Requirement} from "../../shared/module/module.service";
 import {CourseService} from "../../shared/course/course.service";
 import {UrlSegmentService} from "../../shared/url/url-segment.service";
 import {NgIf} from "@angular/common";

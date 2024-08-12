@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {CalendarModule} from "primeng/calendar";
 import {FormsModule} from "@angular/forms";
@@ -7,8 +7,6 @@ import {NgIf} from "@angular/common";
 import {AuthService} from "../shared/auth/auth.service";
 import {AuthModule} from "../shared/auth/auth.module";
 import {MainComponent} from "./main/main.component";
-import {AuthInterceptor} from "../shared/auth/auth.interceptor";
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {LangDefinition, TranslocoService} from "@jsverse/transloco";
 import {PrimeNGConfig} from "primeng/api";
 import {filter} from "rxjs";
