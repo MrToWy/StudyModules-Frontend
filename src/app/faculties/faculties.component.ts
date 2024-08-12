@@ -40,16 +40,18 @@ faculties!: FacultyDto[];
       private languageService: LanguageService
     ) {}
 
+  private subscription: any;
+
     ngOnInit() {
       this.loadFaculties()
 
-      this.languageService.languageSubject.subscribe(() => {
+      this.subscription = this.languageService.languageSubject.subscribe(() => {
         this.loadFaculties()
       });
     }
 
     ngOnDestroy() {
-      this.languageService.languageSubject.unsubscribe();
+      this.subscription.unsubscribe();
     }
 
     loadFaculties() {

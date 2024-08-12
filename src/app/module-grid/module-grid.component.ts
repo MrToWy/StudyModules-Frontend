@@ -62,6 +62,8 @@ export class ModuleGridComponent implements OnInit, OnDestroy{
 
   }
 
+  private subscription: any;
+
   ngOnInit(): void {
     this.availableColumns = [
             { field: 'semester', header: 'Semester' },
@@ -80,13 +82,13 @@ export class ModuleGridComponent implements OnInit, OnDestroy{
 
     this.loadData();
 
-    this.languageService.languageSubject.subscribe(() => {
+    this.subscription = this.languageService.languageSubject.subscribe(() => {
       this.loadData()
     });
   }
 
   ngOnDestroy() {
-    this.languageService.languageSubject.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   isSemesterIncluded(): boolean {
@@ -96,7 +98,7 @@ export class ModuleGridComponent implements OnInit, OnDestroy{
   loadData(){
     this.moduleService.getAll(true, this.courseId).subscribe(
       modules => {
-            this.modules = modules;
+            this.modules = [...modules];
             this.statuses = [...new Set(modules.map(module => module.course))];
             this.users = [...new Set(modules.map(module => module.responsible))];
         });

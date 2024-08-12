@@ -130,16 +130,18 @@ export class ModuleEditorComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  private subscription: any;
+
   ngOnInit(): void {
     this.loadData();
 
-    this.languageService.languageSubject.subscribe(() => {
+    this.subscription = this.languageService.languageSubject.subscribe(() => {
       this.loadData()
     });
   }
 
   ngOnDestroy(): void {
-    this.languageService.languageSubject.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   onModuleChange() {

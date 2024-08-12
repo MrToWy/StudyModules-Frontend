@@ -117,16 +117,18 @@ export class SubmoduleEditorComponent implements OnInit, OnDestroy {
   ) {
   }
 
+  private subscription: any;
+
   ngOnInit(): void {
     this.loadData();
 
-    this.languageService.languageSubject.subscribe(() => {
+    this.subscription = this.languageService.languageSubject.subscribe(() => {
       this.loadData()
     });
   }
 
   ngOnDestroy() {
-    this.languageService.languageSubject.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   onSubModuleChange() {
