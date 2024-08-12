@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgForOf} from "@angular/common";
-import {FacultyDto, FacultyService} from "../../shared/faculty/faculty.service";
 import {MessageService} from "primeng/api";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DepartmentDto, DepartmentService} from "../../shared/department/department.service";
 import {CourseDto} from "../../shared/course/course.service";
 import {activeTranslationIndex} from "../module-translator/module-translator.component";
+import {UrlSegmentService} from "../../shared/url/url-segment.service";
 
 @Component({
   selector: 'app-departments',
@@ -22,23 +22,14 @@ export class DepartmentsComponent implements OnInit{
 
     constructor(private departmentService: DepartmentService,
                 private router: Router,
-                private route: ActivatedRoute
+                private route: ActivatedRoute,
+                private segmentService: UrlSegmentService
                 ) {}
 
     ngOnInit() {
         this.departmentService.getAll()
           .subscribe((data) => {
-            // read facultyId from url
-            const url = this.router.url;
-            const segments = url.split("/");
-
-            // ToDo: Refactor duplicate code
-            const getIdFromSegment = (segment: string) => {
-              const segmentIndex = segments.indexOf(segment);
-              return segmentIndex !== -1 ? segments[segmentIndex + 1] : undefined;
-            };
-
-            const facultyId = Number(getIdFromSegment("faculty"));
+            const facultyId = Number(this.segmentService.getIdFromSegment("faculty"));
             this.departments = data.filter(department => department.faculty.id === facultyId);
         });
     }
@@ -47,7 +38,6 @@ export class DepartmentsComponent implements OnInit{
         await this.router.navigate(['department', department.id, 'course', course.id], {relativeTo: this.route});
     }
 
-    // ToDo: Refactor duplicate code
   addAlpha(color: string | undefined, opacity: number) {
     if (!color) {
         return color;

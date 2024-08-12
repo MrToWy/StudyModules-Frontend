@@ -59,7 +59,6 @@ export class SubmoduleTranslatorComponent {
   @Input()
   languageId: number | undefined;
 
-  // ToDo: Duplicate code (module-translator.component.ts)
   reorderTranslations(requirementTextPromise: Promise<any>, translations: any[]) {
     requirementTextPromise.then((requirementText: any) => {
       let index = translations.indexOf(requirementText);
