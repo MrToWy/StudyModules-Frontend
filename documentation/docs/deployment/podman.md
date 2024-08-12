@@ -23,6 +23,12 @@ podman build -t studymodules-frontend .
 ```
 
 ## Backend
+:::info
+
+Make sure to copy env.dist into .env and fill it with the correct values before building the image.
+
+:::
+
 ```shell
 podman build -t studybase-backend .
 ```
@@ -37,6 +43,12 @@ podman build -t latex-api .
 ## LaTeX-Worker
 The worker is contained inside the backend project in the folder latex.
 
+:::info
+
+Make sure to copy env.dist into .env and fill it with the correct values before building the image.
+
+:::
+
 ```shell
 podman build -t studymodules-latex .
 ```
@@ -45,6 +57,13 @@ podman build -t studymodules-latex .
 ```shell
 cd StudyModules-Frontend\documentation
 ```
+
+:::info
+
+Make sure to edit the docker-compose.yml file.
+The backend volume needs to be changed to the correct path on your system.
+
+:::
 
 ```shell
 podman compose up -d
