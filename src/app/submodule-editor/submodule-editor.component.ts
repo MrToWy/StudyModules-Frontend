@@ -63,7 +63,7 @@ export class SubmoduleEditorComponent implements OnInit, OnDestroy {
 
   creditTooltip: string | undefined;
   protected creditClass: string = "";
-  abbreviationTooltip: string | undefined;
+  abbreviationTooltip: string = translate("abbreviationTooltipSubmodule");
   protected abbreviationClass: string = "";
   nameTooltip: string | undefined;
   protected nameClass: string = "";
@@ -241,7 +241,7 @@ export class SubmoduleEditorComponent implements OnInit, OnDestroy {
     }
 
     this.abbreviationClass = "";
-    this.abbreviationTooltip = "";
+    this.abbreviationTooltip = translate("abbreviationTooltipSubmodule");
 
     const hasAbbreviation = this.subModule.abbreviation !== undefined && this.subModule.abbreviation.length > 0;
 

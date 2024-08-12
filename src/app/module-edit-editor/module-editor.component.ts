@@ -96,7 +96,7 @@ export class ModuleEditorComponent implements OnInit, OnChanges, OnDestroy {
   courseLengthTooltip: string = '';
   learningOutcomesTooltip: string = '';
   responsibleTooltip: string = '';
-  abbreviationTooltip: string = '';
+  abbreviationTooltip: string = translate('abbreviationTooltip');
   hoursPresenceTooltip: string = '';
   hoursSelfTooltip: string = '';
   semesterTooltip: string = '';
@@ -424,7 +424,7 @@ export class ModuleEditorComponent implements OnInit, OnChanges, OnDestroy {
 
   protected validateAbbreviation(onlyIfInvalid: boolean = false): boolean {
     this.abbreviationClass = "";
-    this.abbreviationTooltip = "";
+    this.abbreviationTooltip = translate('abbreviationTooltip');
 
     if (onlyIfInvalid && this.abbreviationClass === "") {
       return true;

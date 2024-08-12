@@ -105,6 +105,8 @@
   "selectLanguagesToCreatePdf": "Select languages to create PDF",
   "generatePdf": "Generate PDF",
   "checkResults": "Check the resulting pdfs and confirm them once you are satisfied.",
+  "abbreviationTooltip": "Expected format: ABC-100",
+  "abbreviationTooltipSubmodule": "Expected format: ABC-100-01",
   "generatingPdf": "Generating PDF, please wait...",
   "publishedSuccessfully": "Successfully published the new pdfs.",
   "clone": "Clone",
