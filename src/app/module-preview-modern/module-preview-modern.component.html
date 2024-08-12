@@ -6,7 +6,9 @@
       <h1>{{moduleText?.name}}</h1>
     </div>
     <div class="right">
+      <p-confirmPopup />
       <p-button *ngIf="authService.isLoggedIn()" (onClick)="switchToEditMode()" class="edit-btn">{{t('edit')}}</p-button>
+      <p-button class="margin-left delete-btn" *ngIf="authService.isLoggedIn()" (onClick)="delete($event)">{{t('delete')}}</p-button>
       <p-button class="margin-left changelog-btn" *ngIf="authService.isLoggedIn()" (onClick)="showChanges()">{{t('changelogCaption')}}</p-button>
     </div>
   </div>

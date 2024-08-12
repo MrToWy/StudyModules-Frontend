@@ -1,5 +1,11 @@
 import {Component, Input} from '@angular/core';
-import {ModuleDetail, ModuleTranslation, SubModule, SubModuleTranslation} from "../../shared/module/module.service";
+import {
+  ModuleDetail,
+  ModuleService,
+  ModuleTranslation,
+  SubModule,
+  SubModuleTranslation
+} from "../../shared/module/module.service";
 import {AvatarModule} from "primeng/avatar";
 import {CardModule} from "primeng/card";
 import {NgIf} from "@angular/common";
@@ -13,6 +19,8 @@ import {AuthService} from "../../shared/auth/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {activeTranslationIndex} from "../module-translator/module-translator.component";
 import {TooltipModule} from "primeng/tooltip";
+import {ConfirmPopupModule} from "primeng/confirmpopup";
+import {ConfirmationService} from "primeng/api";
 
 @Component({
   selector: 'app-module-preview-modern',
@@ -27,18 +35,21 @@ import {TooltipModule} from "primeng/tooltip";
     SplitTextCardComponent,
     TranslocoDirective,
     ButtonModule,
-    TooltipModule
+    TooltipModule,
+    ConfirmPopupModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, ConfirmationService],
   templateUrl: './module-preview-modern.component.html',
   styleUrl: './module-preview-modern.component.sass'
 })
 export class ModulePreviewModernComponent {
 
   constructor(protected authService: AuthService,
-                  private router: Router,
-    private route: ActivatedRoute,
-              ) {
+              private router: Router,
+              private confirmationService: ConfirmationService,
+              private moduleService: ModuleService,
+              private route: ActivatedRoute,
+  ) {
   }
 
   get module(): ModuleDetail | undefined {
@@ -46,7 +57,7 @@ export class ModulePreviewModernComponent {
   }
 
   addPointsToNumbers(input: string): string {
-    if(!input) {
+    if (!input) {
       return translate("noRecommendation");
     }
     return input.replace(/(\d+)(?=-?\d*)/g, '$1.');
@@ -75,4 +86,17 @@ export class ModulePreviewModernComponent {
   }
 
   protected readonly activeTranslationIndex = activeTranslationIndex;
+
+  delete($event: MouseEvent) {
+    this.confirmationService.confirm({
+      message: translate('preview.deleteModule'),
+      target: $event.target as EventTarget,
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.moduleService.delete(this.module!.id).subscribe(async () => {
+          window.history.back();
+        });
+      }
+    });
+  }
 }

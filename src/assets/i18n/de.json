@@ -150,8 +150,10 @@
   },
   "preview": {
     "responsible": "Verantwortlich",
+    "delete": "Löschen",
     "credits": "Credits",
     "language": "Sprache",
+    "deleteModule": "Möchten Sie dieses Modul wirklich löschen?",
     "semester": "Semester",
     "groupSize": "Gruppengröße",
     "timeRequired": "Zeitaufwand",

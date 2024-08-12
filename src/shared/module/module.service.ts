@@ -118,6 +118,10 @@ export class ModuleService {
     };
 
   }
+
+  delete(id: number) {
+    return this.http.delete(this.moduleURL + "/" + id);
+  }
 }
 
 export interface ModuleDto {
