@@ -13,6 +13,7 @@ import {PasswordModule} from "primeng/password";
 import {TranslocoDirective} from "@jsverse/transloco";
 import {PanelModule} from "primeng/panel";
 import {RouterLink} from "@angular/router";
+import {TooltipModule} from "primeng/tooltip";
 
 @Component({
   selector: 'app-sidebar',
@@ -30,7 +31,8 @@ import {RouterLink} from "@angular/router";
     PasswordModule,
     TranslocoDirective,
     PanelModule,
-    RouterLink
+    RouterLink,
+    TooltipModule
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.sass'

@@ -17,7 +17,7 @@
     </ng-template>
     <ng-template pTemplate="footer">
       <div class="footer">
-        <p-button *ngIf="!authService.isLoggedIn()" [label]="t('login')" [text]="true" [raised]="true" severity="secondary" (onClick)="showLogin()"></p-button>
+        <p-button *ngIf="!authService.isLoggedIn()" [label]="t('login')" [text]="true" [pTooltip]="t('getNewAccountHere')" [raised]="true" severity="secondary" (onClick)="showLogin()"></p-button>
         <p-button *ngIf="authService.isLoggedIn()" [label]="t('logout')" [text]="true" [raised]="true" severity="secondary" (onClick)="logout()"></p-button>
         <span class="version">Version 1.0.2</span>
       </div>
