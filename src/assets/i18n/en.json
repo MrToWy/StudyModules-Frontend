@@ -32,6 +32,8 @@
   "showPdf": "Show PDF with all modules",
   "pdf": "PDF",
   "hidden": "Hidden",
+  "hide": "Hide",
+  "unhide": "Unhide",
   "deleteDegreeProgramQuery": "Do you really want to delete this course?",
   "shortName": "Short name",
   "respectively": "resp.",

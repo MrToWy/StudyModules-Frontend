@@ -16,7 +16,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../shared/auth/auth.service";
 import {LanguageDto, LanguageService} from "../../shared/language/language.service";
 import {TagModule} from "primeng/tag";
-import {TranslocoDirective} from "@jsverse/transloco";
+import {translate, TranslocoDirective} from "@jsverse/transloco";
 import {activeTranslationIndex} from "../module-translator/module-translator.component";
 
 @Component({
@@ -88,21 +88,21 @@ export class CoursePanelComponent implements OnInit{
         }
       },
       {
-        label: this.course.hidden ? 'Unhide' : 'Hide',
+        label: this.course.hidden ? translate("unhide") : translate("hide"),
         icon: this.course.hidden ? 'pi pi-fw pi-eye' : 'pi pi-fw pi-eye-slash',
         command: () => {
           this.toggleHide(this.course)
         }
       },
       {
-        label: 'Delete',
+        label: translate("delete"),
         icon: 'pi pi-fw pi-trash',
         command: () => {
           this.deleteCourse(this.course)
         }
       },
       {
-        label: 'Clone',
+        label: translate("clone"),
         icon: 'pi pi-fw pi-clone',
         command: () => {
           this.cloneCourse(this.course);

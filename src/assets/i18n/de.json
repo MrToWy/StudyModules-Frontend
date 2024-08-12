@@ -32,6 +32,8 @@
   "showPdf": "PDF mit allen Modulen ansehen",
   "pdf": "PDF",
   "hidden": "Versteckt",
+  "hide": "Verstecken",
+  "unhide": "Verstecken aufheben",
   "deleteDegreeProgramQuery": "Soll der Studiengang wirklich vollständig gelöscht werden?",
   "shortName": "Kurzname",
   "respectively": "bzw.",
