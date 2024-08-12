@@ -113,8 +113,8 @@ export class JobsComponent implements OnInit, OnDestroy{
       if (JSON.stringify(this.jobs) !== JSON.stringify(jobs)) {
         this.jobs = jobs;
 
-        // Check if all jobs are done
-        if (this.filterGuids && this.jobs.every(job => job.finishedAt)) {
+        // Check if all jobs are published
+        if (this.filterGuids && this.jobs.every(job => job.publishedAt)) {
           this.onJobsCompleted();
         }
       }
