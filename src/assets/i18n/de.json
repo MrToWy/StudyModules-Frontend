@@ -118,6 +118,7 @@
   "text": "Anzeigetext im PDF",
   "abbreviationTooltip": "Erwartetes Eingabeformat: ABC-100",
   "abbreviationTooltipSubmodule": "Erwartetes Eingabeformat: ABC-100-01",
+  "noRecommendation": "Keine Empfehlung",
   "deleteJobConfirmation": "Soll der Job wirklich gelöscht werden?",
   "preview.responsibleTooltip": "Die verantwortliche Person ist für die Pflege des Moduls zuständig. Der Ansprechpartner könnte eine andere Person sein (siehe Stundenplan).",
   "modulesearch": {

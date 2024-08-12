@@ -7,7 +7,7 @@ import {InfoCardComponent} from "../cards/info-card/info-card.component";
 import {StatsCardComponent} from "../cards/stats-card/stats-card.component";
 import {TextCardComponent} from "../cards/text-card/text-card.component";
 import {SplitTextCardComponent} from "../cards/split-text-card/split-text-card.component";
-import {TranslocoDirective} from "@jsverse/transloco";
+import {translate, TranslocoDirective} from "@jsverse/transloco";
 import {ButtonModule} from "primeng/button";
 import {AuthService} from "../../shared/auth/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -46,6 +46,9 @@ export class ModulePreviewModernComponent {
   }
 
   addPointsToNumbers(input: string): string {
+    if(!input) {
+      return translate("noRecommendation");
+    }
     return input.replace(/(\d+)(?=-?\d*)/g, '$1.');
   }
 
