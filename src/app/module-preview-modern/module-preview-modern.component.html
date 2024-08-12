@@ -1,126 +1,137 @@
 <ng-container *transloco="let t; prefix:'preview'">
 
-<div class="">
-  <div class="leftRight">
-    <div class="left">
-      <h1>{{moduleText?.name}}</h1>
+  <div class="">
+    <div class="leftRight">
+      <div class="left">
+        <h1>{{ moduleText?.name }}</h1>
+      </div>
+      <div class="right">
+        <p-confirmPopup/>
+        <p-button *ngIf="authService.isLoggedIn()" (onClick)="switchToEditMode()" class="edit-btn">{{ t('edit') }}
+        </p-button>
+        <p-button class="margin-left delete-btn" *ngIf="authService.isLoggedIn()"
+                  (onClick)="delete($event)">{{ t('delete') }}
+        </p-button>
+        <p-button class="margin-left changelog-btn" *ngIf="authService.isLoggedIn()"
+                  (onClick)="showChanges()">{{ t('changelogCaption') }}
+        </p-button>
+      </div>
     </div>
-    <div class="right">
-      <p-confirmPopup />
-      <p-button *ngIf="authService.isLoggedIn()" (onClick)="switchToEditMode()" class="edit-btn">{{t('edit')}}</p-button>
-      <p-button class="margin-left delete-btn" *ngIf="authService.isLoggedIn()" (onClick)="delete($event)">{{t('delete')}}</p-button>
-      <p-button class="margin-left changelog-btn" *ngIf="authService.isLoggedIn()" (onClick)="showChanges()">{{t('changelogCaption')}}</p-button>
+
+    <div class="fiveGrid module-preview">
+      <app-info-card
+        *ngIf="module"
+        class="card"
+        [label]="t('responsible')"
+        [value]="module.responsible.firstName + ' ' + module.responsible.lastName"
+        [avatarLabel]="module.responsible.firstName[0] + module.responsible.lastName[0]"
+        [pTooltip]="t('responsibleTooltip')"
+      />
+
+      <app-info-card
+        *ngIf="module"
+        class="card"
+        [label]="t('credits')"
+        [value]="module.credits.toString()"
+        [icon]="'pi-trophy'"
+      />
+
+      <app-info-card
+        *ngIf="module"
+        class="card"
+        [label]="t('language')"
+        [value]="subModuleText?.spokenlanguage"
+        [icon]="'pi-language'"
+      />
+
+      <app-info-card
+        *ngIf="module"
+        class="card"
+        [label]="t('semester')"
+        [value]="addPointsToNumbers(module.semester)"
+        [icon]="'pi-calendar'"
+      />
+
+      <app-info-card
+        *ngIf="module"
+        class="card"
+        [label]="t('groupSize')"
+        [value]="subModule?.groupSize?.toString()"
+        [icon]="'pi-users'"
+      />
+
+      <app-stats-card
+        class="card takeTwoColumns takeThreeRows fullheight"
+        [title]="t('timeRequired')"
+        [hoursPresence]="module?.hoursPresence"
+        [hoursSelf]="module?.hoursSelf"
+      />
+
+      <app-text-card
+        class="card"
+        [title]="t('content')"
+        [text]="subModuleText?.content"
+        [style.grid-column]="'span 3'"
+        [style.grid-row]="'span 2'"
+      />
+
+         <app-text-card
+        class="card"
+        [title]="t('event')"
+        [text]="subModuleText?.type + ' (' + subModule?.weeklyHours + ' ' + t('hoursPerWeek') + ') \n' + moduleText?.exam"
+        [style.grid-column]="'span 2'"
+        [style.grid-row]="'span 2'"
+      />
+
+ <app-text-card
+        class="card"
+        [title]="t('learningObjectives')"
+        [text]="moduleText?.learningOutcomes"
+        [style.grid-column]="'span 3'"
+        [style.grid-row]="'span 2'"
+      />
+
+
+
+      <app-text-card
+        class="card"
+        [title]="t('requiredRequirements')"
+        [text]="module?.requirementsHard?.translations?.at(activeTranslationIndex)?.name"
+        [style.grid-column]="'span 2'"
+        [style.grid-row]="'span 2'"
+      />
+
+
+  <app-text-card
+        class="card"
+        [title]="t('literature')"
+        [text]="subModuleText?.literature"
+        [style.grid-column]="'span 3'"
+        [style.grid-row]="'span 4'"
+      />
+
+
+<app-text-card
+        class="card"
+        [title]="t('recommendedRequirements')"
+        [text]="module?.requirementsSoft?.translations?.at(activeTranslationIndex)?.name"
+        [style.grid-column]="'span 2'"
+        [style.grid-row]="'span 2'"
+      />
+
+
+
+      <app-split-text-card
+        class="card"
+        [title]="t('requirements')"
+        [leftCaption]="t('attendance')"
+        [leftText]="subModuleText?.presenceRequirements"
+        [rightCaption]="t('selfStudy')"
+        [rightText]="subModuleText?.selfStudyRequirements"
+        [style.grid-column]="'span 5'"
+        [style.grid-row]="'span 2'"
+      />
     </div>
   </div>
-
-  <div class="fiveGrid module-preview">
-    <app-info-card
-      *ngIf="module"
-      class="card"
-      [label]="t('responsible')"
-      [value]="module.responsible.firstName + ' ' + module.responsible.lastName"
-      [avatarLabel]="module.responsible.firstName[0] + module.responsible.lastName[0]"
-      [pTooltip]="t('responsibleTooltip')"
-    />
-
-    <app-info-card
-      *ngIf="module"
-      class="card"
-      [label]="t('credits')"
-      [value]="module.credits.toString()"
-      [icon]="'pi-trophy'"
-    />
-
-    <app-info-card
-      *ngIf="module"
-      class="card"
-      [label]="t('language')"
-      [value]="subModuleText?.spokenlanguage"
-      [icon]="'pi-language'"
-    />
-
-    <app-info-card
-      *ngIf="module"
-      class="card"
-      [label]="t('semester')"
-      [value]="addPointsToNumbers(module.semester)"
-      [icon]="'pi-calendar'"
-    />
-
-    <app-info-card
-      *ngIf="module"
-      class="card"
-      [label]="t('groupSize')"
-      [value]="subModule?.groupSize?.toString()"
-      [icon]="'pi-users'"
-    />
-
-    <app-stats-card
-      class="card takeTwoColumns takeThreeRows fullheight"
-      [title]="t('timeRequired')"
-      [hoursPresence]="module?.hoursPresence"
-      [hoursSelf]="module?.hoursSelf"
-    />
-
-    <app-text-card
-      class="card"
-      [title]="t('recommendedRequirements')"
-      [text]="module?.requirementsSoft?.translations?.at(activeTranslationIndex)?.name"
-      [style.grid-column]="'span 3'"
-      [style.grid-row]="'span 2'"
-    />
-
-    <app-text-card
-      class="card"
-      [title]="t('event')"
-      [text]="subModuleText?.type + ' (' + subModule?.weeklyHours + ' ' + t('hoursPerWeek') + ') \n' + moduleText?.exam"
-      [style.grid-column]="'span 2'"
-      [style.grid-row]="'span 2'"
-    />
-
-    <app-text-card
-      class="card"
-      [title]="t('requiredRequirements')"
-      [text]="module?.requirementsHard?.translations?.at(activeTranslationIndex)?.name"
-      [style.grid-column]="'span 3'"
-      [style.grid-row]="'span 2'"
-    />
-
-    <app-text-card
-      class="card"
-      [title]="t('learningObjectives')"
-      [text]="moduleText?.learningOutcomes"
-      [style.grid-column]="'span 5'"
-      [style.grid-row]="'span 2'"
-    />
-
-    <app-text-card
-      class="card"
-      [title]="t('literature')"
-      [text]="subModuleText?.literature"
-      [style.grid-column]="'span 2'"
-      [style.grid-row]="'span 2'"
-    />
-
-    <app-text-card
-      class="card"
-      [title]="t('content')"
-      [text]="subModuleText?.content"
-      [style.grid-column]="'span 3'"
-      [style.grid-row]="'span 2'"
-    />
-
-    <app-split-text-card
-      class="card"
-      [title]="t('requirements')"
-      [leftCaption]="t('attendance')"
-      [leftText]="subModuleText?.presenceRequirements"
-      [rightCaption]="t('selfStudy')"
-      [rightText]="subModuleText?.selfStudyRequirements"
-      [style.grid-column]="'span 5'"
-      [style.grid-row]="'span 2'"
-    />
-  </div>
-</div>
 
 </ng-container>
