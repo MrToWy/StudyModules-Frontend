@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ButtonModule} from "primeng/button";
 import {MenuModule} from "primeng/menu";
 import {PanelModule} from "primeng/panel";
@@ -41,7 +41,7 @@ import {activeTranslationIndex} from "../module-translator/module-translator.com
   templateUrl: './course-panel.component.html',
   styleUrl: './course-panel.component.sass'
 })
-export class CoursePanelComponent implements OnInit{
+export class CoursePanelComponent implements OnInit, OnDestroy{
   deleted: boolean = false;
 
   items: MenuItem[] | undefined;
@@ -78,10 +78,29 @@ export class CoursePanelComponent implements OnInit{
   ) {
   }
 
+  private subscription: any;
+
   ngOnInit(): void {
+    this.setMenu();
+
+    this.subscription = this.languageService.languageSubject.subscribe(() => {
+      this.setMenu();
+    });
+
+    this.languageService.getLanguages().subscribe(languages => {
+      this.languages = languages;
+      this.selectedLanguageIds = languages.map(language => language.id);
+    });
+    }
+
+    ngOnDestroy() {
+    this.subscription.unsubscribe();
+    }
+
+    private setMenu() {
     this.items = [
       {
-        label: 'PDF generieren',
+        label: translate("generatePDF"),
         icon: 'pi pi-fw pi-pencil',
         command: () => {
           this.refreshPdf(this.course);
@@ -109,11 +128,6 @@ export class CoursePanelComponent implements OnInit{
         }
       }
     ];
-
-    this.languageService.getLanguages().subscribe(languages => {
-      this.languages = languages;
-      this.selectedLanguageIds = languages.map(language => language.id);
-    });
     }
 
     async selectCourse(course: CourseDto) {

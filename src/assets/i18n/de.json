@@ -113,6 +113,7 @@
   "status": "Status",
   "close": "Schließen",
   "getDataFromSubmodule": "Daten vom ersten Teilmodul übernehmen",
+  "generatePDF": "PDF generieren",
   "runningFor": "Läuft seit ",
   "pdfCreated": "PDF erstellt, bitte prüfen & freigeben ",
   "waitingForBuilder": "Warten auf Server",

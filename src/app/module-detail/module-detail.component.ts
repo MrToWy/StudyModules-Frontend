@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ButtonModule} from "primeng/button";
 import {
   ModuleDetail,
@@ -18,6 +18,7 @@ import {CardModule} from "primeng/card";
 import {PanelModule} from "primeng/panel";
 import {AvatarModule} from "primeng/avatar";
 import {TranslocoDirective} from "@jsverse/transloco";
+import {LanguageService} from "../../shared/language/language.service";
 
 @Component({
   selector: 'app-module-detail',
@@ -38,7 +39,7 @@ import {TranslocoDirective} from "@jsverse/transloco";
   templateUrl: './module-detail.component.html',
   styleUrl: './module-detail.component.sass'
 })
-export class ModuleDetailComponent implements OnInit{
+export class ModuleDetailComponent implements OnInit, OnDestroy{
   moduleId: number | undefined;
   module: ModuleDetail | undefined;
   moduleText: ModuleTranslation | undefined;
@@ -49,13 +50,28 @@ export class ModuleDetailComponent implements OnInit{
 
     private moduleService: ModuleService,
     private urlSegmentService: UrlSegmentService,
-    protected authService: AuthService
+    protected authService: AuthService,
+    private languageService: LanguageService
   ) {
     this.moduleId = Number(urlSegmentService.getIdFromSegment("module"));
   }
 
+  private subscription: any;
+
   ngOnInit(): void {
-    if (this.moduleId) {
+   this.loadData();
+
+   this.subscription = this.languageService.languageSubject.subscribe(() => {
+      this.loadData();
+    });
+   }
+
+    ngOnDestroy() {
+      this.subscription.unsubscribe();
+    }
+
+  private loadData(){
+     if (this.moduleId) {
       this.moduleService.get(this.moduleId).subscribe((module) => {
         this.module = module;
         this.moduleText = module.translations[0];
@@ -64,6 +80,5 @@ export class ModuleDetailComponent implements OnInit{
       });
     }
   }
-
 }
 

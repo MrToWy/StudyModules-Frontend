@@ -34,6 +34,7 @@
   "hidden": "Hidden",
   "hide": "Hide",
   "unhide": "Unhide",
+  "generatePDF": "Generate PDF",
   "getDataFromSubmodule": "Get data from first selected submodule",
   "getNewAccountHere": "The person responsible for the degree program in your department is responsible for the account.",
   "deleteDegreeProgramQuery": "Do you really want to delete this course?",
