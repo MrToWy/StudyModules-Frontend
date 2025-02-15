@@ -1,6 +1,8 @@
 # StudyModules
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.1.
+Documentation: [studymodules-docs.tobi.win](https://studymodules-docs.tobi.win)
+
+Thesis: [github.com/MrToWy/Bachelorarbeit](https://github.com/MrToWy/Bachelorarbeit)
 
 ## Development server
 
